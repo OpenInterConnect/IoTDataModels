@@ -1,0 +1,78 @@
+#%RAML 0.8
+title: OICSpeechTTS
+version: v1.0-20150727
+schemas:
+  - Speech: !include oic.r.speech.tts.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a"]
+
+/SpeechTTSResURI:
+  description: |
+    This resource may be created on the OIC Server that is capable of rendering speech by an OIC Client
+     or may be created on the OIC Server by some resident application.
+    The audio rendered is at this stage local to the Server (i.e. not streamed).
+    The utterance is an SSML document.
+    The supportedLanguages is a comma separate value list of the RFC 5646 defined language tags that are supported.
+    The supportedVoices is an SSML document fragment indicating the voices that are supported.
+
+  displayName: Speech Synthesis-TTS
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Utterance in the example shall be a properly escaped (JSON rules) SSML document. An example is given below:
+        "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n\r
+        <speak version=\"1.1\" xmlns=\"http:\/\/www.w3.org\/2001\/10\/synthesis\"\n\r
+        \txmlns:xsi=\"http:\/\/www.w3.org\/2001\/XMLSchema-instance\"\n\r
+        \txsi:schemaLocation=\"http:\/\/www.w3.org\/2001\/10\/synthesis\n\r
+        \thttp:\/\/www.w3.org\/TR\/speech-synthesis11\/synthesis.xsd\"\n\r
+        \txml:lang=\"en-US\">\n\r
+        \n\r
+        \tThe title of the movie is:\n\r
+        \t\"La vita è bella\"\n\r
+        \t(Life is beautiful),\n\r
+        \twhich is directed by Roberto Benigni.\n\r
+        <\/speak"
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Speech
+            example: |
+              {
+                "rt":                 "oic.r.speech.tts",
+                "id":                 "unique_example_id",
+                "utterance":          "SSML Document",
+                "supportedLanguages": "en-US, en-GB, fr-CA",
+                "supportedVoices":    "<voice gender=\"female\" variant=\"2\"><\/voice>\n\r<voice name=\"Mike\"><\/voice>"
+              }
+
+  post:
+    description: |
+      Changes the utterance being rendered.
+      Example shows a change in language selected.
+    body:
+      application/json:
+        schema: Speech
+        example: |
+          {
+            "rt":         "oic.r.speech.tts",
+            "id":         "unique_example_id",
+            "utterance":  "SSML Document"
+          }
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Speech
+            example: |
+              {
+                "rt":         "oic.r.speech.tts",
+                "id":         "unique_example_id",
+                "utterance":  "SSML Document"
+              }

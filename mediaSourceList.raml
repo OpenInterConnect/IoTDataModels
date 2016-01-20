@@ -1,0 +1,85 @@
+#%RAML 0.8
+title: OICMediaSourceList
+version: v1.0-20151019
+schemas:
+  - mediaSourceList: !include oic.r.mediaSourceList.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: [ "oic.if.a" ]
+
+/mediaSourceListResURI:
+  description: |
+    This resource provides the list of media sources available on the device.
+    The sources are an array of mediaSource(s) as separately defined.
+    The basic resource type oic.r.mediaSourceList does not provide any indications whether the source is input or output.
+    Hence, two specializations of this resource exist.
+    When a device exposes input sources then an instance of this resource with a resource type of oic.r.media.input is exposed.
+    When a device exposes output sources then an instance of this resource with a resource type of oic.r.media.output is exposed.
+    A device that exposes both input and output media sources then exposes two instances of this resource,
+    one with a resource type or oic.r.media.input and one with a resource type of oic.r.media.output
+
+  displayName: Media Source List
+  is: [ interface ]
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: mediaSourceList
+            example: |
+              {
+                "rt": "oic.r.mediaSourceList",
+                "id": "unique_example_id",
+                "sources": [
+                  {
+                    "sourceName": "HDMI-CEC",
+                    "sourceNumber": "1",
+                    "sourceType": "audioPlusVideo",
+                    "status": true
+                  },
+                  {
+                    "sourceName": "dualRCA",
+                    "sourceNumber": "1",
+                    "sourceType": "audioOnly",
+                    "status": false
+                  }
+                ]
+              }
+
+  post:
+    description: |
+      Changes the status of the source(s).
+      Allows changes of the sourceName and the status.
+    body:
+      application/json:
+        schema: mediaSourceList
+        example: |
+          {
+            "id":     "unique_example_id",
+            "sources": [
+              {
+               "sourceName":    "my new name",
+               "sourceNumber":  "1",
+               "status":        true
+              }
+            ]
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: mediaSourceList
+            example: |
+              {
+                "id":     "unique_example_id",
+                "sources": [
+                  {
+                    "sourceName":   "my new name",
+                    "sourceNumber": "1",
+                    "status":       true
+                  }
+                ]
+              }

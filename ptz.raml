@@ -1,0 +1,78 @@
+#%RAML 0.8
+title: OICPanTiltZoom
+version: v1.0-20150805
+schemas:
+  - PanTiltZoom: !include oic.r.ptz.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+            enum: ["oic.if.a"]
+
+/PanTiltZoomResURI:
+  description: |
+    This resource specifies the pan tilt and zoom capabilities of a device.
+    The resource rt is dynamic and reflects whether the values apply to
+      physical movement of the device or digital/virtual enhancements to the image.
+    For physical movement the rt is 'oic.r.movement.ptz'.
+    For digital/virtual image enhancements the rt is 'oic.r.image.ptz'.
+    The Pan and Tilt are specified in degrees.
+    The Zoom Factor is a value in the range 1-100 for linear (optical) zoom.
+    The Zoom Factor is a value in the range [1x, 2x, 4x, 8x, 16x, 32x] for digital zoom.
+    If there is no zoom value to set the Zoom Factor shall be '1x'.
+    The value 0 degrees means neutral, this is the vendor defined setting.
+    Note that this resource also can be used to create an offset for physical movement.
+    When that is the case, the rt value is: oic.r.movement.offset.ptz
+    Note that this resource also can be used to create an offset for image movement.
+    When that is the case, the rt value is: oic.r.image.offset.ptz
+    When the pan_range value is omitted, then the range is [-180,180].
+    If pan is not supported then the range shall be [0,0]
+    When the tilt_range value is omitted, then the range is [-180,180].
+    If tilt is not supported then the range shall be [0,0]
+    Note: When the range is specified as a float (e.g. 180.0, 180.0) then the
+      pan and tilt values are also floats.
+  displayName: Pan Tilt Zoom Movement
+  is: [ interface ]
+
+  get:
+    description: |
+      Retrieves the current pan, tilt and zoom setting.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: PanTiltZoom
+            example: |
+              {
+                "rt":         "oic.r.ptz",
+                "id":         "unique_example_id",
+                "pan":        0,
+                "tilt":       0,
+                "zoomFactor": "2x"
+              }
+
+  post:
+    description: |
+      Sets the current pan, tilt and zoom value
+    body:
+      application/json:
+        schema: PanTiltZoom
+        example: |
+          {
+            "id":         "unique_example_id",
+            "pan":        10,
+            "tilt":       -10,
+            "zoomFactor": "4x"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: PanTiltZoom
+            example: |
+              {
+                "id":         "unique_example_id",
+                "pan":        10,
+                "tilt":       -10,
+                "zoomFactor": "4x"
+              }

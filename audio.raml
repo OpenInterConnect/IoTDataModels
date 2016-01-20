@@ -1,0 +1,58 @@
+#%RAML 0.8
+title: OICAudio
+version: v1.0-20150727
+schemas:
+  - Audio: !include oic.r.audio.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a"]
+
+/AudioResURI:
+  description: |
+    This resource defines basic audio control functions.
+    The volume is an integer containing a percentage [0,100].
+    A volume of 0 (zero) means no sound produced.
+    A volume of 100 means maximum sound production.
+    The mute control is implemented as a boolean.
+    A mute value of true means that the device is muted (no audio).
+    A mute value of false means that the device is not muted (audio).
+  displayName: Audio Controls
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Audio
+            example: |
+              {
+                "rt":     "oic.r.audio",
+                "id":     "unique_example_id",
+                "volume": 50,
+                "mute":   false
+              }
+
+  post:
+    body:
+      application/json:
+        schema: Audio
+        example: |
+          {
+            "id":     "unique_example_id",
+            "volume": 75,
+            "mute":   false
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Audio
+            example: |
+              {
+                "id":     "unique_example_id",
+                "volume": 75,
+                "mute":   false
+              }

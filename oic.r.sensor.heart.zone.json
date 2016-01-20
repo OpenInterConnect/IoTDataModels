@@ -1,0 +1,22 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.sensor.heart.zone.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Heart Rate Zone",
+  "definitions": {
+    "oic.r.sensor.heart.zone": {
+      "properties": {
+        "heartRateZone": {
+            "enum": ["Zone1","Zone2","Zone3", "Zone4", "Zone5"],
+            "description": "ReadOnly, current heart rate zone based on the Zoladz system."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.sensor.heart.zone"}
+  ],
+  "required": ["heartRateZone"]
+}

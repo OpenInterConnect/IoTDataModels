@@ -1,0 +1,19 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.sensor.carbonDioxide.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Carbon Dioxide Sensor",
+  "definitions": {
+    "oic.r.sensor.carbonDioxide": {
+      "allOf": [
+        {"$ref": "oic.r.sensor.json#/definitions/oic.r.sensor"}
+      ]
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.sensor.carbonDioxide"}
+  ],
+  "required": ["value"]
+}

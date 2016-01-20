@@ -1,0 +1,33 @@
+#%RAML 0.8
+title: OICMagneticFieldDirection
+version: v1.0-20150727
+schemas:
+  - magneticFieldDirection: !include oic.r.sensor.magneticFieldDirection.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/MagneticFieldDirectionResURI:
+  description: |
+    This resource describes the direction of the Earth’s magnetic field at the observer's current point in space.
+    Typical use case includes measurement of compass readings on a personal device.
+    The value is a CSV of Hx, Hy, Hz.
+    Each of Hx, Hy and Hz are expressed in A/m (Amperes per metre)
+
+  displayName: Magnetic Field Direction Sensor
+  is: [ interface ]
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: magneticFieldDirection
+            example: |
+              {
+                "rt":     "oic.r.sensor.magneticFieldDirection",
+                "id":     "unique_example_id",
+                "value":  "100,15,90"
+              }

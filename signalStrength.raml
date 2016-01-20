@@ -1,0 +1,33 @@
+#%RAML 0.8
+title: OICSignalStrength
+version: v1.0-20150727
+schemas:
+  - SignalStrength: !include oic.r.signalStrength.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/SignalStrengthResURI:
+  description: |
+    This resource describes the strength of a signal by means of lqi and rssi.
+    The lqi is a floating point number that represents Link Quality Indicator.
+    The rssi is a floating point number that represents the received signal strength indicator.
+
+  displayName: Signal Strength
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: SignalStrength
+            example: |
+              {
+                "rt":   "oic.r.signalStrength",
+                "id":   "unique_example_id",
+                "lqi":  10,
+                "rssi": 55
+              }

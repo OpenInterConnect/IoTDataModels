@@ -1,0 +1,67 @@
+#%RAML 0.8
+title: OIC Media Source
+version: v1.0-20150727
+schemas:
+  - mediaSource: !include oic.r.mediaSource.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: [ "oic.if.a" ]
+
+/mediaSourceResURI:
+  description: |
+    This resource defines a media source that exists on a device.
+    The source can be an input source or output source, this resource is agnostic of that.
+    The sourceName specifies a pre-defined media input or output (e.g."HDMI", "DVI")
+    The sourceNumber is a numeric identifier to specify the instance (e.g. "PC", 1)
+    The sourceType is an enumeration defining whether the source is audio, video or both.
+    The status is a boolean that determines if the specific source instance is selected or not.
+        A status of true means that the source instance is selected.
+        A status of false means that the source instance is not selected.
+
+  displayName: Media Source
+  is: [ interface ]
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: mediaSource
+            example: |
+              {
+                "rt":           "oic.r.mediaSource",
+                "id":           "unique_example_id",
+                "sourceName":   "HDMI-CEC",
+                "sourceNumber": "1",
+                "sourceType":   "videoPlusAudio",
+                "status":       true
+              }
+
+  post:
+    description: |
+      Changes the status of the source.
+      Allows changes of the sourceName and the status.
+    body:
+      application/json:
+        schema: mediaSource
+        example: |
+          {
+            "id":           "unique_example_id",
+            "sourceName":   "my new name",
+            "sourceNumber": "1",
+            "status":       true
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: mediaSource
+            example: |
+              {
+                "id":           "unique_example_id",
+                "sourceName":   "my new name",
+                "sourceNumber": "1",
+                "status":       true
+              }

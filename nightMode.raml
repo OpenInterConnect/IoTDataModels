@@ -1,0 +1,51 @@
+#%RAML 0.8
+title: OICNightMode
+version: v1.0-20150727
+schemas:
+  - NightMode: !include oic.r.nightMode.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+            enum: ["oic.if.a"]
+
+/NightModeResURI:
+  description: |
+    This resource describes a night mode on/off feature (on/off).
+    A nightMode value of 'true' means that the feature is on.
+    A nightMode value of 'false' means that the feature is off.
+
+  displayName: Night Mode
+  is: [ interface ]
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: NightMode
+            example: |
+              {
+                "rt":         "oic.r.nightMode",
+                "id":         "unique_example_id",
+                "nightMode":  false
+              }
+  post:
+    body:
+      application/json:
+        schema: NightMode
+        example: |
+          {
+            "id":         "unique_example_id",
+            "nightMode":  true
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: NightMode
+            example: |
+              {
+                "id":         "unique_example_id",
+                "nightMode":  true
+              }

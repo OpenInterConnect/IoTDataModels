@@ -1,0 +1,33 @@
+#%RAML 0.8
+title: OICGlassBreakSensor
+version: v1.0-20150727
+schemas:
+  - GlassBreak: !include oic.r.sensor.glassBreak.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/GlassBreakResURI:
+  description: |
+    This resource describes a glass break sensor.
+    The value is a boolean.
+    A value of True means that glass break has been sensed.
+    A value of False means that glass break not been sensed.
+
+  displayName: Glass Break Sensor
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: GlassBreak
+            example: |
+              {
+                "rt":     "oic.r.sensor.glassBreak",
+                "id":     "unique_example_id",
+                "value":  true
+              }

@@ -1,0 +1,22 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.sensor.magneticFieldDirection.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Magnetic Field Direction Sensor",
+  "definitions": {
+    "oic.r.sensor.magneticFieldDirection": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "ReadOnly, CSV containing Hx, Hy, Hz."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.sensor.magneticFieldDirection"}
+  ],
+  "required": ["value"]
+}

@@ -1,0 +1,34 @@
+#%RAML 0.8
+title: OICContactSensor
+version: v1.0-20150727
+schemas:
+  - Contact: !include oic.r.sensor.contact.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/ContactResURI:
+  description: |
+    This resource describes whether a contact sensor has been tripped or not.
+    Typical use case is in Security Systems detecting window or door open.
+    The value is a boolean.
+    A value of True means that contact has been broken (open).
+    A value of False means that contact is in place (closed).
+
+  displayName: Contact Sensor
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Contact
+            example: |
+              {
+                "rt":     "oic.r.sensor.contact",
+                "id":     "unique_example_id",
+                "value":  true
+              }

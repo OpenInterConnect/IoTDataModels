@@ -1,0 +1,33 @@
+#%RAML 0.8
+title: OICButton
+version: v1.0-20150727
+schemas:
+  - Button: !include oic.r.button.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/ButtonResURI:
+  description: |
+    This resource describes the operation of a button style switch.
+    The value is a boolean.
+    A value of True means that the button is being pushed/pressed.
+    A value of False means that the button is not being pushed/pressed.
+
+  displayName: Button Switch
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Button
+            example: |
+              {
+                "rt":     "oic.r.button",
+                "id":     "unique_example_id",
+                "value":  true
+              }

@@ -1,0 +1,33 @@
+#%RAML 0.8
+title: OICTouchSensor
+version: v1.0-20150727
+schemas:
+  - Touch: !include oic.r.sensor.touch.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/TouchResURI:
+  description: |
+    This resource describes whether touch has been sensed or not.
+    The value is a boolean.
+    A value of True means that touch has been sensed.
+    A value of False means that touch not been sensed.
+
+  displayName: Touch Sensor
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Touch
+            example: |
+              {
+                "rt":    "oic.r.sensor.touch",
+                "id":    "unique_example_id",
+                "value": true
+              }

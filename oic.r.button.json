@@ -1,0 +1,22 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.button.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Button Switch",
+  "definitions": {
+    "oic.r.button": {
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "description": "ReadOnly, Status of the button"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.button"}
+  ],
+  "required": ["value"]
+}

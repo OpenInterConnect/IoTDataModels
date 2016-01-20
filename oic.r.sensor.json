@@ -1,0 +1,22 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.sensor.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Generic Sensor",
+  "definitions": {
+    "oic.r.sensor": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "description": "ReadOnly, true = sensed, false = not sensed."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.sensor"}
+  ]
+}

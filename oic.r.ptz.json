@@ -1,0 +1,45 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.ptz#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Pan Tilt Zoom",
+  "definitions": {
+    "oic.r.ptz": {
+      "type": "object",
+      "properties": {
+        "pan":  {
+          "type": "number",
+          "description": "horizontal pan in degrees"
+        },
+        "tilt":   {
+          "type": "number",
+          "description": "vertical tilt in degrees"
+        },
+        "pan_range":  {
+          "type": "string",
+          "description": "ReadOnly, Min and Max values for the pan setting",
+          "format": "csv"
+        },
+        "tilt_range":  {
+          "type": "string",
+          "description": "ReadOnly, Min and Max values for the tilt setting",
+          "format": "csv"
+        },
+        "zoomFactor": {
+          "type": "string",
+          "description": "The Zoomfactor value"
+        },
+        "zoomFactorRange": {
+          "enum": ["linear, 1x, 2x, 4x, 8x, 16x, 32x"],
+          "description": "ReadOnly, allowed Zoom Factor values. Linear equates to a 1-100 min/max."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.ptz"}
+  ],
+  "required": ["pan","tilt","zoomFactor"]
+}

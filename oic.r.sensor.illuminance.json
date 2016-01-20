@@ -1,0 +1,22 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.sensor.illuminance.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Illuminance Sensor",
+  "definitions": {
+    "oic.r.sensor.illuminance": {
+      "properties": {
+        "illuminance": {
+          "type": "number",
+          "description": "ReadOnly, sensed luminous flux per unit area in lux."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.sensor.illuminance"}
+  ],
+  "required": ["illuminance"]
+}

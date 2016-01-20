@@ -1,0 +1,22 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.sensor.activity.count.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Activity Count Sensor",
+  "definitions": {
+    "oic.r.sensor.activity.count": {
+      "properties": {
+        "count": {
+          "type": "integer",
+          "description": "Current or Target count."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.sensor.activity.count"}
+  ],
+  "required": ["count"]
+}

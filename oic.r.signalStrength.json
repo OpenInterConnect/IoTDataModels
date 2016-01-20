@@ -1,0 +1,27 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.signalStrength.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Signal Strength",
+  "definitions": {
+    "oic.r.signalStrength": {
+      "type": "object",
+      "properties": {
+        "lqi": {
+          "type": "number",
+          "description": "ReadOnly, current value of Link Quality Indicator"
+        },
+        "rssi": {
+          "type": "number",
+          "description": "ReadOnly, current value of Received Signal Strength Indicator"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.signalStrength"}
+  ],
+  "required": ["lqi","rssi"]
+}

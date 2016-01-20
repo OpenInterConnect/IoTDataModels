@@ -1,0 +1,31 @@
+#%RAML 0.8
+title: OICAtmosphericPressureSensor
+version: v1.0-20150727
+schemas:
+  - atmosphericPressure: !include oic.r.sensor.atmosphericPressure.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/AtmosphericPressureResURI:
+  description: |
+    This resource provides a measurement of Mean Sea Level Pressure experienced at the measuring point expressed in millibars.
+    The value is float which describes the atmospheric pressure in millibars.
+
+  displayName: Atmospheric Pressure Sensor
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: atmosphericPressure
+            example: |
+              {
+                "rt":                   "oic.r.sensor.atmosphericPressure",
+                "id":                   "unique_example_id",
+                "atmosphericPressure":  1000
+              }

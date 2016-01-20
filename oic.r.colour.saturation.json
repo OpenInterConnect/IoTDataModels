@@ -1,0 +1,25 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.colour.saturation#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Colour Saturation",
+  "definitions": {
+    "oic.r.colour.saturation": {
+      "type": "object",
+      "properties": {
+        "colourSaturation": {
+          "type": "integer",
+          "description": "The colour saturation value",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.colour.saturation"}
+  ],
+  "required": [ "colourSaturation" ]
+}

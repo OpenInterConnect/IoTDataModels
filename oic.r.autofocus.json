@@ -1,0 +1,23 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.autofocus#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Auto Focus",
+  "definitions": {
+    "oic.r.autofocus": {
+      "type": "object",
+      "properties": {
+        "autoFocus": {
+          "type": "boolean",
+          "description": "Status of the Auto Focus"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.autofocus"}
+  ],
+  "required": [ "autoFocus" ]
+}

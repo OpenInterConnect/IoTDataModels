@@ -1,0 +1,54 @@
+#%RAML 0.8
+title: OICColourSaturation
+version: v1.0-20150727
+schemas:
+  - Saturation: !include oic.r.colour.saturation.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+            enum: ["oic.if.a"]
+
+
+/ColourSaturationResURI:
+  description: |
+    This resource describes a Colour saturation value.
+    The value is an integer.
+    A coloursaturation has a range of [0,100].
+    A coloursaturation value of 0 means producing black and white images.
+    A coloursaturation value of 50 means producing device specific normal colour images.
+    A coloursaturation value of 100 means producing device very full colour images.
+  displayName: Colour Saturation
+  is: [ interface ]
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Saturation
+            example: |
+              {
+                "rt":               "oic.r.colour.saturation",
+                "id":               "unique_example_id",
+                "colourSaturation": 50
+              }
+  post:
+    body:
+      application/json:
+        schema: Saturation
+        example: |
+          {
+            "id":               "unique_example_id",
+            "colourSaturation": 60
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Saturation
+            example: |
+              {
+                "id":               "unique_example_id",
+                "colourSaturation": 60
+              }

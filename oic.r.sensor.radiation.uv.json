@@ -1,0 +1,23 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.sensor.radiation.uv#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "UV Radiation",
+  "definitions": {
+    "oic.r.sensor.radiation.uv": {
+      "type": "object",
+      "properties": {
+        "measurement":   {
+          "type": "number",
+          "description": "ReadOnly, the measured UV Index"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.sensor.radiation.uv"}
+  ],
+  "required": ["measurement"]
+}

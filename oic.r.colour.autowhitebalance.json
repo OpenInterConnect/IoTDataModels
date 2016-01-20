@@ -1,0 +1,23 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.colour.autowhitebalance#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Auto White Balance",
+  "definitions": {
+    "oic.r.colour.autowhitebalance": {
+      "type": "object",
+      "properties": {
+        "autoWhiteBalance": {
+          "type": "boolean",
+          "description": "Status of the Auto White balance"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.colour.autowhitebalance"}
+  ],
+  "required": [ "autoWhiteBalance" ]
+}

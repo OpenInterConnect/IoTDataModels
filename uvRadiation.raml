@@ -1,0 +1,33 @@
+#%RAML 0.8
+title: OICUVRadiation
+version: v1.0-20150805
+schemas:
+  - UVRadiation: !include oic.r.sensor.radiation.uv.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+            enum: ["oic.if.s"]
+
+/UVRadiationResURI:
+  description: |
+    This resource specifies UV radiation measurement.
+    The measurement is the current measured UV Index
+
+  displayName: UV Radiation
+  is: [ interface ]
+
+  get:
+    description: |
+      Retrieves the current UV Radiation value
+    responses:
+      200:
+        body:
+          application/json:
+            schema: UVRadiation
+            example: |
+              {
+                "rt":           "oic.r.sensor.radiation.uv",
+                "id":           "unique_example_id",
+                "measurement":  3.5
+              }
