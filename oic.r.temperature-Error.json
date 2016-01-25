@@ -1,0 +1,26 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.temperature#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Temperature",
+  "definitions": {
+    "oic.r.temperature": {
+      "type": "object",
+      "properties": {
+        "units":  {
+          "enum": ["C","F","K"],
+          "description": "ReadOnly, Units for the temperature value"
+        },
+        "range":  {
+          "type": "string",
+          "description": "ReadOnly, Comma separated min,max values for this temperature on this device"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.temperature"}
+  ]
+}
