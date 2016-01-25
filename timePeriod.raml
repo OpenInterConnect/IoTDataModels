@@ -1,0 +1,60 @@
+#%RAML 0.8
+title: OICTimePeriod
+version: v1.0-20150727
+schemas:
+  - TimePeriod: !include oic.r.time.period.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a"]
+
+/TimePeriodResURI:
+  description: |
+    This resource describes the time period over which any additionally provided
+    information is derived or bounded.
+    The start and stop times are ISO8601 encoded strings.
+
+  displayName: Time Period
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Defines a time period for information retrieval, action or other behaviour.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: TimePeriod
+            example: |
+              {
+                "rt":       "oic.r.time.period",
+                "id":       "unique_example_id",
+                "startTime":"2015-01-09T14:30Z",
+                "stopTime": "2015-01-09T14:45Z"
+              }
+
+  post:
+    description: |
+      Sets or updates a time period for information retrieval, action or other behavior.
+    body:
+      application/json:
+        schema: TimePeriod
+        example: |
+          {
+            "id":       "unique_example_id",
+            "startTime":"2015-01-09T14:30Z",
+            "stopTime": "2015-01-09T14:45Z"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: TimePeriod
+            example: |
+              {
+                "id":       "unique_example_id",
+                "startTime":"2015-01-09T14:30Z",
+                "stopTime": "2015-01-09T14:45Z"
+              }

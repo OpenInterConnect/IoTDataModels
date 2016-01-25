@@ -1,0 +1,27 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.time.period#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Time Period",
+  "definitions": {
+    "oic.r.time.period": {
+      "type": "object",
+      "properties": {
+        "startTime":{
+          "type": "string",
+          "description": "Start time for the time period"
+        },
+        "stopTime": {
+          "type": "string",
+          "description": "Stop time for the time period"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.time.period"}
+  ],
+  "required": ["startTime"]
+}
