@@ -1,0 +1,22 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.humidity#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Humidity",
+  "definitions": {
+    "oic.r.humidity": {
+      "type": "object",
+      "properties": {
+        "desiredHumidity":  {
+          "type": "integer",
+          "description": "Desired value for Humidity"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.humidity"}
+  ]
+}
