@@ -1,0 +1,69 @@
+#%RAML 0.8
+title: OICRefrigeration
+version: v1.0-20150727
+schemas:
+  - Refrigeration:        !include oic.r.refrigeration.json
+    RefrigerationUpdate:  !include oic.r.refrigeration-Update.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a"]
+
+/RefrigerationResURI:
+  description: |
+    This resource describes a refrigeration function.
+    This is not a Refrigerator device.
+    The filter state is a read-only value providing the percentage life time remaining for the water filter.
+    RapidFreeze is a boolean that controls the rapid freeze capability if present.
+    RapidCool is a boolean that controls the rapid cool capability if present.
+    Defrost is a boolean that controls the defrost cycle if present.
+
+  displayName: Refrigeration
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Retrieves the current Refrigeration function status.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Refrigeration
+            example: |
+              {
+                "rt":           "oic.r.refrigeration",
+                "id":           "unique_example_id",
+                "filter":       75,
+                "rapidFreeze":  false,
+                "rapidCool":    false,
+                "defrost":      true
+              }
+
+  post:
+    description: |
+      Activates the desired Refrigeration functions.
+      Suported values are rapidFreeze, rapidCool and defrost.
+    body:
+      application/json:
+        schema: RefrigerationUpdate
+        example: |
+          {
+            "id":       "unique_example_id",
+            "defrost":  false
+          }
+
+    responses:
+      200:
+        description: |
+          Indicates that the Refrigeration function was changed.
+          The new status  is provided in the response.
+        body:
+          application/json:
+            schema: RefrigerationUpdate
+            example: |
+              {
+                "id":       "unique_example_id",
+                "defrost":  false
+              }
