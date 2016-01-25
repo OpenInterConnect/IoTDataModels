@@ -1,0 +1,37 @@
+#%RAML 0.8
+title: OICEnergyConsumption
+version: v1.0-20150727
+schemas:
+  - Consumption: !include oic.r.energy.consumption.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/EnergyConsumptionResURI:
+  description: |
+    This resource describes the energy consumed by the device since power up.
+    It provides the instantaneous power draw of the device at the time the resource was queried.
+    The power value is in Watts [W].
+    The energy value is in Watt Hours [Wh].
+
+  displayName: Energy Consumption
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Provides the current power draw and cumulative energy usage.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Consumption
+            example: |
+              {
+                "rt":     "oic.r.energy.consumption",
+                "id":     "unique_example_id",
+                "power":  2000,
+                "energy": 3500
+              }

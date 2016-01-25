@@ -1,0 +1,26 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.energy.consumption#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Energy Consumption",
+  "definitions": {
+    "oic.r.energy.consumption": {
+      "type": "object",
+      "properties": {
+        "power":    {
+          "type": "number",
+          "description": "ReadOnly, Instantaneous Power"
+        },
+        "energy":   {
+          "type": "number",
+          "description": "ReadOnly, Energy consumed"}
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.energy.consumption"}
+  ],
+  "required": ["power", "energy"]
+}
