@@ -1,0 +1,31 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.door#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Door",
+  "definitions": {
+    "oic.r.door": {
+      "type": "object",
+      "properties": {
+        "openState" : {
+          "enum": ["Open","Closed"],
+          "description": "ReadOnly, The state of the door (open or closed)"
+        },
+        "openDuration": {
+          "type": "string",
+          "description": "ReadOnly, The time duration the door has been open"
+        },
+        "openAlarm": {
+          "type": "boolean",
+          "description": "The state of the door open alarm"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.door"}
+  ],
+  "required": ["openState"]
+}
