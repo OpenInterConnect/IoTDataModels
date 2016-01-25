@@ -1,0 +1,36 @@
+#%RAML 0.8
+title: OICBattery
+version: v1.0-20150727
+schemas:
+  - Battery:   !include oic.r.energy.battery.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/BatteryResURI:
+  description: |
+    This resource describes a battery function.
+    The charge is an integer showing the current battery charge level.
+    The charge is a percentage in the range 0-100.
+    A value of 0 means fully discharged.
+    A value of 100 means fully charged.
+  displayName: Battery
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Retrieves the state of the battery.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Battery
+            example: |
+              {
+                "rt":     "oic.r.energy.battery",
+                "id":     "unique_example_id",
+                "charge": 50
+              }

@@ -1,0 +1,23 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.energy.battery#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Battery",
+  "definitions": {
+    "oic.r.energy.battery": {
+      "type": "object",
+      "properties": {
+        "charge" : {
+          "type": "integer",
+          "description": "ReadOnly, The current charge percentage."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.energy.battery"}
+  ],
+  "required": [ "charge" ]
+}
