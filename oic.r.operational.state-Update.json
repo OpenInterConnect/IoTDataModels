@@ -1,0 +1,26 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.operational.state#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Operational State",
+  "definitions": {
+    "oic.r.operational.state": {
+      "type": "object",
+      "properties": {
+        "currentMachineState":  {
+          "type": "string",
+          "description": "Current state of operation of the device."
+        },
+        "currentJobState":      {
+          "type": "string",
+          "description": "Currently active jobState"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.operational.state"}
+  ]
+}
