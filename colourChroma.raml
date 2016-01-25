@@ -1,0 +1,66 @@
+#%RAML 0.8
+title: OICColourChroma
+version: v1.0-20150727
+schemas:
+  - ColourChroma: !include oic.r.colour.chroma.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a"]
+
+/ColourChromaResURI:
+  description: |
+    This resource describes the colour using chroma conventions.
+    Properties are hue, saturation and colorspacevalue.
+    Hue and saturation are integer values as defined by the CIECAM02 model definition.
+    Colourspacevalue is a CSV of chromaX, chromaY, colourTemperature (X,Y,T).
+    ChromaX and chromaY are defined by CIE.
+    ColourTemperature is the Mired color temperature.
+
+  displayName: Colour Chroma
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Provides the colour using chroma conventions.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: ColourChroma
+            example: |
+              {
+                "rt":               "oic.r.colour.chroma",
+                "id":               "unique_example_id",
+                "hue":              13088,
+                "saturation":       212,
+                "colourspacevalue": "0.51, 0.41, 467"
+              }
+
+  post:
+    description: |
+      Sets current colour chroma values
+    body:
+      application/json:
+        schema: ColourChroma
+        example: |
+          {
+            "id":               "unique_example_id",
+            "hue":              13088,
+            "saturation":       212,
+            "colourspacevalue": "0.51, 0.41, 467"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: ColourChroma
+            example: |
+              {
+                "id":               "unique_example_id",
+                "hue":              13088,
+                "saturation":       212,
+                "colourspacevalue": "0.51, 0.41, 467"
+              }
