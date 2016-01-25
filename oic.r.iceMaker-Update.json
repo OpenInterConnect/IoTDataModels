@@ -1,0 +1,23 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.iceMaker#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Ice Maker",
+  "definitions": {
+    "oic.r.iceMaker": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": ["on","off"],
+          "description": "Set the status of the Ice Maker"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.iceMaker"}
+  ],
+  "required": ["status"]
+}
