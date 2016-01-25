@@ -1,0 +1,56 @@
+#%RAML 0.8
+title: OICLockCode
+version: v1.0-20150727
+schemas:
+  - LockCode: !include oic.r.lock.code.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a"]
+
+/LockCodeResURI:
+  description: |
+    Resource describing a lock code.
+    The lockCodeList is an array of possible codes that may be associated with a lock.
+    These are all presented as strings.
+  displayName: Lock Code
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Retrieves the current lock code values.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: LockCode
+            example: |
+              {
+                "rt":           "oic.r.lock.code",
+                "id":           "unique_example_id",
+                "lockCodeList": ["012345","112233"]
+              }
+
+  post:
+    description: |
+      Updates the current lock code values.
+    body:
+      application/json:
+        schema: LockCode
+        example: |
+          {
+            "id":           "unique_example_id",
+            "lockCodeList": ["543210","332211"]
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: LockCode
+            example: |
+              {
+                "id":           "unique_example_id",
+                "lockCodeList": ["543210","332211"]
+              }
