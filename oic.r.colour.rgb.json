@@ -1,0 +1,27 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.colour.rgb#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Colour RGB",
+  "definitions": {
+    "oic.r.colour.rgb": {
+      "type": "object",
+      "properties": {
+        "rgbValue": {
+          "type": "string",
+          "description": "RGB value"
+        },
+        "range":    {
+          "type": "string",
+          "description": "min max value of RGB"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.colour.rgb"}
+  ],
+  "required": ["rgbValue"]
+}

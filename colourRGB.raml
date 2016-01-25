@@ -1,0 +1,60 @@
+#%RAML 0.8
+title: OICColourRGB
+version: v1.0-20150727
+schemas:
+  - ColourRGB: !include oic.r.colour.rgb.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a"]
+
+/ColourRGBResURI:
+  description: |
+    This resource specifies the actual colour in the RGB space represented as a string.
+    Each colour value is described with a Red, Green, Blue component.
+    These colour values are encoded as comma separated values in the string.
+    The minimum and maximum colour value per component is described by the range value.
+    When the range value is omitted, then the range is [0,255].
+  displayName: Colour RGB
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Retrieves the current colour in RGB.
+      Value is an CSV of integer values in the order R,G,B.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: ColourRGB
+            example: |
+              {
+                "rt":       "oic.r.colour.rgb",
+                "id":       "unique_example_id",
+                "rgbValue": "255,255,255",
+                "range":    "0,255"
+              }
+
+  post:
+    description: |
+      Sets the current colourRGB value
+    body:
+      application/json:
+        schema: ColourRGB
+        example: |
+          {
+            "id":       "unique_example_id",
+            "rgbValue": "255,0,0"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: ColourRGB
+            example: |
+              {
+                "id":       "unique_example_id",
+                "rgbValue": "255,0,0"
+              }
