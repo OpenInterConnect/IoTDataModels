@@ -1,0 +1,24 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.baseResource#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Base Resource",
+  "definitions": {
+    "oic.r.baseResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ReadOnly, Instance ID of this specific resource"
+        },
+        "value": { "type": ["string","boolean"] },
+        "range": { "type": "string" }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "#/definitions/oic.r.baseResource"}
+  ],
+  "required": ["id"]
+}
