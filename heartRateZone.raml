@@ -1,0 +1,32 @@
+#%RAML 0.8
+title: OICHeartRateZone
+version: v1.0-20150727
+schemas:
+  - heartRateZone: !include oic.r.sensor.heart.zone.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/HeartRateZoneResURI:
+  description: |
+    This resource describes a measured heart rate by the current Zone using the Zoladz method
+    The Zoladz method defines Zones based on maximum heart rate; Zone 1 is the lowest, Zone 5 is the highest.
+    The heartRateZone is an enumeration containing one of: "Zone1", "Zone2", "Zone3", "Zone4", "Zone5".
+
+  displayName: Heart Rate Zone
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: heartRateZone
+            example: |
+              {
+                "rt":             "oic.r.sensor.heart.zone",
+                "id":             "unique_example_id",
+                "heartRateZone":  "Zone3"
+              }

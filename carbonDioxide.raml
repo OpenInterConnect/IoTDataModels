@@ -1,0 +1,33 @@
+#%RAML 0.8
+title: OICCarbonDioxideSensor
+version: v1.0-20157527
+schemas:
+  - CO2: !include oic.r.sensor.carbonDioxide.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/CarbonDioxideResURI:
+  description: |
+    This resource describes whether carbon dioxide has been sensed or not.
+    The value is a boolean.
+    A value of True means that carbon dioxide has been detected.
+    A value of False means that carbon dioxide has not been detected.
+
+  displayName: Carbon Dioxide Sensor
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: CO2
+            example: |
+              {
+                "rt":    "oic.r.sensor.carbonDioxide",
+                "id":    "unique_example_id",
+                "value": true
+              }

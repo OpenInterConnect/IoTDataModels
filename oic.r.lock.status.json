@@ -1,0 +1,24 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.lock.status#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Lock",
+  "definitions": {
+    "oic.r.lock.status": {
+      "type": "object",
+      "properties": {
+        "lockState" : {
+          "type": "string",
+          "enum": ["Locked", "Unlocked"],
+          "description": "State of the lock."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.lock.status"}
+  ],
+  "required": ["lockState"]
+}

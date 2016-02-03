@@ -1,0 +1,34 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.energy.drlc#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "oic.r.energy.drlc": {
+      "type": "object",
+      "properties": {
+        "DRType":   {
+          "type": "integer",
+          "description": "The to be applied demand-response type"
+        },
+        "start":    {
+          "type": "string",
+          "description": "The start time for the application of DR"
+        },
+        "duration": {
+          "type": "integer",
+          "description": "The duration of the to be applied DR type"
+        },
+        "override": {
+          "type": "boolean",
+          "description": "Whether the consumer has overriden the application of DR"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.energy.drlc"}
+  ],
+  "required": ["DRType"]
+}

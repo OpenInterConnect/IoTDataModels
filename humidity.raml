@@ -1,0 +1,63 @@
+#%RAML 0.8
+title: OICHumidity
+version: v1.0-20150727
+schemas:
+  - Humidity:       !include oic.r.humidity.json
+    HumidityUpdate: !include oic.r.humidity-Update.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a","oic.if.s"]
+
+/HumidityResURI:
+  description: |
+    This resource describes a sensed or desired humidity.
+    The value humidity is an integer describing the percentage measured relative humidity.
+    The value desiredHumidity is an integer showing the desired target relative humidity.
+
+  displayName: Humidity
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Retrieves the current (relative) humidity level.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Humidity
+            example: |
+              {
+                "rt":               "oic.r.humidity",
+                "id":               "unique_example_id",
+                "humidity":         40,
+                "desiredHumidity":  40
+              }
+
+  post:
+    description: |
+      Sets the desired relative humidity level.
+    body:
+      application/json:
+        schema: HumidityUpdate
+        example: |
+          {
+            "id":               "unique_example_id",
+            "desiredHumidity" : 45
+          }
+
+    responses:
+      200:
+        description: |
+          Indicates that the relative humidity level was changed.
+          The new relative humidity level is provided in the response.
+        body:
+          application/json:
+            schema: HumidityUpdate
+            example: |
+              {
+                "id":              "unique_example_id",
+                "desiredHumidity": 45
+              }

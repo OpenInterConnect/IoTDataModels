@@ -1,0 +1,31 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.airFlow#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Air Flow",
+  "definitions": {
+    "oic.r.airFlow": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "description": "Directionality of the air flow"
+        },
+        "speed": {
+          "type": "integer",
+          "description": "Current speed level"
+        },
+        "range": {
+          "type": "string",
+          "description": "ReadOnly, Min,max values for the speed level"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.airFlow"}
+  ],
+  "required": ["speed"]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.energy.usage#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Energy Usage",
+  "definitions": {
+    "oic.r.energy.usage": {
+      "type": "object",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "$ref": "oic.web-link.json#"
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.energy.usage"}
+  ],
+  "required": ["resources"]
+}

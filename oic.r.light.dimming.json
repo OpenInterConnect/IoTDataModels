@@ -1,0 +1,31 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.light.dimming#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Dimming",
+  "definitions": {
+    "oic.r.light.dimming": {
+      "type": "object",
+      "properties": {
+        "dimmingSetting":  {
+          "type": "integer",
+          "description": "Current dimming value"
+        },
+        "step":   {
+          "type": "integer",
+          "description": "ReadOnly, step increment for dimming values"
+        },
+        "range":  {
+          "type": "string",
+          "description": "ReadOnly, Min and Max values for the dimming setting"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.light.dimming"}
+  ],
+  "required": ["dimmingSetting"]
+}

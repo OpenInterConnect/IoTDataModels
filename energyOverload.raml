@@ -1,0 +1,34 @@
+#%RAML 0.8
+title: OICEnergyOverload
+version: v1.0-20150727
+schemas:
+  - EnergyOverload: !include oic.r.energy.overload.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/EnergyOverloadResURI:
+  description: |
+    This resource describes whether an energy overload detector/circuit breaker
+      has been tripped.
+    The value is a boolean.
+    A value of True means that energy overload has been tripped.
+    A value of False means that energy overload has not been tripped.
+
+  displayName: Energy Overload/Circuit Breaker
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: EnergyOverload
+            example: |
+              {
+                "rt":    "oic.r.energy.overload",
+                "id":    "unique_example_id",
+                "value": true
+              }

@@ -1,0 +1,68 @@
+#%RAML 0.8
+title: OICDoor
+version: v1.0-20150727
+schemas:
+  - Door:       !include oic.r.door.json
+    DoorUpdate: !include oic.r.door-Update.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a"]
+
+/DoorResURI:
+  description: |
+    This resource describes a door.
+    A door is modelled by means of
+      openState (Open/Closed).
+      openDuration (ISO 8601 Time).
+      openAlarm (boolean).
+    For openState, the value 'Open' indicates the door is open.
+    The value 'Closed' indicates the door is closed.
+    The type of openDuration is an ISO 8601 Time encoded string.
+    The openAlarm value 'true' indicates that the open alarm is active.
+    The openAlarm value 'false' indicates that open alarm is not active.
+  displayName: Door
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: retrieves the state of the Door.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Door
+            example: |
+              {
+                "rt" :          "oic.r.door",
+                "id":           "unique_example_id",
+                "openState":    "Open",
+                "openDuration": "P0Y0M0DT2H25M5S",
+                "openAlarm":    true
+              }
+
+  post:
+    description: |
+      Sets the current Door properties.
+      The only property that can be set as part of an update operation is
+        the openAlarm.
+      This can be made active (true) or inactive (false)
+    body:
+      application/json:
+        schema: DoorUpdate
+        example: |
+          {
+            "id":         "unique_example_id",
+            "openAlarm":  false
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: DoorUpdate
+            example: |
+              {
+                "id":         "unique_example_id",
+                "openAlarm":  false
+              }

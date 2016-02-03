@@ -1,0 +1,52 @@
+#%RAML 0.8
+title: OICAutoFocus
+version: v1.0-20150727
+schemas:
+  - AutoFocus: !include oic.r.autofocus.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+            enum: ["oic.if.a"]
+
+/AutoFocusResURI:
+  description: |
+    This resource describes an auto focus on/off feature (on/off).
+    The value is a boolean.
+    An AutoFocus value of 'true' means that the switch is on.
+    An AutoFocus value of 'false' means that the switch is off.
+    Note that when PTZ is used the autofocus works only the selected area.
+  displayName: Auto Focus
+  is: [ interface ]
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: AutoFocus
+            example: |
+              {
+                "rt":         "oic.r.autofocus",
+                "id":         "unique_example_id",
+                "autoFocus":  false
+              }
+  post:
+    body:
+      application/json:
+        schema: AutoFocus
+        example: |
+          {
+            "id":         "unique_example_id",
+            "autoFocus":  true
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: AutoFocus
+            example: |
+              {
+                "id":         "unique_example_id",
+                "autoFocus":  true
+              }

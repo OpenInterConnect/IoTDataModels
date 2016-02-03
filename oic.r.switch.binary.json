@@ -1,0 +1,23 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.switch.binary#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Binary Switch",
+  "definitions": {
+    "oic.r.switch.binary": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "description": "Status of the switch"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.switch.binary"}
+  ],
+  "required": [ "value" ]
+}

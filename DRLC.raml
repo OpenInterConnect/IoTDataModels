@@ -1,0 +1,85 @@
+#%RAML 0.8
+title: OICDRLC
+version: v1.0-20150727
+schemas:
+  - DRLC:           !include oic.r.energy.drlc.json
+    CreateResponse: !include oic.create.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+            enum: ["oic.if.lb"]
+
+
+
+/DRLCResURI:
+  description: |
+    This resource describes any to be applied or currently being applied DRLC signal.
+    The DRType is the ApplianceLoadReductionType defined in Zigbee/HA Smart Energy Profile 2.0.
+    Start is a string containing an ISO8601 encoded start time.
+    The duration value is in minutes.
+    Override indicates whether the consumer has overridden the request (true) or not (false).
+  displayName: Demand Response Load Control (DRLC).
+  is: [ interface ]
+
+  get:
+    description: |
+      Provides the current DRLC action that is being applied.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: DRLC
+            example: |
+              {
+                "rt":       "oic.r.energy.drlc",
+                "id":       "unique_example_id",
+                "DRType":   1,
+                "start":    "2015-01-09T16:45Z",
+                "duration": 10,
+                "override": false
+              }
+
+  put:
+    description: |
+      Provides the DRLC action to be applied to the device or updates an existing action.
+    body:
+      application/json:
+        schema: DRLC
+        example: |
+          {
+            "rt":       "oic.r.energy.drlc",
+            "id":       "unique_example_id",
+            "DRType":   1,
+            "start":    "2015-01-09T16:45Z",
+            "duration": 10
+          }
+
+    responses:
+      200:
+        description: |
+          Indicates that the target DRLC resource was changed.
+          The new resource attributes are provided in the response.
+        body:
+          application/json:
+            schema: DRLC
+            example: |
+              {
+                "DRType":   1,
+                "id":       "unique_example_id",
+                "start":    "2015-01-09T17:00Z",
+                "duration": 15,
+                "override": false
+              }
+
+      201:
+        description: |
+          Indicates successful creation of the DRLC resource with the attributes provided.
+          The response includes the URI of the created resource.
+        body:
+          application/json:
+            schema: CreateResponse
+            example: |
+              {
+                "ResURI":   "/MyDevice/MyDRLCURI"
+              }

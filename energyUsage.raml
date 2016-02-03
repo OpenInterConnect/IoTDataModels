@@ -1,0 +1,50 @@
+#%RAML 0.8
+title: OICEnergyUsage
+version: v1.1-20150805
+schemas:
+  - Usage: !include oic.r.energy.usage.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.ll", "oic.if.b"]
+
+/EnergyUsageResURI:
+  description: |
+    This resource describes an energy usage query.
+    The values in the start and stop time strings are encoded according
+    to the rules defined in ISO 8601 and equate to time period over which
+    the query applies.
+    The energy consumption is the separately defined OIC resource.
+
+  displayName: Energy Usage
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Retrieves the energy usage information as a composite of consumption over time.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Usage
+            example: |
+              {
+                "rt": "oic.r.energy.usage",
+                "id": "unique_example_id",
+                "resources": [
+                  {
+                    "href": "/TimeIntervalResURI",
+                    "rel":  "contains",
+                    "rt":   "oic.r.time.period",
+                    "if":   "oic.if.a"
+                  },
+                  {
+                    "href": "/EnergyConsumptionResURI",
+                    "rel":  "contains",
+                    "rt":   "oic.r.energy.consumption",
+                    "if":   "oic.if.s"
+                  }
+                ]
+              }

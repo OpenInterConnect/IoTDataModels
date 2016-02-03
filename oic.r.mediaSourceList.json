@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "id": "http://openinterconnect.org/schemas/oic.r.mediaSourceList.json#",
+  "title": "Media Source List",
+  "definitions": {
+    "oic.r.mediaSourceList": {
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "$ref": "oic.r.mediaSource.json#" }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core.json#/definitions/oic.core"},
+    { "$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    { "$ref": "#/definitions/oic.r.mediaSourceList"}
+  ],
+  "required": ["sources"]
+}

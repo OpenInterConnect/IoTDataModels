@@ -1,0 +1,26 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.audio#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "oic.r.audio": {
+      "type": "object",
+      "properties": {
+        "volume":   {
+          "type": "integer",
+          "description": "Volume setting of an audio rendering device."
+        },
+        "mute":    {
+          "type": "boolean",
+          "description": "Mute setting of an audio rendering device"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.audio"}
+  ],
+  "required": ["volume","mute"]
+}

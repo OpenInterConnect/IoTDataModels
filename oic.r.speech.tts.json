@@ -1,0 +1,31 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.speech.tts.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Speech Synthesis-TTS",
+  "definitions": {
+    "oic.r.speech.tts": {
+      "type": "object",
+      "properties": {
+        "utterance": {
+          "type": "string",
+          "description": "SSML document including the speak body"
+        },
+        "supportedLanguages": {
+          "type": "string",
+          "description": "ReadOnly, comma separated list of supported language tags"
+        },
+        "supportedVoices": {
+          "type": "string",
+          "description": "ReadOnly, SSML document fragment indicating supported voices"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.speech.tts"}
+  ],
+  "required": ["utterance"]
+}

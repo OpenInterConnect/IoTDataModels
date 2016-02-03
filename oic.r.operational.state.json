@@ -1,0 +1,47 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.operational.state#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Operational State",
+  "definitions": {
+    "oic.r.operational.state": {
+      "type": "object",
+      "properties": {
+        "machineStates":        {
+          "type": "string",
+          "description": "ReadOnly, Comma separated list of the possible operational states."
+        },
+        "currentMachineState":  {
+          "type": "string",
+          "description": "Current state of operation of the device."
+        },
+        "jobStates":            {
+          "type": "string",
+          "description": "ReadOnly, Comma separate list of the possible job states."
+        },
+        "currentJobState":      {
+          "type": "string",
+          "description": "Currently active jobState"
+        },
+        "runningTime":          {
+          "type": "string",
+          "description": "ReadOnly, Elapsed time in the current operational state"
+        },
+        "remainingTime":        {
+          "type": "string",
+          "description": "ReadOnly, Time till completion of the current operational state"
+        },
+        "progressPercentage":   {
+          "type": "integer",
+          "description": "ReadOnly, Percentage completeness of the current jobState"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.operational.state"}
+  ],
+  "required": ["machineStates", "currentMachineState"]
+}

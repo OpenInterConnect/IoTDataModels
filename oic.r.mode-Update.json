@@ -1,0 +1,23 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.mode#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Mode",
+  "definitions": {
+    "oic.r.mode": {
+      "type": "object",
+      "properties": {
+        "modes":          {
+          "type": "string",
+          "description": "Desired mode"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.mode"}
+  ],
+  "required": ["modes"]
+}

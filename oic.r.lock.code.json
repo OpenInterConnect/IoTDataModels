@@ -1,0 +1,26 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.lock.code#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Lock Code",
+  "definitions": {
+    "oic.r.lock.code": {
+      "type": "object",
+      "properties": {
+        "lockCodeList" : {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Value for the lock code"
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.lock.code"}
+  ],
+  "required": ["lockCodeList"]
+}

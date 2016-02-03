@@ -1,0 +1,64 @@
+#%RAML 0.8
+title: OICMedia
+version: v1.0-20150727
+schemas:
+  - Media: !include oic.r.media.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+            enum: ["oic.if.s"]
+
+/MediaResURI:
+  description: |
+    This resource specifies the media that an OIC Server (Camera) supports.
+    The resource is an array of media elements.  Each element contains:
+        A URL at which the specified media type can be accessed.
+        A string array containing the definition of the media using SDP.
+        Each entry in the sdp array is an SDP line.
+        Each line shall follow the SDP description syntax as defined in the SDP specification.
+    The SDP specification can be found at http://tools.ietf.org/html/rfc4566.
+    The mime subtype video/H264 indicates video resource and the mime subtype video/jpeg indicates still image resource.
+
+  displayName: Media
+  is: [ interface ]
+
+  get:
+    description: |
+      Retrieves the current media resource.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Media
+            example: |
+              {
+                "rt": "oic.r.media",
+                "id": "unique_example_id",
+                "media": [
+                  {
+                    "url": "some example url",
+                    "sdp": [
+                      "m=video 1 RTP/AVP 96",
+                      "a=rtpmap:96 H264/9000",
+                      "a=fmtp:96 profile-level-id=42A028;packetization-mode=1"
+                    ]
+                  },
+                  {
+                    "url": "some other example1 url",
+                    "sdp": [
+                      "m=audio 2 RTP/AVP 97",
+                      "a=rtpmap:97 MP4A-LATM/90000"
+                    ]
+                  },
+                  {
+                    "url": "some other example2 url",
+                    "sdp": [
+                      "m=video 3 RTP/AVP 98",
+                      "a=rtpmap:98 jpeg/90000",
+                      "a=fmtp:98 sampling=YCbCr-4:2:0;width=256;height=256"
+                    ]
+                  }
+                ]
+              }

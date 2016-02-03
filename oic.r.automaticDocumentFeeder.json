@@ -1,0 +1,27 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.automaticDocumentFeeder#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Automatic Document Feeder",
+  "definitions": {
+    "oic.r.automaticDocumentFeeder": {
+      "type": "object",
+      "properties": {
+        "adfStates": {
+          "type": "string",
+          "description": "ReadOnly, Comma separated list of the possible adf states."
+        },
+        "currentAdfState": {
+          "type": "string",
+          "description": "ReadOnly, Current adf state."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.automaticDocumentFeeder"}
+  ],
+  "required": ["adfStates", "currentAdfState"]
+}

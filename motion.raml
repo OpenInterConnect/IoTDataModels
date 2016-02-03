@@ -1,0 +1,33 @@
+#%RAML 0.8
+title: OICMotionSensor
+version: v1.0-20150727
+schemas:
+  - Motion: !include oic.r.sensor.motion.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/MotionResURI:
+  description: |
+    This resource describes whether motion has been sensed or not.
+    The value is a boolean.
+    A value of True means that motion has been sensed.
+    A value of False means that motion not been sensed.
+
+  displayName: Motion Sensor
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Motion
+            example: |
+              {
+                "rt":    "oic.r.sensor.motion",
+                "id":    "unique_example_id",
+                "value": true
+              }

@@ -1,0 +1,31 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.refrigeration#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Refrigeration",
+  "definitions": {
+    "oic.r.refrigeration": {
+      "type": "object",
+      "properties": {
+        "rapidFreeze":  {
+          "type": "boolean",
+          "description": "Indicates whether the unit has a rapid freeze capability active."
+        },
+        "rapidCool":    {
+          "type": "boolean",
+          "description": "Indicates whether the unit has a rapid cool capability active"
+        },
+        "defrost":      {
+          "type": "boolean",
+          "description": "Indicates whether a defrost cycle is currently active"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.refrigeration"}
+  ],
+  "required": ["defrost"]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.openLevel#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Open Level",
+  "definitions": {
+    "oic.r.openLevel": {
+      "type": "object",
+      "properties": {
+        "openLevel":      {
+          "type": "integer",
+          "description": "How open or ajar the entity is"
+        },
+        "increment":  {
+          "type": "integer",
+          "description": "ReadOnly, The step between possible values"
+        },
+        "range":      {
+          "type": "string",
+          "description": "ReadOnly, Lower bound=closed, Upper bound=open"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.openLevel"}
+  ],
+  "required": ["openLevel"]
+}

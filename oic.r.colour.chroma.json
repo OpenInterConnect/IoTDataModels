@@ -1,0 +1,32 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.colour.chroma#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Colour Chroma",
+  "definitions": {
+    "oic.r.colour.chroma": {
+      "type": "object",
+      "properties": {
+        "hue":             {
+          "type": "integer",
+          "description": "Hue as defined by the CIECAM02 model definition"
+        },
+        "saturation":      {
+          "type": "integer",
+          "description": "Saturation as defined by the CIECAM02 model definition"
+        },
+        "colourspacevalue": {
+          "type": "string",
+          "description": "CSV of chromaX, chromaY, colourTemperature (X,Y,T)."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.colour.chroma"}
+  ],
+  "required": [ "hue", "saturation", "colourspacevalue" ]
+
+}

@@ -1,0 +1,22 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.light.brightness#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Brightness",
+  "definitions": {
+    "oic.r.light.brightness": {
+      "type": "object",
+      "properties": {
+        "brightness": {
+          "type": "integer",
+          "description": "Current sensed or set value for Brightness"}
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.light.brightness"}
+  ],
+  "required": [ "brightness" ]
+}

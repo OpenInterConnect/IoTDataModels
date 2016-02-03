@@ -1,0 +1,53 @@
+#%RAML 0.8
+title: OICAutoWhiteBalance
+version: v1.0-20150727
+schemas:
+  - AutoWhiteBalance: !include oic.r.colour.autowhitebalance.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+            enum: ["oic.if.a"]
+
+
+
+/AutoWhiteBalanceResURI:
+  description: |
+    This resource describes an auto balance on/off feature (on/off).
+    The value is a boolean.
+    An AutoWhiteBalance value of 'true' means that the switch is on.
+    An AutoWhiteBalance value of 'false' means that the switch is off.
+  displayName: Auto White Balance
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: AutoWhiteBalance
+            example: |
+              {
+                "rt":               "oic.r.colour.autowhitebalance",
+                "id":               "unique_example_id",
+                "autoWhiteBalance": false
+              }
+  post:
+    body:
+      application/json:
+        schema: AutoWhiteBalance
+        example: |
+          {
+            "id":               "unique_example_id",
+            "autoWhiteBalance": true
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: AutoWhiteBalance
+            example: |
+              {
+                "id":               "unique_example_id",
+                "autoWhiteBalance": true
+              }

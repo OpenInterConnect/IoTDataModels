@@ -1,0 +1,57 @@
+#%RAML 0.8
+title: OICActivityCount
+version: v1.0-20150727
+schemas:
+  - Count: !include oic.r.sensor.activity.count.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+            enum: ["oic.if.s","oic.if.a"]
+
+/ActivityCountResURI:
+  description: |
+    This resource specifies an activity count.
+    The resource can be readonly (oic.if.s interface) in which instance it represents a count.
+    The resource can be readwrite (oic.if.a interface) in which instance it represents a goal or target for a count.
+    The count property is an integer representing either the current count or goal value.
+
+  displayName: Activity Count
+  is: [ interface ]
+
+  get:
+    description: |
+      Retrieves the current activity count.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Count
+            example: |
+              {
+                "rt":     "oic.r.sensor.activity.count",
+                "id":     "unique_example_id",
+                "count":  2500
+              }
+
+  post:
+    description: |
+      Sets the count target
+    body:
+      application/json:
+        schema: Count
+        example: |
+          {
+            "id":     "unique_example_id",
+            "count":  5000
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Count
+            example: |
+              {
+                "id":     "unique_example_id",
+                "count":  5000
+              }

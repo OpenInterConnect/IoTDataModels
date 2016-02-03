@@ -1,0 +1,38 @@
+#%RAML 0.8
+title: OICAutomaticDocumentFeeder
+version: v1.0-20150727
+schemas:
+  - AutomaticDocumentFeeder: !include oic.r.automaticDocumentFeeder.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/AutomaticDocumentFeederResURI:
+  description: |
+    This resource describes the state of an automatic document feeder, typically used with a scanner.
+    The states are read only.
+    The adfStates is a comma separated list of the possible operational states.
+    adfProcessing – the OK state, other states are errors or require ‘user attention’.
+    The currentAdfState is the current value of the ADF state on the device.
+
+  displayName: Automatic Document Feeder
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Retrieves the current automatic document feeder state.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: AutomaticDocumentFeeder
+            example: |
+              {
+                "rt":               "oic.r.automaticDocumentFeeder",
+                "id":               "unique_example_id",
+                "adfStates":        "adfProcessing, adfEmpty, adfJam, adfLoaded, adfMispick, adfHatchOpen, adfDuplexPageTooShort, adfDuplexPageTooLong, adfMultipickDetected, adfInputTrayFailed, adfInputTrayOverloaded",
+                "currentAdfState":  "adfProcessing"
+              }

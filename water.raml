@@ -1,0 +1,32 @@
+#%RAML 0.8
+title: OICWaterSensor
+version: v1.0-20150727
+schemas:
+  - Water: !include oic.r.sensor.water.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+            enum: ["oic.if.a"]
+
+/WaterResURI:
+  description: |
+    This resource describes whether water has been sensed or not.
+    The value is a boolean.
+    A value of True means that water has been sensed.
+    A value of False means that water not been sensed.
+  is: [ interface ]
+  displayName: Water Sensor
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Water
+            example: |
+              {
+                "rt":    "oic.r.sensor.water",
+                "id":    "unique_example_id",
+                "value": true
+              }

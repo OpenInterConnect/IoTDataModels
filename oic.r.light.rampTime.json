@@ -1,0 +1,27 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.light.rampTime#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Ramp Time",
+  "definitions": {
+    "oic.r.light.rampTime": {
+      "type": "object",
+      "properties": {
+        "rampTime": {
+          "type": "integer",
+          "description": "Actual speed of changing between 2 dimming values"
+        },
+        "range": {
+          "type": "string",
+          "description": "ReadOnly, Min and Max of possible values"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.light.rampTime"}
+  ],
+  "required": ["rampTime"]
+}

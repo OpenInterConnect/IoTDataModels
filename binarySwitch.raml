@@ -1,0 +1,52 @@
+#%RAML 0.8
+title: OICBinarySwitch
+version: v1.0-20150727
+schemas:
+  - BinarySwitch: !include oic.r.switch.binary.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a"]
+
+/BinarySwitchResURI:
+  description: |
+    This resource describes a binary switch (on/off).
+    The value is a boolean.
+    A value of 'true' means that the switch is on.
+    A value of 'false' means that the switch is off.
+  displayName: Binary Switch
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: BinarySwitch
+            example: |
+              {
+                "rt":     "oic.r.switch.binary",
+                "id":     "unique_example_id",
+                "value":  false
+              }
+  post:
+    body:
+      application/json:
+        schema: BinarySwitch
+        example: |
+          {
+            "id":    "unique_example_id",
+            "value": true
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: BinarySwitch
+            example: |
+              {
+                "id":    "unique_example_id",
+                "value": true
+              }

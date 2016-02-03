@@ -1,0 +1,31 @@
+#%RAML 0.8
+title: OICIlluminanceSensor
+version: v1.0-20150727
+schemas:
+  - Illuminance: !include oic.r.sensor.illuminance.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s"]
+
+/IlluminanceSensorResURI:
+  description: |
+    This resource describes an illuminance sensor
+    illuminance is a float and represents the sensed luminous flux per unit area in lux.
+
+  displayName: Illuminance Sensor
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Illuminance
+            example: |
+              {
+                "rt":           "oic.r.sensor.illuminance",
+                "id":           "unique_example_id",
+                "illuminance":  450
+              }
