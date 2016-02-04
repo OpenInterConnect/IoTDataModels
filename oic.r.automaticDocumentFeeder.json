@@ -1,6 +1,7 @@
 {
   "id": "http://openinterconnect.org/schemas/oic.r.automaticDocumentFeeder#",
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Automatic Document Feeder",
   "definitions": {
     "oic.r.automaticDocumentFeeder": {
