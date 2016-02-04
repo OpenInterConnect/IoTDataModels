@@ -1,6 +1,7 @@
 {
   "id": "http://openinterconnect.org/schemas/oic.r.colour.autowhitebalance#",
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Auto White Balance",
   "definitions": {
     "oic.r.colour.autowhitebalance": {

@@ -1,6 +1,7 @@
 {
   "id": "http://openinterconnect.org/schemas/oic.r.energy.drlc#",
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "definitions": {
     "oic.r.energy.drlc": {
       "type": "object",
