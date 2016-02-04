@@ -1,6 +1,7 @@
 {
   "id": "http://openinterconnect.org/schemas/oic.r.sensor.heart.zone.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Heart Rate Zone",
   "definitions": {
     "oic.r.sensor.heart.zone": {

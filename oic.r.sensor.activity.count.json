@@ -1,6 +1,7 @@
 {
   "id": "http://openinterconnect.org/schemas/oic.r.sensor.activity.count.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Activity Count Sensor",
   "definitions": {
     "oic.r.sensor.activity.count": {
