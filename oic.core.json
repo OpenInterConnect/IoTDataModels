@@ -1,7 +1,6 @@
 {
   "id": "http://openinterconnect.org/schemas/oic.core#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Core",
   "definitions": {
     "oic.core": {
