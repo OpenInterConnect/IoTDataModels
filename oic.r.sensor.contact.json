@@ -1,0 +1,20 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.sensor.contact.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "title": "Contact Sensor",
+  "definitions": {
+    "oic.r.sensor.contact": {
+      "allOf": [
+        {"$ref": "oic.r.sensor.json#/definitions/oic.r.sensor"}
+      ]
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.sensor.contact"}
+  ],
+  "required": ["value"]
+}

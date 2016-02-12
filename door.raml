@@ -1,0 +1,76 @@
+#%RAML 0.8
+title: OICDoor
+version: v1.0.0-20151223
+documentation:
+  - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+         
+        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - Door:       !include oic.r.door.json
+    DoorUpdate: !include oic.r.door-Update.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a"]
+
+/DoorResURI:
+  description: |
+    This resource describes a door.
+    A door is modelled by means of
+      openState (Open/Closed).
+      openDuration (ISO 8601 Time).
+      openAlarm (boolean).
+    For openState, the value 'Open' indicates the door is open.
+    The value 'Closed' indicates the door is closed.
+    The type of openDuration is an ISO 8601 Time encoded string.
+    The openAlarm value 'true' indicates that the open alarm is active.
+    The openAlarm value 'false' indicates that open alarm is not active.
+  displayName: Door
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: retrieves the state of the Door.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Door
+            example: |
+              {
+                "rt" :          "oic.r.door",
+                "id":           "unique_example_id",
+                "openState":    "Open",
+                "openDuration": "P0Y0M0DT2H25M5S",
+                "openAlarm":    true
+              }
+
+  post:
+    description: |
+      Sets the current Door properties.
+      The only property that can be set as part of an update operation is
+        the openAlarm.
+      This can be made active (true) or inactive (false)
+    body:
+      application/json:
+        schema: DoorUpdate
+        example: |
+          {
+            "id":         "unique_example_id",
+            "openAlarm":  false
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: DoorUpdate
+            example: |
+              {
+                "id":         "unique_example_id",
+                "openAlarm":  false
+              }

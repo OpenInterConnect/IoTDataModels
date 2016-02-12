@@ -1,0 +1,37 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.media#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "title": "Media",
+  "definitions": {
+    "oic.r.media": {
+      "media": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "url for the media instance"
+            },
+            "sdp": {
+              "type": "array",
+              "description": "Array of strings, one per SDP line",
+              "items": {
+                "type": "string",
+                "description": "SDP media or attribute line"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.media"}
+  ],
+  "required": ["media"]
+}

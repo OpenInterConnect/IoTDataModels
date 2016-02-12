@@ -1,0 +1,24 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.iceMaker#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "title": "Ice Maker",
+  "definitions": {
+    "oic.r.iceMaker": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": ["on","off","full"],
+          "description": "Status of the Ice Maker"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "#/definitions/oic.r.iceMaker"}
+  ],
+  "required": ["status"]
+}

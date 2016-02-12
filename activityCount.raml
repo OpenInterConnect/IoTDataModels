@@ -1,0 +1,65 @@
+#%RAML 0.8
+title: OICActivityCount
+version: v1.0.0-20151223
+documentation:
+  - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+         
+        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - Count: !include oic.r.sensor.activity.count.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+            enum: ["oic.if.s","oic.if.a"]
+
+/ActivityCountResURI:
+  description: |
+    This resource specifies an activity count.
+    The resource can be readonly (oic.if.s interface) in which instance it represents a count.
+    The resource can be readwrite (oic.if.a interface) in which instance it represents a goal or target for a count.
+    The count property is an integer representing either the current count or goal value.
+
+  displayName: Activity Count
+  is: [ interface ]
+
+  get:
+    description: |
+      Retrieves the current activity count.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Count
+            example: |
+              {
+                "rt":     "oic.r.sensor.activity.count",
+                "id":     "unique_example_id",
+                "count":  2500
+              }
+
+  post:
+    description: |
+      Sets the count target
+    body:
+      application/json:
+        schema: Count
+        example: |
+          {
+            "id":     "unique_example_id",
+            "count":  5000
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Count
+            example: |
+              {
+                "id":     "unique_example_id",
+                "count":  5000
+              }
