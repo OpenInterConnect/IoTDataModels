@@ -1,7 +1,7 @@
 {
   "id": "http://openinterconnect.org/oic.wk.con#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "definitions": {
     "oic.wk.con": {
       "type": "object",
