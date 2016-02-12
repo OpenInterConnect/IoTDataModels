@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "id": "http://openinterconnect.org/oic.wk.rts#",
+  "definitions": {
+    "oic.wk.rts": {
+      "type": "object",
+      "properties": {
+        "tl": {
+          "type": "string",
+          "description": "Readonly, list of resource type names",
+          "format": "bsv"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/definitions/oic.wk.rts" }
+  ],
+  "required": ["tl"]
+}

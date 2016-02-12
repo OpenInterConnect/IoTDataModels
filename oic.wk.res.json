@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-v4/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "id": "http://openinterconnect.org/schemas/oic.wk.res.json/",
+  "definitions": {
+    "oic.res-links.json": {
+      "type": "object",
+      "properties": {
+        "n": {
+          "type": "string",
+          "description": "ReadOnly, Human friendly name"
+        },
+        "di": {
+          "description": "The device identifier as indicated by the /oic/d resource of the device",
+          "type": "string",
+          "format": "UUID"
+        },
+        "mpro": {
+          "description": "ReadOnly, Supported messaging protocols",
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "oic.oic-link.json#"
+          }
+        }
+      }
+    }
+  },
+  "description": "The list of resources expressed as OIC links",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/oic.res-links.json"
+  },
+  "required": ["di", "links"]
+}

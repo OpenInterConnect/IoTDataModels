@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "id": "http://openinterconnect.org/oic.wk.mnt#",
+  "definitions": {
+    "oic.wk.mnt": {
+      "type": "object",
+        "fr":{
+          "type": "boolean",
+          "description": "Factory Reset"
+        },
+        "rb": {
+          "type": "boolean",
+          "description": "Reboot Action"
+        },
+        "ssc": {
+          "type": "boolean",
+          "description": "Start Stat Collection Action Toggle"
+        }
+      }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "http://openinterconnect.org/oic.core.json#/definitions/oic.core"},
+    {"$ref": "#/definitions/oic.wk.mnt" }
+  ],
+  "required": ["fr", "rb", "ssc"]
+}

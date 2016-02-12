@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "id": "http://openinterconnect.org/schemas/oic.rule.json#",
+  "title" : "Rule",
+  "definitions": {
+    "oic.rule": {
+      "type": "object",
+      "properties": {
+        "condition": {
+          "type": "string",
+          "description": "condition of the rule",
+          "format": "UTF8"
+        },
+                "currentStatus": {
+          "type": "string",
+          "description": "ReadOnly, the current state, can be one of: enabled, disabled, error"
+        },
+        "n": {
+          "type": "string",
+          "description": "Used to name the Rule collection",
+          "format": "UTF8"
+        },
+        "test": {
+          "type": "boolean",
+          "description": "Inidcates initiation of test mode for the rule"
+        },
+        "id": {
+          "type": "string",
+          "description": "Can be an value that is unique to the use context or a UUIDv4"
+        },
+        "rts": {
+          "type": "string",
+          "description": "ReadOnly, Defines the list of allowable resource types in links included in the collection; new links being created can only be from this list"
+        },
+                "links": {
+          "type": "array",
+          "description": "Array of OIC web links that are the rule members, this is the script",
+          "items" : {
+            "allOf": [
+              { "$ref": "http://openinterconnect.org/schemas/oic.oic-link.json#" },
+              { "required" : [ "ins" ] }
+            ]
+          }
+        }
+      },
+      "required": [ "links", "condition", "currentStatus", "test", "id", "rts" ]
+    }
+  },
+
+  "type": "object",
+  "allOf" : [
+    { "$ref": "oic.core.json#/definitions/oic.core" },
+    { "$ref": "#/definitions/oic.rule" }
+  ]
+}

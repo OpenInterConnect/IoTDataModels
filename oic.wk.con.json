@@ -1,0 +1,39 @@
+{
+  "id": "http://openinterconnect.org/oic.wk.con#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "definitions": {
+    "oic.wk.con": {
+      "type": "object",
+      "properties": {
+        "n": {
+          "type": "string",
+          "description": "Human friendly name"
+        },
+        "loc": {
+          "type": "string",
+          "description": "Location information",
+          "format": "json"
+        },
+        "locn": {
+          "type": "string",
+          "description": "Human Friendly Name"
+        },
+        "c": {
+          "type": "string",
+          "description": "Currency"
+        },
+        "r": {
+          "type": "string",
+          "description": "Region"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.wk.con" }
+  ],
+  "required": [ "n" ]
+}

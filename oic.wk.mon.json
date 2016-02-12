@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "id": "http://openinterconnect.org/oic.wk.mon#",
+  "definitions": {
+    "oic.wk.mon": {
+      "type": "object",
+      "properties": {
+        "av":{
+          "type": "boolean",
+          "description": "ReadOnly, Indicates if the device is available or not on the network (like ping)"
+        },
+        "lat": {
+          "type": "integer",
+          "description": "ReadOnly, Indicates the elapsed time in seconds after the device was invoked or acted upon"
+        },
+        "ds": {
+          "type": "string",
+          "description": "ReadOnly, Contains Device Statistics Info (no. of received packets, no. of sent packets, time to respond etc.)",
+          "format": "csv"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "#/definitions/oic.wk.mon"}
+  ],
+  "required": ["av", "lat"]
+}

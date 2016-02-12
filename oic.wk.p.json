@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "id": "http://openinterconnect.org/oic.wk.p#",
+  "definitions": {
+    "oic.wk.p": {
+      "type": "object",
+      "properties": {
+        "pi": {
+          "type": "string",
+          "description": "ReadOnly, Platform Identifier"
+        },
+        "mnmn": {
+          "type": "string",
+          "description": "ReadOnly, Manufacturer Name",
+          "maxLength": 16
+        },
+        "mnml": {
+          "type": "string",
+          "description": "ReadOnly, Manufacturer's URL",
+          "maxLength": 32,
+          "format": "uri"
+        },
+        "mnmo": {
+          "type": "string",
+          "description": "ReadOnly, Model number as designated by manufacturer"
+        },
+        "mndt": {
+          "type": "string",
+          "description": "ReadOnly, Manufacturing Date",
+          "format": "date-time"
+        },
+        "mnpv": {
+          "type": "string",
+          "description": "ReadOnly, Platform Version"
+        },
+        "mnos": {
+          "type": "string",
+          "description": "Readonly, Platform Resident OS Version"
+        },
+        "mnhw": {
+          "type": "string",
+          "description": "Readonly, Platform Hardware Version"
+        },
+        "mnfv": {
+          "type": "string",
+          "description": "ReadOnly, Manufacturer's firmware version"
+        },
+        "mnsl": {
+          "type": "string",
+          "description": "ReadOnly, Manufacturer's Support Information URL",
+          "format": "uri"
+        },
+        "st": {
+          "type": "string",
+          "description": "ReadOnly, Reference time for the device",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/definitions/oic.wk.p" }
+  ],
+  "required": [ "pi", "mnmn" ]
+}

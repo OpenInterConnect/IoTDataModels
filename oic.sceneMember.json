@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "id": "http://openinterconnect.org/schemas/oic.sceneMember.json#",
+  "title" : "Scene Member",
+  "definitions": {
+    "oic.sceneMember": {
+      "type": "object",
+      "properties": {
+        "n": {
+          "type": "string",
+          "description": "Used to name the Scene collection",
+          "format": "UTF8"
+        },
+        "id": {
+          "type": "string",
+          "description": "Can be an value that is unique to the use context or a UUIDv4"
+        },
+        "SceneMappings" : {
+          "type": "array",
+           "description": "array of mappings per scene, can be 1",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "scene": {
+                  "type": "string",
+                  "description": "Specifies a scene value that will acted upon"
+                },
+                "memberProperty": {
+                  "type":  "string",
+                  "description": "ReadOnly, property name that will be mapped"
+                },
+                  "memberValue": {
+                  "type": "string",
+                  "description": "ReadOnly, value of the Member Property"
+                }
+              },
+              "required": [ "scene", "memberProperty", "memberValue" ]
+            }
+          ]
+        },
+
+        "link": {
+          "type": "string",
+          "description": "web link that points at an resource",
+          "$ref": "oic.oic-link.json#"
+        }
+      },
+      "required": [ "link" ]
+    }
+  },
+
+  "type": "object",
+  "allOf" : [
+    { "$ref": "oic.core.json#/definitions/oic.core" },
+    { "$ref": "#/definitions/oic.sceneMember" }
+  ]
+}

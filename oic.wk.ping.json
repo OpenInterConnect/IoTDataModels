@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "id": "http://openinterconnect.org/oic.wk.ping#",
+  "definitions": {
+    "oic.wk.ping": {
+      "type": "object",
+      "properties": {
+        "in": {
+          "type": "integer",
+          "description": "ReadWrite, Indicates the interval for which connection shall be kept alive"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "oic.core.json#/definitions/oic.core"
+    },
+    {
+      "$ref": "#/definitions/oic.wk.ping"
+    }
+  ],
+  "required": [
+    "in"
+  ]
+}

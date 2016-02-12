@@ -1,0 +1,297 @@
+#%RAML 0.8
+title: OICScene
+version: v1.0-20150630
+documentation:
+  - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+         
+        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+schemas:
+  - Collection:        !include oic.collection.json
+    SceneCollection:   !include oic.sceneCollection.json
+    SceneCollectionUpdate:   !include oic.sceneCollection-Update.json
+    SceneMember:       !include oic.sceneMember.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+            enum: ["oic.if.a", "oic.if.ll"]
+
+
+/SceneListResURI:
+    description: |
+      Toplevel Scene resource.
+      This resource is a generic collection resource.
+      The rts value shall contain oic.sceneCollection resource types.
+    displayName: Scenes (Top level)
+
+    get:
+        description: |
+          Provides the current list of web links pointing to scenes
+        responses:
+            200:
+                body:
+                    application/json:
+                        schema: Collection
+                        example: |
+                            {
+                                "rt":       "oic.wk.sceneList",
+                                "n":        "list of scene Collections",
+                                "rts":      "oic.wk.sceneCollection",
+                                "links": [
+                                 ]
+                            }
+
+    post:
+        description: |
+          Provides the action to create a new sceneCollection in the SceneList resource
+          The only resource type that is allowed to be created "oic.wk.sceneCollection".
+          The example contains 3 scene values off, Reading and TVWatching.
+        body:
+            application/json:
+                schema: SceneCollection
+                example: |
+                    {
+                       "scenevalue": "off",
+                       "sceneValues": "off,Reading,TVWatching",
+                       "lastScene": "off",
+                       "rt":       "oic.wk.sceneCollection",
+                       "n":        "my first scene",
+                       "id":       "my_scene1",
+                       "rts":      "oic.r.sceneMember"
+                    }
+
+        responses:
+            200:
+                description: |
+                   Indicates that the target resource was created.
+                   The created resource attributes are provided in the response,
+                   including the server generated identifier.
+                body:
+                    application/json:
+                       schema: SceneCollection
+                       example: |
+                          {
+                            "scenevalue": "off",
+                            "sceneValues": "off,Reading,TVWatching",
+                            "lastScene": "off",
+                            "rt":       "oic.r.sceneCollection",
+                            "n":        "mymembername",
+                            "link":     "coap://newscene",
+                            "id":       "0685B960-736F-46F7-BEC0-9E6CBD671ADC1",
+                            "rts":      "oic.r.sceneMember"
+                           }
+
+    delete:
+        description: |
+          No change from collection.
+          When delete is used with the URI of the collection without and query parameters then the entire collection is deleted
+          When the delete uses the "ins" parameter with the value of a specific link then only that link is deleted
+        queryParameters:
+          ins:
+              type: string
+              description: |
+                Delete the Web link identified by the string - could be a UUID.
+              required: false
+              example: |
+                DELETE /mycollection?ins="0685B960-736F-46F7-BEC0-9E6CBD671ADC1"
+        responses:
+          200:
+            description: The web link instance or the the entire collection has been successfully deleted
+          400:
+            description: The request is invalid
+
+
+
+/SceneCollectionResURI:
+    description: |
+      Collection that models a set of Scenes.
+      This resource is a generic collection resource with additional parameters.
+      The rts value shall contain oic.sceneMember resource types.
+      The additional parameters are
+        lastScene, this is the scene value last set by any OIC Client
+        sceneValueList, this is the list of available scenes
+        lastScene shall be listed in sceneValueList.
+    displayName: Scene Collections
+
+    get:
+        description: |
+          Provides the current list of web links pointing to scenes
+        responses:
+            200:
+                body:
+                    application/json:
+                        schema: SceneCollection
+                        example: |
+                            {
+                                "lastScene": "off",
+                                "sceneValues": "off,Reading,TVWatching",
+                                "rt":       "oic.wk.sceneCollection",
+                                "n":        "My Scenes for my living room",
+                                "id":       "0685B960-736F-46F7-BEC0-9E6CBD671ADC1",
+                                "rts":      "oic.wk.sceneMember",
+                                "links": [
+                                 ]
+                            }
+
+    put:
+        description: |
+          Provides the action to change the last settted scene selection.
+          Calling this method shall update of all sceneMembers to the prescribed membervalue.
+          When this method is called with the same value as the current lastScene value
+          then all sceneMembers shall be updated.
+
+        body:
+            application/json:
+                schema: SceneCollectionUpdate
+                example: |
+                    {
+                       "lastScene": "Reading"
+                    }
+
+        responses:
+            200:
+                description: |
+                   Indicates that the value is changed.
+                   The changed properties are provided in the response.
+                body:
+                    application/json:
+                        schema: SceneCollectionUpdate
+                        example: |
+                            {
+                                "lastScene": "Reading"
+                            }
+
+
+    post:
+        description: |
+          Provides the action to create a new sceneMember in the SceneCollection resource
+          The only resource type that is allowed to be created is "oic.wk.sceneMember".
+          The id of the resource will be generated by the implementation.
+          As example the mappings of the 3 scenes are mapped to different states of an binary switch
+
+        body:
+            application/json:
+                schema: SceneMember
+                example: |
+                    {
+                      "link": { "href":"coap://mydevice/mybinaryswitch",
+                                "if": "oic.if.a",
+                                "rt": "oic.r.switch.binary" },
+                      "n": "my binary switch (for light bulb) mappings",
+                      "sceneMappings": [
+                          {
+                            "scene":           "off",
+                            "memberProperty":  "value",
+                            "memberValue":     true
+                          },
+                          {
+                            "scene":           "Reading",
+                            "memberProperty":  "value",
+                            "memberValue":     false
+                          },
+                          {
+                            "scene":           "TVWatching",
+                            "memberProperty":  "value",
+                            "memberValue":     true
+                          }
+                        ]
+                    }
+
+        responses:
+            200:
+                description: |
+                   Indicates that the target resource was created.
+                   The new resource attributes are provided in the response.
+                body:
+                    application/json:
+                       schema: SceneMember
+                       example: |
+                          {
+                            "id": "0685B960-FFFF-46F7-BEC0-9E6234671ADC1",
+                            "n": "my binary switch (for light bulb) mappings",
+                            "link": { "href":"coap://mydevice/mybinaryswitch",
+                                      "if": "oic.if.a",
+                                      "rt": "oic.r.switch.binary" },
+                            "sceneMappings": [
+                             {
+                               "scene":           "off",
+                               "memberProperty":  "value",
+                               "memberValue":     true
+                             },
+                             {
+                               "scene":           "Reading",
+                               "memberProperty":  "value",
+                               "memberValue":     false
+                             },
+                             {
+                               "scene":           "TVWatching",
+                               "memberProperty":  "value",
+                               "memberValue":     true
+                             }
+                            ]
+                          }
+
+    delete:
+        description: |
+          No change from collection.
+          When delete is used with the URI of the collection without and query parameters then the entire collection is deleted
+          When the delete uses the "ins" parameter with the value of a specific link then only that link is deleted
+        queryParameters:
+          ins:
+              type: string
+              description: |
+                Delete the Web link identified by the string - could be a UUID.
+              required: false
+              example: |
+                DELETE /mycollection?ins="0685B960-FFFF-46F7-BEC0-9E6234671ADC1"
+        responses:
+          200:
+            description: The web link instance or the the entire collection has been successfully deleted
+          400:
+            description: The request is invalid
+
+
+/SceneMemberResURI:
+    description: |
+      Collection that models a sceneMember.
+    displayName: Scene Member
+
+    get:
+        description: |
+          Provides the scene member
+        responses:
+            200:
+                body:
+                    application/json:
+                       schema: SceneMember
+                       example: |
+                          {
+                            "id": "0685B960-FFFF-46F7-BEC0-9E6234671ADC1",
+                            "n": "my binary switch (for light bulb) mappings",
+                            "link": { "href":"coap://mydevice/mybinaryswitch",
+                                      "if": "oic.if.a",
+                                      "rt": "oic.r.switch.binary" },
+                            "sceneMappings": [
+                             {
+                               "scene":           "off",
+                               "memberProperty":  "value",
+                               "memberValue":     true
+                             },
+                             {
+                               "scene":           "Reading",
+                               "memberProperty":  "value",
+                               "memberValue":     false
+                             },
+                             {
+                               "scene":           "TVWatching",
+                               "memberProperty":  "value",
+                               "memberValue":     true
+                             }
+                            ]
+                          }

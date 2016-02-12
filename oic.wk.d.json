@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "id": "http://openinterconnect.org/oic.wk.d#",
+  "definitions": {
+    "oic.wk.d": {
+      "type": "object",
+      "properties": {
+        "n": {
+          "type": "string",
+          "description": "Readonly, Human friendly name"
+        },
+        "di": {
+          "type": "string",
+          "description": "ReadOnly, Unique identifier for device (UUID)",
+          "format": "uuid"
+        },
+        "icv": {
+          "type": "string",
+          "description": "ReadOnly, The version of the OIC Server"
+        },
+        "dmv": {
+          "type": "string",
+          "description": "ReadOnly, The spec version of the vertical specification",
+          "format": "csv"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/definitions/oic.wk.d" }
+  ],
+  "required": [ "n", "di", "icv" ]
+}
