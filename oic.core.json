@@ -3,7 +3,6 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Core",
-  "$ref": "#/definitions/oic.core",
   "definitions": {
     "oic.core": {
       "type": "object",
@@ -33,5 +32,9 @@
         }
       }
     }
-  }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/oic.core"}
+  ]
 }
