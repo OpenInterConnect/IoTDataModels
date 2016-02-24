@@ -1,10 +1,10 @@
 {
   "id": "http://openinterconnect.org/schemas/oic.r.airFlowControl#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Air Flow Control",
   "definitions": {
-    "oic.r.airFlowControl": {
+    "oic.r.airflowcontrol": {
       "type": "object",
       "properties": {
         "airFlowControl": {
@@ -12,7 +12,7 @@
           "items": {
             "anyOf": [
               {"$ref": "oic.r.switch.binary.json#"},
-              {"$ref": "oic.r.airFlow.json#"}
+              {"$ref": "oic.r.airflow.json#"}
             ]
           }
         }
@@ -22,8 +22,8 @@
   "type": "object",
   "allOf": [
     {"$ref": "oic.core.json#/definitions/oic.core"},
-    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
-    {"$ref": "#/definitions/oic.r.airFlowControl"}
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.airflowcontrol"}
   ],
   "required": ["airFlowControl"]
 }

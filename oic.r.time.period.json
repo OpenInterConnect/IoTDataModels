@@ -1,7 +1,7 @@
 {
   "id": "http://openinterconnect.org/schemas/oic.r.time.period#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Time Period",
   "definitions": {
     "oic.r.time.period": {
@@ -21,7 +21,7 @@
   "type": "object",
   "allOf": [
     {"$ref": "oic.core.json#/definitions/oic.core"},
-    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.time.period"}
   ],
   "required": ["startTime"]

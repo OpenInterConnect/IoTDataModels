@@ -1,10 +1,10 @@
 {
   "id": "http://openinterconnect.org/schemas/oic.r.sensor.atmosphericPressure.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Atmospheric Pressure Sensor",
   "definitions": {
-    "oic.r.sensor.atmosphericPressure": {
+    "oic.r.sensor.atmosphericpressure": {
       "properties": {
         "atmosphericPressure": {
           "type": "number",
@@ -16,8 +16,8 @@
   "type": "object",
   "allOf": [
     {"$ref": "oic.core.json#/definitions/oic.core"},
-    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
-    {"$ref": "#/definitions/oic.r.sensor.atmosphericPressure"}
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.sensor.atmosphericpressure"}
   ],
   "required": ["atmosphericPressure"]
 }
