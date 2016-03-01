@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "id": "http://openinterconnect.org/schemas/oic.r.mediaSourceList.json#",
   "title": "Media Source List",
