@@ -1,24 +1,22 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.movement.linear#",
+  "id": "http://openinterconnect.org/schemas/oic.r.movement.linear.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Linear Movement",
   "definitions": {
     "oic.r.movement.linear": {
-      "type": "object",
       "properties": {
-        "movementSettings":  {
-          "type": "string",
-          "description": "ReadOnly, comma separated list of possible movement values",
-          "format": "csv"
+        "movementSettings": {
+            "type": "number",
+            "description": "ReadOnly, CSV list of possible movement values."
         },
-        "movement":   {
+        "movement": {
           "type": "string",
           "description": "Current movement value"
         },
         "movementModifier":  {
           "type": "string",
-          "description": "Modfied to the movement value (e.g. spin-90, left-20), units are device dependent"
+          "description": "Modifier to the movement value (e.g. spin-90, left-20), units are device dependent"
         }
       }
     }
@@ -29,5 +27,5 @@
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.movement.linear"}
   ],
-  "required": ["movementSettings", "movement"]
+  "required": ["movementSettings","movement"]
 }
