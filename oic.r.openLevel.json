@@ -1,10 +1,10 @@
 {
   "id": "http://openinterconnect.org/schemas/oic.r.openLevel#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Open Level",
   "definitions": {
-    "oic.r.openLevel": {
+    "oic.r.openlevel": {
       "type": "object",
       "properties": {
         "openLevel":      {
@@ -25,8 +25,8 @@
   "type": "object",
   "allOf": [
     {"$ref": "oic.core.json#/definitions/oic.core"},
-    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
-    {"$ref": "#/definitions/oic.r.openLevel"}
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.openlevel"}
   ],
   "required": ["openLevel"]
 }

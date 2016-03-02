@@ -1,0 +1,29 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.clock#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "(c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "title": "Clock",
+  "definitions": {
+    "oic.r.clock": {
+      "type": "object",
+      "properties": {
+        "datetime": {
+          "type": "string",
+          "description": "Using ISO 8601 datetime format (e.g: 2007-04-05T14:30Z, 2007-04-05T14:30+09:00)"
+        },
+        "countdown": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Desired total seconds for countdown"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.clock"}
+  ],
+  "required": ["datetime"]
+}

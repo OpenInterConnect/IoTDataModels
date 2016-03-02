@@ -1,10 +1,10 @@
 {
   "id": "http://openinterconnect.org/schemas/oic.r.light.rampTime#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Ramp Time",
   "definitions": {
-    "oic.r.light.rampTime": {
+    "oic.r.light.ramptime": {
       "type": "object",
       "properties": {
         "rampTime": {
@@ -21,8 +21,8 @@
   "type": "object",
   "allOf": [
     {"$ref": "oic.core.json#/definitions/oic.core"},
-    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
-    {"$ref": "#/definitions/oic.r.light.rampTime"}
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.light.ramptime"}
   ],
   "required": ["rampTime"]
 }

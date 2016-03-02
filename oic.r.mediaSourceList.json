@@ -1,10 +1,10 @@
 {
   "$schema": "http://json-schemas.org/draft-04/schema#",
-  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "id": "http://openinterconnect.org/schemas/oic.r.mediaSourceList.json#",
   "title": "Media Source List",
   "definitions": {
-    "oic.r.mediaSourceList": {
+    "oic.r.mediasourcelist": {
       "properties": {
         "sources": {
           "type": "array",
@@ -20,8 +20,8 @@
   "type": "object",
   "allOf": [
     { "$ref": "oic.core.json#/definitions/oic.core"},
-    { "$ref": "oic.baseResource.json#/definitions/oic.r.baseResource"},
-    { "$ref": "#/definitions/oic.r.mediaSourceList"}
+    { "$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    { "$ref": "#/definitions/oic.r.mediasourcelist"}
   ],
   "required": ["sources"]
 }

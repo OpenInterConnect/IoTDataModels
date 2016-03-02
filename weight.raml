@@ -1,8 +1,8 @@
 #%RAML 0.8
-title: OICAtmosphericPressureSensor
+title: OICWeight
 version: v1.1.0-20160229
 documentation:
-  - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
+  - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
         Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
         1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -10,30 +10,32 @@ documentation:
 
         THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 schemas:
-  - atmosphericPressure: !include oic.r.sensor.atmosphericPressure.json
+  - Weight: !include oic.r.weight.json
+
 traits:
   - interface:
       queryParameters:
         if:
           enum: ["oic.if.s"]
 
-/AtmosphericPressureResURI:
+/WeightResURI:
   description: |
-    This resource provides a measurement of Mean Sea Level Pressure experienced at the measuring point expressed in millibars.
-    The value is float which describes the atmospheric pressure in millibars.
-
-  displayName: Atmospheric Pressure Sensor
-  is: [ interface ] # valid for all methods
+    This resource describes the properties associated with weight of an object.
+    Weight (weight) is weight of an object.
+  displayName: Weight
+  is: [ interface ]
 
   get:
+    description: |
+      Retrieves weight of an object.
     responses:
       200:
         body:
           application/json:
-            schema: atmosphericPressure
+            schema: Weight
             example: |
               {
-                "rt":                   "oic.r.sensor.atmosphericpressure",
-                "id":                   "unique_example_id",
-                "atmosphericPressure":  1000
+                "rt":     "oic.r.weight",
+                "id":     "unique_example_id",
+                "weight": 200
               }

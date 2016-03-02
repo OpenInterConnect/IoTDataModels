@@ -4,7 +4,7 @@
   "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Base Resource",
   "definitions": {
-    "oic.r.baseResource": {
+    "oic.r.baseresource": {
       "type": "object",
       "properties": {
         "id": {
@@ -19,7 +19,7 @@
   "type": "object",
   "allOf": [
     {"$ref": "oic.core.json#/definitions/oic.core"},
-    {"$ref": "#/definitions/oic.r.baseResource"}
+    {"$ref": "#/definitions/oic.r.baseresource"}
   ],
   "required": ["id"]
 }
