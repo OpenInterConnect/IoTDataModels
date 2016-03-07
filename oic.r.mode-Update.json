@@ -1,5 +1,5 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.mode#",
+  "id": "http://openinterconnect.org/schemas/oic.r.mode-Update.json",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Mode",
