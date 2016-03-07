@@ -15,12 +15,13 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.s"]
+          enum: ["oic.if.s","oic.if.baseline"]
 
 /AtmosphericPressureResURI:
   description: |
     This resource provides a measurement of Mean Sea Level Pressure experienced at the measuring point expressed in millibars.
-    The value is float which describes the atmospheric pressure in millibars.
+    The value is float which describes the atmospheric pressure in hPa (hectoPascals).
+    Note that hPa and the also commonly used unit of millibars (mbar) are numerically equivalent.
 
   displayName: Atmospheric Pressure Sensor
   is: [ interface ] # valid for all methods
