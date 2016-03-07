@@ -21,7 +21,7 @@
   },
   "type": "object",
   "allOf": [
-    {"$ref": "http://openconnectivityfoundation.org/core/oic.core.json#/definitions/oic.core"},
+    {"$ref": "http://openconnectivityfoundation.org/core/oic.core-schema.json#/definitions/oic.core"},
     {"$ref": "#/definitions/oic.wk.mnt" }
   ],
   "required": ["fr", "rb", "ssc"]

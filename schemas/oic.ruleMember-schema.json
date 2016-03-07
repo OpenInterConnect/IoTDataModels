@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openconnectivityfoundation.org/core/schemas/oic.ruleMember.json#",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.ruleMember-schema.json#",
   "title" : "Rule Member",
   "definitions": {
     "oic.ruleMember": {
@@ -31,7 +31,7 @@
         "link": {
           "type": "string",
           "description": "web link that points at a resource",
-          "$ref": "oic.oic-link.json#"
+          "$ref": "oic.oic-link-schema.json#"
         }
       },
       "required": [ "id", "link", "memberProperty", "memberValue" ],
@@ -41,7 +41,7 @@
 
   "type": "object",
   "allOf" : [
-      { "$ref": "oic.core.json#/definitions/oic.core" },
+      { "$ref": "oic.core-schema.json#/definitions/oic.core" },
       { "$ref": "#/definitions/oic.ruleMember" }
   ]
 }

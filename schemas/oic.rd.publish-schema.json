@@ -1,14 +1,14 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openconnectivityfoundation.org/core/schemas/oic.rd.publish.json#",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.rd.publish-schema.json#",
   "title": "RD Publish & Update",
   "definitions": {
     "oic.rd.publish": {
       "description": "Publishes resources as OIC Links into the resource directory",
       "properties": {
         "linkSet": {
-          "$ref": "oic.collection.json#/definitions/oic.collection.setof-tagged-setoflinks"
+          "$ref": "oic.collection-schema.json#/definitions/oic.collection.setof-tagged-setoflinks"
         },
         "ttl": {
           "type": "integer",

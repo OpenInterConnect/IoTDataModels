@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-v4/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openconnectivityfoundation.org/core/schemas/oic.wk.res.json/",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.wk.res-schema.json/",
   "definitions": {
-    "oic.res-links.json": {
+    "oic.res-links-schema.json": {
       "type": "object",
       "properties": {
         "n": {
@@ -22,7 +22,7 @@
         "links": {
           "type": "array",
           "items": {
-            "$ref": "oic.oic-link.json#"
+            "$ref": "oic.oic-link-schema.json#"
           }
         }
       }
@@ -31,7 +31,7 @@
   "description": "The list of resources expressed as OIC links",
   "type": "array",
   "items": {
-    "$ref": "#/definitions/oic.res-links.json"
+    "$ref": "#/definitions/oic.res-links-schema.json"
   },
   "required": ["di", "links"]
 }

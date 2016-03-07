@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openconnectivityfoundation.org/core/schemas/oic.sceneMember.json#",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.sceneMember-schema.json#",
   "title" : "Scene Member",
   "definitions": {
     "oic.sceneMember": {
@@ -44,7 +44,7 @@
         "link": {
           "type": "string",
           "description": "web link that points at an resource",
-          "$ref": "oic.oic-link.json#"
+          "$ref": "oic.oic-link-schema.json#"
         }
       },
       "required": [ "link" ]
@@ -53,7 +53,7 @@
 
   "type": "object",
   "allOf" : [
-    { "$ref": "oic.core.json#/definitions/oic.core" },
+    { "$ref": "oic.core-schema.json#/definitions/oic.core" },
     { "$ref": "#/definitions/oic.sceneMember" }
   ]
 }
