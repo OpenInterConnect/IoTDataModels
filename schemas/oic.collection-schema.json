@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openinterconnect.org/schemas/oic.collection.json#",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.collection.json#",
   "title": "Collection",
   "definitions": {
     "oic.collection.setoflinks": {

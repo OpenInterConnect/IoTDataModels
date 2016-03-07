@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openinterconnect.org/schemas/oic.rule.json#",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.rule.json#",
   "title" : "Rule",
   "definitions": {
     "oic.rule": {
@@ -38,13 +38,13 @@
           "description": "Array of OIC web links that are the rule members, this is the script",
           "items" : {
             "allOf": [
-              { "$ref": "http://openinterconnect.org/schemas/oic.oic-link.json#" },
+              { "$ref": "http://openconnectivityfoundation.org/core/schemas/oic.oic-link.json#" },
               { "required" : [ "ins" ] }
             ]
           }
         }
       },
-      "required": [ "currentStatus" ]
+      "required": [ "links", "condition", "currentStatus", "test", "id", "rts" ]
     }
   },
 

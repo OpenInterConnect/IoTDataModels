@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schemas.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openinterconnect.org/oic.wk.mnt#",
+  "id": "http://openconnectivityfoundation.org/core/oic.wk.mnt#",
   "definitions": {
     "oic.wk.mnt": {
       "type": "object",
@@ -21,7 +21,7 @@
   },
   "type": "object",
   "allOf": [
-    {"$ref": "http://openinterconnect.org/oic.core.json#/definitions/oic.core"},
+    {"$ref": "http://openconnectivityfoundation.org/core/oic.core.json#/definitions/oic.core"},
     {"$ref": "#/definitions/oic.wk.mnt" }
   ],
   "required": ["fr", "rb", "ssc"]

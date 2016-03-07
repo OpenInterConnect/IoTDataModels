@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openinterconnect.org/schemas/oic.sceneCollection.json#",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.sceneCollection.json#",
   "title" : "Scene Collection",
   "definitions": {
     "oic.sceneCollection": {
@@ -36,13 +36,13 @@
           "description": "Array of OIC web links that are reference from this collection",
           "items" : {
             "allOf": [
-              { "$ref": "http://openinterconnect.org/schemas/oic.oic-link.json#" },
+              { "$ref": "http://openconnectivityfoundation.org/core/schemas/oic.oic-link.json#" },
               { "required" : [ "ins" ] }
             ]
           }
         }
       },
-      "required": [ "lastScene" ]
+      "required": [ "lastScene","sceneValues","rts","id" ]
     }
   },
 

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openinterconnect.org/schemas/oic.rd.selection.json#",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.rd.selection.json#",
   "title" : "RD Selection",
   "definitions": {
     "oic.rd.attributes": {

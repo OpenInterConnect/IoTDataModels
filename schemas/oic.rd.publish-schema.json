@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openinterconnect.org/schemas/oic.rd.publish.json#",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.rd.publish.json#",
   "title": "RD Publish & Update",
   "definitions": {
     "oic.rd.publish": {
