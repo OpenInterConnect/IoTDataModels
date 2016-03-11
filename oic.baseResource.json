@@ -1,18 +1,20 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.baseResource#",
+  "id": "http://openinterconnect.org/schemas/oic.r.baseResource.json",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "© 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyrihgt (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Base Resource",
   "definitions": {
     "oic.r.baseresource": {
       "type": "object",
       "properties": {
-        "id": {
+        "value": {
+          "type": ["string","boolean"],
+          "description": "The value sensed or actuated by this Resource"
+         },
+        "range": {
           "type": "string",
-          "description": "ReadOnly, Instance ID of this specific resource"
-        },
-        "value": { "type": ["string","boolean"] },
-        "range": { "type": "string" }
+          "description": "The valid range for the value Property"
+        }
       }
     }
   },
@@ -20,6 +22,5 @@
   "allOf": [
     {"$ref": "oic.core.json#/definitions/oic.core"},
     {"$ref": "#/definitions/oic.r.baseresource"}
-  ],
-  "required": ["id"]
+  ]
 }

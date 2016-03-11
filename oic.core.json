@@ -1,5 +1,5 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.core#",
+  "id": "http://openinterconnect.org/schemas/oic.core.json",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Core",
@@ -13,23 +13,21 @@
           "description": "ReadOnly, Resource Type"
         },
         "if": {
-          "type": "array",
-          "items": [
-            {
-              "type" : "string",
-              "enum" : ["oic.if.def", "oic.if.ll", "oic.if.b", "oic.if.rp", "oic.if.p", "oic.if.a", "oic.if.s" ]
-            }
-          ],
-          "minItems": 1,
+          "type" : "string",
+          "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.lb", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s" ],
           "description": "ReadOnly, The interface set supported by this resource"
         },
         "p": {
-          "type": "string",
+          "type": "integer",
           "description": "ReadOnly, bitmap indicating observable and discoverable"
         },
         "n": {
           "type": "string",
           "description": "Friendly name of the resource"
+        },
+        "id": {
+          "type": "string",
+          "description": "ReadOnly, Instance ID of this specific resource"
         }
       }
     }
