@@ -15,7 +15,7 @@
   },
   "type": "object",
   "allOf": [
-    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "../../core/schemas/oic.core-schema.json#/definitions/oic.core"},
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.sensor.acceleration"}
   ],
