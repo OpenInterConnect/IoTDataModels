@@ -37,7 +37,7 @@ traits:
               {
                 "rt":               "oic.r.movement.linear",
                 "id":               "unique_example_id",
-                "movementSettings": "stop, left, right, rotate, forward, backward",
+                "movementSettings": ["stop", "left", "right", "rotate", "forward", "backward"],
                 "movement":         "rotate",
                 "movementModifier": "90"
               }
@@ -52,7 +52,7 @@ traits:
         example: |
           {
             "id":       "unique_example_id",
-            "movementSettings": "stop, left, right, rotate, forward, backward",
+            "movementSettings": ["stop", "left", "right", "rotate", "forward", "backward"],
             "movement": "stop"
           }
 
@@ -64,6 +64,6 @@ traits:
             example: |
               {
                 "id":       "unique_example_id",
-                "movementSettings": "stop, left, right, rotate, forward, backward",
+                "movementSettings": ["stop", "left", "right", "rotate", "forward", "backward"],
                 "movement": "stop"
               }

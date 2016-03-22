@@ -13,11 +13,14 @@
         },
         "units":  {
           "enum": ["C","F","K"],
-          "description": "ReadOnly, Units for the temperature value"
+          "description": "ReadOnly, the unit for the temperature value"
         },
         "range":  {
-          "type": "string",
-          "description": "ReadOnly, Comma separated min,max values for this temperature on this device"
+          "type": "array",
+          "description": "ReadOnly, Comma separated min,max values for this temperature on this device",
+          "items": {
+            "type": "number"
+          }
         }
       }
     }

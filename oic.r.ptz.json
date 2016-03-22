@@ -16,14 +16,22 @@
           "description": "vertical tilt in degrees"
         },
         "pan_range":  {
-          "type": "string",
+          "type": "array",
           "description": "ReadOnly, Min and Max values for the pan setting",
-          "format": "csv"
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
         },
         "tilt_range":  {
-          "type": "string",
+          "type": "array",
           "description": "ReadOnly, Min and Max values for the tilt setting",
-          "format": "csv"
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
         },
         "zoomFactor": {
           "type": "string",

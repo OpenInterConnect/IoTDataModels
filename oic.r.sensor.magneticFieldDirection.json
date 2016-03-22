@@ -7,8 +7,13 @@
     "oic.r.sensor.magneticfielddirection": {
       "properties": {
         "value": {
-          "type": "string",
-          "description": "ReadOnly, CSV containing Hx, Hy, Hz."
+          "type": "array",
+          "description": "ReadOnly, CSV containing Hx, Hy, Hz.",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "number"
+          }
         }
       }
     }

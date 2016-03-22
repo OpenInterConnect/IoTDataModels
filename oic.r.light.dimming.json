@@ -16,8 +16,11 @@
           "description": "ReadOnly, step increment for dimming values"
         },
         "range":  {
-          "type": "string",
-          "description": "ReadOnly, Min and Max values for the dimming setting"
+          "type": "array",
+          "description": "ReadOnly, Min and Max values for the dimming setting",
+          "items": {
+            "type": "integer"
+          }
         }
       }
     }

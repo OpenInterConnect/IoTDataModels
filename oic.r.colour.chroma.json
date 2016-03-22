@@ -15,9 +15,18 @@
           "type": "integer",
           "description": "Saturation as defined by the CIECAM02 model definition"
         },
-        "colourspacevalue": {
-          "type": "string",
-          "description": "CSV of chromaX, chromaY, colourTemperature (X,Y,T)."
+        "csc": {
+          "type": "array",
+          "description": "X and Y coordinates of the colour in CIE colour space",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "ct": {
+          "type": "integer",
+          "description": "Mired colour temperarture"
         }
       }
     }
@@ -28,6 +37,6 @@
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.colour.chroma"}
   ],
-  "required": [ "hue", "saturation", "colourspacevalue" ]
+  "required": [ "hue", "saturation", "csc" ]
 
 }

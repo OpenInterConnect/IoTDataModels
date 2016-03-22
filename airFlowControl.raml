@@ -2,7 +2,7 @@
 title: OICAirFlowControl
 version: v1.1.0-20160229
 documentation:
-  - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
+  - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
         Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
         1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -17,7 +17,7 @@ traits:
   - interface-all:
       queryParameters:
         if:
-          enum: ["oic.if.ll", "oic.if.b"]
+          enum: ["oic.if.ll", "oic.if.b","oic.if.baseline"]
 
   - interface-b:
       queryParameters:
@@ -45,7 +45,7 @@ traits:
             schema: AirFlowControl
             example: |
               {
-                "rt": "oic.r.airflowcontrol",
+                "rt": "oic.r.airflowControl",
                 "id": "unique_example_id",
                 "airFlowControl": [
                   {

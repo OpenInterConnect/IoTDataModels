@@ -12,8 +12,11 @@
           "description": "Actual speed of changing between 2 dimming values"
         },
         "range": {
-          "type": "string",
-          "description": "ReadOnly, Min and Max of possible values"
+          "type": "array",
+          "description": "ReadOnly, Min and Max of possible values",
+          "items": {
+            "type": "integer"
+          }
         }
       }
     }

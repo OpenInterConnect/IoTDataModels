@@ -16,8 +16,11 @@
           "description": "ReadOnly, The step between possible values"
         },
         "range":      {
-          "type": "string",
-          "description": "ReadOnly, Lower bound=closed, Upper bound=open"
+          "type": "array",
+          "description": "ReadOnly, Lower bound=closed, Upper bound=open",
+          "items": {
+            "type": "integer"
+          }
         }
       }
     }

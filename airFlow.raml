@@ -2,7 +2,7 @@
 title: OICAirFlow
 version: v1.1.0-20160229
 documentation:
-  - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
+  - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
         Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
         1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -16,7 +16,7 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.a"]
+          enum: ["oic.if.a","oic.if.baseline"]
 
 /AirFlowResURI:
   description: |
@@ -24,7 +24,7 @@ traits:
     The direction is the directionality of the air flow if applicable.
     Direction values are dependent on the capabilities of the unit.
     The speed is an integer representing the current speed level for the unit.
-    The range is the min,max values for the speed level.
+    The range is an array of the min,max values for the speed level.
 
   displayName: Air Flow
   is: [ interface ] # valid for all methods
@@ -43,7 +43,7 @@ traits:
                 "id":         "unique_example_id",
                 "direction":  "left",
                 "speed":      5,
-                "range":      "1,7"
+                "range":      [1,7]
               }
 
   post:

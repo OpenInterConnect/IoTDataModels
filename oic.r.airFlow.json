@@ -16,8 +16,11 @@
           "description": "Current speed level"
         },
         "range": {
-          "type": "string",
-          "description": "ReadOnly, Min,max values for the speed level"
+          "type": "array",
+          "description": "ReadOnly, Min,max values for the speed level",
+          "items": {
+            "type": "integer"
+          }
         }
       }
     }

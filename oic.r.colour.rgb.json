@@ -8,12 +8,22 @@
       "type": "object",
       "properties": {
         "rgbValue": {
-          "type": "string",
-          "description": "RGB value"
+          "type": "array",
+          "description": "RGB value; the first item is the R, second the G, third the B.",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "integer"
+          }
         },
         "range":    {
-          "type": "string",
-          "description": "min max value of RGB"
+          "type": "array",
+          "description": "ReadOnly, min max value of RGB",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "integer"
+          }
         }
       }
     }
