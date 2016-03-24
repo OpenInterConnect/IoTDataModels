@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schemas.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openconnectivityfoundation.org/core/oic.wk.ifs-schema.json#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.wk.ifs-schema.json#",
   "definitions": {
     "oic.wk.ifs": {
       "type": "object",
