@@ -15,12 +15,8 @@
   },
   "type": "object",
   "allOf": [
-    {
-      "$ref": "oic.core-schema.json#/definitions/oic.core"
-    },
-    {
-      "$ref": "#/definitions/oic.wk.ping"
-    }
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.wk.ping"}
   ],
   "required": [
     "in"

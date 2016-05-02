@@ -8,6 +8,7 @@
       "properties": {
         "n": {
           "type": "string",
+          "maxLength": 64,
           "description": "Human friendly name"
         },
         "loc": {
@@ -17,14 +18,17 @@
         },
         "locn": {
           "type": "string",
+          "maxLength": 64,
           "description": "Human Friendly Name"
         },
         "c": {
           "type": "string",
+          "maxLength": 64,
           "description": "Currency"
         },
         "r": {
           "type": "string",
+          "maxLength": 64,
           "description": "Region"
         }
       }
@@ -32,7 +36,7 @@
   },
   "type": "object",
   "allOf": [
-    {"$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.con" }
   ],
   "required": [ "n" ]

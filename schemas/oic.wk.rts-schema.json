@@ -7,15 +7,21 @@
       "type": "object",
       "properties": {
         "tl": {
-          "type": "string",
-          "description": "Readonly, list of resource type names",
-          "format": "bsv"
+          "type": "array",
+          "items" : [
+            {
+              "type" : "string",
+              "maxLength": 64
+            }
+          ],
+          "description": "Readonly, list of resource type names"
         }
       }
     }
   },
   "type": "object",
   "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.rts" }
   ],
   "required": ["tl"]

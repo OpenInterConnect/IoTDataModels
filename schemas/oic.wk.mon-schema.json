@@ -15,9 +15,14 @@
           "description": "ReadOnly, Indicates the elapsed time in seconds after the device was invoked or acted upon"
         },
         "ds": {
-          "type": "string",
-          "description": "ReadOnly, Contains Device Statistics Info (no. of received packets, no. of sent packets, time to respond etc.)",
-          "format": "csv"
+          "type": "array",
+          "items" : [
+            {
+              "type" : "string",
+              "maxLength": 64
+            }
+          ],
+          "description": "ReadOnly, Contains Device Statistics Info (no. of received packets, no. of sent packets, time to respond etc.)"
         }
       }
     }

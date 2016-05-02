@@ -7,15 +7,21 @@
       "type": "object",
       "properties": {
         "il": {
-          "type": "string",
-          "description": "Readonly, list of interface names",
-          "format": "bsv"
+          "type": "array",
+          "items" : [
+            {
+              "type" : "string",
+              "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.lb", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s" ]
+            }
+          ],
+          "description": "Readonly, list of interface names"
         }
       }
     }
   },
   "type": "object",
   "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.ifs" }
   ],
   "required": ["il"]

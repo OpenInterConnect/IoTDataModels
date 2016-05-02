@@ -5,6 +5,12 @@
   "definitions": {
     "oic.wk.mnt": {
       "type": "object",
+      "properties": {
+        "n": {
+          "type" : "string",
+          "maxLength" : 64,
+          "description": "Name"
+        },
         "fr":{
           "type": "boolean",
           "description": "Factory Reset"
@@ -18,11 +24,12 @@
           "description": "Start Stat Collection Action Toggle"
         }
       }
+    }
   },
   "type": "object",
   "allOf": [
-    {"$ref": "http://openconnectivityfoundation.org/core/oic.core-schema.json#/definitions/oic.core"},
-    {"$ref": "#/definitions/oic.wk.mnt" }
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.wk.mnt" }
   ],
-  "required": ["fr", "rb", "ssc"]
+  "required": ["fr"]
 }

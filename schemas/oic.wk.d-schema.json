@@ -8,6 +8,7 @@
       "properties": {
         "n": {
           "type": "string",
+          "maxLength": 64,
           "description": "Readonly, Human friendly name"
         },
         "di": {
@@ -17,19 +18,26 @@
         },
         "icv": {
           "type": "string",
+          "maxLength": 64,
           "description": "ReadOnly, The version of the OIC Server"
         },
         "dmv": {
-          "type": "string",
-          "description": "ReadOnly, The spec version of the vertical specification",
-          "format": "csv"
+          "type": "array",
+          "items" : [
+            {
+              "type" : "string",
+              "maxLength": 64
+            }
+          ],
+          "description": "ReadOnly, The spec version of the vertical specification"
         }
       }
     }
   },
   "type": "object",
   "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.d" }
   ],
-  "required": [ "n", "di", "icv" ]
+  "required": [ "n", "di", "icv", "dmv" ]
 }
