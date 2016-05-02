@@ -1,28 +1,30 @@
 {
   "$schema": "http://json-schema.org/draft-v4/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openinterconnect.org/schemas/oic.wk.res.json/",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.wk.res-schema.json#",
   "definitions": {
     "oic.res-links.json": {
       "type": "object",
       "properties": {
         "n": {
           "type": "string",
+          "maxLength": 64,
           "description": "ReadOnly, Human friendly name"
         },
         "di": {
           "description": "The device identifier as indicated by the /oic/d resource of the device",
           "type": "string",
-          "format": "UUID"
+          "format": "uuid"
         },
         "mpro": {
           "description": "ReadOnly, Supported messaging protocols",
-          "type": "string"
+          "type": "string",
+          "maxLength": 64
         },
         "links": {
           "type": "array",
           "items": {
-            "$ref": "oic.oic-link.json#"
+            "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
           }
         }
       }
