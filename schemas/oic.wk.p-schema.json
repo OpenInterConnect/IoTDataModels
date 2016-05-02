@@ -1,66 +1,79 @@
 {
   "$schema": "http://json-schemas.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openinterconnect.org/oic.wk.p#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.wk.p-schema.json#",
   "definitions": {
     "oic.wk.p": {
       "type": "object",
       "properties": {
         "pi": {
           "type": "string",
+          "format" : "uuid",
           "description": "ReadOnly, Platform Identifier"
         },
         "mnmn": {
           "type": "string",
           "description": "ReadOnly, Manufacturer Name",
-          "maxLength": 16
+          "maxLength": 64
         },
         "mnml": {
           "type": "string",
           "description": "ReadOnly, Manufacturer's URL",
-          "maxLength": 32,
+          "maxLength": 256,
           "format": "uri"
         },
         "mnmo": {
           "type": "string",
+          "maxLength": 64,
           "description": "ReadOnly, Model number as designated by manufacturer"
         },
         "mndt": {
           "type": "string",
           "description": "ReadOnly, Manufacturing Date",
-          "format": "date-time"
+          "format": "date"
         },
         "mnpv": {
           "type": "string",
+          "maxLength": 64,
           "description": "ReadOnly, Platform Version"
         },
         "mnos": {
           "type": "string",
+          "maxLength": 64,
           "description": "Readonly, Platform Resident OS Version"
         },
         "mnhw": {
           "type": "string",
+          "maxLength": 64,
           "description": "Readonly, Platform Hardware Version"
         },
         "mnfv": {
           "type": "string",
+          "maxLength": 64,
           "description": "ReadOnly, Manufacturer's firmware version"
         },
         "mnsl": {
           "type": "string",
           "description": "ReadOnly, Manufacturer's Support Information URL",
+          "maxLength": 256,
           "format": "uri"
         },
         "st": {
           "type": "string",
           "description": "ReadOnly, Reference time for the device",
           "format": "date-time"
+        },
+        "vid": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ReadOnly, Manufacturer's defined string for the platform. The string is freeform and up to the manufacturer on what text to populate it"
         }
       }
     }
   },
   "type": "object",
   "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.p" }
   ],
   "required": [ "pi", "mnmn" ]

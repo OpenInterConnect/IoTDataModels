@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schemas.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openinterconnect.org/oic.wk.mon#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.wk.mon-schema.json#",
   "definitions": {
     "oic.wk.mon": {
       "type": "object",
@@ -15,16 +15,21 @@
           "description": "ReadOnly, Indicates the elapsed time in seconds after the device was invoked or acted upon"
         },
         "ds": {
-          "type": "string",
-          "description": "ReadOnly, Contains Device Statistics Info (no. of received packets, no. of sent packets, time to respond etc.)",
-          "format": "csv"
+          "type": "array",
+          "items" : [
+            {
+              "type" : "string",
+              "maxLength": 64
+            }
+          ],
+          "description": "ReadOnly, Contains Device Statistics Info (no. of received packets, no. of sent packets, time to respond etc.)"
         }
       }
     }
   },
   "type": "object",
   "allOf": [
-    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.core-schema.json#/definitions/oic.core"},
     {"$ref": "#/definitions/oic.wk.mon"}
   ],
   "required": ["av", "lat"]

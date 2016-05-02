@@ -1,13 +1,14 @@
 {
-  "id": "http://openinterconnect.org/oic.wk.con#",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.wk.con-schema.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "definitions": {
     "oic.wk.con": {
       "type": "object",
       "properties": {
         "n": {
           "type": "string",
+          "maxLength": 64,
           "description": "Human friendly name"
         },
         "loc": {
@@ -17,14 +18,17 @@
         },
         "locn": {
           "type": "string",
+          "maxLength": 64,
           "description": "Human Friendly Name"
         },
         "c": {
           "type": "string",
+          "maxLength": 64,
           "description": "Currency"
         },
         "r": {
           "type": "string",
+          "maxLength": 64,
           "description": "Region"
         }
       }
@@ -32,7 +36,7 @@
   },
   "type": "object",
   "allOf": [
-    {"$ref": "oic.core.json#/definitions/oic.core"},
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.con" }
   ],
   "required": [ "n" ]

@@ -1,10 +1,16 @@
 {
   "$schema": "http://json-schemas.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openinterconnect.org/oic.wk.mnt#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.wk.mnt-schema.json#",
   "definitions": {
     "oic.wk.mnt": {
       "type": "object",
+      "properties": {
+        "n": {
+          "type" : "string",
+          "maxLength" : 64,
+          "description": "Name"
+        },
         "fr":{
           "type": "boolean",
           "description": "Factory Reset"
@@ -18,11 +24,12 @@
           "description": "Start Stat Collection Action Toggle"
         }
       }
+    }
   },
   "type": "object",
   "allOf": [
-    {"$ref": "http://openinterconnect.org/oic.core.json#/definitions/oic.core"},
-    {"$ref": "#/definitions/oic.wk.mnt" }
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.wk.mnt" }
   ],
-  "required": ["fr", "rb", "ssc"]
+  "required": ["fr"]
 }
