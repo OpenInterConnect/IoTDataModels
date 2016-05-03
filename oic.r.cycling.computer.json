@@ -25,7 +25,7 @@
           "$ref": "oic.r.cycling.speedcadence.json#/definitions/oic.r.cycling.speedcadence"
         },
         "c-alt": {
-          "$ref": "oic.r.cycling.altimeter.json#/definitions/oic.r.altimeter"
+          "$ref": "oic.r.altimeter.json#/definitions/oic.r.altimeter"
         },
         "c-hr": {
           "$ref": "oic.r.heartrate.json#/definitions/oic.r.heartrate"
