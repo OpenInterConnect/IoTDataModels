@@ -1,10 +1,10 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.body.temperature#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.body.temperature.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description": "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Body temperature",
   "definitions": {
-    "oic.r.bodytemperature": {
+    "oic.r.body.temperature": {
       "type": "object",
       "properties": {
         "$ref": "oic.r.temperature.json#/definitions/oic.r.temperature",

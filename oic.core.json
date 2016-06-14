@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.core.json",
+  "id": "http://openinterconnect.org/iotdatamodels/chemas/oic.core.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Core",
   "$ref": "#/definitions/oic.core",
   "definitions": {
@@ -9,7 +9,14 @@
       "type": "object",
       "properties": {
         "rt": {
-          "type": "string",
+          "type": "array",
+          "items" : [
+            {
+              "type" : "string",
+              "maxLength": 64
+            }
+          ],
+          "minItems" : 1,
           "description": "ReadOnly, Resource Type"
         },
         "if": {
@@ -19,10 +26,6 @@
             "type": "string",
             "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.lb", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s" ]
           }
-        },
-        "p": {
-          "type": "integer",
-          "description": "ReadOnly, Bitmap indicating observable and discoverable"
         },
         "n": {
           "type": "string",

@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.gsr#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.gsr.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description": "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Galvanic Skin Response",
   "definitions": {
     "oic.r.gsr": {
@@ -10,12 +10,12 @@
         "skincon": {
           "type": "number",
           "minimum": 0,
-          "description": "ReadOnly, the value of skin conductance. unit is μS (micro siemens)"
+          "description": "ReadOnly, the value of skin conductance. unit is uS (micro siemens)"
         },
         "skinres": {
           "type": "number",
           "minimum": 0,
-          "description": "ReadOnly, the value of skin resistance. unit is Ω (ohm)"
+          "description": "ReadOnly, the value of skin resistance. unit is Ohm"
         },
         "skincv": {
           "type": "number",

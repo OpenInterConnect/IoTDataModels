@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.temperature#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.temperature.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Temperature",
   "definitions": {
     "oic.r.temperature": {
@@ -17,7 +17,7 @@
         },
         "range":  {
           "type": "array",
-          "description": "ReadOnly, Comma separated min,max values for this temperature on this device",
+          "description": "ReadOnly, Array defining min,max values for this temperature on this device",
           "items": {
             "type": "number"
           }

@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.baseResource.json",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.baseResource.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Base Resource",
   "definitions": {
     "oic.r.baseresource": {
@@ -20,7 +20,7 @@
         },
         "range": {
           "type": "array",
-          "description": "ReadOnly, The valid range for the value Property",
+          "description": "The valid range for the value Property",
           "minItems": 2,
           "maxItems": 2,
           "items": {

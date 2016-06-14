@@ -1,6 +1,6 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.blood.pressure#",
-  "description": "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.blood.pressure.json#",
+  "description": "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Blood pressure sensor",
   "definitions": {

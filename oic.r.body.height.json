@@ -1,10 +1,10 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.body.height#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.body.height.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description": "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Body height",
   "definitions": {
-    "oic.r.bodyheight": {
+    "oic.r.body.height": {
       "type": "object",
       "properties": {
         "$ref": "oic.r.height.json#/definitions/oic.r.height",
@@ -22,7 +22,7 @@
   "type": "object",
   "allOf": [
     {"$ref": "oic.core.json#/definitions/oic.core"},
-    {"$ref": "oic.baseresource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.body.height"}
   ],
   "required": ["height", "units"]

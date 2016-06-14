@@ -1,10 +1,10 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.body.fat#",
-  "description": "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.body.fat.json#",
+  "description": "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Body fat",
   "definitions": {
-    "oic.r.bodyfat": {
+    "oic.r.body.fat": {
       "type": "object",
       "properties": {
         "bodyfat": {
@@ -25,7 +25,7 @@
   "type": "object",
   "allOf": [
     {"$ref": "oic.core.json#/definitions/oic.core"},
-    {"$ref": "oic.baseresource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.body.fat"}
   ],
   "required": ["bodyfat", "units"]

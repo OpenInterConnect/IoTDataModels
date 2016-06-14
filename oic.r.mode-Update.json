@@ -1,15 +1,18 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.mode-Update.json",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.mode-Update.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Mode",
   "definitions": {
     "oic.r.mode": {
       "type": "object",
       "properties": {
         "modes":          {
-          "type": "string",
-          "description": "Desired mode"
+          "type": "array",
+          "description": "Desired mode",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

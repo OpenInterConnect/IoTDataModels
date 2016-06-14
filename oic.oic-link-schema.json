@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.oic-link-schema.json#",
+  "definitions": {
+    "oic.oic-link": {
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "RFC5988 style web-links serialized into JSON. This is the target URI",
+          "format": "uri"
+        },
+        "rel": {
+          "type": "string",
+          "default": "advertises",
+          "maxLength": 64,
+          "description": "The relation of the target URI referenced by the link to the context URI"
+        },
+        "rt": {
+          "type": "array",
+          "items" : [
+            {
+              "type" : "string",
+              "maxLength": 64
+            }
+          ],
+          "minItems" : 1,
+          "description": "ReadOnly, Resource Type"
+        },
+        "if": {
+          "type": "array",
+          "items": [
+            {
+              "type" : "string",
+              "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.lb", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s" ]
+            }
+          ],
+          "minItems": 1,
+          "description": "ReadOnly, The interface set supported by this resource"
+        },
+        "p": {
+          "description": "ReadOnly, JSON object containing a Bitmap indicating observable and discoverable plus security and port",
+          "type": "object",
+          "properties": {
+            "bm": {
+              "type": "integer"
+            },
+            "sec": {
+              "type": "boolean"
+            },
+            "port": {
+              "type": "integer"
+            }
+          }
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "A title for the link relation. Can be used by the UI to provide a context"
+        },
+        "anchor": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "This is used to override the context URI e.g. override the URI of the containing collection",
+          "format": "uri"
+        },
+        "ins": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "description": "An ordinal number that is not repeated - must be unique in the collection context"
+            },
+            {
+              "type": "string",
+              "maxLength": 256,
+              "format" : "uri",
+              "description": "Any unique string including a URI"
+            },
+            {
+              "type": "string",
+              "format": "uuid",
+              "description": "Use UUID for universal uniqueness - used in /oic/res to identify the device"
+            }
+          ],
+          "description": "The instance identifier for this web link in an array of web links - used in collections"
+        },
+        "ttl": {
+          "type": "integer",
+          "description": "The time to live for this link in seconds - value is specified in a request only and is not returned on response. Max integer size to represent time is 4 octets"
+         },
+        "type": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "A hint at the representation of the resource referenced by the target URI",
+          "default": "application/json"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/definitions/oic.oic-link" }
+  ],
+  "required": [ "href", "rt", "if" ]
+}
