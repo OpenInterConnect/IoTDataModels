@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICSoftLeanMass
-version: v1.0-2016____
+version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -22,7 +22,7 @@ traits:
   description: |
     This resource describes the properties associated with soft lean mass.
     SLM (Soft Lean Mass) describes the current value measured. Refer to the "slm" (oic.r.slm)
-    Units (units) is a soft lean mass measurement units which can either be in "kg" or "lb". 
+    Units (units) is a soft lean mass measurement units which can either be in "kg" or "lb".
 
   displayName: Soft Lean Mass
   is: [ interface ]
@@ -42,7 +42,7 @@ traits:
             schema: SLM
             example: |
               {
-                "rt":     "oic.r.slm",
+                "rt":     ["oic.r.slm"],
                 "id":     "unique_example_id",
                 "slm": 40,
                 "units":   "kg",

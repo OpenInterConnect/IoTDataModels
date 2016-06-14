@@ -1,8 +1,8 @@
 #%RAML 0.8
-title: OICHeartRateZone
+title: OICSleepSensor
 version: v1.1.0-20160519
 documentation:
-  - title: © 2016 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.
     content: |
         Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
         1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -10,20 +10,21 @@ documentation:
 
         THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 schemas:
-  - heartRateZone: !include oic.r.sensor.heart.zone.json
+  - sleep: !include oic.r.sensor.sleep.json
 traits:
   - interface:
       queryParameters:
         if:
           enum: ["oic.if.s","oic.if.baseline"]
 
-/HeartRateZoneResURI:
+/SleepSensorResURI:
   description: |
-    This resource describes a measured heart rate by the current Zone using the Zoladz method
-    The Zoladz method defines Zones based on maximum heart rate; Zone 1 is the lowest, Zone 5 is the highest.
-    The heartRateZone is an enumeration containing one of: "Zone1", "Zone2", "Zone3", "Zone4", "Zone5".
+    This resource describes whether sleep has been sensed or not.
+    The value is a boolean.
+    A value of True means that sleep has been sensed.
+    A value of False means that sleep not been sensed.
 
-  displayName: Heart Rate Zone
+  displayName: Sleep Sensor
   is: [ interface ] # valid for all methods
 
   get:
@@ -31,10 +32,10 @@ traits:
       200:
         body:
           application/json:
-            schema: heartRateZone
+            schema: sleep
             example: |
               {
-                "rt":             ["oic.r.sensor.heart.zone"],
-                "id":             "unique_example_id",
-                "heartRateZone":  "Zone3"
+                "rt":     ["oic.r.sensor.sleep"],
+                "id":     "unique_example_id",
+                "value":  true
               }

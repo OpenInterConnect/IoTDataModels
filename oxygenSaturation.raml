@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICOxygenSaturation
-version: v1.2-20160219
+version: v1.2-20160519
 documentation:
   - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -36,7 +36,7 @@ traits:
             schema: OxygenSaturation
             example: |
               {
-                "rt":         "oic.r.blood.oxygen.saturation",
+                "rt":         ["oic.r.blood.oxygen.saturation"],
                 "id":         "unique_example_id",
                 "spo2":       100,
                 "perfusion":  95,

@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICAltimeter
-version: v1.1.0-20160229
+version: v1.1.0-20160519
 documentation:
   - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -17,7 +17,7 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.s","oic.if.baseline"]
+          enum: ["oic.if.s"]
 
 /AltimeterResURI:
   description: |
@@ -36,9 +36,9 @@ traits:
             schema: Altimeter
             example: |
               {
-                "rt":  "oic.r.altimeter",
+                "rt":  ["oic.r.altimeter"],
                 "id":  "unique_example_id",
-                "alt": 1500
+                "alt": 1500.0
               }
   post:
     description: |
@@ -48,8 +48,8 @@ traits:
         schema: Altimeter
         example: |
           {
-            "id":     "unique_example_id",
-            "alt": 1500
+            "id":  "unique_example_id",
+            "alt": 1500.0
           }
     responses:
       200:
@@ -61,8 +61,8 @@ traits:
             schema: Altimeter
             example: |
               {
-                "id":     "unique_example_id",
-                "alt": 1500
+                "id":  "unique_example_id",
+                "alt": 1500.0
               }
       403:
         description: |
@@ -73,6 +73,6 @@ traits:
             schema: Altimeter
             example: |
               {
-                "id":     "unique_example_id",
-                "alt": 1500
+                "id":  "unique_example_id",
+                "alt": 1500.0
               }

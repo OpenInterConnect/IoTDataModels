@@ -1,14 +1,14 @@
 #%RAML 0.8
 title: OICMode
-version: v1.1.0-20160229
+version: v1.1.0-20160519
 documentation:
-  - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
+  - title: © 2016 Open Connectivity Foundation, Inc. All rights reserved.
     content: |
         Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
         1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
         2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 
-        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 schemas:
   - Mode:       !include oic.r.mode.json
   - ModeUpdate: !include oic.r.mode-Update.json
@@ -23,8 +23,8 @@ traits:
   description: |
     This resource describes the modes of operation that a device can provide.
     The mode can be read or set.
-    The supportedModes is a comma separated list of possible modes the device supports.
-    The modes are a comma separated list of the currently active mode(s).
+    The supportedModes is an array of possible modes the device supports.
+    The modes are an array of the currently active mode(s).
 
   displayName: Mode
   is: [ interface ] # valid for all methods
@@ -39,10 +39,10 @@ traits:
             schema: Mode
             example: |
               {
-                "rt":             "oic.r.mode",
+                "rt":             ["oic.r.mode"],
                 "id":             "unique_example_id",
-                "supportedModes": "home,away,quiet,sleep",
-                "modes":          "quiet"
+                "supportedModes": ["active","armedAway","armedStay","armedInstant"],
+                "modes":          ["active"]
               }
 
   post:
@@ -54,7 +54,7 @@ traits:
         example: |
           {
             "id":    "unique_example_id",
-            "modes": "sleep"
+            "modes": ["armedAway"]
           }
     responses:
       200:
@@ -64,7 +64,7 @@ traits:
             example: |
               {
                 "id":    "unique_example_id",
-                "modes": "sleep"
+                "modes": ["armedAway"]
               }
 
       403:
@@ -78,6 +78,6 @@ traits:
             example: |
               {
                 "id":             "unique_example_id",
-                "supportedModes": "home,away,quiet,sleep",
-                "modes":          "quiet"
+                "supportedModes": ["active","armedAway","armedStay","armedInstant"],
+                "modes":          ["active"]
               }

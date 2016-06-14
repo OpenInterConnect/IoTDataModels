@@ -1,14 +1,14 @@
 #%RAML 0.8
 title: OICRefrigeration
-version: v1.1.0-20160229
+version: v1.1.0-20160519
 documentation:
-  - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
+  - title: © 2016 Open Connectivity Foundation, Inc. All rights reserved.
     content: |
         Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
         1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
         2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 
-        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 schemas:
   - Refrigeration:        !include oic.r.refrigeration.json
   - RefrigerationUpdate:  !include oic.r.refrigeration-Update.json
@@ -21,7 +21,7 @@ traits:
   - supportedOps:
       queryParameters:
         supportedValues:
-          description: Queries the resource for supported operations and their current state
+          description: Queries the resource for supported properties and their current state
 
 /RefrigerationResURI:
   description: |
@@ -38,9 +38,9 @@ traits:
   get:
     description: |
       Retrieves the current Refrigeration function status.
-      If the 'supportedOps' query parameter is included then all values are provided that the
+      If the 'supportedValues' query parameter is included then all values are provided that the
       device supports, not just those which are active.
-      If the 'supportedOps' query parameter is not included then only those values that are
+      If the 'supportedValues' query parameter is not included then only those values that are
       active are returned.
 
     responses:
@@ -50,7 +50,7 @@ traits:
             schema: Refrigeration
             example: |
               {
-                "rt":           "oic.r.refrigeration",
+                "rt":           ["oic.r.refrigeration"],
                 "id":           "unique_example_id",
                 "filter":       75,
                 "rapidFreeze":  false,

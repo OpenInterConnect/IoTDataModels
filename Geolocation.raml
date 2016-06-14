@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICGeolocaiton
-version: v1.1.0-20160229
+version: v1.1.0-20160519
 documentation:
   - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -16,7 +16,7 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.s","oic.if.baseline"]
+          enum: ["oic.if.s"]
 
 /GeolocationResURI:
   description: |
@@ -42,15 +42,15 @@ traits:
             schema: Geolocation
             example: |
               {
-                "rt":         "oic.r.sensor.geolocation",
+                "rt":         ["oic.r.sensor.geolocation"],
                 "id":         "unique_example_id",
                 "latitude":  55.070859,
                 "longitude": -3.60512,
                 "alt": 12.07,
                 "accuracy": 65.0,
-                "altitudeAccuracy": 0,
-                "heading": 90,
-                "speed": 0
+                "altitudeAccuracy": 0.0,
+                "heading": 90.0,
+                "speed": 0.0
               }
   post:
     description: |

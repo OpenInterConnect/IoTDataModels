@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICDistance
-version: v1.0-2016____
+version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -35,7 +35,7 @@ traits:
             schema: Distance
             example: |
               {
-                "rt":         "oic.r.distance",
+                "rt":         ["oic.r.distance"],
                 "id":         "unique_example_id",
                 "distance":  10,
                 "units": "kilometer",

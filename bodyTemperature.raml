@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICBodyTemperature
-version: v1.0-2016____
+version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -43,7 +43,7 @@ traits:
             schema: BodyTemperature
             example: |
               {
-                "rt":           "oic.r.health.body.temperature",
+                "rt":           ["oic.r.health.body.temperature"],
                 "id":           "unique_example_id",
                 "temperature":  36,
                 "units":        "C",
