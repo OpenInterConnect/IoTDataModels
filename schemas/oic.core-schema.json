@@ -29,15 +29,6 @@
           "minItems": 1,
           "description": "ReadOnly, The interface set supported by this resource"
         },
-        "p": {
-          "description": "ReadOnly, JSON object containing a Bitmap indicating observable and discoverable",
-          "type": "object",
-          "properties": {
-            "bm": {
-              "type": "integer"
-            }
-          }
-        },
         "n": {
           "type": "string",
           "maxLength": 64,

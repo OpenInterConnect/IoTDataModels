@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OIC Root Device
-version: v1-20150811
+version: v1-20160622
 documentation:
 
   - title: OCF Copyright
@@ -17,17 +17,17 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.r"]
+          enum: ["oic.if.r", "oic.if.baseline"]
 
 /oic/d:
-  displayName: OIC Logical Device
+  displayName: Device
   is: [ interface ]
   description: |
-    Known resource that is hosted by every OIC Server.
+    Known resource that is hosted by every Server.
     Allows for logical device specific information to be discovered.
   get:
     description: |
-      Retrieve the information about the OIC device
+      Retrieve the information about the Device
     responses:
       200:
         body:
@@ -36,7 +36,8 @@ traits:
             example: |
               {
                 "n":    "Device 1",
-                "rt":   "oic.wk.d",
+                "rt":   ["oic.wk.d"],
                 "di":   "54919CA5-4101-4AE4-595B-353C51AA983C",
-                "icv":  "OIC 1.0"
+                "icv":  "core.1.1.0",
+                "dmv":  "res.1.1.0"
               }

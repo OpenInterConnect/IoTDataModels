@@ -38,7 +38,7 @@
           "description": "Array of OIC web links that are the rule members, this is the script",
           "items" : {
             "allOf": [
-              { "$ref": "http://openconnectivityfoundation.org/core/schemas/oic.oic-link-schema.json#" },
+              { "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link" },
               { "required" : [ "ins" ] }
             ]
           }

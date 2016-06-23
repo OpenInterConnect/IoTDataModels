@@ -1,6 +1,6 @@
 #%RAML 0.8
-title: OIC Maintenance
-version: v1-20150811
+title: Maintenance
+version: v1-20160622
 documentation:
 
   - title: OCF Copyright
@@ -17,13 +17,13 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.r"]
+          enum: ["oic.if.r", "oic.if.baseline"]
 
 /oic/mnt:
-  displayName: OIC Maintenance
+  displayName: Maintenance
   is: [ interface ]
   description: |
-    The resource through which an OIC Device is maintained and can be used for diagnostic purposes.
+    The resource through which an Device is maintained and can be used for diagnostic purposes.
     fr (Factory Reset) is a boolean.
       The value 0 means No action (Default), the value 1 means Start Factory Reset
     After factory reset, this value shall be changed back to the default value
@@ -45,7 +45,7 @@ traits:
             schema: MNT
             example: |
               {
-                "rt":   "oic.wk.mnt",
+                "rt":   ["oic.wk.mnt"],
                 "n":    "My Maintenance Actions",
                 "fr":   false,
                 "rb":   false,

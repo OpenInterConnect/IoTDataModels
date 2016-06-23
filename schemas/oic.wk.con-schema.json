@@ -13,8 +13,7 @@
         },
         "loc": {
           "type": "string",
-          "description": "Location information",
-          "format": "json"
+          "description": "Location information"
         },
         "locn": {
           "type": "string",

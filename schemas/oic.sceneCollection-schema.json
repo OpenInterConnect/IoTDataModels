@@ -23,8 +23,8 @@
           "format": "UTF8"
         },
         "id": {
-            "type": "string", 
-                        "description" : "A unique string that could be a hash or similarly unique" 
+            "type": "string",
+                        "description" : "A unique string that could be a hash or similarly unique"
         },
         "rts": {
           "type": "string",
@@ -36,7 +36,7 @@
           "description": "Array of OIC web links that are reference from this collection",
           "items" : {
             "allOf": [
-              { "$ref": "http://openconnectivityfoundation.org/core/schemas/oic.oic-link-schema.json#" },
+              { "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link" },
               { "required" : [ "ins" ] }
             ]
           }

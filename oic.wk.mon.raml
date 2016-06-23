@@ -1,6 +1,6 @@
 #%RAML 0.8
-title: OIC Monitoring
-version: v1-20150401
+title: Monitoring
+version: v1-20160622
 documentation:
 
   - title: OCF Copyright
@@ -17,13 +17,13 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.r"]
+          enum: ["oic.if.r", "oic.if.baseline"]
 
 /oic/mon:
-  displayName: OIC Monitoring
+  displayName: Monitoring
   is: [ interface ]
   description: |
-    The resource through which an OIC Device is monitored.
+    The resource through which an Device is monitored.
   get:
     description: Retrieve the monitor information
     responses:
@@ -33,9 +33,9 @@ traits:
             schema: MON
             example: |
               {
-                "rt":   "oic.wk.mon",
+                "rt":   ["oic.wk.mon"],
                 "name": "My Monitor Information",
                 "av":   true,
                 "lat":  50,
-                "ds":   "1500, 2750, 0"
+                "ds":   ["1500", "2750", "0"]
               }

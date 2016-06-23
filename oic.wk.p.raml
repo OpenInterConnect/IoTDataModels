@@ -1,6 +1,6 @@
 #%RAML 0.8
-title: OIC Base Platform
-version: v1-20150804
+title: Platform
+version: v1-20160622
 documentation:
 
   - title: OCF Copyright
@@ -17,17 +17,17 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.r"]
+          enum: ["oic.if.r", "oic.if.baseline"]
 
 /oic/p:
-  displayName: OIC Base Platform
+  displayName: Platform
   is: [ interface ]
   description: |
-    Known resource that is defines the platform on which an OIC Server is hosted.
+    Known resource that is defines the platform on which an Server is hosted.
     Allows for platform specific information to be discovered.
   get:
     description: |
-      Retrieve the information about the OIC Platform
+      Retrieve the information about the Platform
 
     responses:
       200:
@@ -36,7 +36,7 @@ traits:
             schema: Platform
             example: |
               {
-                "pi":   "my-platform-identfier",
-                "rt":   "oic.wk.p",
+                "pi":   "54919CA5-4101-4AE4-595B-353C51AA983C",
+                "rt":   ["oic.wk.p"],
                 "mnmn": "Acme, Inc"
               }

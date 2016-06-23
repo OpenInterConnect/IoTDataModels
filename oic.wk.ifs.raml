@@ -1,6 +1,6 @@
 #%RAML 0.8
-title: OIC Interface Types
-version: v1-20150811
+title: Interface Types
+version: v1-20160622
 documentation:
 
   - title: OCF Copyright
@@ -17,13 +17,13 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.r"]
+          enum: ["oic.if.r", "oic.if.baseline"]
 
 /oic/ifs:
-  displayName: OIC Inteface Types
+  displayName: Inteface Types
   is: [ interface ]
   description: |
-    List of resource interfaces that are supported by this OIC Server
+    List of resource interfaces that are supported by this Server
   get:
     description: Retrieve the resource interface list
     responses:
@@ -33,6 +33,6 @@ traits:
             schema: IFS
             example: |
               {
-                "rt": "oic.wk.ifs",
-                "il": "oic.if.ll oic.if.bat oic.if.r"
+                "rt": ["oic.wk.ifs"],
+                "il": ["oic.if.ll", "oic.if.b", "oic.if.r"]
               }
