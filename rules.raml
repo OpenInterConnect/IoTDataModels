@@ -1,6 +1,6 @@
 #%RAML 0.8
-title: OICRules
-version: v1.0-20150810
+title: Rules
+version: v1-20160622
 documentation:
 
   - title: OCF Copyright
@@ -13,15 +13,15 @@ documentation:
 
 schemas:
   - Collection:  !include schemas/oic.collection-schema.json
-    Rule:        !include schemas/oic.rule-schema.json
-    RuleUpdate:  !include schemas/oic.rule-Update-schema.json
-    RuleMember:  !include schemas/oic.ruleMember-schema.json
+  - Rule:        !include schemas/oic.rule-schema.json
+  - RuleUpdate:  !include schemas/oic.rule-Update-schema.json
+  - RuleMember:  !include schemas/oic.ruleMember-schema.json
 
 traits:
   - interface:
       queryParameters:
         if:
-            enum: ["oic.if.a", "oic.if.ll"]
+            enum: ["oic.if.a", "oic.if.ll", "oic.if.baseline"]
 
 
 /RuleListResURI:

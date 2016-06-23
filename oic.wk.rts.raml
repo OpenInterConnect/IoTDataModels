@@ -1,6 +1,6 @@
 #%RAML 0.8
-title: OIC Resource Types
-version: v1-20150811
+title: Resource Types
+version: v1-20160622
 documentation:
 
   - title: OCF Copyright
@@ -17,14 +17,14 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.r"]
+          enum: ["oic.if.r", "oic.if.baseline"]
 
 
 /oic/rts:
-  displayName: OIC Resource Types
+  displayName: Resource Types
   is: [ interface ]
   description: |
-    List of resource types that are supported by this OIC Server
+    List of resource types that are supported by this Server
   get:
     description: Retrieve the resource type list
     responses:
@@ -34,6 +34,6 @@ traits:
             schema: RTS
             example: |
               {
-                "rt": "oic.wk.rts",
-                "tl": "oic.r.example oic.r.other-example"
+                "rt": ["oic.wk.rts"],
+                "tl": ["oic.r.example", "oic.r.other-example"]
               }

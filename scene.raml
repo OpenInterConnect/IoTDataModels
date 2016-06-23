@@ -1,6 +1,6 @@
 #%RAML 0.8
-title: OICScene
-version: v1.0-20150630
+title: Scene
+version: v1-20160622
 documentation:
 
   - title: OCF Copyright
@@ -13,15 +13,15 @@ documentation:
 
 schemas:
   - Collection:        !include schemas/oic.collection-schema.json
-    SceneCollection:   !include schemas/oic.sceneCollection-schema.json
-    SceneCollectionUpdate:   !include schemas/oic.sceneCollection-Update-schema.json
-    SceneMember:       !include schemas/oic.sceneMember-schema.json
+  - SceneCollection:   !include schemas/oic.sceneCollection-schema.json
+  - SceneCollectionUpdate:   !include schemas/oic.sceneCollection-Update-schema.json
+  - SceneMember:       !include schemas/oic.sceneMember-schema.json
 
 traits:
   - interface:
       queryParameters:
         if:
-            enum: ["oic.if.a", "oic.if.ll"]
+            enum: ["oic.if.a", "oic.if.ll", "oic.if.baseline"]
 
 
 /SceneListResURI:

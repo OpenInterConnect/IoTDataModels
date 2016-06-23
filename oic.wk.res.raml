@@ -1,6 +1,6 @@
 #%RAML 0.8
-title: OIC Discoverable Resources
-version: v1-20150807
+title: Discoverable Resources
+version: v1-20160622
 documentation:
 
   - title: OCF Copyright
@@ -13,17 +13,18 @@ documentation:
 
 schemas:
   - Resources: !include schemas/oic.wk.res-schema.json
+
 traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.ll"]
+          enum: ["oic.if.ll", "oic.if.baseline"]
 
 /oic/res:
-  displayName: OIC Discoverable Resources
+  displayName: Discoverable Resources
   is: [ interface ]
   description: |
-    The resource through which the corresponding OIC Server is discovered and introspected for available resources.
+    The resource through which the corresponding Server is discovered and introspected for available resources.
   get:
     description: |
       Retrieve the discoverable resource set
@@ -34,21 +35,24 @@ traits:
           application/json:
             schema: Resources
             example: |
-              [{
-                "rt": "oic.wk.res",
+              [
+                {
+                "rt": ["oic.wk.res"],
                 "di": "0685B960-736F-46F7-BEC0-9E6CBD61ADC1",
                 "links":
                   [
                     {
                       "href": "/res",
                       "rel":  "self",
-                      "rt":   "oic.r.collection",
-                      "if":   "oic.if.ll" },
+                      "rt":   ["oic.r.collection"],
+                      "if":   ["oic.if.ll"]
+                    },
                     {
                       "href": "/smartDevice",
                       "rel":  "contained",
-                      "rt":   "oic.d.smartDevice",
-                      "if":   "oic.if.a"
+                      "rt":   ["oic.d.smartDevice"],
+                      "if":   ["oic.if.a"]
                     }
                   ]
-              }]
+                }
+              ]

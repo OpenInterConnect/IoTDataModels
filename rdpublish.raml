@@ -1,7 +1,7 @@
 #%RAML 0.8
-#RAML for OIC Resource Directory
+#RAML for Resource Directory
 title: Resource Directory
-version: 1.0-090215
+version: v1-20160622
 documentation:
 
   - title: OCF Copyright
@@ -11,33 +11,32 @@ documentation:
   - title: OCF Disclaimer
     content: !include DISCLAIMER.md
 
-  - title: OIC Rsource Directory
+  - title: Resource Directory
     content: |
-      A Resoure Directory is an OIC Device that helps other OIC Devices to be discovered.
+      A Resoure Directory is an Device that helps other Devices to be discovered.
   - title: Introduction
     content: |
-      For resource in other OIC Devices to be discovered using the Resource Directory, these other devices have to publish the resource links they would otherwise have advertised through /oic/res to the Resource Directory. Once the information has been published then the OIC Devices may stop responding to discovery queries and may also go to sleep.
+      For resource in other Devices to be discovered using the Resource Directory, these other devices have to publish the resource links they would otherwise have advertised through /oic/res to the Resource Directory. Once the information has been published then the Devices may stop responding to discovery queries and may also go to sleep.
 
       The Resource Directory will respond to all discovery queries with resources that it directly advertises and also the resource information that has been published to it.
   - title: Resource Directory discovery
     content: |
-      Before an OIC Device publishes its resource information, it must first discover available Resource Directories and then select one of those to publish the information to.
+      Before a Device publishes its resource information, it must first discover available Resource Directories and then select one of those to publish the information to.
 
-      This doscovery is done with a multicast query to /oic/rd. The information returned is either a bais factor or a list of attributes that help the discovering OIC Device to select one of the RDs. This RD will be used till the RD does not respond or another RD is selected.
+      This doscovery is done with a multicast query to /oic/rd. The information returned is either a bais factor or a list of attributes that help the discovering Device to select one of the RDs. This RD will be used till the RD does not respond or another RD is selected.
   - title: Resource Directory publish
     content: |
-      Once the RD has been discovery and selected, the OIC Device can publish its resoure information. The resource information are published to the /oic/rd resource using the "publish" interface. The information that needs to tbe available in /oic/res is then populated by the Resource Directory.
+      Once the RD has been discovery and selected, the Device can publish its resoure information. The resource information are published to the /oic/rd resource using the "publish" interface. The information that needs to tbe available in /oic/res is then populated by the Resource Directory.
 
-      Periodically based on the TTL set by the publishing OIC Device, the information that is published has to be refreshed with a new TTL or the TTL can be updated if there is no change in the information. It is the responsibility of the publishing OIC Device to ensure that the information or TTL is updated before the previous TTL expires; failing this the RD will garbage collect all the information related to the publishing OIC Device.
+      Periodically based on the TTL set by the publishing Device, the information that is published has to be refreshed with a new TTL or the TTL can be updated if there is no change in the information. It is the responsibility of the publishing Device to ensure that the information or TTL is updated before the previous TTL expires; failing this the RD will garbage collect all the information related to the publishing Device.
   - title: Resource discovery
     content: |
-      The discovery of resources is done in the same manner as for any OIC Server. A query to /oic/res either over multicast or uincast is required.
+      The discovery of resources is done in the same manner as for any Server. A query to /oic/res either over multicast or uincast is required.
 
 schemas:
--
   # Each schema represents an OIC Resource Type. The baseline interface operates on the entire representation
-  rdPublish: !include schemas/oic.rd.publish-schema.json
-  rdSelection: !include schemas/oic.rd.selection-schema.json
+-  rdPublish: !include schemas/oic.rd.publish-schema.json
+-  rdSelection: !include schemas/oic.rd.selection-schema.json
   # rdDelLink: !include schemas/oic.rd.del-link-schema.json
 
 traits:
@@ -45,7 +44,7 @@ traits:
     queryParameters:
       if:
         description: |
-          Interface is optional since there is only one interface supported for the OIC Resource Type
+          Interface is optional since there is only one interface supported for the Resource Type
           Both for RD selectin and for publish
         type: string
         enum: [ "oic.if.baseline" ]
@@ -57,14 +56,14 @@ traits:
 /oic/rd:
   displayName: Resource directory resource
   description: |
-    Resource to be exposed by any OIC Device that can act as a Resource Directory
+    Resource to be exposed by any Device that can act as a Resource Directory
   get:
     description: |
       Get the attributes of the Resource Directory for selection purposes.
     queryParameters:
       rt:
         description: |
-          Only one OIC Resource Type is used for GET; OIC RT is optional
+          Only one Resource Type is used for GET; RT is optional
         type: string
         enum: [ "oic.wk.rd" ]
         default: "oic.wk.rd"
@@ -94,7 +93,7 @@ traits:
     queryParameters:
       rt:
         description: |
-          Only one OIC Resource Type is used for GET; OIC RT is optional
+          Only one Resource Type is used for GET; RT is optional
         type: string
         enum: [ "oic.wk.rdpub" ]
         default: "oic.wk.rdpub"

@@ -9,7 +9,7 @@
         "href": {
           "type": "string",
           "maxLength": 256,
-          "description": "RFC5988 style web-links serialized into JSON. This is the target URI",
+          "description": "This is the target URI – can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
           "format": "uri"
         },
         "rel": {
@@ -40,14 +40,45 @@
           "minItems": 1,
           "description": "ReadOnly, The interface set supported by this resource"
         },
+        "di": {
+           "type": "string",
+           "description": "The Device ID on which the Relative Reference in href is to be resolved on. Base URI should be used in preference where possible",
+           "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+        },
+        "buri": {
+    	    "type": "string",
+          "description": "The base URI used to fully qualify a Relative Reference in the href parameter. Use the OCF Schema for URI",
+          "maxLength": 256,
+          "format": "uri"
+        },
         "p": {
-          "description": "ReadOnly, JSON object containing a Bitmap indicating observable and discoverable",
+          "description": "ReadOnly, Specifies the framework policies on the Resource referenced by the target URI",
           "type": "object",
           "properties": {
             "bm": {
+              "description": "ReadOnly, Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
               "type": "integer"
-            }
+            },
+            "sec": {
+              "description": "ReadOnly, Specifies if security needs to be turned on when looking to interact with the Resource",
+              "type": "boolean"
+            },
+            "port": {
+              "description": "ReadOnly, Secure port to be used for connection",
+              "type": "integer"
+            },
+            "required" : ["bm"]
           }
+        },
+        "bp": {
+           "type": "object",
+           "properties": {
+               "q": {
+                  "type": "string",
+                  "maxLength": 64,
+                  "description": "This defines the query string to be used when batch request is forwarded through this Link"
+               }
+            }
         },
         "title": {
           "type": "string",
@@ -74,28 +105,30 @@
             },
             {
               "type": "string",
-              "format": "uuid",
+              "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
               "description": "Use UUID for universal uniqueness - used in /oic/res to identify the device"
             }
           ],
           "description": "The instance identifier for this web link in an array of web links - used in collections"
         },
-        "ttl": {
-          "type": "integer",
-          "description": "The time to live for this link in seconds - value is specified in a request only and is not returned on response. Max integer size to represent time is 4 octets"
-         },
         "type": {
-          "type": "string",
-          "maxLength": 64,
-          "description": "A hint at the representation of the resource referenced by the target URI",
-          "default": "application/json"
+          "type": "array",
+          "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting",
+          "items" : [
+            {
+            "type": "string",
+            "maxLength": 64
+            }
+          ],
+          "minItems": 1,
+          "default": "application/cbor"
         }
-      }
+      },
+      "required": [ "href", "rt", "if" ]
     }
   },
   "type": "object",
   "allOf": [
     { "$ref": "#/definitions/oic.oic-link" }
-  ],
-  "required": [ "href", "rt", "if" ]
+  ]
 }

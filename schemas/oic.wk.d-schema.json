@@ -13,8 +13,8 @@
         },
         "di": {
           "type": "string",
-          "description": "ReadOnly, Unique identifier for device (UUID)",
-          "format": "uuid"
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "description": "ReadOnly, Unique identifier for device (UUID)"
         },
         "icv": {
           "type": "string",
@@ -22,14 +22,9 @@
           "description": "ReadOnly, The version of the OIC Server"
         },
         "dmv": {
-          "type": "array",
-          "items" : [
-            {
-              "type" : "string",
-              "maxLength": 64
-            }
-          ],
-          "description": "ReadOnly, The spec version of the vertical specification"
+          "type": "string",
+          "maxLength": 64,
+          "description": "ReadOnly, The spec version of the vertical and/or resource specification"
         }
       }
     }

@@ -1,6 +1,6 @@
 #%RAML 0.8
-title: OIC Ping
-version: v1-20150814
+title: Ping
+version: v1-20160622
 documentation:
 
   - title: OCF Copyright
@@ -17,13 +17,13 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.rw"]
+          enum: ["oic.if.rw", "oic.if.baseline"]
 
 /oic/ping:
-  displayName: OIC Ping
+  displayName: Ping
   is: [ interface ]
   description: |
-    The resource using which an OIC Client keeps its Connection with an OIC Server active.
+    The resource using which an Client keeps its Connection with an Server active.
   get:
     description: Retrieve the ping information
     responses:
@@ -33,7 +33,7 @@ traits:
             schema: PING
             example: |
               {
-                "rt":   "oic.wk.ping",
-                "name": "Ping Information",
+                "rt":   ["oic.wk.ping"],
+                "n": "Ping Information",
                 "in":   16
               }
