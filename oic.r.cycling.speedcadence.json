@@ -6,14 +6,17 @@
   "definitions": {
     "oic.r.cycling.speedcadence": {
       "type": "object",
-      "properties": {
-        "cadence": {
-          "type": "number",
-          "minimum": 0,
-          "description": "ReadOnly, Pedals per minutes"
-        },
-        "$ref": "oic.r.speed.json#/definitions/oic.r.speed"
-      }
+      "allOf": [
+        {"$ref": "oic.r.speed.json#/definitions/oic.r.speed"},
+        {"properties": {
+          "cadence": {
+            "type": "number",
+            "minimum": 0,
+            "description": "ReadOnly, Pedals per minutes"
+          }
+         }
+        }
+      ]
     }
   },
   "type": "object",
