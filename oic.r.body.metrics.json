@@ -6,13 +6,11 @@
   "definitions": {
     "oic.r.body.metrics": {
       "type": "object",
-      "properties": {
         "allOf": [
-          {"$ref": "oic.r.bodyweight.json#/definitions/oic.r.weight.fitness"},
-          {"$ref": "oic.r.bodyheight.json#/definitions/oic.r.height.fitness"},
+          {"$ref": "oic.r.body.weight.json#/definitions/oic.r.body.weight"},
+          {"$ref": "oic.r.body.height.json#/definitions/oic.r.body.height"},
           {"$ref": "oic.r.bmi.json#/definitions/oic.r.bmi"}
         ]
-        }
       }
     },
   "type": "object",
