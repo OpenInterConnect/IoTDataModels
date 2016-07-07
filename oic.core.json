@@ -1,5 +1,5 @@
 {
-  "id": "http://openinterconnect.org/iotdatamodels/chemas/oic.core.json#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.core.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Core",
