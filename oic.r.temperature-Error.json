@@ -8,8 +8,18 @@
       "type": "object",
       "properties": {
         "units":  {
-          "enum": ["C","F","K"],
-          "description": "ReadOnly, Units for the temperature value"
+          "oneOf": [
+            {
+              "enum": ["C","F","K"],
+              "description": "ReadOnly, Units for the temperature value"
+            },
+            {
+              "type": "array",
+              "items": {
+                "enum": ["C","F","K"]
+              }
+            }
+          ]
         },
         "range":  {
           "type": "string",
