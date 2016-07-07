@@ -22,24 +22,6 @@
         "defrost":      {
           "type": "boolean",
           "description": "Indicates whether a defrost cycle is currently active"
-        },
-        "delaydefrost": {
-          "type": "object",
-          "required": ["status"],
-          "properties": {
-            "status": {
-              "type": "boolean",
-              "description": "Indicates whether any supported delay defost function is active"
-            },
-            "deferralPeriod": {
-              "type": "array",
-              "description": "Array of start times for 4 hour defost deferral periods",
-              "items": {
-                "deferralTime": "string",
-               "format": "date-time"
-             }
-            }
-          }
         }
       }
     }
