@@ -9,6 +9,7 @@
         "pi": {
           "type": "string",
           "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "format": "uuid",
           "description": "ReadOnly, Platform Identifier as a UUID"
         },
         "mnmn": {
@@ -30,7 +31,8 @@
         "mndt": {
           "type": "string",
           "description": "ReadOnly, Manufacturing Date as defined in ISO 8601, where the format is [yyyy]-[mm]-[dd].",
-          "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])$"
+          "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])$",
+          "format": "date-time"
         },
         "mnpv": {
           "type": "string",
@@ -61,7 +63,7 @@
         "st": {
           "type": "string",
           "description": "ReadOnly, Reference time for the device as defined in ISO 8601, where concatenation of 'date' and 'time' with the 'T' as a delimiter between 'date' and 'time'. The format is [yyyy]-[mm]-[dd]T[hh]:[mm]:[ss]Z.",
-          "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])T(2[0-3]|1[0-9]|0[0-9]):([0-5][0-9]):([0-5][0-9])Z)$",
+          "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])T(2[0-3]|1[0-9]|0[0-9]):([0-5][0-9]):([0-5][0-9])Z$",
           "format": "date-time"
         },
         "vid": {
