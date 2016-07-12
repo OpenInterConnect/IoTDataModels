@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openinterconnect.org/schemas/oic.sceneCollection.json#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.sceneCollection-schema.json#",
   "title" : "Scene Collection",
   "definitions": {
     "oic.sceneCollection": {
@@ -23,8 +23,8 @@
           "format": "UTF8"
         },
         "id": {
-            "type": "string", 
-                        "description" : "A unique string that could be a hash or similarly unique" 
+            "type": "string",
+                        "description" : "A unique string that could be a hash or similarly unique"
         },
         "rts": {
           "type": "string",
@@ -36,19 +36,19 @@
           "description": "Array of OIC web links that are reference from this collection",
           "items" : {
             "allOf": [
-              { "$ref": "http://openinterconnect.org/schemas/oic.oic-link.json#" },
+              { "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link" },
               { "required" : [ "ins" ] }
             ]
           }
         }
       },
-      "required": [ "lastScene" ]
+      "required": [ "lastScene","sceneValues","rts","id" ]
     }
   },
 
   "type": "object",
   "allOf" : [
-    { "$ref": "oic.core.json#/definitions/oic.core" },
+    { "$ref": "oic.core-schema.json#/definitions/oic.core" },
     { "$ref": "#/definitions/oic.sceneCollection" }
   ]
 }

@@ -1,66 +1,82 @@
 {
   "$schema": "http://json-schemas.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openinterconnect.org/oic.wk.p#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.wk.p-schema.json#",
   "definitions": {
     "oic.wk.p": {
       "type": "object",
       "properties": {
         "pi": {
           "type": "string",
-          "description": "ReadOnly, Platform Identifier"
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "format": "uuid",
+          "description": "ReadOnly, Platform Identifier as a UUID"
         },
         "mnmn": {
           "type": "string",
           "description": "ReadOnly, Manufacturer Name",
-          "maxLength": 16
+          "maxLength": 64
         },
         "mnml": {
           "type": "string",
           "description": "ReadOnly, Manufacturer's URL",
-          "maxLength": 32,
+          "maxLength": 256,
           "format": "uri"
         },
         "mnmo": {
           "type": "string",
+          "maxLength": 64,
           "description": "ReadOnly, Model number as designated by manufacturer"
         },
         "mndt": {
           "type": "string",
-          "description": "ReadOnly, Manufacturing Date",
+          "description": "ReadOnly, Manufacturing Date as defined in ISO 8601, where the format is [yyyy]-[mm]-[dd].",
+          "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])$",
           "format": "date-time"
         },
         "mnpv": {
           "type": "string",
+          "maxLength": 64,
           "description": "ReadOnly, Platform Version"
         },
         "mnos": {
           "type": "string",
+          "maxLength": 64,
           "description": "Readonly, Platform Resident OS Version"
         },
         "mnhw": {
           "type": "string",
+          "maxLength": 64,
           "description": "Readonly, Platform Hardware Version"
         },
         "mnfv": {
           "type": "string",
+          "maxLength": 64,
           "description": "ReadOnly, Manufacturer's firmware version"
         },
         "mnsl": {
           "type": "string",
           "description": "ReadOnly, Manufacturer's Support Information URL",
+          "maxLength": 256,
           "format": "uri"
         },
         "st": {
           "type": "string",
-          "description": "ReadOnly, Reference time for the device",
+          "description": "ReadOnly, Reference time for the device as defined in ISO 8601, where concatenation of 'date' and 'time' with the 'T' as a delimiter between 'date' and 'time'. The format is [yyyy]-[mm]-[dd]T[hh]:[mm]:[ss]Z.",
+          "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])T(2[0-3]|1[0-9]|0[0-9]):([0-5][0-9]):([0-5][0-9])Z$",
           "format": "date-time"
+        },
+        "vid": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ReadOnly, Manufacturer's defined string for the platform. The string is freeform and up to the manufacturer on what text to populate it"
         }
       }
     }
   },
   "type": "object",
   "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.p" }
   ],
   "required": [ "pi", "mnmn" ]

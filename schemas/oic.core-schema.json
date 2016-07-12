@@ -1,0 +1,49 @@
+{
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.core-schema.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Core",
+  "definitions": {
+    "oic.core": {
+      "type": "object",
+      "properties": {
+        "rt": {
+          "type": "array",
+          "items" : [
+            {
+              "type" : "string",
+              "maxLength": 64
+            }
+          ],
+          "minItems" : 1,
+          "description": "ReadOnly, Resource Type"
+        },
+        "if": {
+          "type": "array",
+          "items": [
+            {
+              "type" : "string",
+              "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.lb", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s" ]
+            }
+          ],
+          "minItems": 1,
+          "description": "ReadOnly, The interface set supported by this resource"
+        },
+        "n": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ReadOnly, Friendly name of the resource"
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ReadOnly, Instance ID of this specific resource"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/definitions/oic.core"}
+  ]
+}

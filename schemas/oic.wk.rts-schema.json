@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.wk.rts-schema.json#",
+  "definitions": {
+    "oic.wk.rts": {
+      "type": "object",
+      "properties": {
+        "tl": {
+          "type": "array",
+          "items" : [
+            {
+              "type" : "string",
+              "maxLength": 64
+            }
+          ],
+          "description": "Readonly, list of resource type names"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.wk.rts" }
+  ],
+  "required": ["tl"]
+}

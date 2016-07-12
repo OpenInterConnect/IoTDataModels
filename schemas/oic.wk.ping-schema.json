@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schemas.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
-  "id": "http://openinterconnect.org/oic.wk.ping#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://openconnectivityfoundation.org/core/schemas/oic.wk.ping-schema.json#",
   "definitions": {
     "oic.wk.ping": {
       "type": "object",
@@ -15,12 +15,8 @@
   },
   "type": "object",
   "allOf": [
-    {
-      "$ref": "oic.core.json#/definitions/oic.core"
-    },
-    {
-      "$ref": "#/definitions/oic.wk.ping"
-    }
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.wk.ping"}
   ],
   "required": [
     "in"
