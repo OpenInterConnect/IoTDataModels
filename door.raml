@@ -14,10 +14,14 @@ schemas:
   - DoorUpdate: !include oic.r.door-Update.json
 
 traits:
-  - interface:
+  - interface-actuator:
       queryParameters:
         if:
           enum: ["oic.if.a","oic.if.baseline"]
+  - interface-all:
+      queryParameters:
+        if:
+          enum: ["oic.if.a","oic.if.s","oic.if.baseline"]
 
 /DoorResURI:
   description: |
@@ -32,9 +36,9 @@ traits:
     The openAlarm value 'true' indicates that the open alarm is active.
     The openAlarm value 'false' indicates that open alarm is not active.
   displayName: Door
-  is: [ interface ] # valid for all methods
 
   get:
+    is: [ interface-all ] 
     description: retrieves the state of the Door.
     responses:
       200:
@@ -51,6 +55,7 @@ traits:
               }
 
   post:
+    is: [ interface-actuator ] 
     description: |
       Sets the current Door properties.
       The only property that can be set as part of an update operation is
