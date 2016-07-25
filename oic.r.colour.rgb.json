@@ -18,6 +18,7 @@
         },
         "range":    {
           "type": "array",
+          "readOnly": true,
           "description": "ReadOnly, min max value of RGB",
           "minItems": 2,
           "maxItems": 2,

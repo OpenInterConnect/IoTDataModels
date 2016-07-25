@@ -9,6 +9,7 @@
       "properties": {
         "charge" : {
           "type": "integer",
+          "readOnly": true,
           "description": "ReadOnly, The current charge percentage."
         }
       }

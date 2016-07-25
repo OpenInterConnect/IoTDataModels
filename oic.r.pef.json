@@ -9,10 +9,12 @@
       "properties": {
         "pef": {
           "type": "number",
+          "readOnly": true,
           "description": "ReadOnly, Maximum flow measured at the mouth during an expiration delivered with maximal force starting immediately after achieving maximum lung inflation. PEF is measured in liters per minute."
         },
         "observedtime": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
         }
       }

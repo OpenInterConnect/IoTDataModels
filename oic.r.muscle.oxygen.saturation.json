@@ -10,10 +10,12 @@
         "smo2": {
           "type": "number",
           "minimum": 0,
+          "readOnly": true,
           "description": "ReadOnly, SMO2(Muscle Oxygen Saturation). It is the percentage of hemoglobin that is carrying oxygen in muscle tissue."
         },
         "observedtime": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
         }
       }

@@ -10,15 +10,18 @@
         "bmi": {
           "type": "number",
           "minimum": 0,
+          "readOnly": true,
           "description": "ReadOnly, Body Mass Index of a person in kg/m^2"
         },
         "bmip": {
           "type": "number",
           "minimum": 0,
+          "readOnly": true,
           "description": "ReadOnly, BMI prime is a normalized BMI by 25"
         },
         "observedtime": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
         }
       }

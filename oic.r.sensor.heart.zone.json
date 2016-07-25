@@ -8,6 +8,7 @@
       "properties": {
         "heartRateZone": {
             "enum": ["Zone1","Zone2","Zone3", "Zone4", "Zone5"],
+            "readOnly": true,
             "description": "ReadOnly, current heart rate zone based on the Zoladz system."
         }
       }

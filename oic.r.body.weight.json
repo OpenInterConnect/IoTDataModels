@@ -12,10 +12,12 @@
           "weightunits": {
             "type": "string",
             "enum": ["kg", "lb"],
+            "readOnly": true,
             "description": "ReadOnly, Unit of a person's weight"
           },
           "observedtime": {
             "type": "string",
+            "readOnly": true,
             "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
           }
          }

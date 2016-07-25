@@ -9,14 +9,17 @@
       "properties": {
         "bloodpressure": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, measured blood pressure in mmHG. It uses CSV (data type) containing systolic, diastolic values."
         },
         "map": {
           "type": "number",
+          "readOnly": true,
           "description": "ReadOnly, measured blood pressure in mmHG. MAP(Mean Arterial Pressure) is a value of the integral of one cycle of the blood pressure curve divided by the period between successive heart beats."
         },
         "observedtime": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
         }
       }

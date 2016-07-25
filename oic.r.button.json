@@ -8,6 +8,7 @@
       "properties": {
         "value": {
           "type": "boolean",
+          "readOnly": true,
           "description": "ReadOnly, Status of the button"
         }
       }
