@@ -8,6 +8,7 @@
       "properties": {
         "atmosphericPressure": {
           "type": "number",
+          "readOnly": true,
           "description": "ReadOnly, Current atmospheric pressure in hPa."
         }
       }

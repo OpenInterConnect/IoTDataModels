@@ -13,10 +13,12 @@
             "site": {
               "type": "string",
               "enum": ["anus", "armpit", "ear", "forehead", "mouth"],
+              "readOnly": true,
               "description": "ReadOnly, Measurement site"
             },
             "observedtime": {
               "type": "string",
+              "readOnly": true,
               "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
             }
           }

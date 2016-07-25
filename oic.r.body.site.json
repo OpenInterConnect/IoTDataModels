@@ -11,10 +11,12 @@
           "type": "integer",
           "minimum": 248,
           "maximum": 992,
+          "readOnly": true,
           "description": "ReadOnly, Nomenclature code referring a specific muscle group engaged. Refer to Annex C of IEEE Std 11073-10442-2008."
         },
         "observedtime": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
         }
       }

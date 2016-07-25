@@ -15,6 +15,7 @@
           "oneOf": [
             {
               "enum": ["C","F","K"],
+              "readOnly": true,
               "description": "ReadOnly, Units for the temperature value"
             },
             {
@@ -27,6 +28,7 @@
         },
         "range":  {
           "type": "array",
+          "readOnly": true,
           "description": "ReadOnly, Array defining min,max values for this temperature on this device",
           "items": {
             "type": "number"

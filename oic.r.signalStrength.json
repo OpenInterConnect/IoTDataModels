@@ -9,10 +9,12 @@
       "properties": {
         "lqi": {
           "type": "number",
+          "readOnly": true,
           "description": "ReadOnly, current value of Link Quality Indicator"
         },
         "rssi": {
           "type": "number",
+          "readOnly": true,
           "description": "ReadOnly, current value of Received Signal Strength Indicator"
         }
       }

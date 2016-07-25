@@ -9,6 +9,7 @@
       "properties": {
         "humidity":    {
           "type": "integer",
+          "readOnly": true,
           "description": "ReadOnly, Current sensed value for Humidity"
         },
         "desiredHumidity":  {

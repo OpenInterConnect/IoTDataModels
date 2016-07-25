@@ -9,19 +9,23 @@
       "properties": {
         "bloodsugar": {
           "type": "number",
+          "readOnly": true,
           "description": "ReadOnly, The concentration of glucose in the blood"
         },
         "units": {
           "type": "string",
           "enum": ["mg/dL", "mmol/L"],
+          "readOnly": true,
           "description": "ReadOnly, Units used to measure blood sugar levels"
         },
         "site": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, Lot number of strip"
         },
         "observedtime": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
         }
       }

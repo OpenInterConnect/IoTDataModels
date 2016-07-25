@@ -9,6 +9,7 @@
       "properties": {
         "filter":       {
           "type": "integer",
+          "readOnly": true,
           "description": "ReadOnly, Percentage life time remaining for the water filter"
         },
         "rapidFreeze":  {

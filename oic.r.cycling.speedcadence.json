@@ -12,6 +12,7 @@
           "cadence": {
             "type": "number",
             "minimum": 0,
+            "readOnly": true,
             "description": "ReadOnly, Pedals per minutes"
           }
          }

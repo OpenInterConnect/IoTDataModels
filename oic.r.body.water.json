@@ -9,14 +9,17 @@
       "properties": {
         "bodywater": {
           "type": "number",
+          "readOnly": true,
           "description": "ReadOnly, The total water of the human body"
         },
         "units": {
           "enum": ["kg", "lb", "%"],
+          "readOnly": true,
           "description": "ReadOnly, Unit of a body water of a person"
         },
         "observedtime": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
         }
       }

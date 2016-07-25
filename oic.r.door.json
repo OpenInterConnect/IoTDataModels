@@ -9,10 +9,12 @@
       "properties": {
         "openState" : {
           "enum": ["Open","Closed"],
+          "readOnly": true,
           "description": "ReadOnly, The state of the door (open or closed)"
         },
         "openDuration": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, The time duration the door has been open"
         },
         "openAlarm": {
