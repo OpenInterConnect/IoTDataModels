@@ -9,7 +9,10 @@
       "properties": {
         "brightness": {
           "type": "integer",
-          "description": "Current sensed or set value for Brightness"}
+          "description": "Quantized representation in the range 0-100 of the current sensed or set value for Brightness",
+          "minimum": 0,
+          "maximum": 100
+        }
       }
     }
   },

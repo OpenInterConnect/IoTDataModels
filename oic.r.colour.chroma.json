@@ -21,7 +21,9 @@
           "minItems": 2,
           "maxItems": 2,
           "items": {
-            "type": "number"
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
           }
         },
         "ct": {
