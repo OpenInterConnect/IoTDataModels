@@ -66,9 +66,9 @@
             "port": {
               "description": "ReadOnly, Secure port to be used for connection",
               "type": "integer"
-            },
-            "required" : ["bm"]
-          }
+            }
+          },
+          "required" : ["bm"]
         },
         "bp": {
            "type": "object",
