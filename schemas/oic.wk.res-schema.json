@@ -12,9 +12,7 @@
           "description": "ReadOnly, Human friendly name"
         },
         "di": {
-          "type": "string",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-          "format": "uuid",
+          "$ref": "oic.types-schema.json#/definitions/uuid", 
           "description": "ReadOnly, Unique identifier for device (UUID) as indicated by the /oic/d resource of the device"
         },
         "mpro": {
