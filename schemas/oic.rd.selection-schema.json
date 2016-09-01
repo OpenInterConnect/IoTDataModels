@@ -13,9 +13,9 @@
           "format": "UTF8"
         },
         "di": {
-          "type": "string",
-          "description": "A unique identifier for the Resource Directory - the same as the device ID of the RD",
-          "format": "uuid"
+          "$ref": "oic.types-schema.json#/definitions/uuid",
+          "description": "A unique identifier for the Resource Directory - the same as the device ID of the RD"
+
         },
         "sel": {
           "description": "Selection criteria that a device wanting to publish to any RD can use to choose this Resource Directory over others that are discovered",
