@@ -15,16 +15,19 @@
           "type": "string",
           "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
           "format": "uuid",
+          "readOnly": true,
           "description": "ReadOnly, Unique identifier for device (UUID)"
         },
         "icv": {
           "type": "string",
           "maxLength": 64,
+          "readOnly": true,
           "description": "ReadOnly, The version of the OIC Server"
         },
         "dmv": {
           "type": "string",
           "maxLength": 64,
+          "readOnly": true,
           "description": "ReadOnly, The spec version of the vertical and/or resource specification"
         }
       }

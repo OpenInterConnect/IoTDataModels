@@ -18,6 +18,7 @@
         },
         "memberProperty": {
           "type":  "string",
+          "readOnly": true,
           "description": "ReadOnly, property name that will be mapped"
         },
         "memberValue": {
@@ -26,6 +27,7 @@
             { "type": "string",  "description":  "if member property is an number" },
             { "type": "boolean", "description": "if member property is an boolean" }
           ],
+          "readOnly": true,
           "description": "ReadOnly, value of the Member Property"
         },
         "link": {

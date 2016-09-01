@@ -8,10 +8,12 @@
       "properties": {
         "av":{
           "type": "boolean",
+          "readOnly": true,
           "description": "ReadOnly, Indicates if the device is available or not on the network (like ping)"
         },
         "lat": {
           "type": "integer",
+          "readOnly": true,
           "description": "ReadOnly, Indicates the elapsed time in seconds after the device was invoked or acted upon"
         },
         "ds": {
@@ -22,6 +24,7 @@
               "maxLength": 64
             }
           ],
+          "readOnly": true,
           "description": "ReadOnly, Contains Device Statistics Info (no. of received packets, no. of sent packets, time to respond etc.)"
         }
       }
