@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+    "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.types-schema.json#",
+    "definitions" : {
+        "uuid": {
+            "type":"string",
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+        }
+    }
+}

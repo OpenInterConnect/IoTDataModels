@@ -47,17 +47,15 @@
                   "description": "A unique string that could be a hash or similarly unique"
                 },
                 {
-                  "type": "string",
-                  "format": "UUID",
+                  "$ref": "oic.types-schema.json#/definitions/uuid",
                   "description": "A unique string that could be a UUIDv4"
                 }
               ],
               "description": "Id for each set of links i.e. tag. Can be an value that is unique to the use context or a UUIDv4"
             },
             "di": {
-              "type": "string",
-              "description": "The device ID which is an UUIDv4 string; used for backward compatibility with Spec A defintion of /oic/res",
-              "format": "UUID"
+              "$ref": "oic.types-schema.json#/definitions/uuid",
+              "description": "The device ID which is an UUIDv4 string; used for backward compatibility with Spec A defintion of /oic/res"
             }
           }
         }
@@ -107,8 +105,7 @@
                   "description": "A unique string that could be a hash or similarly unique"
                 },
                 {
-                  "type": "string",
-                  "format": "UUID",
+                  "$ref": "oic.types-schema.json#/definitions/uuid",
                   "description": "A unique string that could be a UUIDv4"
                 }
               ],
