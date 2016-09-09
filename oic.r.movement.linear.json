@@ -9,6 +9,7 @@
       "properties": {
         "movementSettings":  {
           "type": "array",
+          "readOnly": true,
           "description": "ReadOnly, array of possible movement values",
           "items": {
             "type": "string"

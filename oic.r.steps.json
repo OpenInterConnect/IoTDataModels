@@ -11,14 +11,17 @@
         {"properties": {
            "distance": {
              "type": "integer",
+             "readOnly": true,
              "description": "ReadOnly, measured distance based on steps in meters"
            },
            "kcal": {
              "type": "number",
+             "readOnly": true,
              "description": "ReadOnly, measured calorie based on steps"
            },
            "observedtime": {
              "type": "string",
+             "readOnly": true,
              "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
            }
          }

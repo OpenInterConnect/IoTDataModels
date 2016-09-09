@@ -13,6 +13,7 @@
         },
         "supportedLanguages": {
           "type": "array",
+          "readOnly": true,
           "description": "ReadOnly, array of supported language tags",
           "items": {
             "type": "string"
@@ -20,6 +21,7 @@
         },
         "supportedVoices": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, SSML document fragment indicating supported voices"
         }
       }

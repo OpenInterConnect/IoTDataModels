@@ -8,6 +8,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "description": "ReadOnly, array containing Hx, Hy, Hz.",
           "minItems": 3,
           "maxItems": 3,

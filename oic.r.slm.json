@@ -9,15 +9,18 @@
       "properties": {
         "slm": {
           "type": "number",
+          "readOnly": true,
           "description": "ReadOnly, The sum of the body water mass and protein mass"
         },
         "units": {
           "type": "string",
           "enum": ["kg", "lb"],
+          "readOnly": true,
           "description": "ReadOnly, Unit of a soft lean mass of a person"
         },
         "observedtime": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
         }
       }

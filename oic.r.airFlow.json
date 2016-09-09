@@ -17,6 +17,7 @@
         },
         "range": {
           "type": "array",
+          "readOnly": true,
           "description": "ReadOnly, Min,max values for the speed level",
           "items": {
             "type": "integer"

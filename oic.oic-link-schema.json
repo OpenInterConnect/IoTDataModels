@@ -27,6 +27,7 @@
             }
           ],
           "minItems" : 1,
+          "readOnly": true,
           "description": "ReadOnly, Resource Type"
         },
         "if": {
@@ -38,9 +39,11 @@
             }
           ],
           "minItems": 1,
+          "readOnly": true,
           "description": "ReadOnly, The interface set supported by this resource"
         },
         "p": {
+          "readOnly": true,
           "description": "ReadOnly, JSON object containing a Bitmap indicating observable and discoverable plus security and port",
           "type": "object",
           "properties": {

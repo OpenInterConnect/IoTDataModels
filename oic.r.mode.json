@@ -9,6 +9,7 @@
       "properties": {
         "supportedModes": {
           "type": "array",
+          "readOnly": true,
           "description": "ReadOnly, Array of possible modes the device supports.",
           "items": {
             "type": "string"

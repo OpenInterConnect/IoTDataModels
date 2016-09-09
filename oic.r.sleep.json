@@ -10,30 +10,36 @@
         "Type": {
           "type": "string",
           "enum": ["awake", "light", "deep"],
+          "readOnly": true,
           "description": "ReadOnly, Sleep type categorized into awake, light, and deep"
         },
         "Tst": {
           "type": "number",
           "minimum": 0,
+          "readOnly": true,
           "description": "ReadOnly, Total sleep time in hours per day"
         },
         "Dst": {
           "type": "number",
           "minimum": 0,
+          "readOnly": true,
           "description": "ReadOnly, Total deep sleep time in hours per day"
         },
         "Lst": {
           "type": "number",
           "minimum": 0,
+          "readOnly": true,
           "description": "ReadOnly, Total light sleep time in hours per day"
         },
         "At": {
           "type": "number",
           "minimum": 0,
+          "readOnly": true,
           "description": "ReadOnly, Total awake time in hours per day"
         },
         "observedtime": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
         }
       }

@@ -10,15 +10,18 @@
         "spo2": {
           "type": "number",
           "minimum": 0,
+          "readOnly": true,
           "description": "ReadOnly, Oxygen saturation level in percentage"
         },
         "perfusion": {
           "type": "number",
           "minimum": 0,
+          "readOnly": true,
           "description": "ReadOnly, Ratio of AC over DC of PPG"
         },
         "observedtime": {
           "type": "string",
+          "readOnly": true,
           "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
         }
       }

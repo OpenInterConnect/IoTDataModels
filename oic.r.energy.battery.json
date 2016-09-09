@@ -10,6 +10,7 @@
         "charge" : {
           "type": "integer",
           "description": "ReadOnly, The current charge percentage.",
+          "readOnly": true,
           "minimum": 0,
           "maximum": 100
         }
