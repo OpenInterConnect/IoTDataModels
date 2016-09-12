@@ -8,6 +8,7 @@
       "properties": {
         "pi": {
           "$ref": "oic.types-schema.json#/definitions/uuid",
+          "readOnly": true,
           "description": "ReadOnly, Platform Identifier as a UUID"
         },
         "mnmn": {
@@ -45,12 +46,14 @@
         "mnos": {
           "type": "string",
           "maxLength": 64,
-          "description": "Readonly, Platform Resident OS Version"
+          "readOnly": true,
+          "description": "ReadOnly, Platform Resident OS Version"
         },
         "mnhw": {
           "type": "string",
           "maxLength": 64,
-          "description": "Readonly, Platform Hardware Version"
+          "readOnly": true,
+          "description": "ReadOnly, Platform Hardware Version"
         },
         "mnfv": {
           "type": "string",

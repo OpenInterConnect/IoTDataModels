@@ -14,6 +14,7 @@
         },
         "di": {
           "$ref": "oic.types-schema.json#/definitions/uuid", 
+          "readOnly": true,
           "description": "ReadOnly, Unique identifier for device (UUID) as indicated by the /oic/d resource of the device"
         },
         "mpro": {

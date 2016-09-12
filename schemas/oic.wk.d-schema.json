@@ -9,10 +9,12 @@
         "n": {
           "type": "string",
           "maxLength": 64,
-          "description": "Readonly, Human friendly name"
+          "readOnly": true,
+          "description": "ReadOnly, Human friendly name"
         },
         "di": {
           "$ref": "oic.types-schema.json#/definitions/uuid",
+          "readOnly": true,
           "description": "ReadOnly, Unique identifier for device (UUID)"
         },
         "icv": {
