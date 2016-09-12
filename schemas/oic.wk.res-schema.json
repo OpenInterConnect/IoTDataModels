@@ -10,16 +10,16 @@
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "ReadOnly, Human friendly name"
+          "description": "Human friendly name"
         },
         "di": {
           "$ref": "oic.types-schema.json#/definitions/uuid", 
           "readOnly": true,
-          "description": "ReadOnly, Unique identifier for device (UUID) as indicated by the /oic/d resource of the device"
+          "description": "Unique identifier for device (UUID) as indicated by the /oic/d resource of the device"
         },
         "mpro": {
           "readOnly": true,
-          "description": "ReadOnly, Supported messaging protocols",
+          "description": "Supported messaging protocols",
           "type": "string",
           "maxLength": 64
         },

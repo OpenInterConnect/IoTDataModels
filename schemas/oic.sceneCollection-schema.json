@@ -15,7 +15,7 @@
         "sceneValues": {
           "type": "string",
           "readOnly": true,
-          "description": "ReadOnly, All available scene values",
+          "description": "All available scene values",
           "format": "CSV"
         },
         "n": {
@@ -30,7 +30,7 @@
         "rts": {
           "type": "string",
           "readOnly": true,
-          "description": "ReadOnly, Defines the list of allowable resource types in links included in the collection; new links being created can only be from this list",
+          "description": "Defines the list of allowable resource types in links included in the collection; new links being created can only be from this list",
           "format": "UTF8"
         },
         "links": {

@@ -15,7 +15,7 @@
             }
           ],
           "readOnly": true,
-          "description": "ReadOnly, list of resource type names"
+          "description": "list of resource type names"
         }
       }
     }

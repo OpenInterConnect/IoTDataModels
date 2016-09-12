@@ -15,7 +15,7 @@
             }
           ],
           "readOnly": true,
-          "description": "ReadOnly, list of interface names"
+          "description": "list of interface names"
         }
       }
     }

@@ -19,7 +19,7 @@
         "memberProperty": {
           "type":  "string",
           "readOnly": true,
-          "description": "ReadOnly, property name that will be mapped"
+          "description": "property name that will be mapped"
         },
         "memberValue": {
             "oneOf" : [
@@ -28,7 +28,7 @@
             { "type": "boolean", "description": "if member property is an boolean" }
           ],
           "readOnly": true,
-          "description": "ReadOnly, value of the Member Property"
+          "description": "value of the Member Property"
         },
         "link": {
           "type": "string",
