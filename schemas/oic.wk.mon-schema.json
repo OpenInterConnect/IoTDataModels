@@ -9,12 +9,12 @@
         "av":{
           "type": "boolean",
           "readOnly": true,
-          "description": "ReadOnly, Indicates if the device is available or not on the network (like ping)"
+          "description": "Indicates if the device is available or not on the network (like ping)"
         },
         "lat": {
           "type": "integer",
           "readOnly": true,
-          "description": "ReadOnly, Indicates the elapsed time in seconds after the device was invoked or acted upon"
+          "description": "Indicates the elapsed time in seconds after the device was invoked or acted upon"
         },
         "ds": {
           "type": "array",
@@ -25,7 +25,7 @@
             }
           ],
           "readOnly": true,
-          "description": "ReadOnly, Contains Device Statistics Info (no. of received packets, no. of sent packets, time to respond etc.)"
+          "description": "Contains Device Statistics Info (no. of received packets, no. of sent packets, time to respond etc.)"
         }
       }
     }

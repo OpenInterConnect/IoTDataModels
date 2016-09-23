@@ -9,23 +9,25 @@
         "n": {
           "type": "string",
           "maxLength": 64,
-          "description": "Readonly, Human friendly name"
+          "readOnly": true,
+          "description": "Human friendly name"
         },
         "di": {
           "$ref": "oic.types-schema.json#/definitions/uuid",
-          "description": "ReadOnly, Unique identifier for device (UUID)"
+          "readOnly": true,
+          "description": "Unique identifier for device (UUID)"
         },
         "icv": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "ReadOnly, The version of the OIC Server"
+          "description": "The version of the OIC Server"
         },
         "dmv": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "ReadOnly, The spec version of the vertical and/or resource specification"
+          "description": "The spec version of the vertical and/or resource specification"
         }
       }
     }

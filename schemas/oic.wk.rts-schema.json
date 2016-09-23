@@ -14,7 +14,8 @@
               "maxLength": 64
             }
           ],
-          "description": "Readonly, list of resource type names"
+          "readOnly": true,
+          "description": "list of resource type names"
         }
       }
     }

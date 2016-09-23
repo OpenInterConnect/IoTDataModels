@@ -14,7 +14,8 @@
               "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.lb", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s" ]
             }
           ],
-          "description": "Readonly, list of interface names"
+          "readOnly": true,
+          "description": "list of interface names"
         }
       }
     }

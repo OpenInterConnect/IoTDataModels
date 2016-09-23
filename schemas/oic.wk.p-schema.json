@@ -8,18 +8,19 @@
       "properties": {
         "pi": {
           "$ref": "oic.types-schema.json#/definitions/uuid",
-          "description": "ReadOnly, Platform Identifier as a UUID"
+          "readOnly": true,
+          "description": "Platform Identifier as a UUID"
         },
         "mnmn": {
           "type": "string",
           "readOnly": true,
-          "description": "ReadOnly, Manufacturer Name",
+          "description": "Manufacturer Name",
           "maxLength": 64
         },
         "mnml": {
           "type": "string",
           "readOnly": true,
-          "description": "ReadOnly, Manufacturer's URL",
+          "description": "Manufacturer's URL",
           "maxLength": 256,
           "format": "uri"
         },
@@ -27,46 +28,48 @@
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "ReadOnly, Model number as designated by manufacturer"
+          "description": "Model number as designated by manufacturer"
         },
         "mndt": {
           "$ref": "oic.types-schema.json#/definitions/date",
           "readOnly": true,
-          "description": "ReadOnly, Manufacturing Date."
+          "description": "Manufacturing Date."
         },
         "mnpv": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "ReadOnly, Platform Version"
+          "description": "Platform Version"
         },
         "mnos": {
           "type": "string",
           "maxLength": 64,
-          "description": "Readonly, Platform Resident OS Version"
+          "readOnly": true,
+          "description": "Platform Resident OS Version"
         },
         "mnhw": {
           "type": "string",
           "maxLength": 64,
-          "description": "Readonly, Platform Hardware Version"
+          "readOnly": true,
+          "description": "Platform Hardware Version"
         },
         "mnfv": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "ReadOnly, Manufacturer's firmware version"
+          "description": "Manufacturer's firmware version"
         },
         "mnsl": {
           "type": "string",
           "readOnly": true,
-          "description": "ReadOnly, Manufacturer's Support Information URL",
+          "description": "Manufacturer's Support Information URL",
           "maxLength": 256,
           "format": "uri"
         },
         "st": {
           "type": "string",
           "readOnly": true,
-          "description": "ReadOnly, Reference time for the device as defined in ISO 8601, where concatenation of 'date' and 'time' with the 'T' as a delimiter between 'date' and 'time'. The format is [yyyy]-[mm]-[dd]T[hh]:[mm]:[ss]Z.",
+          "description": "Reference time for the device as defined in ISO 8601, where concatenation of 'date' and 'time' with the 'T' as a delimiter between 'date' and 'time'. The format is [yyyy]-[mm]-[dd]T[hh]:[mm]:[ss]Z.",
           "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])T(2[0-3]|1[0-9]|0[0-9]):([0-5][0-9]):([0-5][0-9])Z$",
           "format": "date-time"
         },
@@ -74,7 +77,7 @@
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "ReadOnly, Manufacturer's defined string for the platform. The string is freeform and up to the manufacturer on what text to populate it"
+          "description": "Manufacturer's defined string for the platform. The string is freeform and up to the manufacturer on what text to populate it"
         }
       }
     }
