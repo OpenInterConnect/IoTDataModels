@@ -17,7 +17,7 @@
           ],
           "minItems" : 1,
           "readOnly": true,
-          "description": "ReadOnly, Resource Type"
+          "description": "Resource Type"
         },
         "if": {
           "type": "array",
@@ -29,19 +29,19 @@
           ],
           "minItems": 1,
           "readOnly": true,
-          "description": "ReadOnly, The interface set supported by this resource"
+          "description": "The interface set supported by this resource"
         },
         "n": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "ReadOnly, Friendly name of the resource"
+          "description": "Friendly name of the resource"
         },
         "id": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "ReadOnly, Instance ID of this specific resource"
+          "description": "Instance ID of this specific resource"
         }
       }
     }

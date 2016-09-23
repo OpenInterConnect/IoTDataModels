@@ -15,7 +15,7 @@
                 "currentStatus": {
           "type": "string",
           "readOnly": true,
-          "description": "ReadOnly, the current state, can be one of: enabled, disabled, error"
+          "description": "the current state, can be one of: enabled, disabled, error"
         },
         "n": {
           "type": "string",
@@ -33,7 +33,7 @@
         "rts": {
           "type": "string",
           "readOnly": true,
-          "description": "ReadOnly, Defines the list of allowable resource types in links included in the collection; new links being created can only be from this list"
+          "description": "Defines the list of allowable resource types in links included in the collection; new links being created can only be from this list"
         },
                 "links": {
           "type": "array",
