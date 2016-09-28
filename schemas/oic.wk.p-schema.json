@@ -31,11 +31,9 @@
           "description": "Model number as designated by manufacturer"
         },
         "mndt": {
-          "type": "string",
+          "$ref": "oic.types-schema.json#/definitions/date",
           "readOnly": true,
-          "description": "Manufacturing Date as defined in ISO 8601, where the format is [yyyy]-[mm]-[dd].",
-          "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])$",
-          "format": "date-time"
+          "description": "Manufacturing Date."
         },
         "mnpv": {
           "type": "string",
