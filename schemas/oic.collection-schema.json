@@ -1,138 +1,139 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection-schema.json#",
-  "title": "Collection",
-  "definitions": {
-    "oic.collection.setoflinks": {
-      "type": "object",
-      "description": "A set (array) of simple or individual OIC Links",
-      "properties": {
-        "links": {
-          "type": "array",
-          "description": "Array of OIC Links. In addition to properties required for an OIC Link, the identifier for that link in this set is also required",
-          "items": {
-            "allOf": [
-              {
-                "$ref": "oic.oic-link-schema.json#"
-              }
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+    "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection-schema.json#",
+    "title": "Collection",
+    "definitions": {
+        "uuid": {
+            "type":"string",
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+        },
+        "oic.collection.setoflinks": {
+            "description": "A set (array) of simple or individual OIC Links. In addition to properties required for an OIC Link, the identifier for that link in this set is also required",
+            "type": "array",
+            "items": {
+                "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
+            }
+        },
+        "oic.collection.tags": {
+            "type": "object",
+            "description": "The tags that can be used for tagging links in a collection",
+            "properties": {
+                "n": {
+                    "type": "string",
+                    "description": "Used to name i.e. tag the set of links"
+                },
+                "id": {
+                    "description": "Id for each set of links i.e. tag. Can be an value that is unique to the use context or a UUIDv4",
+                    "anyOf": [
+                        {
+                            "type": "integer",
+                            "description": "A number that is unique to that collection; like an ordinal number that is not repeated"
+                        },
+                        {
+                            "type": "string",
+                            "description": "A unique string that could be a hash or similarly unique"
+                        },
+                        {
+                            "$ref": "#/definitions/uuid",
+                            "description": "A unique string that could be a UUIDv4"
+                        }
+                    ]
+                },
+                "di": {
+                    "$ref": "#/definitions/uuid",
+                    "description": "The device ID which is an UUIDv4 string"
+                },
+                "base": {
+                    "type": "string",
+                    "description": "The base URI to be used if the links are relative URIs  (i.e. relative references); see base URI in Core spec for details",
+                    "format": "uri"
+                }
+            },
+            "minProperties": 1
+        },
+        "oic.collection.tagged-setoflinks": {
+            "type": "array",
+            "description": "A tagged link is a set (array) of links that are tagged with one or more key-value pairs usually either an ID or Name or both",
+            "items": [
+                {
+                    "$ref": "#/definitions/oic.collection.tags"
+                },
+                {
+                    "$ref": "#/definitions/oic.collection.setoflinks"
+                }
             ],
-            "required": ["ins"]
-          }
-        }
-      }
-    },
-    "oic.collection.tagged-setoflinks": {
-      "type": "object",
-      "description": "A tagged link is a set (array) of links that are tagged with one or more key-value pairs usually either an ID or Name or both",
-      "allOf": [
-        {
-          "$ref": "#/definitions/oic.collection.setoflinks"
+            "additionalItems": false
         },
-        {
-          "properties": {
-            "n": {
-              "type": "string",
-              "description": "Used to name i.e. tag the set of links",
-              "format": "UTF8"
-            },
-            "id": {
-              "oneOf": [
+        "oic.collection.setof-tagged-setoflinks": {
+            "type": "array",
+            "items": [
                 {
-                  "type": "integer",
-                  "description": "A number that is unique to that collection; like an ordinal number that is not repeated"
-                },
-                {
-                  "type": "string",
-                  "description": "A unique string that could be a hash or similarly unique"
-                },
-                {
-                  "$ref": "oic.types-schema.json#/definitions/uuid",
-                  "description": "A unique string that could be a UUIDv4"
+                    "$ref": "#/definitions/oic.collection.tagged-setoflinks"
                 }
-              ],
-              "description": "Id for each set of links i.e. tag. Can be an value that is unique to the use context or a UUIDv4"
-            },
-            "di": {
-              "$ref": "oic.types-schema.json#/definitions/uuid",
-              "description": "The device ID which is an UUIDv4 string; used for backward compatibility with Spec A defintion of /oic/res"
-            }
-          }
-        }
-      ],
-      "required": [ "links"  ]
-    },
-    "oic.collection.setof-tagged-setoflinks": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/oic.collection.tagged-setoflinks"
-      }
-    },
-    "oic.collection.alllinks": {
-      "description": "All forms of links in a collection",
-      "oneOf": [
-        {
-          "$ref": "#/definitions/oic.collection.setof-tagged-setoflinks"
+            ],
+            "additionalItems": false
         },
-        {
-          "$ref": "#/definitions/oic.collection.setoflinks"
-        }
-      ],
-      "required": [  "links" ]
-    },
-    "oic.collection": {
-      "type": "object",
-      "description": "A collection is a set (array) of tagged-link or set (array) of simple links along with additional properties to describe the collection itself",
-      "allOf": [
-        {
-          "$ref": "#/definitions/oic.collection.alllinks"
-        },
-        {
-          "properties": {
-            "n": {
-              "type": "string",
-              "description": "User friendly name of the collection",
-              "format": "UTF8"
-            },
-            "id": {
-              "oneOf": [
+        "oic.collection.alllinks": {
+            "description": "All forms of links in a collection",
+            "oneOf": [
                 {
-                  "type": "integer",
-                  "description": "A number that is unique to that collection; like an ordinal number that is not repeated"
+                    "$ref": "#/definitions/oic.collection.setof-tagged-setoflinks"
                 },
                 {
-                  "type": "string",
-                  "description": "A unique string that could be a hash or similarly unique"
+                    "$ref": "#/definitions/oic.collection.tagged-setoflinks"
                 },
                 {
-                  "$ref": "oic.types-schema.json#/definitions/uuid",
-                  "description": "A unique string that could be a UUIDv4"
+                    "$ref": "#/definitions/oic.collection.setoflinks"
                 }
-              ],
-              "description": "ID for the collection. Can be an value that is unique to the use context or a UUIDv4"
-            },
-            "rts": {
-              "type": "string",
-              "description": "Defines the list of allowable resource types (for Target and anchors) in links included in the collection; new links being created can only be from this list",
-              "format": "UTF8"
-            },
-            "drel": {
-              "type": "string",
-              "description": "When specified this is the default relationship to use when an OIC Link does not specify an explicit relationship with *rel* parameter"
+            ]
+        },
+        "oic.collection": {
+            "type": "object",
+            "description": "A collection is a set (array) of tagged-link or set (array) of simple links along with additional properties to describe the collection itself",
+            "properties": {
+                "n": {
+                    "type": "string",
+                    "description": "User friendly name of the collection"                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer",
+                            "description": "A number that is unique to that collection; like an ordinal number that is not repeated"
+                        },
+                        {
+                            "type": "string",
+                            "description": "A unique string that could be a hash or similarly unique"
+                        },
+                        {
+                            "$ref": "#/definitions/uuid",
+                            "description": "A unique string that could be a UUIDv4"
+                        }
+                    ],
+                    "description": "ID for the collection. Can be an value that is unique to the use context or a UUIDv4"
+                },
+                "di": {
+                    "$ref": "#/definitions/uuid",
+                    "description": "The device ID which is an UUIDv4 string; used for backward compatibility with Spec A defintion of /oic/res"
+                },
+                "rts": {
+                    "type": "string",
+                    "description": "Defines the list of allowable resource types (for Target and anchors) in links included in the collection; new links being created can only be from this list"                },
+                "drel": {
+                    "type": "string",
+                    "description": "When specified this is the default relationship to use when an OIC Link does not specify an explicit relationship with *rel* parameter"
+                },
+                "links": {
+                    "$ref": "#/definitions/oic.collection.alllinks"
+                }
             }
-          }
         }
-      ]
-    }
-  },
-
-  "type": "object",
-  "allOf": [
-    {
-      "$ref": "oic.core-schema.json#/definitions/oic.core"
     },
-    {
+    "type": "object",
+    "allOf": [
+        {
+      "$ref": "oic.core-schema.json#/definitions/oic.core",
       "$ref": "#/definitions/oic.collection"
-    }
-  ]
+        }
+    ]
 }

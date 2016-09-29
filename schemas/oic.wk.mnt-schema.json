@@ -18,10 +18,6 @@
         "rb": {
           "type": "boolean",
           "description": "Reboot Action"
-        },
-        "ssc": {
-          "type": "boolean",
-          "description": "Start Stat Collection Action Toggle"
         }
       }
     }
