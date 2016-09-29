@@ -9,12 +9,12 @@
         "href": {
           "type": "string",
           "maxLength": 256,
-          "description": "This is the target URI – can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
+          "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
           "format": "uri"
         },
         "rel": {
           "type": "string",
-          "default": "advertises",
+          "default": "hosts",
           "maxLength": 64,
           "description": "The relation of the target URI referenced by the link to the context URI"
         },
@@ -77,14 +77,8 @@
           "required" : ["bm"]
         },
         "bp": {
-           "type": "object",
-           "properties": {
-               "q": {
-                  "type": "string",
-                  "maxLength": 64,
-                  "description": "This defines the query string to be used when batch request is forwarded through this Link"
-               }
-            }
+          "type": "string",
+          "description": " Batch Parameters: URI parameters to use with an oic.if.b batch request using this link"
         },
         "title": {
           "type": "string",

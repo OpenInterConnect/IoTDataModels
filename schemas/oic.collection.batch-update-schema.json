@@ -1,0 +1,8 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+    "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.batch-update-schema.json#",
+    "title": "Collection Batch Update Format",
+    "type": "object",
+    "description": "object with keywords to identify properties to be updated in all target resources that have matching property names"
+}

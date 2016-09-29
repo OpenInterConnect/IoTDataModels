@@ -13,7 +13,7 @@
           "description": "Human friendly name"
         },
         "di": {
-          "$ref": "oic.types-schema.json#/definitions/uuid", 
+          "$ref": "oic.types-schema.json#/definitions/uuid",
           "readOnly": true,
           "description": "Unique identifier for device (UUID) as indicated by the /oic/d resource of the device"
         },
