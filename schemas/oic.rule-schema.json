@@ -40,7 +40,7 @@
           "description": "Array of OIC web links that are the rule members, this is the script",
           "items" : {
             "allOf": [
-              { "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link#" },
+              { "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link" },
               { "required" : [ "ins" ] }
             ]
           }
