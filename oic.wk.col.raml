@@ -73,17 +73,17 @@ traits:
               {
                 "rt": ["oic.wk.col"],
                 "id": "unique_example_id",
-                "rts": [ "oic.r.switch.binary", "oic.r.airFlow" ],
+                "rts": [ "oic.r.switch.binary", "oic.r.airflow" ],
                 "links": [
                   {
                     "href": "switch",
                     "rt":   ["oic.r.switch.binary"],
-                    "if":   ["oic.if.a"]
+                    "if":   ["oic.if.a", "oic.if.baseline"]
                   },
                   {
                     "href": "airFlow",
-                    "rt":   ["oic.r.airFlow"],
-                    "if":   ["oic.if.a"]
+                    "rt":   ["oic.r.airflow"],
+                    "if":   ["oic.if.a", "oic.if.baseline"]
                   }
                 ]
               }
@@ -220,11 +220,11 @@ traits:
                   {
                     "href": "switch",
                     "rt":   ["oic.r.switch.binary"],
-                    "if":   ["oic.if.a"]
+                    "if":   ["oic.if.a", "oic.if.baseline"]
                   },
                   {
                     "href": "airFlow",
-                    "rt":   ["oic.r.airFlow"],
-                    "if":   ["oic.if.a"]
+                    "rt":   ["oic.r.airflow"],
+                    "if":   ["oic.if.a", "oic.if.baseline"]
                   }
                 ]

@@ -4,10 +4,6 @@
     "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection-schema.json#",
     "title": "Collection",
     "definitions": {
-        "uuid": {
-            "type":"string",
-            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
-        },
         "oic.collection.setoflinks": {
             "description": "A set (array) of simple or individual OIC Links. In addition to properties required for an OIC Link, the identifier for that link in this set is also required",
             "type": "array",
@@ -35,13 +31,13 @@
                             "description": "A unique string that could be a hash or similarly unique"
                         },
                         {
-                            "$ref": "#/definitions/uuid",
+                            "$ref": "oic.types-schema.json#/definitions/uuid",
                             "description": "A unique string that could be a UUIDv4"
                         }
                     ]
                 },
                 "di": {
-                    "$ref": "#/definitions/uuid",
+                    "$ref": "oic.types-schema.json#/definitions/uuid",
                     "description": "The device ID which is an UUIDv4 string"
                 },
                 "base": {
@@ -106,15 +102,15 @@
                             "description": "A unique string that could be a hash or similarly unique"
                         },
                         {
-                            "$ref": "#/definitions/uuid",
+                            "$ref": "oic.types-schema.json#/definitions/uuid",
                             "description": "A unique string that could be a UUIDv4"
                         }
                     ],
                     "description": "ID for the collection. Can be an value that is unique to the use context or a UUIDv4"
                 },
                 "di": {
-                    "$ref": "#/definitions/uuid",
-                    "description": "The device ID which is an UUIDv4 string; used for backward compatibility with Spec A defintion of /oic/res"
+                    "$ref": "oic.types-schema.json#/definitions/uuid",
+                    "description": "The device ID which is an UUIDv4 string; used for backward compatibility with Spec A definition of /oic/res"
                 },
                 "rts": {
                     "$ref": "oic.core-schema.json#/definitions/oic.core/properties/rt",
