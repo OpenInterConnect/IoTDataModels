@@ -117,7 +117,7 @@
                     "description": "The device ID which is an UUIDv4 string; used for backward compatibility with Spec A defintion of /oic/res"
                 },
                 "rts": {
-                    "type": "string",
+                    "$ref": "oic.core-schema.json#/definitions/oic.core/properties/rt",
                     "description": "Defines the list of allowable resource types (for Target and anchors) in links included in the collection; new links being created can only be from this list"                },
                 "drel": {
                     "type": "string",

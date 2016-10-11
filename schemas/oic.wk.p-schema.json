@@ -70,7 +70,6 @@
           "type": "string",
           "readOnly": true,
           "description": "Reference time for the device as defined in ISO 8601, where concatenation of 'date' and 'time' with the 'T' as a delimiter between 'date' and 'time'. The format is [yyyy]-[mm]-[dd]T[hh]:[mm]:[ss]Z.",
-          "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])T(2[0-3]|1[0-9]|0[0-9]):([0-5][0-9]):([0-5][0-9])Z$",
           "format": "date-time"
         },
         "vid": {
