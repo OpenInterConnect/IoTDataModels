@@ -11,11 +11,23 @@
             "href": {
               "type": "string",
               "description": "URI of the target resource relative assuming the collection URI as anchor"
-            }
+            },
+            "rep": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "description": "The response payload from a single resource"
+                },
+                {
+                  "type": "array",
+                  "description": " The response payload from a collection (batch) resource"
+                }
+            ]
          },
-         "additionalProperties": true,
+         "additionalProperties": false,
          "required": [
-            "href"
+            "href",
+            "rep"
          ]
     }
 }
