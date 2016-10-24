@@ -13,9 +13,15 @@
           "format": "uri"
         },
         "rel": {
-          "type": "string",
-          "default": "hosts",
-          "maxLength": 64,
+          "type": "array",
+          "items": [
+            {
+              "type": "string",
+              "maxLength": 64
+            }
+          ],
+          "minItems": 1,
+          "default": ["hosts"],
           "description": "The relation of the target URI referenced by the link to the context URI"
         },
         "rt": {
