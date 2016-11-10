@@ -62,9 +62,7 @@
     },
     "type": "object",
     "allOf": [
-        {
-      "$ref": "oic.core-schema.json#/definitions/oic.core",
-      "$ref": "#/definitions/oic.collection"
-        }
+        {"$ref": "oic.core-schema.json#/definitions/oic.core"},
+        {"$ref": "#/definitions/oic.collection"}
     ]
 }
