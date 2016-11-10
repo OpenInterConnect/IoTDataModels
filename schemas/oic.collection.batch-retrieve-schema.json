@@ -23,11 +23,12 @@
                   "description": " The response payload from a collection (batch) resource"
                 }
             ]
-         },
-         "additionalProperties": false,
-         "required": [
-            "href",
-            "rep"
-         ]
+         }
+       },
+       "additionalProperties": false,
+       "required": [
+          "href",
+          "rep"
+       ]
     }
 }
