@@ -8,7 +8,8 @@
       "properties": {
         "illuminance": {
           "type": "number",
-          "description": "ReadOnly, sensed luminous flux per unit area in lux."
+          "readOnly": true,
+          "description": "Sensed luminous flux per unit area in lux."
         }
       }
     }

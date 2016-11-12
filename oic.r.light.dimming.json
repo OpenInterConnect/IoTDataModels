@@ -13,11 +13,13 @@
         },
         "step":   {
           "type": "integer",
-          "description": "ReadOnly, step increment for dimming values"
+          "readOnly": true,
+          "description": "step increment for dimming values"
         },
         "range":  {
           "type": "array",
-          "description": "ReadOnly, Min and Max values for the dimming setting",
+          "readOnly": true,
+          "description": "Min and Max values for the dimming setting",
           "items": {
             "type": "integer"
           }

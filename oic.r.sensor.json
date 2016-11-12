@@ -9,7 +9,8 @@
       "properties": {
         "value": {
           "type": "boolean",
-          "description": "ReadOnly, true = sensed, false = not sensed."
+          "readOnly": true,
+          "description": "true = sensed, false = not sensed."
         }
       }
     }

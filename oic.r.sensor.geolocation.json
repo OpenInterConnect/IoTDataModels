@@ -11,32 +11,38 @@
         {"properties": {
            "latitude": {
              "type": "number",
-             "description": "ReadOnly. Device's Current Latitude coordinate (degrees)"
+             "readOnly": true,
+             "description": "Device's Current Latitude coordinate (degrees)"
            },
            "longitude": {
              "type": "number",
-             "description": "ReadOnly. Device's Current Longitude coordinate (degrees)"
+             "readOnly": true,
+             "description": "Device's Current Longitude coordinate (degrees)"
            },
            "accuracy": {
              "type": "number",
              "minimum": 0,
-             "description": "ReadOnly. The accuracy level of the latitude and longitude coordinates (metres)"
+             "readOnly": true,
+             "description": "The accuracy level of the latitude and longitude coordinates (metres)"
            },
            "altitudeAccuracy": {
              "type": "number",
              "minimum": 0,
-             "description": "ReadOnly. The accuracy level of the altitude coordinates (metres)"
+             "readOnly": true,
+             "description": "The accuracy level of the altitude coordinates (metres)"
            },
            "heading": {
              "type": "number",
              "minimum": 0,
              "maximum": 360,
-             "description": "ReadOnly. Direction of travel of device (degree)"
+             "readOnly": true,
+             "description": "Direction of travel of device (degree)"
            },
            "speed": {
              "type": "number",
              "minimum": 0,
-             "description": "ReadOnly. Device's current velocity (metres per second)"
+             "readOnly": true,
+             "description": "Device's current velocity (metres per second)"
            }
          }
         }

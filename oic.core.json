@@ -17,11 +17,13 @@
             }
           ],
           "minItems" : 1,
-          "description": "ReadOnly, Resource Type"
+          "readOnly": true,
+          "description": "Resource Type"
         },
         "if": {
           "type" : "array",
-          "description": "ReadOnly, The interface set supported by this resource",
+          "readOnly": true,
+          "description": "The interface set supported by this resource",
           "items": {
             "type": "string",
             "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.lb", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s" ]
@@ -29,11 +31,13 @@
         },
         "n": {
           "type": "string",
-          "description": "ReadOnly, Friendly name of the resource"
+          "readOnly": true,
+          "description": "Friendly name of the resource"
         },
         "id": {
           "type": "string",
-          "description": "ReadOnly, Instance ID of this specific resource"
+          "readOnly": true,
+          "description": "Instance ID of this specific resource"
         }
       }
     }

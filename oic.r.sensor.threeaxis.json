@@ -8,7 +8,8 @@
       "properties": {
         "orientation": {
             "type": "array",
-            "description": "ReadOnly, array containing x-plane, y-plane and z-plane orientation in 'g'.",
+            "readOnly": true,
+            "description": "Array containing x-plane, y-plane and z-plane orientation in 'g'.",
             "minItems": 3,
             "maxItems": 3,
             "items": {

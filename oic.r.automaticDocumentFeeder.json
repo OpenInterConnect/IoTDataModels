@@ -9,14 +9,16 @@
       "properties": {
         "adfStates": {
           "type": "array",
-          "description": "ReadOnly, array of the possible adf states.",
+          "readOnly": true,
+          "description": "array of the possible adf states.",
           "items": {
             "type": "string"
           }
         },
         "currentAdfState": {
           "type": "string",
-          "description": "ReadOnly, Current adf state."
+          "readOnly": true,
+          "description": "Current adf state."
         }
       }
     }

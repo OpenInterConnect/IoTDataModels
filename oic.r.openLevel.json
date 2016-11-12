@@ -13,11 +13,13 @@
         },
         "increment":  {
           "type": "integer",
-          "description": "ReadOnly, The step between possible values"
+          "readOnly": true,
+          "description": "The step between possible values"
         },
         "range":      {
           "type": "array",
-          "description": "ReadOnly, Lower bound=closed, Upper bound=open",
+          "readOnly": true,
+          "description": "Lower bound=closed, Upper bound=open",
           "items": {
             "type": "integer"
           }

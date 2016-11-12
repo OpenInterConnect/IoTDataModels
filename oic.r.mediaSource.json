@@ -12,11 +12,13 @@
         },
         "sourceNumber": {
           "type": [ "integer", "string" ],
-          "description": "ReadOnly, Numeric identifier to specify the instance"
+          "readOnly": true,
+          "description": "Numeric identifier to specify the instance"
         },
         "sourceType": {
           "enum": [ "audioOnly", "videoOnly", "audioPlusVideo" ],
-          "description": "ReadOnly, Specifies the type of the source"
+          "readOnly": true,
+          "description": "Specifies the type of the source"
         },
         "status": {
           "type": "boolean",

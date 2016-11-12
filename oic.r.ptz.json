@@ -17,7 +17,8 @@
         },
         "pan_range":  {
           "type": "array",
-          "description": "ReadOnly, Min and Max values for the pan setting",
+          "readOnly": true,
+          "description": "Min and Max values for the pan setting",
           "minItems": 2,
           "maxItems": 2,
           "items": {
@@ -26,7 +27,8 @@
         },
         "tilt_range":  {
           "type": "array",
-          "description": "ReadOnly, Min and Max values for the tilt setting",
+          "readOnly": true,
+          "description": "Min and Max values for the tilt setting",
           "minItems": 2,
           "maxItems": 2,
           "items": {
@@ -39,7 +41,8 @@
         },
         "zoomFactorRange": {
           "enum": ["linear, 1x, 2x, 4x, 8x, 16x, 32x"],
-          "description": "ReadOnly, allowed Zoom Factor values. Linear equates to a 1-100 min/max."
+          "readOnly": true,
+          "description": "allowed Zoom Factor values. Linear equates to a 1-100 min/max."
         }
       }
     }

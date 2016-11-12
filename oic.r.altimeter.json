@@ -10,7 +10,8 @@
         "alt": {
           "type": "number",
           "minimum": 0,
-          "description": "ReadOnly. The current height of the position (metres)"
+          "readOnly": true,
+          "description": "The current height of the position (metres)"
         }
       }
     }

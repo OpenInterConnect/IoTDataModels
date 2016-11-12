@@ -9,7 +9,8 @@
       "properties": {
         "measurement":   {
           "type": "number",
-          "description": "ReadOnly, the measured UV Index"
+          "readOnly": true,
+          "description": "The measured UV Index"
         }
       }
     }

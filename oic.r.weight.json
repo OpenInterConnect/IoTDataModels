@@ -10,7 +10,8 @@
         "weight": {
           "type": "number",
           "minimum": 0,
-          "description": "ReadOnly. Weight of an object"
+          "readOnly": true,
+          "description": "Weight of an object"
         }
       }
     }

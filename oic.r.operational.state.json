@@ -9,7 +9,8 @@
       "properties": {
         "machineStates":        {
           "type": "array",
-          "description": "ReadOnly, array of the possible operational states.",
+          "readOnly": true,
+          "description": "array of the possible operational states.",
           "items": {
             "type": "string"
           }
@@ -20,7 +21,8 @@
         },
         "jobStates":            {
           "type": "array",
-          "description": "ReadOnly, array of the possible job states.",
+          "readOnly": true,
+          "description": "array of the possible job states.",
           "items": {
             "type": "string"
           }
@@ -31,15 +33,18 @@
         },
         "runningTime":          {
           "type": "string",
-          "description": "ReadOnly, Elapsed time in the current operational state"
+          "readOnly": true,
+          "description": "Elapsed time in the current operational state"
         },
         "remainingTime":        {
           "type": "string",
-          "description": "ReadOnly, Time till completion of the current operational state"
+          "readOnly": true,
+          "description": "Time till completion of the current operational state"
         },
         "progressPercentage":   {
           "type": "integer",
-          "description": "ReadOnly, Percentage completeness of the current jobState"
+          "readOnly": true,
+          "description": "Percentage completeness of the current jobState"
         }
       }
     }

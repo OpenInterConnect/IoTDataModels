@@ -8,7 +8,8 @@
       "properties": {
         "acceleration": {
             "type": "number",
-            "description": "ReadOnly, sensed acceleration experienced in 'g'."
+            "readOnly": true,
+            "description": "sensed acceleration experienced in 'g'."
         }
       }
     }

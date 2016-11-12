@@ -9,11 +9,13 @@
       "properties": {
         "power":    {
           "type": "number",
-          "description": "ReadOnly, Instantaneous Power"
+          "readOnly": true,
+          "description": "Instantaneous Power"
         },
         "energy":   {
           "type": "number",
-          "description": "ReadOnly, Energy consumed"}
+          "readOnly": true,
+          "description": "Energy consumed"}
       }
     }
   },

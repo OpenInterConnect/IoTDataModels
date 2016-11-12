@@ -13,7 +13,8 @@
         },
         "range": {
           "type": "array",
-          "description": "ReadOnly, Min and Max of possible values",
+          "readOnly": true,
+          "description": "Min and Max of possible values",
           "items": {
             "type": "integer"
           }
