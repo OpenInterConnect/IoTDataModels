@@ -18,7 +18,7 @@
         },
         "range":    {
           "type": "array",
-          "description": "ReadOnly, min max value of RGB",
+          "description": "ReadOnly, min max value of RGB. The first item is the min, the second the max.",
           "minItems": 2,
           "maxItems": 2,
           "items": {

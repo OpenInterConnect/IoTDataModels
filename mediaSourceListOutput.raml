@@ -1,5 +1,5 @@
 #%RAML 0.8
-title: OICColourRGB
+title: OICMediaSourceOutput
 version: v1.1.0-20160519
 documentation:
   - title: © 2016 Open Connectivity Foundation, Inc. All rights reserved.
@@ -10,7 +10,7 @@ documentation:
 
         THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 schemas:
-  - ColourRGB: !include oic.r.colour.rgb.json
+  - mediaSourceList: !include oic.r.mediaSourceList.json
 
 traits:
   - interface:
@@ -18,51 +18,70 @@ traits:
         if:
           enum: ["oic.if.a","oic.if.baseline"]
 
-/ColourRGBResURI:
+/mediaSourceOutputResURI:
   description: |
-    This resource specifies the actual colour in the RGB space represented as an array of integers.
-    Each colour value is described with a Red, Green, Blue component.
-    These colour values are encoded as an array of integer values ([R,G,B]).
-    The minimum and maximum colour value per component is described by the range array.
-    When the range value is omitted, then the range is [0,255].
-  displayName: Colour RGB
-  is: [ interface ] # valid for all methods
+    This resource provides the list of output media sources available on the device.
+    The sources are an array of mediaSource(s) as separately defined.
 
+  displayName: Media Source Output
+  is: [ interface ]
   get:
-    description: |
-      Retrieves the current colour in RGB.
-      Value is an array of integer values in the order R,G,B.
     responses:
       200:
         body:
           application/json:
-            schema: ColourRGB
+            schema: mediaSourceList
             example: |
               {
-                "rt":       ["oic.r.colour.rgb"],
-                "id":       "unique_example_id",
-                "rgbValue": [255,255,255],
-                "range":    [0,255]
+                "rt": ["oic.r.media.output"],
+                "id": "unique_example_id",
+                "sources": [
+                  {
+                    "sourceName": "HDMI-CEC",
+                    "sourceNumber": "1",
+                    "sourceType": "audioPlusVideo",
+                    "status": true
+                  },
+                  {
+                    "sourceName": "dualRCA",
+                    "sourceNumber": "1",
+                    "sourceType": "audioOnly",
+                    "status": false
+                  }
+                ]
               }
 
   post:
     description: |
-      Sets the current colourRGB value
+      Changes the status of the source(s).
+      Allows changes of the sourceName and the status.
     body:
       application/json:
-        schema: ColourRGB
+        schema: mediaSourceList
         example: |
           {
-            "id":       "unique_example_id",
-            "rgbValue": [255,0,0]
+            "id":     "unique_example_id",
+            "sources": [
+              {
+               "sourceName":    "my new name",
+               "sourceNumber":  "1",
+               "status":        true
+              }
+            ]
           }
     responses:
       200:
         body:
           application/json:
-            schema: ColourRGB
+            schema: mediaSourceList
             example: |
               {
-                "id":       "unique_example_id",
-                "rgbValue": [255,0,0]
+                "id":     "unique_example_id",
+                "sources": [
+                  {
+                    "sourceName":   "my new name",
+                    "sourceNumber": "1",
+                    "status":       true
+                  }
+                ]
               }

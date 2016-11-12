@@ -1,5 +1,5 @@
 #%RAML 0.8
-title: OICGeolocaiton
+title: OICGeolocation
 version: v1.1.0-20160519
 documentation:
   - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
@@ -16,7 +16,7 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.s"]
+          enum: ["oic.if.s","oic.if.baseline"]
 
 /GeolocationResURI:
   description: |
@@ -24,9 +24,9 @@ traits:
     Geolocation is a geolocation coordinate data.
     Latitude is a device's current Latitude coordinate (degrees).
     Longitude is a device's current Longitude coordinate (degrees).
-    Altitude is a devices' current Altitude postion (metres).
+    Altitude is a device's current Altitude position (metres).
     Accuracy is the accuracy level of the latitude and longitude coordinates (metres).
-    altitudeAccruracy is ahe accuracy level of the altitude coordinates (metres).
+    altitudeAccuracy is the accuracy level of the altitude coordinates (metres).
     heading is a direction of travel of device (degree).
     speed is a device's current velocity (metres per second).
   displayName: Geolocation
@@ -51,46 +51,4 @@ traits:
                 "altitudeAccuracy": 0.0,
                 "heading": 90.0,
                 "speed": 0.0
-              }
-  post:
-    description: |
-      Sets the desired geolocation coordinates.
-    body:
-      application/json:
-        schema: Geolocation
-        example: |
-          {
-            "id": "unique_example_id",
-            "latitude":  55.070859,
-            "longitude": -3.60512,
-            "alt": 12.07
-          }
-    responses:
-      200:
-        description: |
-          Indicates that the geolocation coordinates was successfully changed.
-          The new alt number is provided in the response.
-        body:
-          application/json:
-            schema: Geolocation
-            example: |
-              {
-                "id": "unique_example_id",
-                "latitude":  55.070859,
-                "longitude": -3.60512,
-                "alt": 12.07
-              }
-      403:
-        description: |
-          Indicates that OIC client sent an invalid property value to the server.
-          The server responds with the required input representation.
-        body:
-          application/json:
-            schema: Geolocation
-            example: |
-              {
-                "id": "unique_example_id",
-                "latitude":  55.070859,
-                "longitude": -3.60512,
-                "alt": 12.07
               }

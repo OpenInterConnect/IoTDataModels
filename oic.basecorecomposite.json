@@ -65,7 +65,7 @@
   },
   "type": "object",
   "allOf": [
-    {"$ref": "#definitions/oic.core"},
+    {"$ref": "#/definitions/oic.core"},
     {"$ref": "#/definitions/oic.r.baseresource"}
   ]
 }

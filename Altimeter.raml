@@ -17,7 +17,7 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.s"]
+          enum: ["oic.if.s","oic.if.baseline"]
 
 /AltimeterResURI:
   description: |
@@ -37,42 +37,6 @@ traits:
             example: |
               {
                 "rt":  ["oic.r.altimeter"],
-                "id":  "unique_example_id",
-                "alt": 1500.0
-              }
-  post:
-    description: |
-      Sets the desired height of the position (metres).
-    body:
-      application/json:
-        schema: Altimeter
-        example: |
-          {
-            "id":  "unique_example_id",
-            "alt": 1500.0
-          }
-    responses:
-      200:
-        description: |
-          Indicates that the alt number was successfully changed.
-          The new alt number is provided in the response.
-        body:
-          application/json:
-            schema: Altimeter
-            example: |
-              {
-                "id":  "unique_example_id",
-                "alt": 1500.0
-              }
-      403:
-        description: |
-          Indicates that OIC client sent an invalid property value to the server.
-          The server responds with the required input representation.
-        body:
-          application/json:
-            schema: Altimeter
-            example: |
-              {
                 "id":  "unique_example_id",
                 "alt": 1500.0
               }

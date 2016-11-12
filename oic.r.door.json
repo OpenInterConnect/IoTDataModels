@@ -13,6 +13,7 @@
         },
         "openDuration": {
           "type": "string",
+          "format": "date-time",
           "description": "ReadOnly, The time duration the door has been open"
         },
         "openAlarm": {

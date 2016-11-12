@@ -8,7 +8,9 @@
       "properties": {
         "volume":   {
           "type": "integer",
-          "description": "Volume setting of an audio rendering device."
+          "description": "Volume setting of an audio rendering device.",
+          "minimum": 0,
+          "maximum": 100
         },
         "mute":    {
           "type": "boolean",

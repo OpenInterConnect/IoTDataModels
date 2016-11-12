@@ -21,10 +21,9 @@ traits:
 /EnergyUsageResURI:
   description: |
     This resource describes an energy usage query.
-    The values in the start and stop time strings are encoded according
-    to the rules defined in ISO 8601 and equate to time period over which
-    the query applies.
-    The energy consumption is the separately defined OIC resource.
+    The resource is a composite resource being made up as a collection of:
+      TimePeriod Resource
+      EnergyConsumption Resource
 
   displayName: Energy Usage
   is: [ interface ] # valid for all methods

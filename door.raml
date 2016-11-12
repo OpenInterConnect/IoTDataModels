@@ -26,10 +26,7 @@ traits:
 /DoorResURI:
   description: |
     This resource describes a door.
-    A door is modelled by means of
-      openState (Open/Closed).
-      openDuration (ISO 8601 Time).
-      openAlarm (boolean).
+    A door is modelled by means of openState (Open/Closed), openDuration (ISO 8601 Time), and openAlarm (boolean).
     For openState, the value 'Open' indicates the door is open.
     The value 'Closed' indicates the door is closed.
     The type of openDuration is an ISO 8601 Time encoded string.
@@ -38,7 +35,7 @@ traits:
   displayName: Door
 
   get:
-    is: [ interface-all ] 
+    is: [ interface-all ]
     description: retrieves the state of the Door.
     responses:
       200:
@@ -55,7 +52,7 @@ traits:
               }
 
   post:
-    is: [ interface-actuator ] 
+    is: [ interface-actuator ]
     description: |
       Sets the current Door properties.
       The only property that can be set as part of an update operation is

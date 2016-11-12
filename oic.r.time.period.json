@@ -9,10 +9,12 @@
       "properties": {
         "startTime":{
           "type": "string",
+          "format": "date-time",
           "description": "Start time for the time period"
         },
         "stopTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Stop time for the time period"
         }
       }
