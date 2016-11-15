@@ -1,0 +1,49 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.cycling.computer.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Cycling Computer",
+  "definitions": {
+    "oic.r.cycling.computer": {
+      "type": "object",
+      "properties": {
+        "biketime": {
+          "type": "string",
+          "description": "Accumulated Bike using time"
+        },
+        "ctime": {
+          "$ref": "oic.r.clock.json#/definitions/oic.r.clock"
+        },
+        "laptime": {
+          "type": "string",
+          "description": "freezed the elapsed time"
+        },
+        "c-power": {
+          "$ref": "oic.r.cycling.power.json#/definitions/oic.r.cycling.power"
+        },
+        "c-cadence": {
+          "$ref": "oic.r.cycling.speedcadence.json#/definitions/oic.r.cycling.speedcadence"
+        },
+        "c-alt": {
+          "$ref": "oic.r.altimeter.json#/definitions/oic.r.altimeter"
+        },
+        "c-hr": {
+          "$ref": "oic.r.heartrate.json#/definitions/oic.r.heartrate"
+        },
+        "c-speed": {
+          "$ref": "oic.r.speed.json#/definitions/oic.r.speed"
+        },
+        "c-distance": {
+          "$ref": "oic.r.distance.json#/definitions/oic.r.distance"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.cycling.computer"}
+  ],
+  "required": ["biketime"]
+}

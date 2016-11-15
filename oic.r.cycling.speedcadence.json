@@ -1,0 +1,29 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.cycling.speedcadence.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Cycling Speed Cadence",
+  "definitions": {
+    "oic.r.cycling.speedcadence": {
+      "type": "object",
+      "allOf": [
+        {"$ref": "oic.r.speed.json#/definitions/oic.r.speed"},
+        {"properties": {
+          "cadence": {
+            "type": "number",
+            "minimum": 0,
+            "description": "ReadOnly, Pedals per minutes"
+          }
+         }
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.cycling.speedcadence"}
+  ],
+  "required": ["cadence"]
+}
