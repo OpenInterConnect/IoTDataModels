@@ -3,6 +3,33 @@
     "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
     "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.batch-update-schema.json#",
     "title": "Collection Batch Update Format",
-    "type": "object",
-    "description": "object with keywords to identify properties to be updated in all target resources that have matching property names"
+    "type": "array",
+    "minItems": 1,
+    "items": {
+       "type": "object",
+         "properties": {
+            "href": {
+              "type": "string",
+              "description": "URI of the target resource relative assuming the collection URI as anchor"
+            },
+            "rep": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "description": "The response payload from a single resource"
+                },
+                {
+                  "type": "array",
+                  "description": " The response payload from a collection (batch) resource"
+                }
+            ]
+         }
+       },
+       "additionalProperties": false,
+       "required": [
+          "href",
+          "rep"
+       ]
+    },
+    "description": "array of resource representations to apply to the batch collection, using href to indicate which resource(s) in the batch to update. If the href property is empty, effectively making the URI reference to the collection itself, the representation is to be applied to all resources in the batch"
 }
