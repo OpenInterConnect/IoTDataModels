@@ -25,7 +25,7 @@
             ]
          }
        },
-       "additionalProperties": false,
+       "additionalProperties": true,
        "required": [
           "href",
           "rep"
