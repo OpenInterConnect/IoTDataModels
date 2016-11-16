@@ -11,74 +11,9 @@
                 "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
             }
         },
-        "oic.collection.tags": {
-            "type": "object",
-            "description": "The tags that can be used for tagging links in a collection",
-            "properties": {
-                "n": {
-                    "type": "string",
-                    "description": "Used to name i.e. tag the set of links"
-                },
-                "id": {
-                    "description": "Id for each set of links i.e. tag. Can be an value that is unique to the use context or a UUIDv4",
-                    "anyOf": [
-                        {
-                            "type": "integer",
-                            "description": "A number that is unique to that collection; like an ordinal number that is not repeated"
-                        },
-                        {
-                            "type": "string",
-                            "description": "A unique string that could be a hash or similarly unique"
-                        },
-                        {
-                            "$ref": "oic.types-schema.json#/definitions/uuid",
-                            "description": "A unique string that could be a UUIDv4"
-                        }
-                    ]
-                },
-                "di": {
-                    "$ref": "oic.types-schema.json#/definitions/uuid",
-                    "description": "The device ID which is an UUIDv4 string"
-                },
-                "base": {
-                    "type": "string",
-                    "description": "The base URI to be used if the links are relative URIs  (i.e. relative references); see base URI in Core spec for details",
-                    "format": "uri"
-                }
-            },
-            "minProperties": 1
-        },
-        "oic.collection.tagged-setoflinks": {
-            "type": "array",
-            "description": "A tagged link is a set (array) of links that are tagged with one or more key-value pairs usually either an ID or Name or both",
-            "items": [
-                {
-                    "$ref": "#/definitions/oic.collection.tags"
-                },
-                {
-                    "$ref": "#/definitions/oic.collection.setoflinks"
-                }
-            ],
-            "additionalItems": false
-        },
-        "oic.collection.setof-tagged-setoflinks": {
-            "type": "array",
-            "items": [
-                {
-                    "$ref": "#/definitions/oic.collection.tagged-setoflinks"
-                }
-            ],
-            "additionalItems": false
-        },
         "oic.collection.alllinks": {
             "description": "All forms of links in a collection",
             "oneOf": [
-                {
-                    "$ref": "#/definitions/oic.collection.setof-tagged-setoflinks"
-                },
-                {
-                    "$ref": "#/definitions/oic.collection.tagged-setoflinks"
-                },
                 {
                     "$ref": "#/definitions/oic.collection.setoflinks"
                 }
@@ -127,9 +62,7 @@
     },
     "type": "object",
     "allOf": [
-        {
-      "$ref": "oic.core-schema.json#/definitions/oic.core",
-      "$ref": "#/definitions/oic.collection"
-        }
+        {"$ref": "oic.core-schema.json#/definitions/oic.core"},
+        {"$ref": "#/definitions/oic.collection"}
     ]
 }
