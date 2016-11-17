@@ -165,10 +165,23 @@ traits:
         application/json:
           schema: sbatch-update
           example: |
-            {
-              "direction": "demist",
-              "speed": 5
-            }
+            [
+              {
+                "href": "switch",
+                "rep":
+                  {
+                    "value": true
+                  }
+              },
+              {
+                "href": "airFlow",
+                "rep":
+                  {
+                    "direction": "floor",
+                    "speed": 3
+                  }
+              }
+            ]
 
       responses:
         200:
