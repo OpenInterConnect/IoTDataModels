@@ -250,15 +250,18 @@ traits:
             application/json:
               schema: slinks
               example: |
-                [
-                  {
-                    "href": "switch",
-                    "rt":   ["oic.r.switch.binary"],
-                    "if":   ["oic.if.a", "oic.if.baseline"]
-                  },
-                  {
-                    "href": "airFlow",
-                    "rt":   ["oic.r.airflow"],
-                    "if":   ["oic.if.a", "oic.if.baseline"]
-                  }
-                ]
+                {
+                  "links":
+                    [
+                      {
+                        "href": "switch",
+                        "rt":   ["oic.r.switch.binary"],
+                        "if":   ["oic.if.a", "oic.if.baseline"]
+                      },
+                      {
+                        "href": "airFlow",
+                        "rt":   ["oic.r.airflow"],
+                        "if":   ["oic.if.a", "oic.if.baseline"]
+                      }
+                    ]
+                }
