@@ -85,10 +85,6 @@
           },
           "required" : ["bm"]
         },
-        "bp": {
-          "type": "string",
-          "description": " Batch Parameters: URI parameters to use with an oic.if.b batch request using this link"
-        },
         "title": {
           "type": "string",
           "maxLength": 64,
