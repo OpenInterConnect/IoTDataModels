@@ -23,7 +23,7 @@
                 }
               ],
               "minItems": 1,
-              "default": ["hosts"],
+              "default": ["hosts"]
             },
             {
               "type": "string",
