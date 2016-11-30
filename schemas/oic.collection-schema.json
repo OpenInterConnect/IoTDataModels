@@ -13,7 +13,11 @@
         },
         "oic.collection.alllinks": {
             "description": "All forms of links in a collection",
-            "$ref": "#/definitions/oic.collection.setoflinks"
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/oic.collection.setoflinks"
+                }
+            ]
         },
         "oic.collection": {
             "type": "object",
