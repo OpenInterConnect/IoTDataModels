@@ -42,7 +42,6 @@
             }
           ],
           "minItems" : 1,
-          "readOnly": true,
           "description": "Resource Type"
         },
         "if": {
@@ -54,7 +53,6 @@
             }
           ],
           "minItems": 1,
-          "readOnly": true,
           "description": "The interface set supported by this resource"
         },
         "di": {
@@ -68,23 +66,19 @@
           "format": "uri"
         },
         "p": {
-          "readOnly": true,
           "description": "Specifies the framework policies on the Resource referenced by the target URI",
           "type": "object",
           "properties": {
             "bm": {
-              "readOnly": true,
               "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
               "type": "integer"
             },
             "sec": {
-              "readOnly": true,
               "description": "Specifies if security needs to be turned on when looking to interact with the Resource",
               "default": false,
               "type": "boolean"
             },
             "port": {
-              "readOnly": true,
               "description": "Secure port to be used for connection",
               "type": "integer"
             }
