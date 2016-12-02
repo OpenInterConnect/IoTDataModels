@@ -12,47 +12,84 @@ documentation:
 
 
 schemas:
-  - Resources: !include schemas/oic.wk.res-schema.json
+  - sbaseline: !include schemas/oic.wk.res-schema.json
+  - slinklist: !include schemas/oic.wk.res-schema-ll.json
 
 traits:
-  - interface:
+  - interface-baseline:
       queryParameters:
         if:
-          enum: ["oic.if.ll", "oic.if.baseline"]
+          enum: ["oic.if.baseline"]
 
-/oic/res:
-  displayName: Discoverable Resources
-  is: [ interface ]
+  - interface-ll:
+      queryParameters:
+        if:
+          enum: ["oic.if.ll"]
+
+
+/oic-res-baseline-URI:
+  displayName: Discoverable Resources, baseline interface
+  is: [ interface-baseline ]
   description: |
-    The resource through which the corresponding Server is discovered and introspected for available resources.
+    Baseline representation of /oic/res; list of discoverable resources
   get:
     description: |
-      Retrieve the discoverable resource set
+      Retrieve the discoverable resource set, baseline interface
 
     responses:
       200:
         body:
           application/json:
-            schema: Resources
+            schema: sbaseline
             example: |
               [
                 {
                 "rt": ["oic.wk.res"],
+                "if": ["oic.if.baseline", "oic.if.ll" ],
                 "di": "0685B960-736F-46F7-BEC0-9E6CBD61ADC1",
                 "links":
                   [
                     {
-                      "href": "/res",
-                      "rel":  "self",
-                      "rt":   ["oic.r.collection"],
-                      "if":   ["oic.if.ll"]
+                      "href": "/humidity",
+                      "rt":   ["oic.r.humidity"],
+                      "if":   ["oic.if.s"]
                     },
                     {
-                      "href": "/smartDevice",
-                      "rel":  "contained",
-                      "rt":   ["oic.d.smartDevice"],
-                      "if":   ["oic.if.a"]
+                      "href": "/temperature",
+                      "rt":   ["oic.r.temperature"],
+                      "if":   ["oic.if.s"]
                     }
                   ]
                 }
               ]
+
+/oic-res-ll-URI:
+  displayName: Discoverable Resources, link list interface
+  is: [ interface-ll]
+  description: |
+    Link list representation of /oic/res; list of discoverable resources
+  get:
+    description: |
+      Retrieve the discoverable resource set, link list interface
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: slinklist
+            example: |
+              {
+                "links":
+                  [
+                    {
+                      "href": "/humidity",
+                      "rt":   ["oic.r.humidity"],
+                      "if":   ["oic.if.s"]
+                    },
+                    {
+                      "href": "/temperature",
+                      "rt":   ["oic.r.temperature"],
+                      "if":   ["oic.if.s"]
+                    }
+                  ]
+              }

@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-v4/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.res-schema-ll.json#",
+  "definitions": {
+    "oic.res-ll": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
+          }
+        }
+      },
+      "required": ["links"]
+    }
+  },
+  "description": "The list of resources expressed as OIC links",
+  "$ref": "#/definitions/oic.res-ll"
+}

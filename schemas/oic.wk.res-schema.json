@@ -3,9 +3,33 @@
   "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.res-schema.json#",
   "definitions": {
-    "oic.res-links.json": {
+    "oic.res-baseline": {
       "type": "object",
       "properties": {
+        "rt": {
+          "type": "array",
+          "items" : [
+            {
+              "type" : "string",
+              "maxLength": 64
+            }
+          ],
+          "minItems" : 1,
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "if": {
+          "type": "array",
+          "items": [
+            {
+              "type" : "string",
+              "enum" : ["oic.if.baseline", "oic.if.ll"]
+            }
+          ],
+          "minItems": 1,
+          "readOnly": true,
+          "description": "The interface set supported by this resource"
+        },
         "n": {
           "type": "string",
           "maxLength": 64,
@@ -30,12 +54,12 @@
           }
         }
       },
-      "required": ["di", "links"]
+      "required": ["rt", "if", "di", "links"]
     }
   },
   "description": "The list of resources expressed as OIC links",
   "type": "array",
   "items": {
-    "$ref": "#/definitions/oic.res-links.json"
+    "$ref": "#/definitions/oic.res-baseline"
   }
 }
