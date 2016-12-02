@@ -8,6 +8,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value sensed or actuated by this Resource",
           "anyOf": [
             {"type": "array"},
             {"type": "string"},
@@ -15,12 +16,12 @@
             {"type": "integer"},
             {"type": "number"},
             {"type": "object"}
-          ],
-          "description": "The value sensed or actuated by this Resource"
+          ]
         },
         "range": {
           "type": "array",
           "description": "The valid range for the value Property",
+          "readOnly": true,
           "minItems": 2,
           "maxItems": 2,
           "items": {
@@ -29,13 +30,20 @@
               {"type": "integer"}
             ]
           }
+        },
+        "step": {
+          "description": "Step value across the defined range",
+          "readOnly": true,
+          "anyOf": [
+            {"type": "integer"},
+            {"type": "number"}
+          ]
         }
       }
     }
   },
   "type": "object",
   "allOf": [
-    {"$ref": "oic.core.json#/definitions/oic.core"},
     {"$ref": "#/definitions/oic.r.baseresource"}
   ]
 }

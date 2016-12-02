@@ -26,7 +26,10 @@ traits:
 
 /BaseResourceSchemaResURI:
   description: |
-    This is the base resource schema in which all other resources defined in this specification build
+    This is the base resource schema on which all other resources defined in this specification build.
+    value is the sensed or actuated value of the Resource.
+    range is the range over which value is valid.
+    step is the step function over the defined range if applicable (e.g. always step by '2').
   displayName: Base Resource Schema
 
   get:
@@ -42,8 +45,9 @@ traits:
                 "rt" :          ["oic.baseresource"],
                 "if":           ["oic.if.baseline"],
                 "id":           "unique_example_id",
-                "value":        "someValue",
-                "range":        [0,100]
+                "value":        8,
+                "range":        [0,100],
+                "step":         2
               }
 
   post:
@@ -54,7 +58,7 @@ traits:
         schema: base
         example: |
           {
-            "value":  "newValue"
+            "value":  10
           }
     responses:
       200:
@@ -63,5 +67,5 @@ traits:
             schema: base
             example: |
               {
-                "value":  "newValue"
+                "value":  10
               }

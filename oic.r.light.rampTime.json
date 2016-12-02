@@ -10,14 +10,6 @@
         "rampTime": {
           "type": "integer",
           "description": "Actual speed of changing between 2 dimming values"
-        },
-        "range": {
-          "type": "array",
-          "readOnly": true,
-          "description": "Min and Max of possible values",
-          "items": {
-            "type": "integer"
-          }
         }
       }
     }

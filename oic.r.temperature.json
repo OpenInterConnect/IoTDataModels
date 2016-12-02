@@ -12,27 +12,9 @@
           "description": "Current temperature setting or measurement"
         },
         "units":  {
-          "oneOf": [
-            {
-              "enum": ["C","F","K"],
-              "readOnly": true,
-              "description": "Units for the temperature value"
-            },
-            {
-              "type": "array",
-              "items": {
-                "enum": ["C","F","K"]
-              }
-            }
-          ]
-        },
-        "range":  {
-          "type": "array",
-          "readOnly": true,
-          "description": "Array defining min,max values for this temperature on this device",
-          "items": {
-            "type": "number"
-          }
+          "enum": ["C","F","K"],
+          "description": "Units for the temperature value",
+          "readOnly": true
         }
       }
     }

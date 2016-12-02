@@ -26,8 +26,7 @@ traits:
     It provides the unit of measurement for the temperature value.
     It is a read-only value that is provided by the server.
     If the units Property is missing the default is Celsius [C].
-    The range is an array with min,max values for this temperature on this device.
-    If no range is provided the default is +/- MAXINT.
+    When range (from oic.r.baseresource) is omitted the default is +/- MAXINT.
 
   displayName: Temperature
   is: [ interface ] # valid for all methods

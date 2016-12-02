@@ -13,16 +13,8 @@
         },
         "increment":  {
           "type": "integer",
-          "readOnly": true,
-          "description": "The step between possible values"
-        },
-        "range":      {
-          "type": "array",
-          "readOnly": true,
-          "description": "Lower bound=closed, Upper bound=open",
-          "items": {
-            "type": "integer"
-          }
+          "description": "Deprecated, use 'step' instead.",
+          "readOnly": true
         }
       }
     }

@@ -24,7 +24,8 @@ traits:
     The direction is the directionality of the air flow if applicable.
     Direction values are dependent on the capabilities of the unit.
     The speed is an integer representing the current speed level for the unit.
-    The range is an array of the min,max values for the speed level.
+    The range (from oic.r.baseresource) is an array of the min,max values for the speed level.
+    If not present the range defaults to [0,100]
 
   displayName: Air Flow
   is: [ interface ] # valid for all methods

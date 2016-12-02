@@ -23,8 +23,8 @@ traits:
     This resource specifies the actual colour in the RGB space represented as an array of integers.
     Each colour value is described with a Red, Green, Blue component.
     These colour values are encoded as an array of integer values ([R,G,B]).
-    The minimum and maximum colour value per component is described by the range array.
-    When the range value is omitted, then the range is [0,255].
+    The minimum and maximum colour value per component may be described by range (from oic.r.baseresource).
+    When range (from oic.r.baseresource) is omitted, then the range is [0,255].
   displayName: Colour RGB
   is: [ interface ] # valid for all methods
 

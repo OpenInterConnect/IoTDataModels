@@ -22,9 +22,8 @@ traits:
   description: |
     This resource describes a dimming function.
     The value is an integer showing the current dimming level.
-    The step is the increment between dimmer values.
-    The range is the maximum and minimum values for the dimming value.
-    If the range is omitted [0,100] is assumed.
+    If step (from oic.r.baseresource) is present then it represents the increment between dimmer values.
+    When range (from oic.r.baseresource) is omitted, then the range is [0,100].
     A value of 0 means total dimming; a value of 100 means no dimming.
 
   displayName: Dimming

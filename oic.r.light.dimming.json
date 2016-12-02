@@ -10,19 +10,6 @@
         "dimmingSetting":  {
           "type": "integer",
           "description": "Current dimming value"
-        },
-        "step":   {
-          "type": "integer",
-          "readOnly": true,
-          "description": "step increment for dimming values"
-        },
-        "range":  {
-          "type": "array",
-          "readOnly": true,
-          "description": "Min and Max values for the dimming setting",
-          "items": {
-            "type": "integer"
-          }
         }
       }
     }

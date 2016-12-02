@@ -15,16 +15,6 @@
           "items": {
             "type": "integer"
           }
-        },
-        "range":    {
-          "type": "array",
-          "readOnly": true,
-          "description": "min max value of RGB",
-          "minItems": 2,
-          "maxItems": 2,
-          "items": {
-            "type": "integer"
-          }
         }
       }
     }
