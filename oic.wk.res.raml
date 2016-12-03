@@ -78,18 +78,21 @@ traits:
           application/json:
             schema: slinklist
             example: |
-              {
-                "links":
-                  [
-                    {
-                      "href": "/humidity",
-                      "rt":   ["oic.r.humidity"],
-                      "if":   ["oic.if.s"]
-                    },
-                    {
-                      "href": "/temperature",
-                      "rt":   ["oic.r.temperature"],
-                      "if":   ["oic.if.s"]
-                    }
-                  ]
-              }
+              [
+                {
+                  "di": "0685B960-736F-46F7-BEC0-9E6CBD61ADC1",
+                  "links":
+                    [
+                      {
+                        "href": "/humidity",
+                        "rt":   ["oic.r.humidity"],
+                        "if":   ["oic.if.s"]
+                      },
+                      {
+                        "href": "/temperature",
+                        "rt":   ["oic.r.temperature"],
+                        "if":   ["oic.if.s"]
+                      }
+                    ]
+                }
+              ]
