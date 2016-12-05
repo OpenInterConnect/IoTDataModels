@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-v4/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.res-schema-ll.json#",
+  "definitions": {
+    "oic.res-ll": {
+      "type": "object",
+      "properties": {
+        "di": {
+          "$ref": "oic.types-schema.json#/definitions/uuid",
+          "readOnly": true,
+          "description": "Unique identifier for device (UUID) as indicated by the /oic/d resource of the device"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
+          }
+        }
+      },
+      "required": ["di", "links"]
+    }
+  },
+  "description": "The list of resources expressed as OIC links with di ",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/oic.res-ll"
+  }
+}
