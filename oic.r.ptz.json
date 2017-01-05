@@ -40,7 +40,8 @@
           "description": "The Zoomfactor value"
         },
         "zoomFactorRange": {
-          "enum": ["linear, 1x, 2x, 4x, 8x, 16x, 32x"],
+          "type": "string",
+          "enum": ["linear", "1x", "2x", "4x", "8x", "16x", "32x"],
           "readOnly": true,
           "description": "allowed Zoom Factor values. Linear equates to a 1-100 min/max."
         }
