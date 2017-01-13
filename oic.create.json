@@ -11,5 +11,7 @@
     }
   },
   "type": "object",
-  "$ref": "#/definitions/oic.create"
+  "allOf": [
+     {"$ref": "#/definitions/oic.create"}
+   ]
 }
