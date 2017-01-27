@@ -7,7 +7,7 @@
     "oic.r.airflow": {
       "type": "object",
       "properties": {
-         "supporteddirections": {
+        "supporteddirections": {
             "type": "array",
             "description": "Array of possible direction settings for this instance of the Resource Type",
             "readOnly": true,
@@ -25,17 +25,9 @@
           "type": "integer",
           "description": "Current speed level"
         },
-        "range": {
-          "type": "array",
-          "readOnly": true,
-          "description": "Min,max values for the speed level",
-          "items": {
-            "type": "integer"
-          }
-        },
         "automode": {
           "enum": ["On", "Off"],
-          "description": "Status of the automode feature which governs auto control of speed"
+          "description": "Status of the automode feature, if on speed is set by the device"
         }
       }
     }
