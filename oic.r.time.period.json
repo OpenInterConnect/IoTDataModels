@@ -9,15 +9,25 @@
       "properties": {
         "startTime":{
           "type": "string",
-          "format": "date-time",
           "description": "Start time for the time period"
         },
         "stopTime": {
           "type": "string",
-          "format": "date-time",
           "description": "Stop time for the time period"
+        },
+        "interval": {
+          "type": "integer",
+          "description": "Time interval in minutes after the startTime"
         }
-      }
+      },
+      "not": {
+        "anyOf": [
+          {
+            "required": ["stopTime","interval"]
+          }
+        ]
+      },
+      "required": ["startTime"]
     }
   },
   "type": "object",
@@ -25,6 +35,5 @@
     {"$ref": "oic.core.json#/definitions/oic.core"},
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.time.period"}
-  ],
-  "required": ["startTime"]
+  ]
 }

@@ -22,7 +22,9 @@ traits:
   description: |
     This resource describes the time period over which any additionally provided
     information is derived or bounded.
-    The start and stop times are ISO8601 encoded strings.
+    The startTime and stopTime are ISO8601 encoded strings.  startTime must be present.
+    The interval is the interval of the time period in minutes, if present this value must be no less than 1 minute.
+    stoptime and interval are mutually exclusive; both Properties cannot be present in a Resource instance.
 
   displayName: Time Period
   is: [ interface ] # valid for all methods

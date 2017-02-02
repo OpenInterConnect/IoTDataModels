@@ -1,0 +1,38 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.delaydefrost.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Delay Defrost",
+  "definitions": {
+    "oic.r.delaydefrost": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "oic.r.time.period.json#/definitions/oic.r.time.period"
+        },
+        {
+          "properties": {
+            "interval": {
+              "type": "integer",
+              "description": "Defrost interval as defined by Energy Star",
+              "minimum": 1,
+              "maximum": 1440,
+              "default": 240
+            },
+            "status": {
+              "type": "boolean",
+              "description": "Indicates whether any supported delay defrost function is active"
+            }
+          },
+          "required": ["status"]
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.delaydefrost"}
+  ]
+}
