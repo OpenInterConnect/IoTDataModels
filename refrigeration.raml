@@ -18,10 +18,6 @@ traits:
       queryParameters:
         if:
           enum: ["oic.if.a","oic.if.baseline"]
-  - supportedOps:
-      queryParameters:
-        supportedValues:
-          description: Queries the resource for supported properties and their current state
 
 /RefrigerationResURI:
   description: |
@@ -30,17 +26,14 @@ traits:
     RapidFreeze is a boolean that controls the rapid freeze capability if present.
     RapidCool is a boolean that controls the rapid cool capability if present.
     Defrost is a boolean that controls the defrost cycle if present.
+    At least one of the listed Properties shall be present in a Resource Instance.
 
   displayName: Refrigeration
-  is: ['interface','supportedOps'] # valid for all methods
+  is: ['interface'] # valid for all methods
 
   get:
     description: |
-      Retrieves the current Refrigeration function status.
-      If the 'supportedValues' query parameter is included then all values are provided that the
-      device supports, not just those which are active.
-      If the 'supportedValues' query parameter is not included then only those values that are
-      active are returned.
+      Retrieves the current Refrigeration function status; all Properties supported by the Device are returned.
 
     responses:
       200:
@@ -61,25 +54,26 @@ traits:
     description: |
       Activates the desired Refrigeration functions.
       Suported values are rapidFreeze, rapidCool and defrost.
+      At least on of the supported values shall be provided.
     body:
       application/json:
         schema: RefrigerationUpdate
         example: |
           {
-            "id":       "unique_example_id",
-            "defrost":  false
+            "id":           "unique_example_id",
+            "rapidFreeze":  true
           }
 
     responses:
       200:
         description: |
           Indicates that the Refrigeration function was changed.
-          The new status  is provided in the response.
+          The new status can be provided in the response.
         body:
           application/json:
             schema: RefrigerationUpdate
             example: |
               {
-                "id":       "unique_example_id",
-                "defrost":  false
+                "id":           "unique_example_id",
+                "rapidFreeze":  true
               }

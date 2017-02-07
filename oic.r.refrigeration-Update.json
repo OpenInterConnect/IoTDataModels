@@ -6,6 +6,11 @@
   "definitions": {
     "oic.r.refrigeration": {
       "type": "object",
+      "anyOf": [
+        {"required": ["rapidFreeze"]},
+        {"required": ["rapidCool"]},
+        {"required": ["defrost"]}
+      ],
       "properties": {
         "rapidFreeze":  {
           "type": "boolean",
