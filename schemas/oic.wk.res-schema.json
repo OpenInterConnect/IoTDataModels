@@ -8,24 +8,20 @@
       "properties": {
         "rt": {
           "type": "array",
-          "items" : [
-            {
+          "items" : {
               "type" : "string",
               "maxLength": 64
-            }
-          ],
+            },
           "minItems" : 1,
           "readOnly": true,
           "description": "Resource Type"
         },
         "if": {
           "type": "array",
-          "items": [
-            {
+          "items": {
               "type" : "string",
               "enum" : ["oic.if.baseline", "oic.if.ll"]
-            }
-          ],
+            },
           "minItems": 1,
           "readOnly": true,
           "description": "The interface set supported by this resource"

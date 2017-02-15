@@ -9,29 +9,24 @@
       "properties": {
         "lastScene": {
           "type": "string",
-          "description": "Last selected Scene, shall be part of sceneValues",
-          "format": "UTF8"
+          "description": "Last selected Scene, shall be part of sceneValues"
         },
         "sceneValues": {
           "type": "string",
           "readOnly": true,
-          "description": "All available scene values",
-          "format": "CSV"
+          "description": "All available scene values"
         },
         "n": {
           "type": "string",
-          "description": "Used to name the Scene collection",
-          "format": "UTF8"
+          "description": "Used to name the Scene collection"
         },
         "id": {
             "type": "string",
                         "description" : "A unique string that could be a hash or similarly unique"
         },
         "rts": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Defines the list of allowable resource types in links included in the collection; new links being created can only be from this list",
-          "format": "UTF8"
+          "$ref": "oic.core-schema.json#/definitions/oic.core/properties/rt",
+          "description": "Defines the list of allowable resource types in links included in the collection; new links being created can only be from this list"
         },
         "links": {
           "type": "array",

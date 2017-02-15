@@ -28,7 +28,7 @@ traits:
     description: |
       Toplevel Scene resource.
       This resource is a generic collection resource.
-      The rts value shall contain oic.sceneCollection resource types.
+      The rts value shall contain oic.scenecollection resource types.
     displayName: Scenes (Top level)
 
     get:
@@ -41,9 +41,9 @@ traits:
                         schema: Collection
                         example: |
                             {
-                                "rt":       "oic.wk.sceneList",
+                                "rt":       ["oic.wk.scenelist"],
                                 "n":        "list of scene Collections",
-                                "rts":      "oic.wk.sceneCollection",
+                                "rts":      ["oic.wk.scenecollection"],
                                 "links": [
                                  ]
                             }
@@ -73,10 +73,10 @@ traits:
                             {
                                 "lastScene": "off",
                                 "sceneValues": "off,Reading,TVWatching",
-                                "rt":       "oic.wk.sceneCollection",
+                                "rt":       ["oic.wk.sceneCollection"],
                                 "n":        "My Scenes for my living room",
                                 "id":       "0685B960-736F-46F7-BEC0-9E6CBD671ADC1",
-                                "rts":      "oic.wk.sceneMember",
+                                "rts":      ["oic.wk.sceneMember"],
                                 "links": [
                                  ]
                             }
@@ -128,8 +128,8 @@ traits:
                             "id": "0685B960-FFFF-46F7-BEC0-9E6234671ADC1",
                             "n": "my binary switch (for light bulb) mappings",
                             "link": { "href":"coap://mydevice/mybinaryswitch",
-                                      "if": "oic.if.a",
-                                      "rt": "oic.r.switch.binary" },
+                                      "if": ["oic.if.a"],
+                                      "rt": ["oic.r.switch.binary"] },
                             "sceneMappings": [
                              {
                                "scene":           "off",
