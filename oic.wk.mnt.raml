@@ -23,7 +23,7 @@ traits:
   displayName: Maintenance
   is: [ interface ]
   description: |
-    The resource through which an Device is maintained and can be used for diagnostic purposes.
+    The resource through which a Device is maintained and can be used for diagnostic purposes.
     fr (Factory Reset) is a boolean.
       The value 0 means No action (Default), the value 1 means Start Factory Reset
     After factory reset, this value shall be changed back to the default value
@@ -44,7 +44,6 @@ traits:
             example: |
               {
                 "rt":   ["oic.wk.mnt"],
-                "n":    "My Maintenance Actions",
                 "fr":   false,
                 "rb":   false
               }
