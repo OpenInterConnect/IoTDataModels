@@ -1,0 +1,58 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.consumablecollection#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Consumables Collection",
+  "definitions": {
+    "oic.r.consumablecollection": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "oic.collection-schema.json#/definitions/oic.collection"
+        },
+        {
+          "rt": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "uniqueItems": true,
+              "items": {
+                  "enum": ["oic.r.consumablecollection","oic.wk.col"]
+              }
+          },
+          "rts": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 2,
+              "uniqueItems": true,
+              "items": {
+                  "oneOf": [
+                      {
+                          "enum": ["oic.r.consumable","oic.r.value.conditional"]
+                      },
+                      {
+                          "enum": ["oic.r.consumable"]
+                      }
+                  ]
+              }
+          }
+        }
+      ],
+      "properties": {
+        "supportedconsumables": {
+          "type": "array",
+          "description": "Array of possible consumables the device measures.",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "#/definitions/oic.r.consumablecollection"}
+  ]
+}
