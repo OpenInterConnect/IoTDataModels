@@ -1,0 +1,56 @@
+#%RAML 0.8
+title: OICAirQuality
+version: v1.1.0-20160519
+documentation:
+  - title: © 2017 Open Connectivity Foundation, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - AirQuality:  !include oic.r.airquality.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s","oic.if.baseline"]
+
+/AirQualityResURI:
+  description: |
+    This resource describes a qualitative or measured contaminant that can be used to infer Air Quality.
+    Measured is the actual sensed value with units per contaminant type as described below.
+    Qualitative is a representative value within the range provided where the minium value is minimum contamination and maximum value is maximum contamination for the specific contaminant.
+    The valueType indicates a qualitative or measured reading within the contaminantvalue Property.
+    contaminantvalue contains the actual measured or qualitative level.
+    range contains the allowed range for the value that is being reported (from oic.r.baseresource).
+    If valueType is 'Measured' then the units for the contaminant types are as follows:
+     Methanal (also known as Formaldehyde): CH2O (ug/m^3),
+     Carbon Dioxide: CO2 (ppm),
+     Carbon Monoxide: CO (ppm),
+     Particulate Matter (less than 2.5 microns in diameter): PM2.5 (ug/m^3),
+     Particulate Matter (less than 10 microns in diameter): PM10 (ug/m^3),
+     Volatile Organic Compounds: VOC (ug/m^3)
+
+  displayName: Air Quality
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Retrieves the current air quality.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: AirQuality
+            example: |
+              {
+                "rt":             ["oic.r.airquality"],
+                "id":             "unique_example_id",
+                "contaminanttype": "CO",
+                "valuetype": "Measured",
+                "contaminantvalue": 10,
+                "range": [0,500]
+              }
