@@ -5,6 +5,10 @@
   "definitions": {
     "oic.wk.mnt": {
       "type": "object",
+      "oneOf": [
+        {"required": ["fr"]},
+        {"required": ["rb"]}
+      ],
       "properties": {
         "n": {
           "type" : "string",
@@ -26,6 +30,5 @@
   "allOf": [
     { "$ref": "oic.core-schema.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.mnt" }
-  ],
-  "required": ["fr"]
+  ]
 }
