@@ -10,11 +10,6 @@
         {"required": ["rb"]}
       ],
       "properties": {
-        "n": {
-          "type" : "string",
-          "maxLength" : 64,
-          "description": "Name"
-        },
         "fr":{
           "type": "boolean",
           "description": "Factory Reset"
