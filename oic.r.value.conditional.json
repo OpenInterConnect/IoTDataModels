@@ -1,0 +1,38 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.value.conditional.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Value Conditional",
+  "definitions": {
+    "oic.r.value.conditional": {
+      "type": "object",
+      "anyOf": [
+        {"required": ["threshold"]},
+        {"required": ["minnotifyperiod"]},
+        {"required": ["maxnotifyperiod"]}
+      ],
+      "properties": {
+        "threshold":  {
+          "type": "number",
+          "minimum": 0,
+          "description": "Amount by which the measured value must change before a notification is sent."
+        },
+        "minnotifyperiod": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum elapsed time in ms before a notification is sent."
+        },
+        "maxnotifyperiod": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum elapsed time in ms before a notification must be sent."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "#/definitions/oic.r.value.conditional"}
+  ]
+}

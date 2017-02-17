@@ -28,6 +28,7 @@ traits:
   description: |
     This is the base resource schema on which all other resources defined in this specification build.
     value is the sensed or actuated value of the Resource.
+    precision is the accuracy granularity of the value.
     range is the range over which value is valid.
     step is the step function over the defined range if applicable (e.g. always step by '2').
   displayName: Base Resource Schema
@@ -42,12 +43,12 @@ traits:
             schema: baseCore
             example: |
               {
-                "rt" :          ["oic.baseresource"],
-                "if":           ["oic.if.baseline"],
-                "id":           "unique_example_id",
-                "value":        8,
-                "range":        [0,100],
-                "step":         2
+                "rt" :            ["oic.baseresource"],
+                "if":             ["oic.if.baseline"],
+                "id":             "unique_example_id",
+                "value":          10.5,
+                "precision":      0.5,
+                "range":          [0.0,100.0]
               }
 
   post:
@@ -58,7 +59,7 @@ traits:
         schema: base
         example: |
           {
-            "value":  10
+            "value":  20.5
           }
     responses:
       200:
@@ -67,5 +68,5 @@ traits:
             schema: base
             example: |
               {
-                "value":  10
+                "value":  20.5
               }

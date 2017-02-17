@@ -21,9 +21,13 @@ traits:
 /AirFlowResURI:
   description: |
     This resource describes the properties associated with air flow.
+    The supporteddirections is the set of valid values for the direction property for a particular instance of this resource type.
     The direction is the directionality of the air flow if applicable.
     Direction values are dependent on the capabilities of the unit.
     The speed is an integer representing the current speed level for the unit.
+    Automode  is for automatic control of fan speed level. If AutoMode is On,
+     the fan speed level is controlled automatically. If Automode is Off the FanSpeedLevel will remain at an
+     appropriate fixed speed determined by the speed setting.
     The range (from oic.r.baseresource) is an array of the min,max values for the speed level.
     If not present the range defaults to [0,100]
 
@@ -42,15 +46,17 @@ traits:
               {
                 "rt":         ["oic.r.airflow"],
                 "id":         "unique_example_id",
+                "supporteddirections": ["left","right","centre"],
                 "direction":  "left",
                 "speed":      5,
-                "range":      [1,7]
+                "range":      [1,7],
+                "automode":   "Off"
               }
 
   post:
     description: |
       Sets the current air flow values.
-      Only direction and speed may be set by an update operation.
+      Only direction, speed and automode may be set by an update operation.
     body:
       application/json:
         schema: AirFlow
@@ -58,7 +64,8 @@ traits:
           {
             "id":         "unique_example_id",
             "direction":  "right",
-            "speed":      3
+            "speed":      3,
+            "automode":   "On"
           }
     responses:
       200:
@@ -69,7 +76,8 @@ traits:
               {
                 "id":         "unique_example_id",
                 "direction":  "right",
-                "speed":      3
+                "speed":      3,
+                "automode":   "On"
               }
 
       403:
@@ -84,6 +92,8 @@ traits:
             example: |
               {
                 "id":         "unique_example_id",
+                "supporteddirections": ["left","right","centre"],
                 "direction":  "right",
-                "speed":      3
+                "speed":      3,
+                "automode":   "On"
               }
