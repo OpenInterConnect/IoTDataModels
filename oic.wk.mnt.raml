@@ -17,7 +17,7 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.r","oic.if.rw","oic.if.baseline"]
+          enum: ["oic.if.rw","oic.if.r","oic.if.baseline"]
 
 /oic/mnt:
   displayName: Maintenance
@@ -35,7 +35,7 @@ traits:
     description: Retrieve the maintenance action status
     queryParameters:
       if:
-        enum: ["oic.if.r","oic.if.rw","oic.if.baseline"]
+        enum: ["oic.if.rw","oic.if.r","oic.if.baseline"]
     responses:
       200:
         body:
