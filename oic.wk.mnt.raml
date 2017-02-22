@@ -17,13 +17,13 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.r", "oic.if.baseline"]
+          enum: ["oic.if.rw","oic.if.r","oic.if.baseline"]
 
 /oic/mnt:
   displayName: Maintenance
   is: [ interface ]
   description: |
-    The resource through which an Device is maintained and can be used for diagnostic purposes.
+    The resource through which a Device is maintained and can be used for diagnostic purposes.
     fr (Factory Reset) is a boolean.
       The value 0 means No action (Default), the value 1 means Start Factory Reset
     After factory reset, this value shall be changed back to the default value
@@ -35,7 +35,7 @@ traits:
     description: Retrieve the maintenance action status
     queryParameters:
       if:
-        enum: ["oic.if.r"]
+        enum: ["oic.if.rw","oic.if.r","oic.if.baseline"]
     responses:
       200:
         body:
@@ -44,7 +44,6 @@ traits:
             example: |
               {
                 "rt":   ["oic.wk.mnt"],
-                "n":    "My Maintenance Actions",
                 "fr":   false,
                 "rb":   false
               }
@@ -54,7 +53,7 @@ traits:
       Set the maintenance action(s)
     queryParameters:
       if:
-        enum: ["oic.if.rw"]
+        enum: ["oic.if.rw","oic.if.baseline"]
     body:
       application/json:
         schema: MNT
