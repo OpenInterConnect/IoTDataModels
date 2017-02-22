@@ -9,8 +9,7 @@
       "properties": {
         "n": {
           "type": "string",
-          "description": "A human friendly name for the Resource Directory",
-          "format": "UTF8"
+          "description": "A human friendly name for the Resource Directory"
         },
         "di": {
           "$ref": "oic.types-schema.json#/definitions/uuid",

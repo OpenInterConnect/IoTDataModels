@@ -9,8 +9,7 @@
       "properties": {
         "n": {
           "type": "string",
-          "description": "Used to name the Scene collection",
-          "format": "UTF8"
+          "description": "Used to name the Scene collection"
         },
         "id": {
           "type": "string",
@@ -19,8 +18,7 @@
         "SceneMappings" : {
           "type": "array",
            "description": "array of mappings per scene, can be 1",
-          "items": [
-            {
+          "items": {
               "type": "object",
               "properties": {
                 "scene": {
@@ -40,7 +38,6 @@
               },
               "required": [ "scene", "memberProperty", "memberValue" ]
             }
-          ]
         },
 
         "link": {
