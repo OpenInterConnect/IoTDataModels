@@ -20,14 +20,13 @@ traits:
 
 /MediaResURI:
   description: |
-    This resource specifies the media that an OIC Server (Camera) supports.
+    This resource specifies the media types that an OCF Server supports.
     The resource is an array of media elements.  Each element contains:
         A URL at which the specified media type can be accessed.
         A string array containing the definition of the media using SDP.
         Each entry in the sdp array is an SDP line.
         Each line shall follow the SDP description syntax as defined in the SDP specification.
     The SDP specification can be found at http://tools.ietf.org/html/rfc4566.
-    The mime subtype video/H264 indicates video resource and the mime subtype video/jpeg indicates still image resource.
 
   displayName: Media
   is: [ interface ]
