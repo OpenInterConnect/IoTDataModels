@@ -53,12 +53,6 @@
            "$ref": "oic.types-schema.json#/definitions/uuid",
            "description": "Unique identifier for device (UUID)"
         },
-        "buri": {
-    	    "type": "string",
-          "description": "The base URI used to fully qualify a Relative Reference in the href parameter. Use the OCF Schema for URI",
-          "maxLength": 256,
-          "format": "uri"
-        },
         "p": {
           "description": "Specifies the framework policies on the Resource referenced by the target URI",
           "type": "object",
@@ -131,7 +125,8 @@
                 "description": "URI with Transport Protocol Suites + Endpoint Locator as specified in 10.2.1"
               },
               "pri": {
-                "type": "number",
+                "type": "integer",
+                "minimum": "1",
                 "description": "The priority among multiple Endpoints as specified in 10.2.3"
               }
             }

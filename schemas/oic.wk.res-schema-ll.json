@@ -21,7 +21,7 @@
       "required": ["di", "links"]
     }
   },
-  "description": "The list of resources expressed as OIC links with di ",
+  "description": "The list of resources expressed as OCF links without di",
   "type": "array",
   "items": {
     "$ref": "#/definitions/oic.res-ll"
