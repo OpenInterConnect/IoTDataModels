@@ -37,3 +37,16 @@ traits:
                 "n": "Ping Information",
                 "in":   16
               }
+post:
+    description: Update or reset the alive interval
+    body:
+      application/json:
+        schema: PING
+          example: |
+          {
+            "in":   16
+          }
+    
+    response:
+      203:
+        description: Successfully updated & restarted alive interval timer.
