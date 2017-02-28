@@ -30,7 +30,6 @@
         "n": {
           "type": "string",
           "maxLength": 64,
-          "readOnly": true,
           "description": "Friendly name of the resource"
         },
         "id": {
