@@ -13,22 +13,31 @@ documentation:
 
 schemas:
   - Configuration: !include schemas/oic.wk.con-schema.json
+  - CommonProperties: !include schemas/oic.core-schema.json
 
 
 traits:
-  - interface:
+  - interface-all:
       queryParameters:
         if:
           enum: ["oic.if.rw", "oic.if.baseline"]
+  - interface-rw:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw"]
+  - interface-baseline:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline"]
 
 /oic/con:
   displayName: OIC Configuration
-  is: [ interface ]
   description: |
     Known resource that is hosted by every Server.
     Allows for device specific information to be configured.
 
   get:
+    is: ["interface-all"]
     description: |
       Retrieves the current configuration settings
     responses:
@@ -47,11 +56,12 @@ traits:
               }
 
   post:
+    is: ["interface-baseline"]
     description: |
       Update the information about the Device
     body:
         application/json:
-            schema: Configuration
+            schema: CommonProperties
             example: |
                 {
                     "n":  "My Friendly Device Name"
@@ -60,7 +70,7 @@ traits:
       200:
         body:
           application/json:
-            schema: Configuration
+            schema: CommonProperties
             example: |
                 {
                     "n":  "My Friendly Device Name"
