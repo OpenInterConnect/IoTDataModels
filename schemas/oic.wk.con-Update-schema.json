@@ -1,10 +1,16 @@
 {
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.con-schema.json#",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.con-Update-schema.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "definitions": {
     "oic.wk.con": {
       "type": "object",
+      "oneOf": [
+        {"required": ["loc"]},
+        {"required": ["locn"]},
+        {"required": ["c"]},
+        {"required": ["r"]}
+      ],
       "properties": {
         "loc": {
           "type": "array",

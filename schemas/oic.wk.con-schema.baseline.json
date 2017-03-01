@@ -7,13 +7,8 @@
       "type": "object",
       "properties": {
         "loc": {
-          "type": "array",
-          "description": "Location information",
-          "items": {
-            "type": "number"
-          },
-          "minItems": 2,
-          "maxItems": 2
+          "type": "string",
+          "description": "Location information"
         },
         "locn": {
           "type": "string",
@@ -35,7 +30,8 @@
   },
   "type": "object",
   "allOf": [
-    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "oic.core-schema.baseline.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.con" }
-  ]
+  ],
+  "required": [ "n" ]
 }

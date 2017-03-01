@@ -1,7 +1,7 @@
 {
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.core-schema.json#",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.core-schema.baseline.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Core",
   "definitions": {
     "oic.core": {
@@ -30,7 +30,6 @@
         "n": {
           "type": "string",
           "maxLength": 64,
-          "readOnly": true,
           "description": "Friendly name of the resource"
         },
         "id": {

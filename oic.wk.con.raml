@@ -13,7 +13,8 @@ documentation:
 
 schemas:
   - Configuration: !include schemas/oic.wk.con-schema.json
-  - CommonProperties: !include schemas/oic.core-schema.json
+  - Update: !include schemas/oic.wk.con-Update-schema.json
+  - Baseline: !include schemas/oic.wk.con-baseline-Update-schema.json
 
 
 traits:
@@ -33,8 +34,7 @@ traits:
 /oic/con:
   displayName: OIC Configuration
   description: |
-    Known resource that is hosted by every Server.
-    Allows for device specific information to be configured.
+    Resource that allows for device specific information to be configured.
 
   get:
     is: ["interface-all"]
@@ -49,19 +49,41 @@ traits:
               {
                 "rt":   ["oic.wk.con"],
                 "n":    "My Friendly Device Name",
-                "loc":  "My Location Information",
+                "loc":  [32.777,-96.797],
                 "locn": "My Location Name",
                 "c":    "USD",
                 "r":    "MyRegion"
               }
 
   post:
-    is: ["interface-baseline"]
+    is: ["interface-rw"]
     description: |
       Update the information about the Device
     body:
         application/json:
-            schema: CommonProperties
+            schema: Update
+            example: |
+                {
+                    "r":  "MyNewRegion"
+                }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Update
+            example: |
+                {
+                    "r":  "MyNewRegion"
+                }
+
+/oic/con-baseline:
+  post:
+    is: ["interface-baseline"]
+    description: |
+      Update the Device friendly name
+    body:
+        application/json:
+            schema: Baseline
             example: |
                 {
                     "n":  "My Friendly Device Name"
@@ -70,7 +92,7 @@ traits:
       200:
         body:
           application/json:
-            schema: CommonProperties
+            schema: Baseline
             example: |
                 {
                     "n":  "My Friendly Device Name"
