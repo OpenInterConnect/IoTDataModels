@@ -5,12 +5,6 @@
   "definitions": {
     "oic.wk.con": {
       "type": "object",
-      "oneOf": [
-        {"required": ["loc"]},
-        {"required": ["locn"]},
-        {"required": ["c"]},
-        {"required": ["r"]}
-      ],
       "properties": {
         "loc": {
           "type": "array",
@@ -41,7 +35,8 @@
   },
   "type": "object",
   "allOf": [
-    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "oic.core-schema.rw.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.con" }
-  ]
+  ],
+  "required": ["n"]
 }

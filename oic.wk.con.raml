@@ -14,8 +14,6 @@ documentation:
 schemas:
   - Configuration: !include schemas/oic.wk.con-schema.json
   - Update: !include schemas/oic.wk.con-Update-schema.json
-  - Baseline: !include schemas/oic.wk.con-baseline-Update-schema.json
-
 
 traits:
   - interface-all:
@@ -26,10 +24,6 @@ traits:
       queryParameters:
         if:
           enum: ["oic.if.rw"]
-  - interface-baseline:
-      queryParameters:
-        if:
-          enum: ["oic.if.baseline"]
 
 /oic/con:
   displayName: OIC Configuration
@@ -64,6 +58,7 @@ traits:
             schema: Update
             example: |
                 {
+                    "n": "My New Friendly Name",
                     "r":  "MyNewRegion"
                 }
     responses:
@@ -74,26 +69,4 @@ traits:
             example: |
                 {
                     "r":  "MyNewRegion"
-                }
-
-/oic/con-baseline:
-  post:
-    is: ["interface-baseline"]
-    description: |
-      Update the Device friendly name
-    body:
-        application/json:
-            schema: Baseline
-            example: |
-                {
-                    "n":  "My Friendly Device Name"
-                }
-    responses:
-      200:
-        body:
-          application/json:
-            schema: Baseline
-            example: |
-                {
-                    "n":  "My Friendly Device Name"
                 }
