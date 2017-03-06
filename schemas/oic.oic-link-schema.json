@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.oic-link-schema.json#",
   "definitions": {
     "oic.oic-link": {
@@ -59,15 +59,6 @@
           "properties": {
             "bm": {
               "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
-              "type": "integer"
-            },
-            "sec": {
-              "description": "Specifies if security needs to be turned on when looking to interact with the Resource",
-              "default": false,
-              "type": "boolean"
-            },
-            "port": {
-              "description": "Secure port to be used for connection",
               "type": "integer"
             }
           },
