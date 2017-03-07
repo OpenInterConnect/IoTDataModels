@@ -13,22 +13,25 @@ documentation:
 
 schemas:
   - Configuration: !include schemas/oic.wk.con-schema.json
-
+  - Update: !include schemas/oic.wk.con-Update-schema.json
 
 traits:
-  - interface:
+  - interface-all:
       queryParameters:
         if:
           enum: ["oic.if.rw", "oic.if.baseline"]
+  - interface-rw:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw"]
 
 /oic/con:
   displayName: OIC Configuration
-  is: [ interface ]
   description: |
-    Known resource that is hosted by every Server.
-    Allows for device specific information to be configured.
+    Resource that allows for device specific information to be configured.
 
   get:
+    is: ["interface-all"]
     description: |
       Retrieves the current configuration settings
     responses:
@@ -40,28 +43,30 @@ traits:
               {
                 "rt":   ["oic.wk.con"],
                 "n":    "My Friendly Device Name",
-                "loc":  "My Location Information",
+                "loc":  [32.777,-96.797],
                 "locn": "My Location Name",
                 "c":    "USD",
                 "r":    "MyRegion"
               }
 
   post:
+    is: ["interface-rw"]
     description: |
       Update the information about the Device
     body:
         application/json:
-            schema: Configuration
+            schema: Update
             example: |
                 {
-                    "n":  "My Friendly Device Name"
+                    "n": "My New Friendly Name",
+                    "r":  "MyNewRegion"
                 }
     responses:
       200:
         body:
           application/json:
-            schema: Configuration
+            schema: Update
             example: |
                 {
-                    "n":  "My Friendly Device Name"
+                    "r":  "MyNewRegion"
                 }
