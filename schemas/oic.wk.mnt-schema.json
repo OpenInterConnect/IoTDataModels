@@ -5,7 +5,7 @@
   "definitions": {
     "oic.wk.mnt": {
       "type": "object",
-      "oneOf": [
+      "anyOf": [
         {"required": ["fr"]},
         {"required": ["rb"]}
       ],
