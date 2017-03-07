@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schemas.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.ping-schema.json#",
   "definitions": {
     "oic.wk.ping": {
@@ -8,7 +8,8 @@
       "properties": {
         "in": {
           "type": "integer",
-          "description": "ReadWrite, Indicates the interval for which connection shall be kept alive"
+          "readOnly": false,
+          "description": "Indicates the interval for which connection shall be kept alive"
         }
       }
     }

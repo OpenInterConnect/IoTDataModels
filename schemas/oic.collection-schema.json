@@ -23,9 +23,6 @@
             "type": "object",
             "description": "A collection is a set (array) of tagged-link or set (array) of simple links along with additional properties to describe the collection itself",
             "properties": {
-                "n": {
-                    "type": "string",
-                    "description": "User friendly name of the collection"                },
                 "id": {
                     "anyOf": [
                         {
