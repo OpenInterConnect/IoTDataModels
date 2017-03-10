@@ -6,7 +6,7 @@
   "definitions": {
     "oic.r.icon": {
       "properties": {
-        "mimeType": {
+        "mimetype": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
@@ -39,5 +39,5 @@
     { "$ref": "oic.core-schema.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.r.icon"}
   ],
-  "required": ["mimeType","width","height","media"]
+  "required": ["mimetype","width","height","media"]
 }
