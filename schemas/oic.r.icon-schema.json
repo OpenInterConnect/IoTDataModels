@@ -8,6 +8,7 @@
       "properties": {
         "mimeType": {
           "type": "string",
+          "maxLength": 64,
           "readOnly": true,
           "description": "Specifies the format of the MIME Type"
         },
