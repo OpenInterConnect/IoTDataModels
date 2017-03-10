@@ -19,9 +19,9 @@
         },
         "dmv": {
           "type": "string",
-          "maxLength": 64,
+          "maxLength": 256,
           "readOnly": true,
-          "description": "The spec version of the vertical and/or resource specification"
+          "description": "Spec versions of the Resource and Device Specifications to which this device data model is implemented"
         },
         "ld": {
             "type": "array",
