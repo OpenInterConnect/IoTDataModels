@@ -26,7 +26,7 @@ traits:
     Direction values are dependent on the capabilities of the unit.
     The speed is an integer representing the current speed level for the unit.
     The range (from oic.r.baseresource) is an array of the min,max values for the speed level. If not present the range defaults to [0,100].
-    automode is the status of the automode feature; off means automode is not enabled, on means automode is active and the speed is automatically controlled by the device.
+    automode is the status of the automode feature; Off means automode is not enabled, On means automode is active and the speed is automatically controlled by the device.
 
   displayName: Air Flow
   is: [ interface ] # valid for all methods
@@ -47,7 +47,7 @@ traits:
                 "direction":  "left",
                 "speed":      5,
                 "range":      [1,7],
-                "automode":   false
+                "automode":   "Off"
               }
 
   post:
