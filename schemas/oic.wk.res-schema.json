@@ -32,6 +32,11 @@
           "readOnly": true,
           "description": "Human friendly name"
         },
+        "di": {
+          "$ref": "oic.types-schema.json#/definitions/uuid",
+          "readOnly": true,
+          "description": "Unique identifier for device (UUID) as indicated by the /oic/d resource of the device"
+        },
         "mpro": {
           "readOnly": true,
           "description": "Supported messaging protocols",
@@ -45,7 +50,7 @@
           }
         }
       },
-      "required": ["rt", "if", "links"]
+      "required": ["rt", "if", "di", "links"]
     }
   },
   "description": "The list of resources expressed as OIC links",

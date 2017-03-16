@@ -117,14 +117,14 @@
               },
               "pri": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": "1",
                 "description": "The priority among multiple Endpoints as specified in 10.2.3"
               }
             }
           }
         }
       },
-      "required": [ "href", "rt", "if", "eps" ]
+      "required": [ "href", "rt", "if" ]
     }
   },
   "type": "object",

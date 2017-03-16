@@ -46,27 +46,18 @@ traits:
                 {
                 "rt": ["oic.wk.res"],
                 "if": ["oic.if.baseline", "oic.if.ll" ],
+                "di": "0685B960-736F-46F7-BEC0-9E6CBD61ADC1",
                 "links":
                   [
                     {
                       "href": "/humidity",
                       "rt":   ["oic.r.humidity"],
-                      "if":   ["oic.if.s"],
-                      "p":    {"bm": 3},
-                      "eps": [
-                          {"ep": "coap://[fe80::b1d6]:1111", "pri": 2},
-                          {"ep": "coaps://[fe80::b1d6]:1122"},
-                          {"ep": "coap+tcp://[2001:db8:a::123]:2222", "pri": 3}
-                      ]
+                      "if":   ["oic.if.s"]
                     },
                     {
                       "href": "/temperature",
                       "rt":   ["oic.r.temperature"],
-                      "if":   ["oic.if.s"],
-                      "p":    {"bm": 3},
-                      "eps": [
-                          {"ep": "coap://[[2001:db8:a::123]:2222"}
-                      ]
+                      "if":   ["oic.if.s"]
                     }
                   ]
                 }
@@ -91,21 +82,11 @@ traits:
                   {
                     "href": "/humidity",
                     "rt":   ["oic.r.humidity"],
-                    "if":   ["oic.if.s"],
-                    "p":    {"bm": 3},
-                    "eps": [
-                        {"ep": "coap://[fe80::b1d6]:1111", "pri": 2},
-                        {"ep": "coaps://[fe80::b1d6]:1122"},
-                        {"ep": "coap+tcp://[2001:db8:a::123]:2222", "pri": 3}
-                    ]
+                    "if":   ["oic.if.s"]
                   },
                   {
                     "href": "/temperature",
                     "rt":   ["oic.r.temperature"],
-                    "if":   ["oic.if.s"],
-                    "p":    {"bm": 3},
-                    "eps": [
-                        {"ep": "coap://[[2001:db8:a::123]:2222"}
-                    ]
+                    "if":   ["oic.if.s"]
                   }
               ]
