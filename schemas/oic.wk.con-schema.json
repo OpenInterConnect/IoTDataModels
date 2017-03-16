@@ -29,6 +29,30 @@
           "type": "string",
           "maxLength": 64,
           "description": "Region"
+        },
+        "ln": {
+          "type": "array",
+          "items" :
+            {
+              "type": "object",
+              "properties": {
+                "language": {
+                  "$ref": "oic.types-schema.json#/definitions/language-tag",
+                  "description": "An RFC 5646 language tag."
+                },
+                "value": {
+                  "type": "string",
+                  "maxLength": 64,
+                  "description": "Device description in the indicated language."
+                }
+              }
+            },
+          "minItems" : 1,
+          "description": "Localized names"
+        },
+        "dl": {
+          "$ref": "oic.types-schema.json#/definitions/language-tag",
+          "description": "Default Language"
         }
       }
     }
