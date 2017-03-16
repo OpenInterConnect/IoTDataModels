@@ -127,9 +127,16 @@ traits:
                           {
                             "id": "0685B960-FFFF-46F7-BEC0-9E6234671ADC1",
                             "n": "my binary switch (for light bulb) mappings",
-                            "link": { "href":"coap://mydevice/mybinaryswitch",
-                                      "if": ["oic.if.a"],
-                                      "rt": ["oic.r.switch.binary"] },
+                            "link": {
+                              "href": "binarySwitch",
+                              "rt":   ["oic.r.switch.binary"],
+                              "if":   ["oic.if.a", "oic.if.baseline"],
+                              "eps": [
+                                  {"ep": "coap://[fe80::b1d6]:1111", "pri": 2},
+                                  {"ep": "coaps://[fe80::b1d6]:1122"},
+                                  {"ep": "coap+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                              ]
+                            },
                             "sceneMappings": [
                              {
                                "scene":           "off",

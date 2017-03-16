@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016,2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.rd.publish-schema.json#",
   "title": "RD Publish & Update",
   "definitions": {
@@ -8,7 +8,7 @@
       "description": "Publishes resources as OIC Links into the resource directory",
       "properties": {
         "linkSet": {
-          "$ref": "oic.collection-schema.json#/definitions/oic.collection.setof-tagged-setoflinks"
+          "$ref": "oic.collection-schema.json#/definitions/oic.collection.setoflinks"
         },
         "ttl": {
           "type": "integer",
