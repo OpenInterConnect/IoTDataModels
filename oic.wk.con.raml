@@ -13,7 +13,9 @@ documentation:
 
 schemas:
   - Configuration: !include schemas/oic.wk.con-schema.json
+  - Conf_Platform: !include schemas/oic.wk.con.p-schema.json
   - Update: !include schemas/oic.wk.con-Update-schema.json
+  - Update_Platform: !include schemas/oic.wk.con-Update-schema.json
 
 traits:
   - interface-all:
@@ -25,7 +27,7 @@ traits:
         if:
           enum: ["oic.if.rw"]
 
-/oic/con:
+/example/oic/con:
   displayName: OIC Configuration
   description: |
     Resource that allows for device specific information to be configured.
@@ -41,12 +43,14 @@ traits:
             schema: Configuration
             example: |
               {
-                "rt":   ["oic.wk.con"],
                 "n":    "My Friendly Device Name",
+                "rt":   ["oic.wk.con", "oic.wk.con.p"],
                 "loc":  [32.777,-96.797],
                 "locn": "My Location Name",
                 "c":    "USD",
-                "r":    "MyRegion"
+                "r":    "MyRegion",
+                "dl":   "en",
+                "mnpn": [ { "language": "en", "value": "My Friendly Device Name" } ]
               }
 
   post:
@@ -58,8 +62,11 @@ traits:
             schema: Update
             example: |
                 {
-                    "n": "My New Friendly Name",
-                    "r":  "MyNewRegion"
+                    "n": "Nuevo Nombre Amistoso",
+                    "r": "MyNewRegion",
+                    "ln": [ { "language": "es", "value": "Nuevo Nombre Amistoso" } ],
+                    "dl": "es",
+                    "mnpn": [ { "language": "es", "value": "Nuevo nombre de Plataforma Amigable" } ]
                 }
     responses:
       200:
@@ -67,6 +74,10 @@ traits:
           application/json:
             schema: Update
             example: |
-                {
-                    "r":  "MyNewRegion"
-                }
+              {
+                  "n": "Nuevo Nombre Amistoso",
+                  "r": "MyNewRegion",
+                  "ln": [ { "language": "es", "value": "Nuevo Nombre Amistoso" } ],
+                  "dl":   "es",
+                  "mnpn": [ { "language": "es", "value": "Nuevo nombre de Plataforma Amigable" } ]
+              }
