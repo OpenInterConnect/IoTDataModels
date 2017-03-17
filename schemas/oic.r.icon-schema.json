@@ -1,7 +1,7 @@
 {
-  "id": "schemas/oic.r.icon.json#",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.icon.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016,2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Icon",
   "definitions": {
     "oic.r.icon": {
