@@ -2,7 +2,7 @@
 title: OICEnergyUsage
 version: v1.1.0-20160519
 documentation:
-  - title: © 2016 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: © 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.
     content: |
         Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
         1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -45,13 +45,15 @@ traits:
                     "href": "/TimeIntervalResURI",
                     "rel":  "contains",
                     "rt":   ["oic.r.time.period"],
-                    "if":   ["oic.if.a"]
+                    "if":   ["oic.if.a"],
+                    "eps":  [{"ep": "coaps://[fe80::b1d6]:1122"}]
                   },
                   {
                     "href": "/EnergyConsumptionResURI",
                     "rel":  "contains",
                     "rt":   ["oic.r.energy.consumption"],
-                    "if":   ["oic.if.s"]
+                    "if":   ["oic.if.s"],
+                    "eps":  [{"ep": "coaps://[fe80::b1d6]:1122"}]
                   }
                 ]
               }

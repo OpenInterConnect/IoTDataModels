@@ -44,11 +44,11 @@ traits:
             example: |
               {
                 "rt":   ["oic.r.airqualitycollection","oic.wk.col"],
-                "if":   ["oic.if.baseline","oic.if.ll"],        
+                "if":   ["oic.if.baseline","oic.if.ll"],
                 "id":   "unique_example_id",
                 "links": [
-                  {"href": "/myCOMeasureResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"]},
-                  {"href": "/myCO2ResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"]}
+                  {"href": "/myCOMeasureResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myCO2ResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
                 ]
               }
 
@@ -72,7 +72,7 @@ traits:
             example: |
               {
                 "links": [
-                  {"href": "/myCOMeasureResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"]},
-                  {"href": "/myCO2ResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"]}
+                  {"href": "/myCOMeasureResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myCO2ResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
                 ]
               }

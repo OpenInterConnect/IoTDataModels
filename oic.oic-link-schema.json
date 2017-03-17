@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
-  "id": "http://openconnectivityfoundation.org/core/schemas/oic.oic-link-schema.json#",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.oic-link-schema.json#",
   "definitions": {
     "oic.oic-link": {
       "type": "object",
@@ -9,54 +9,60 @@
         "href": {
           "type": "string",
           "maxLength": 256,
-          "description": "RFC5988 style web-links serialized into JSON. This is the target URI",
+          "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
           "format": "uri"
         },
         "rel": {
-          "type": "string",
-          "default": "advertises",
-          "maxLength": 64,
-          "description": "The relation of the target URI referenced by the link to the context URI"
+          "oneOf":[
+            {
+              "type": "array",
+              "items": {
+                  "type": "string",
+                  "maxLength": 64
+                },
+              "minItems": 1,
+              "default": ["hosts"]
+            },
+            {
+              "type": "string",
+              "maxLength": 64,
+              "default": "hosts"
+            }
+          ],
+        "description": "The relation of the target URI referenced by the link to the context URI"
         },
         "rt": {
           "type": "array",
-          "items" : [
-            {
+          "items" : {
               "type" : "string",
               "maxLength": 64
-            }
-          ],
+            },
           "minItems" : 1,
-          "readOnly": true,
           "description": "Resource Type"
         },
         "if": {
           "type": "array",
-          "items": [
-            {
+          "items": {
               "type" : "string",
-              "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.lb", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s" ]
-            }
-          ],
+              "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s" ]
+            },
           "minItems": 1,
-          "readOnly": true,
           "description": "The interface set supported by this resource"
         },
+        "di": {
+           "$ref": "oic.types-schema.json#/definitions/uuid",
+           "description": "Unique identifier for device (UUID)"
+        },
         "p": {
-          "readOnly": true,
-          "description": "JSON object containing a Bitmap indicating observable and discoverable plus security and port",
+          "description": "Specifies the framework policies on the Resource referenced by the target URI",
           "type": "object",
           "properties": {
             "bm": {
-              "type": "integer"
-            },
-            "sec": {
-              "type": "boolean"
-            },
-            "port": {
+              "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
               "type": "integer"
             }
-          }
+          },
+          "required" : ["bm"]
         },
         "title": {
           "type": "string",
@@ -82,29 +88,47 @@
               "description": "Any unique string including a URI"
             },
             {
-              "type": "string",
-              "format": "uuid",
-              "description": "Use UUID for universal uniqueness - used in /oic/res to identify the device"
+              "$ref": "oic.types-schema.json#/definitions/uuid",
+              "description": "Unique identifier (UUID)"
             }
           ],
           "description": "The instance identifier for this web link in an array of web links - used in collections"
         },
-        "ttl": {
-          "type": "integer",
-          "description": "The time to live for this link in seconds - value is specified in a request only and is not returned on response. Max integer size to represent time is 4 octets"
-         },
         "type": {
-          "type": "string",
-          "maxLength": 64,
-          "description": "A hint at the representation of the resource referenced by the target URI",
-          "default": "application/json"
+          "type": "array",
+          "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting",
+          "items" : {
+            "type": "string",
+            "maxLength": 64
+            },
+          "minItems": 1,
+          "default": "application/cbor"
+        },
+        "eps": {
+          "type": "array",
+          "description": "the Endpoint information of the target Resource",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ep": {
+                "type": "string",
+                "format": "uri",
+                "description": "URI with Transport Protocol Suites + Endpoint Locator as specified in 10.2.1"
+              },
+              "pri": {
+                "type": "integer",
+                "minimum": "1",
+                "description": "The priority among multiple Endpoints as specified in 10.2.3"
+              }
+            }
+          }
         }
-      }
+      },
+      "required": [ "href", "rt", "if" ]
     }
   },
   "type": "object",
   "allOf": [
     { "$ref": "#/definitions/oic.oic-link" }
-  ],
-  "required": [ "href", "rt", "if" ]
+  ]
 }

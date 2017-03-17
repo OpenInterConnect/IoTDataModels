@@ -46,10 +46,10 @@ traits:
                 "rt":    ["oic.r.heatingzonecollection","oic.wk.col"],
                 "id":    "unique_example_id",
                 "links": [
-                  {"href": "/myZone1ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s","oic.if.baseline"]},
-                  {"href": "/myZone2ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s","oic.if.baseline"]},
-                  {"href": "/myZone3ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s","oic.if.baseline"]},
-                  {"href": "/myZone4ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s","oic.if.baseline"]}
+                  {"href": "/myZone1ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myZone2ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myZone3ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myZone4ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
                 ]
               }
 
@@ -71,9 +71,9 @@ traits:
             example: |
               {
                 "links": [
-                  {"href": "/myZone1ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"]},
-                  {"href": "/myZone2ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"]},
-                  {"href": "/myZone3ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"]},
-                  {"href": "/myZone4ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"]}
+                  {"href": "/myZone1ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myZone2ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myZone3ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myZone4ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
                 ]
               }

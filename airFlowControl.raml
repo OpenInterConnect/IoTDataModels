@@ -2,7 +2,7 @@
 title: OICAirFlowControl
 version: v1.1.0-20160519
 documentation:
-  - title: © 2016 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: © 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.
     content: |
         Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
         1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -52,13 +52,15 @@ traits:
                     "href": "/BinarySwitchResURI",
                     "rel":  "contains",
                     "rt":   ["oic.r.switch.binary"],
-                    "if":   ["oic.if.a"]
+                    "if":   ["oic.if.a"],
+                    "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]
                   },
                   {
                     "href": "/AirFlowResURI",
                     "rel":  "contains",
                     "rt":   ["oic.r.airflow"],
-                    "if":   ["oic.if.a"]
+                    "if":   ["oic.if.a"],
+                    "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]
                   }
                 ]
               }

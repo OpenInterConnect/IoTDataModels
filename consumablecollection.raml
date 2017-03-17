@@ -47,10 +47,10 @@ traits:
                 "rts":              ["oic.r.consumable","oic.r.value.conditional"],
                 "supportedconsumables": ["tonerBlack","tonerCyan","tonerMagenta","tonerYellow"],
                 "links": [
-                  {"href": "/myTonerBlackResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"]},
-                  {"href": "/myTonerCyanResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"]},
-                  {"href": "/myTonerMagentaResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"]},
-                  {"href": "/myTonerYellowResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"]}
+                  {"href": "/myTonerBlackResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myTonerCyanResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myTonerMagentaResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myTonerYellowResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
                 ]
               }
 
@@ -72,9 +72,9 @@ traits:
             example: |
               {
                 "links": [
-                  {"href": "/myTonerBlackResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"]},
-                  {"href": "/myTonerCyanResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"]},
-                  {"href": "/myTonerMagentaResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"]},
-                  {"href": "/myTonerYellowResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"]}
+                  {"href": "/myTonerBlackResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myTonerCyanResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myTonerMagentaResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myTonerYellowResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
                 ]
               }
