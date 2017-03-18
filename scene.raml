@@ -73,10 +73,10 @@ traits:
                             {
                                 "lastScene": "off",
                                 "sceneValues": "off,Reading,TVWatching",
-                                "rt":       ["oic.wk.sceneCollection"],
+                                "rt":       ["oic.wk.scenecollection"],
                                 "n":        "My Scenes for my living room",
                                 "id":       "0685B960-736F-46F7-BEC0-9E6CBD671ADC1",
-                                "rts":      ["oic.wk.sceneMember"],
+                                "rts":      ["oic.wk.scenemember"],
                                 "links": [
                                  ]
                             }
@@ -112,7 +112,7 @@ traits:
 
 /SceneMemberResURI:
     description: |
-      Collection that models a sceneMember.
+      Collection that models a scene member.
     displayName: Scene Member
 
     get:
@@ -125,6 +125,7 @@ traits:
                        schema: SceneMember
                        example: |
                           {
+                            "rt": ["oic.wk.scenemember"],
                             "id": "0685B960-FFFF-46F7-BEC0-9E6234671ADC1",
                             "n": "my binary switch (for light bulb) mappings",
                             "link": {
