@@ -22,19 +22,23 @@
           },
           "rts": {
             "type": "array",
-            "minItems": 1,
-            "maxItems": 2,
             "uniqueItems": true,
-            "items": {
-              "oneOf": [
-                {
+            "oneOf": [
+              {
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
                   "enum": ["oic.r.airquality","oic.r.value.conditional"]
-                },
-                {
+                }
+              },
+              {
+                "minItems": 1,
+                "maxItems": 1,
+                "items": {
                   "enum": ["oic.r.airquality"]
                 }
-              ]
-            }
+              }
+            ]
           }
         }
       ]
