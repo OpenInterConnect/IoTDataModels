@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
-    "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.batch-retrieve-schema.json#",
+    "id": "schemas/oic.collection.batch-retrieve-schema.json#",
     "title": "Collection Batch Retrieve Format",
     "definitions": {
       "oic.wk.col-batch-retrieve": {
