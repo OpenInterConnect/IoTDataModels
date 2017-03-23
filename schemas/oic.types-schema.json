@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
-    "id": "schemas/oic.types-schema.json#",
+    "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.types-schema.json#",
     "definitions" : {
         "uuid": {
             "description": "An identifier formatted according to IETF RFC 4122.",

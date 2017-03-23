@@ -80,7 +80,7 @@ traits:
             schema: rdSelection
             example: |
               {
-                "rt": ["oic.wk.rd"],
+                "rt": "oic.wk.rd",
                 "sel": 50
               }
   post:
@@ -114,14 +114,14 @@ traits:
                 "links": [
                   {
                     "href": "coap://someAuthority:1000/somePath",
-                    "rt":   ["oic.r.someResource"],
-                    "if":   ["oic.if.a"],
+                    "rt":   "oic.r.someResource",
+                    "if":   "oic.if.a",
                     "ins":  12345
                   },
                   {
                     "href": "coap://someAuthority:1000/somePath",
-                    "rt":   ["oic.r.someOtherResource"],
-                    "if":   ["oic.if.baseline"],
+                    "rt":   "oic.r.someOtherResource",
+                    "if":   "oic.if.baseline",
                     "ins":  54321
                   }
                 ],
