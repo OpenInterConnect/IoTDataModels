@@ -33,20 +33,20 @@ traits:
             schema: PING
             example: |
               {
-                "rt":   ["oic.wk.ping"],
-                "n": "Ping Information",
-                "in":   16
+                "rt": ["oic.wk.ping"],
+                "n":  "Ping Information",
+                "in": 16
               }
-post:
+  post:
     description: Update or reset the alive interval
     body:
       application/json:
         schema: PING
-          example: |
+        example: |
           {
-            "in":   16
+            "in": 16
           }
 
-    response:
+    responses:
       203:
         description: Successfully updated & restarted alive interval timer.

@@ -42,8 +42,8 @@
 
         "link": {
           "type": "string",
-          "description": "web link that points at an resource",
-          "$ref": "oic.oic-link-schema.json#"
+          "description": "web link that points at a resource",
+          "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
         }
       },
       "required": [ "link" ]

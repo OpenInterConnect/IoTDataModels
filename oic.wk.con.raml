@@ -4,7 +4,7 @@ version: v1-20160622
 documentation:
 
   - title: OCF Copyright
-    content: Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.
+    content: Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.
   - title: OCF License
     content: !include LICENSE.md
   - title: OCF Disclaimer
@@ -13,7 +13,9 @@ documentation:
 
 schemas:
   - Configuration: !include schemas/oic.wk.con-schema.json
+  - Conf_Platform: !include schemas/oic.wk.con.p-schema.json
   - Update: !include schemas/oic.wk.con-Update-schema.json
+  - Update_Platform: !include schemas/oic.wk.con.p-Update-schema.json
 
 traits:
   - interface-all:
@@ -25,15 +27,15 @@ traits:
         if:
           enum: ["oic.if.rw"]
 
-/oic/con:
-  displayName: OIC Configuration
+/example/oic/con:
+  displayName: OIC Device Configuration
   description: |
-    Resource that allows for device specific information to be configured.
+    Resource that allows for Device specific information to be configured.
 
   get:
     is: ["interface-all"]
     description: |
-      Retrieves the current configuration settings
+      Retrieves the current Device configuration settings
     responses:
       200:
         body:
@@ -41,12 +43,13 @@ traits:
             schema: Configuration
             example: |
               {
-                "rt":   ["oic.wk.con"],
                 "n":    "My Friendly Device Name",
+                "rt":   ["oic.wk.con"],
                 "loc":  [32.777,-96.797],
                 "locn": "My Location Name",
                 "c":    "USD",
-                "r":    "MyRegion"
+                "r":    "MyRegion",
+                "dl":   "en"
               }
 
   post:
@@ -58,8 +61,10 @@ traits:
             schema: Update
             example: |
                 {
-                    "n": "My New Friendly Name",
-                    "r":  "MyNewRegion"
+                  "n": "Nuevo Nombre Amistoso",
+                  "r": "MyNewRegion",
+                  "ln": [ { "language": "es", "value": "Nuevo Nombre Amistoso" } ],
+                  "dl": "es"
                 }
     responses:
       200:
@@ -67,6 +72,52 @@ traits:
           application/json:
             schema: Update
             example: |
-                {
-                    "r":  "MyNewRegion"
-                }
+              {
+                  "n": "Nuevo Nombre Amistoso",
+                  "r": "MyNewRegion",
+                  "ln": [ { "language": "es", "value": "Nuevo Nombre Amistoso" } ],
+                  "dl":   "es"
+              }
+
+/example/oic/con/p:
+  displayName: OIC Platform Configuration
+  description: |
+    Resource that allows for platform specific information to be configured.
+
+  get:
+    is: ["interface-all"]
+    description: |
+      Retrieves the current platform configuration settings
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Conf_Platform
+            example: |
+              {
+                "rt":   ["oic.wk.con.p"],
+                "mnpn": [ { "language": "en", "value": "My Friendly Device Name" } ]
+              }
+
+  post:
+    is: ["interface-rw"]
+    description: |
+      Update the information about the platform
+    body:
+      application/json:
+        schema: Update_Platform
+        example: |
+          {
+            "n": "Nuevo nombre",
+            "mnpn": [ { "language": "es", "value": "Nuevo nombre de Plataforma Amigable" } ]
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Update_Platform
+            example: |
+              {
+                "n": "Nuevo nombre",
+                "mnpn": [ { "language": "es", "value": "Nuevo nombre de Plataforma Amigable" } ]
+              }

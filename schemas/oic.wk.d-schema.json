@@ -24,38 +24,8 @@
           "description": "Spec versions of the Resource and Device Specifications to which this device data model is implemented"
         },
         "ld": {
-            "type": "array",
-            "items" : [
-              {
-                "type": "object",
-                "properties": {
-                  "language": {
-                    "$ref": "oic.types-schema.json#/definitions/language-tag",
-                    "readOnly": true,
-                    "description": "An RFC 5646 language tag."
-                  },
-                  "value": {
-                    "type": "string",
-                    "maxLength": 64,
-                    "readOnly": true,
-                    "description": "Device description in the indicated language."
-                  }
-                }
-              }
-            ],
-            "minItems" : 1,
-            "readOnly": true,
-            "description": "Localized Description."
-        },
-        "sv": {
-          "type": "string",
-          "maxLength": 64,
-          "readOnly": true,
-          "description": "Software version."
-        },
-        "dmn": {
           "type": "array",
-          "items" : [
+          "items" :
             {
               "type": "object",
               "properties": {
@@ -71,11 +41,39 @@
                   "description": "Device description in the indicated language."
                 }
               }
-            }
-          ],
+            },
           "minItems" : 1,
           "readOnly": true,
           "description": "Localized Description."
+        },
+        "sv": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Software version."
+        },
+        "dmn": {
+          "type": "array",
+          "items" :
+            {
+              "type": "object",
+              "properties": {
+                "language": {
+                  "$ref": "oic.types-schema.json#/definitions/language-tag",
+                  "readOnly": true,
+                  "description": "An RFC 5646 language tag."
+                },
+                "value": {
+                  "type": "string",
+                  "maxLength": 64,
+                  "readOnly": true,
+                  "description": "Manufacturer name in the indicated language."
+                }
+              }
+            },
+          "minItems" : 1,
+          "readOnly": true,
+          "description": "Manufacturer Name."
         },
         "dmno": {
           "type": "string",
