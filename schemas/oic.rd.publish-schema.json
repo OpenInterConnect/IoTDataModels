@@ -18,7 +18,10 @@
     }
   },
   "type": "object",
-  "allOf": [{ "$ref": "#/definitions/oic.rd.publish" }],
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.rd.publish" }
+  ],
   "required": [ "links" ],
   "dependencies": {
     "links": [ "ttl" ]
