@@ -46,7 +46,7 @@ traits:
         description: |
           Interface is optional since there is only one interface supported for the Resource Type
           Both for RD selectin and for publish.
-          Example:  GET /oic/rd /oic/rd?if=oic.if.baseline
+          Example:  GET /oic/rd?if=oic.if.baseline
         type: string
         enum: [ "oic.if.baseline" ]
         default: "oic.if.baseline"
@@ -115,9 +115,9 @@ traits:
                     "if":   ["oic.if.a"],
                     "ins":  12345,
                     "eps": [
-                        {"ep": "coap://[fe80::b1d6]:1111", "pri": 2},
+                        {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2},
                         {"ep": "coaps://[fe80::b1d6]:1122"},
-                        {"ep": "coap+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                        {"ep": "coaps+tcp://[2001:db8:a::123]:2222", "pri": 3}
                     ]
                   },
                   {
@@ -126,7 +126,7 @@ traits:
                     "if":   ["oic.if.baseline"],
                     "ins":  54321,
                     "eps": [
-                        {"ep": "coap://[[2001:db8:a::123]:2222"}
+                        {"ep": "coaps://[[2001:db8:a::123]:2222"}
                     ]
                   }
                 ],
