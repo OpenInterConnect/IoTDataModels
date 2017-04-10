@@ -103,6 +103,8 @@ traits:
         description: |
           Respond with the same schema as publish but with the links have the "ins" parameter set to the appropriate instance value.
           This value is used by the receiver to manage that OIC Link instance.
+          NOTE: That oic.r.airquality and oic.r.button OCF defined Resource Types are used for
+          illustrative purposes here as fixtious examples.
         body:
           application/json:
             schema: rdPublish
@@ -111,7 +113,7 @@ traits:
                 "links": [
                   {
                     "href": "coap://someAuthority:1000/somePath",
-                    "rt":   ["oic.r.someResource"],
+                    "rt":   ["oic.r.airquality"],
                     "if":   ["oic.if.a"],
                     "ins":  12345,
                     "eps": [
@@ -122,7 +124,7 @@ traits:
                   },
                   {
                     "href": "coap://someAuthority:1000/somePath",
-                    "rt":   ["oic.r.someOtherResource"],
+                    "rt":   ["oic.r.button"],
                     "if":   ["oic.if.baseline"],
                     "ins":  54321,
                     "eps": [

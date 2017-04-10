@@ -13,6 +13,8 @@
           "properties": {
             "href": {
               "type": "string",
+              "maxLength": 256,
+              "format": "uri",
               "description": "URI of the target resource relative assuming the collection URI as anchor"
             },
             "rep": {
