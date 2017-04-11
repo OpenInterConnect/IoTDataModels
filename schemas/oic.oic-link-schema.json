@@ -124,7 +124,7 @@
           }
         }
       },
-      "required": [ "href", "rt", "if", "eps" ]
+      "required": [ "href", "rt", "if" ]
     }
   },
   "type": "object",

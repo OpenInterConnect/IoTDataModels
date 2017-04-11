@@ -7,10 +7,6 @@
     "oic.rd.attributes": {
       "type": "object",
       "properties": {
-        "n": {
-          "type": "string",
-          "description": "A human friendly name for the Resource Directory"
-        },
         "di": {
           "$ref": "oic.types-schema.json#/definitions/uuid",
           "description": "A unique identifier for the Resource Directory - the same as the device ID of the RD"
@@ -64,6 +60,9 @@
     }
   },
   "type": "object",
-  "allOf": [ {"$ref": "#/definitions/oic.rd.attributes"}],
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core" },
+    { "$ref": "#/definitions/oic.rd.attributes" }
+  ],
   "required": ["sel"]
 }

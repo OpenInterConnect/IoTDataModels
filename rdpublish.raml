@@ -45,31 +45,29 @@ traits:
       if:
         description: |
           Interface is optional since there is only one interface supported for the Resource Type
-          Both for RD selectin and for publish
+          Both for RD selectin and for publish.
+          Example:  GET /oic/rd?if=oic.if.baseline
         type: string
         enum: [ "oic.if.baseline" ]
         default: "oic.if.baseline"
         required: false
-        example: |
-          GET /oic/rd?if=oic.if.baseline
 
 /oic/rd:
   displayName: Resource directory resource
   description: |
-    Resource to be exposed by any Device that can act as a Resource Directory
+    Resource to be exposed by any Device that can act as a Resource Directory.
   get:
     description: |
       Get the attributes of the Resource Directory for selection purposes.
     queryParameters:
       rt:
         description: |
-          Only one Resource Type is used for GET; RT is optional
+          Only one Resource Type is used for GET; RT is optional.
+          Example: GET /oic/rd?rt=oic.wk.rd
         type: string
         enum: [ "oic.wk.rd" ]
         default: "oic.wk.rd"
         required: false
-        example: |
-            GET /oic/rd?rt=oic.wk.rd
     is: [ rddefinterface ]
     responses:
       200:
@@ -80,7 +78,7 @@ traits:
             schema: rdSelection
             example: |
               {
-                "rt": "oic.wk.rd",
+                "rt": ["oic.wk.rd"],
                 "sel": 50
               }
   post:
@@ -94,18 +92,19 @@ traits:
       rt:
         description: |
           Only one Resource Type is used for GET; RT is optional
+          Example: /oic/rd?rt=oic.wk.rdpub
         type: string
         enum: [ "oic.wk.rdpub" ]
         default: "oic.wk.rdpub"
         required: false
-        example: |
-            GET /oic/rd?rt=oic.wk.rdpub
     is: [ rddefinterface ]
     responses:
       200:
         description: |
           Respond with the same schema as publish but with the links have the "ins" parameter set to the appropriate instance value.
           This value is used by the receiver to manage that OIC Link instance.
+          NOTE: That oic.r.airquality and oic.r.button OCF defined Resource Types are used for
+          illustrative purposes here as fictitious examples.
         body:
           application/json:
             schema: rdPublish
@@ -114,15 +113,23 @@ traits:
                 "links": [
                   {
                     "href": "coap://someAuthority:1000/somePath",
-                    "rt":   "oic.r.someResource",
-                    "if":   "oic.if.a",
-                    "ins":  12345
+                    "rt":   ["oic.r.airquality"],
+                    "if":   ["oic.if.a"],
+                    "ins":  12345,
+                    "eps": [
+                        {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2},
+                        {"ep": "coaps://[fe80::b1d6]:1122"},
+                        {"ep": "coaps+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                    ]
                   },
                   {
                     "href": "coap://someAuthority:1000/somePath",
-                    "rt":   "oic.r.someOtherResource",
-                    "if":   "oic.if.baseline",
-                    "ins":  54321
+                    "rt":   ["oic.r.button"],
+                    "if":   ["oic.if.baseline"],
+                    "ins":  54321,
+                    "eps": [
+                        {"ep": "coaps://[[2001:db8:a::123]:2222"}
+                    ]
                   }
                 ],
                 "ttl": 600
