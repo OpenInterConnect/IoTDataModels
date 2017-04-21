@@ -57,9 +57,9 @@ schemas:
     queryParameters:
       rt:
         description: "used in POST request to ask the RD to add the Links in payload to /oic/res."
-        enum: ["oic.r.rdpub"]		
+        enum: ["oic.wk.rdpub"]		
         example: |
-          POST /oic/rd?rt=oic.r.rdpub        
+          POST /oic/rd?rt=oic.wk.rdpub        
       #"rt" query is used in POST request but such usage is unprecedented & out-of-sync with existing "rt" query practice, 
       # so I recommend to remove this if IoTivity allows. Take notice here the absence of "rt" would produce the same result.  			
     body:
