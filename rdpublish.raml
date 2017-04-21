@@ -16,67 +16,22 @@ schemas:
   # rdPublish represents the payload in POST request. 
 -  rdSelection: !include schemas/oic.rd.selection-schema.json
 -  rdPublish: !include schemas/oic.rd.publish-schema.json
-
-traits:
-- rddefinterface:
-    queryParameters:
-      if:
-        description: |
-          Interface is optional since there is only one interface supported for the Resource Type
-          Both for RD selectin and for publish.
-          Example:  GET /oic/rd?if=oic.if.baseline
-        type: string
-        enum: [ "oic.if.baseline" ]
-        default: "oic.if.baseline"
-        required: false
-
-traits:
-  - interface-if:
-      queryParameters:
-        if:
-          enum: ["oic.if.baseline"]
-  - link-publish-rt:
-      description: |
-        used in POST request to ask the RD to add the Links in payload to /oic/res. 
-      queryParameters:
-        rt:
-          enum: ["oic.r.rdpub"]		        
-      #"rt" query is used in POST request but such usage is unprecedented & 
-      # out-of-sync with existing "rt" query practice, so recommend to remove this if IoTivity allows. 		
-  - link-delete-ins: 
-      description: |
-        used in DELETE request to ask the RD to remove the Links indicated by ins from /oic/res. 
-        "ins" is assigned by RD upon successful Link publishing to identify the published Link.  
-      queryParameters:
-        ins:
-          "oneOf": [
-            {
-              "type": "integer",
-              "description": "An ordinal number that is not repeated - must be unique in the collection context"
-            },
-            {
-              "type": "string",
-              "maxLength": 256,
-              "format" : "uri",
-              "description": "Any unique string including a URI"
-            },
-            {
-              "$ref": "oic.types-schema.json#/definitions/uuid",
-              "description": "Unique identifier (UUID)"
-            }
-          ]	
-		
+	
 /oic/rd:
   displayName: Resource directory resource
   description: |
     Resource to be exposed by any Device that can act as a Resource Directory.
     1) Provides selector criteria with GET request, 
-    2) Publish a Link in /oic/res with POST request 
+    2) Publish or Update a Link in /oic/res with POST request 
     3) Delete a Link in /oic/res with DELETE request 
+
   get:
     description: |
       Get the attributes of the Resource Directory for selection purposes.
-    is: [ interface-if ]
+    queryParameters:
+      if:
+        description: "The Interface to be used."
+        enum: ["oic.if.baseline"]
     responses:
       200:
         description: |
@@ -89,12 +44,24 @@ traits:
                 "rt": ["oic.wk.rd"],
                 "sel": 50
               }
+
   post:
     description: |
-      Publish the resource information. Appropriates parts of the information posted will be discovered through /oic/res
-    is: [ link-publish-rt ]
-      #"rt" query is used POST request & such usage is unprecedented, unspecified & 
-      # out-of-sync with existing "rt" query practice. recommend to remove this if IoTivity allows. 		
+      Publish the resource information for the first time or Update the existing one in /oic/res. 
+      Appropriates parts of the information, i.e. Links of the published Resources will be discovered through /oic/res. 
+      1) When a Device first publishes a Link, the request payload to RD includes only the Links and "di" of the publishing Device.  	 
+      2) Upon granting the request, the RD assigns a unique instance value identifying the Link among all the Links it advertises  
+         and sends back the instance value in "ins" Paramter in the Link to the publishing Device.  
+      3) When later the publishing Device updates the existing Link, i.e. changing its Endpoint information,   
+         the request paylod to RD needs to include the instance value in "ins" Parameter to identify the Link to update.  
+    queryParameters:
+      rt:
+        description: "used in POST request to ask the RD to add the Links in payload to /oic/res."
+        enum: ["oic.r.rdpub"]		
+        example: |
+          POST /oic/rd?rt=oic.r.rdpub        
+      #"rt" query is used in POST request but such usage is unprecedented & out-of-sync with existing "rt" query practice, 
+      # so I recommend to remove this if IoTivity allows. Take notice here the absence of "rt" would produce the same result.  			
     body:
       application/json:
         schema: rdPublish
@@ -130,8 +97,8 @@ traits:
     responses:
       200:
         description: |
-          Respond with the same schema as publish but with the links have the "ins" parameter set to the appropriate instance value.
-          This value is used by the receiver to manage that OIC Link instance.
+          Respond with the same schema as publish but, when a Link is first published, with the additional "ins" Parameter in the Link.  
+          This value is used by the receiver to manage that OIC Link instance. 
         body:
           application/json:
             schema: rdPublish
@@ -172,27 +139,26 @@ traits:
       Delete a particular OIC Link - the link may be a simple link or a link in a tagged set.
     queryParameters:
       di:
-        displayName: ID of the device making request
         description: |
-          This is used to determine which set of links to operata on. (Need authentication to ensure that there is no spoofing). 
-          If instance is ommitted then the entire set of links from this device ID is deleted
-        type: string
-        required: true
+          This is used to determine which set of links to delete. (Need authentication to ensure that there is no spoofing). 
+          It's the form of di=value, where value is a device ID indicating the Device to operate on. 
+          When included, the entire set of links corresponding to the device ID is deleted. 
+        type: string 
+        required: false 
         example: |
           DELETE /oic/rd?di="0685B960-736F-46F7-BEC0-9E6CBD671ADC1"
       ins:
-        displayName: Link instance for deletion
         description: |
           Instance of the link to delete
-          Value of parameter is a string where instance to be deleted are comma separated
+          Value of parameter is a string indicating the instance to be deleted. 
+          When included, the Link with the same instance value is deleted. 		  
         type: string
         required: false
         example: |
-          DELETE /oic/rd?di="0685B960-736F-46F7-BEC0-9E6CBD671ADC1";ins="20"
+          DELETE /oic/rd?ins="20"
     responses:
       200:
-        description: The delete succeeded
-
-# The discovery through the /oic/res of the resource directory is the same as the standard resource discovery
-# Need to include the RAML for /oic/res based resource discovery
+ 		
+# The discovery through the /oic/res of the resource directory is the same 
+# as specified in 11.3.6.4.1 /oic/res and retrieving of the resources  
 
