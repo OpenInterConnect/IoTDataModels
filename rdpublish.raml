@@ -51,9 +51,9 @@ schemas:
       Appropriates parts of the information, i.e. Links of the published Resources will be discovered through /oic/res. 
       1) When a Device first publishes a Link, the request payload to RD includes only the Links and "di" of the publishing Device.  	 
       2) Upon granting the request, the RD assigns a unique instance value identifying the Link among all the Links it advertises  
-         and sends back the instance value in "ins" Paramter in the Link to the publishing Device.  
+         and sends back the instance value in "ins" Parameter in the Link to the publishing Device.  
       3) When later the publishing Device updates the existing Link, i.e. changing its Endpoint information,   
-         the request paylod to RD needs to include the instance value in "ins" Parameter to identify the Link to update.  
+         the request payload to RD needs to include the instance value in "ins" Parameter to identify the Link to update.  
     queryParameters:
       rt:
         description: "used in POST request to ask the RD to add the Links in payload to /oic/res."
