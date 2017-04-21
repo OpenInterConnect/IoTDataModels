@@ -49,7 +49,7 @@ schemas:
     description: |
       Publish the resource information for the first time or Update the existing one in /oic/res. 
       Appropriates parts of the information, i.e. Links of the published Resources will be discovered through /oic/res. 
-      1) When a Device first publishes a Link, the request payload to RD includes only the Links and "di" of the publishing Device.  	 
+      1) When a Device first publishes a Link, the request payload to RD may include the Links without "ins" Parameter.  	 
       2) Upon granting the request, the RD assigns a unique instance value identifying the Link among all the Links it advertises  
          and sends back the instance value in "ins" Parameter in the Link to the publishing Device.  
       3) When later the publishing Device updates the existing Link, i.e. changing its Endpoint information,   
