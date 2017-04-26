@@ -16,12 +16,12 @@
         "language-tag": {
           "description": "An identifier formatted according to IETF RFC 5646 (langusge tag).",
           "type": "string",
-          "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1-8})*$"
+          "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$"
         },
         "int64": {
           "description": "A string instance is valid against this attribute if it contains an integer in the range [-(2**63), (2**63)-1]",
           "type": "string",
-          "pattern": "^0|(-?[1-9][0-9]{0,18)}$"
+          "pattern": "^0|(-?[1-9][0-9]{0,18})$"
         },
         "uint64": {
           "description": "A string instance is valid against this attribute if it contains an integer in the range [0, (2**64)-1]",
