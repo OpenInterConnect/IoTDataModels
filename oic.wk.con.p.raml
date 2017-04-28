@@ -1,0 +1,69 @@
+#%RAML 0.8
+title: OIC Platform Configuration
+version: v1-20160622
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+
+schemas:
+  - Conf_Platform: !include schemas/oic.wk.con.p-schema.json
+  - Update_Platform: !include schemas/oic.wk.con.p-Update-schema.json
+
+traits:
+  - interface-all:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw", "oic.if.baseline"]
+  - interface-rw:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw"]
+
+/example/oic/con/p:
+  displayName: Platform Configuration
+  description: |
+    Resource that allows for platform specific information to be configured.
+
+  get:
+    is: ["interface-all"]
+    description: |
+      Retrieves the current platform configuration settings
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Conf_Platform
+            example: |
+              {
+                "rt":   ["oic.wk.con.p"],
+                "mnpn": [ { "language": "en", "value": "My Friendly Device Name" } ]
+              }
+
+  post:
+    is: ["interface-rw"]
+    description: |
+      Update the information about the platform
+    body:
+      application/json:
+        schema: Update_Platform
+        example: |
+          {
+            "n": "Nuevo nombre",
+            "mnpn": [ { "language": "es", "value": "Nuevo nombre de Plataforma Amigable" } ]
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Update_Platform
+            example: |
+              {
+                "n": "Nuevo nombre",
+                "mnpn": [ { "language": "es", "value": "Nuevo nombre de Plataforma Amigable" } ]
+              }
