@@ -23,7 +23,9 @@ traits:
   displayName: Ping
   is: [ interface ]
   description: |
-    The resource using which an Client keeps its Connection with an Server active.
+    The resource using which a Client keeps its Connection with a Server active.
+    in is an integer defining the total time over which the connection is kept alive.
+    inarray is an array of integers governing the periodicity of the ping.
   get:
     description: Retrieve the ping information
     responses:
@@ -34,8 +36,8 @@ traits:
             example: |
               {
                 "rt": ["oic.wk.ping"],
-                "n":  "Ping Information",
-                "in": 16
+                "in": 16,
+                "inarray": [4, 8, 12]
               }
   post:
     description: Update or reset the alive interval
@@ -49,4 +51,4 @@ traits:
 
     responses:
       203:
-        description: Successfully updated & restarted alive interval timer.
+        description: Successfully updated and restarted alive interval timer.
