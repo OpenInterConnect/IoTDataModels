@@ -11,29 +11,31 @@
           "$ref": "oic.collection-schema.json#/definitions/oic.collection"
         },
         {
-          "rt": {
-            "type": "array",
-            "minItems": 2,
-            "maxItems": 2,
-            "uniqueItems": true,
-            "items": {
-              "enum": ["oic.r.heatingzonecollection","oic.wk.col"]
-            }
-          },
-          "rts": {
-            "type": "array",
-            "minItems": 1,
-            "maxItems": 2,
-            "uniqueItems": true,
-            "items": {
-              "oneOf": [
-                {
-                  "enum": ["oic.r.heatingzone","oic.r.value.conditional"]
-                },
-                {
-                  "enum": ["oic.r.heatingzone"]
-                }
-              ]
+          "properties": {
+            "rt": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "uniqueItems": true,
+              "items": {
+                "enum": ["oic.r.heatingzonecollection","oic.wk.col"]
+              }
+            },
+            "rts": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 2,
+              "uniqueItems": true,
+              "items": {
+                "oneOf": [
+                  {
+                    "enum": ["oic.r.heatingzone","oic.r.value.conditional"]
+                  },
+                  {
+                    "enum": ["oic.r.heatingzone"]
+                  }
+                ]
+              }
             }
           }
         }

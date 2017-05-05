@@ -11,7 +11,8 @@
           "$ref": "oic.collection-schema.json#/definitions/oic.collection"
         },
         {
-          "rt": {
+          "properties": {
+            "rt": {
               "type": "array",
               "minItems": 2,
               "maxItems": 2,
@@ -19,8 +20,8 @@
               "items": {
                   "enum": ["oic.r.consumablecollection","oic.wk.col"]
               }
-          },
-          "rts": {
+            },
+            "rts": {
               "type": "array",
               "minItems": 1,
               "maxItems": 2,
@@ -35,19 +36,18 @@
                       }
                   ]
               }
+            },
+            "supportedconsumables": {
+              "type": "array",
+              "description": "Array of possible consumables the device measures.",
+              "readOnly": true,
+              "items": {
+                "type": "string"
+              }
+            }
           }
         }
-      ],
-      "properties": {
-        "supportedconsumables": {
-          "type": "array",
-          "description": "Array of possible consumables the device measures.",
-          "readOnly": true,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
+      ]
     }
   },
   "type": "object",

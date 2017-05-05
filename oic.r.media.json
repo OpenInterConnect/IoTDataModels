@@ -5,21 +5,23 @@
   "title": "Media",
   "definitions": {
     "oic.r.media": {
-      "media": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "url": {
-              "type": "string",
-              "description": "url for the media instance"
-            },
-            "sdp": {
-              "type": "array",
-              "description": "Array of strings, one per SDP line",
-              "items": {
+      "properties": {
+        "media": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {
                 "type": "string",
-                "description": "SDP media or attribute line"
+                "description": "url for the media instance"
+              },
+              "sdp": {
+                "type": "array",
+                "description": "Array of strings, one per SDP line",
+                "items": {
+                  "type": "string",
+                  "description": "SDP media or attribute line"
+                }
               }
             }
           }
