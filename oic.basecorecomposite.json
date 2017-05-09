@@ -1,14 +1,21 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.baseResource#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.basecorecomposite.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Base and Core Composite Resource",
   "definitions": {
     "oic.core": {
       "properties": {
         "rt": {
-          "type": "string",
-          "description": "ReadOnly, Resource Type"
+          "type": "array",
+          "description": "ReadOnly, Resource Type",
+          "items" : [
+            {
+              "type" : "string",
+              "maxLength": 64
+            }
+          ],
+          "minItems" : 1
         },
         "if": {
           "type" : "array",
@@ -17,10 +24,6 @@
             "type": "string",
             "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.lb", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s" ]
           }
-        },
-        "p": {
-          "type": "integer",
-          "description": "ReadOnly, Bitmap indicating observable and discoverable"
         },
         "n": {
           "type": "string",
@@ -35,6 +38,7 @@
     "oic.r.baseresource": {
       "properties": {
         "value": {
+          "description": "The value sensed or actuated by this Resource",
           "anyOf": [
             {"type": "array"},
             {"type": "string"},
@@ -42,12 +46,17 @@
             {"type": "integer"},
             {"type": "number"},
             {"type": "object"}
-          ],
-          "description": "The value sensed or actuated by this Resource"
+          ]
+        },
+        "precision":  {
+          "type": "number",
+          "readOnly": true,
+          "description": "Accuracy granularity of the exposed value"
         },
         "range": {
           "type": "array",
-          "description": "ReadOnly, The valid range for the value Property",
+          "description": "The valid range for the value Property",
+          "readOnly": true,
           "minItems": 2,
           "maxItems": 2,
           "items": {
@@ -56,13 +65,21 @@
               {"type": "integer"}
             ]
           }
+        },
+        "step": {
+          "description": "Step value across the defined range",
+          "readOnly": true,
+          "anyOf": [
+            {"type": "integer"},
+            {"type": "number"}
+          ]
         }
       }
     }
   },
   "type": "object",
   "allOf": [
-    {"$ref": "#definitions/oic.core"},
+    {"$ref": "#/definitions/oic.core"},
     {"$ref": "#/definitions/oic.r.baseresource"}
   ]
 }

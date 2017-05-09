@@ -1,10 +1,10 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.muscle.oxygen.saturation#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.muscle.oxygen.saturation.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description": "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Muscle Oxygen Saturation",
   "definitions": {
-    "oic.r.muscle.o2.saturation": {
+    "oic.r.muscle.oxygen.saturation": {
       "type": "object",
       "properties": {
         "smo2": {

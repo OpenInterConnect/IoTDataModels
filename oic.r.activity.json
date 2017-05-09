@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.activity#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.activity.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description": "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Activity",
   "definitions": {
     "oic.r.activity": {
@@ -10,7 +10,7 @@
         "Type": {
           "type": "string",
           "enum": ["sleep", "sit", "stand", "walk", "run"],
-          "description": "User’s current activity type"
+          "description": "Users current activity type"
         },
         "Atime": {
           "type": "integer",
@@ -20,7 +20,7 @@
         "Acalory": {
           "type": "integer",
           "minimum": 0,
-          "description": "Total used calories per day that calculated by user’s activity"
+          "description": "Total used calories per day that calculated by users activity"
         },
         "observedtime": {
           "type": "string",

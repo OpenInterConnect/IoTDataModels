@@ -6,38 +6,47 @@
   "definitions": {
     "oic.r.sensor.geolocation": {
       "type": "object",
-      "properties": {
-        "latitude": {
-          "type": "number",
-          "description": "ReadOnly. Device's Current Latitude coordinate (degrees)"
-        },
-        "longitude": {
-          "type": "number",
-          "description": "ReadOnly. Device's Current Longitude coordinate (degrees)"
-        },
-        "$ref": "oic.r.altimeter.json#/definitions/oic.r.altimeter",
-        "accuracy": {
-          "type": "number",
-          "minimum": 0,
-          "description": "ReadOnly. The accuracy level of the latitude and longitude coordinates (metres)"
-        },
-        "altitudeAccuracy": {
-          "type": "number",
-          "minimum": 0,
-          "description": "ReadOnly. The accuracy level of the altitude coordinates (metres)"
-        },
-        "heading": {
-          "type": "number",
-          "minimum": 0,
-          "maximum": 360,
-          "description": "ReadOnly. Direction of travel of device (degree)"
-        },
-        "speed": {
-          "type": "number",
-          "minimum": 0,
-          "description": "ReadOnly. Device's current velocity (metres per second)"
+      "allOf": [
+        {"$ref": "oic.r.altimeter.json#/definitions/oic.r.altimeter"},
+        {"properties": {
+           "latitude": {
+             "type": "number",
+             "readOnly": true,
+             "description": "Device's Current Latitude coordinate (degrees)"
+           },
+           "longitude": {
+             "type": "number",
+             "readOnly": true,
+             "description": "Device's Current Longitude coordinate (degrees)"
+           },
+           "accuracy": {
+             "type": "number",
+             "minimum": 0,
+             "readOnly": true,
+             "description": "The accuracy level of the latitude and longitude coordinates (metres)"
+           },
+           "altitudeAccuracy": {
+             "type": "number",
+             "minimum": 0,
+             "readOnly": true,
+             "description": "The accuracy level of the altitude coordinates (metres)"
+           },
+           "heading": {
+             "type": "number",
+             "minimum": 0,
+             "maximum": 360,
+             "readOnly": true,
+             "description": "Direction of travel of device (degree)"
+           },
+           "speed": {
+             "type": "number",
+             "minimum": 0,
+             "readOnly": true,
+             "description": "Device's current velocity (metres per second)"
+           }
+         }
         }
-      }
+      ]
     }
   },
   "type": "object",

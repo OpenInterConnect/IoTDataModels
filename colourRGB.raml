@@ -1,14 +1,14 @@
 #%RAML 0.8
 title: OICColourRGB
-version: v1.1.0-20160229
+version: v1.1.0-20160519
 documentation:
-  - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
+  - title: © 2016 Open Connectivity Foundation, Inc. All rights reserved.
     content: |
         Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
         1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
         2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 
-        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 schemas:
   - ColourRGB: !include oic.r.colour.rgb.json
 
@@ -20,18 +20,18 @@ traits:
 
 /ColourRGBResURI:
   description: |
-    This resource specifies the actual colour in the RGB space represented as a string.
+    This resource specifies the actual colour in the RGB space represented as an array of integers.
     Each colour value is described with a Red, Green, Blue component.
     These colour values are encoded as an array of integer values ([R,G,B]).
-    The minimum and maximum colour value per component is described by the range array.
-    When the range value is omitted, then the range is [0,255].
+    The minimum and maximum colour value per component may be described by range (from oic.r.baseresource).
+    When range (from oic.r.baseresource) is omitted, then the range is [0,255].
   displayName: Colour RGB
   is: [ interface ] # valid for all methods
 
   get:
     description: |
       Retrieves the current colour in RGB.
-      Value is an CSV of integer values in the order R,G,B.
+      Value is an array of integer values in the order R,G,B.
     responses:
       200:
         body:
@@ -39,7 +39,7 @@ traits:
             schema: ColourRGB
             example: |
               {
-                "rt":       "oic.r.colour.rgb",
+                "rt":       ["oic.r.colour.rgb"],
                 "id":       "unique_example_id",
                 "rgbValue": [255,255,255],
                 "range":    [0,255]

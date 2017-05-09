@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICBodyFat
-version: v1.0-2016____
+version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -22,7 +22,7 @@ traits:
   description: |
     This resource describes the properties associated with body fat.
     Fat (fat) describes the current value measured. Refer to the "Fat" (oic.r.body.fat)
-    Units (units) is a body fat measurement units which can either be in "kg", "lb", or "%". 
+    Units (units) is a body fat measurement units which can either be in "kg", "lb", or "%".
 
   displayName: Body Fat
   is: [ interface ]
@@ -42,7 +42,7 @@ traits:
             schema: BodyFat
             example: |
               {
-                "rt":     "oic.r.body.fat",
+                "rt":     ["oic.r.body.fat"],
                 "id":     "unique_example_id",
                 "bodyfat": 25,
                 "units":   "%",

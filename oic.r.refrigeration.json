@@ -1,15 +1,22 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.refrigeration.json",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.refrigeration.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Refrigeration",
   "definitions": {
     "oic.r.refrigeration": {
       "type": "object",
+      "anyOf": [
+        {"required": ["filter"]},
+        {"required": ["rapidFreeze"]},
+        {"required": ["rapidCool"]},
+        {"required": ["defrost"]}
+      ],
       "properties": {
         "filter":       {
           "type": "integer",
-          "description": "ReadOnly, Percentage life time remaining for the water filter"
+          "readOnly": true,
+          "description": "Percentage life time remaining for the water filter"
         },
         "rapidFreeze":  {
           "type": "boolean",

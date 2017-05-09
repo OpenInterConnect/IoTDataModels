@@ -1,19 +1,24 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.automaticDocumentFeeder#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.automaticDocumentFeeder.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Automatic Document Feeder",
   "definitions": {
     "oic.r.automaticdocumentfeeder": {
       "type": "object",
       "properties": {
         "adfStates": {
-          "type": "string",
-          "description": "ReadOnly, Comma separated list of the possible adf states."
+          "type": "array",
+          "readOnly": true,
+          "description": "array of the possible adf states.",
+          "items": {
+            "type": "string"
+          }
         },
         "currentAdfState": {
           "type": "string",
-          "description": "ReadOnly, Current adf state."
+          "readOnly": true,
+          "description": "Current adf state."
         }
       }
     }

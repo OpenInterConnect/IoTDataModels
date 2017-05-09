@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.openLevel#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.openLevel.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Open Level",
   "definitions": {
     "oic.r.openlevel": {
@@ -13,14 +13,8 @@
         },
         "increment":  {
           "type": "integer",
-          "description": "ReadOnly, The step between possible values"
-        },
-        "range":      {
-          "type": "array",
-          "description": "ReadOnly, Lower bound=closed, Upper bound=open",
-          "items": {
-            "type": "integer"
-          }
+          "description": "Deprecated, use 'step' instead.",
+          "readOnly": true
         }
       }
     }

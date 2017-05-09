@@ -1,0 +1,96 @@
+#%RAML 0.8
+title: OICDelayDefrost
+version: OCF_v1.0.0-2016____
+documentation:
+  - title: © 2016 Open Connectivity Foundation, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - DelayDefrost:  !include oic.r.delaydefrost.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a","oic.if.baseline"]
+
+/DelayDefrostResURI:
+  description: |
+    This resource describes the delay defrost function as defined by the US Energy Star Specifications.
+    See Energy Star Refrigerator Requirements Version 5 Section 4)G
+    (https://www.energystar.gov/sites/default/files/specs//private/ENERGY%20STAR%20Final%20Version%205.0%20Residential%20Refrigerators%20and%20Freezers%20Program%20Requirements.pdf)
+    The status is a boolean indicating whether the function is on, if off then defrost is scheduled as part of normal device operation.
+    startTime, from oir.r.time.period (mandatory) is an ISO8601 encoded start time for the interval in which defrost shall not occur.
+    stopTime, from oic.r.time.period is an ISO8601 encoded stop time for the interval in which defrost shall not occur.
+    interval, from oic.r.time.period with additional range restrictions is the time in minutes of the period that starts at starttime (if not present the default is 240).
+    stopTime and interval are mutually exlusive; they cannot both be present in a Resource instance
+  displayName: Delay Defrost
+  is: ['interface'] # valid for all methods
+
+  get:
+    description: |
+      Retrieves the current Delay Defrost function status
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: DelayDefrost
+            example: |
+              {
+                "rt":     ["oic.r.delaydefrost"],
+                "id":     "unique_example_id",
+                "startTime":  "06:00Z",
+                "status": false
+              }
+
+  post:
+    description: |
+      Activates the desired Delay Defrost functions
+    body:
+      application/json:
+        schema: DelayDefrost
+        example: |
+          {
+            "id":         "unique_example_id",
+            "status":     true,
+            "startTime":  "06:00Z",
+            "interval":   180
+          }
+
+    responses:
+      200:
+        description: |
+          Indicates that the DelayDefrost function was changed.
+          The new representation may be provided in the response.
+        body:
+          application/json:
+            schema: DelayDefrost
+            example: |
+              {
+                "id":         "unique_example_id",
+                "status":     true,
+                "startTime":  "06:00Z",
+                "interval":   180
+              }
+
+      403:
+        description: |
+          Indicates the update to the time properties was rejected.
+          Reasons for rejection:
+            invalid time entry
+          The current unchanged representation may be provided in the response.
+        body:
+          application/json:
+            schema: DelayDefrost
+            example: |
+              {
+                "id":         "unique_example_id",
+                "status":     true,
+                "startTime":  "06:00Z",
+                "interval":   180
+              }

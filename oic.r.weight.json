@@ -1,5 +1,5 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.weight#",
+  "id": "http://openinterconnect.org/schemas/oic.r.weight.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description": "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Weight",
@@ -10,7 +10,8 @@
         "weight": {
           "type": "number",
           "minimum": 0,
-          "description": "ReadOnly. Weight of an object"
+          "readOnly": true,
+          "description": "Weight of an object"
         }
       }
     }

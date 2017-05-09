@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.colour.chroma#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.colour.chroma.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Colour Chroma",
   "definitions": {
     "oic.r.colour.chroma": {
@@ -21,12 +21,14 @@
           "minItems": 2,
           "maxItems": 2,
           "items": {
-            "type": "number"
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
           }
         },
         "ct": {
           "type": "integer",
-          "description": "Mired colour temperarture"
+          "description": "Mired colour temperature"
         }
       }
     }

@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.airFlowControl#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.airFlowControl.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Air Flow Control",
   "definitions": {
     "oic.r.airflowcontrol": {
@@ -12,7 +12,7 @@
           "minItems": 2,
           "maxItems": 2,
           "items": {
-            "$ref": "oic.web-link.json#"
+            "$ref": "oic.oic-link-schema.json#"
           }
         }
       }

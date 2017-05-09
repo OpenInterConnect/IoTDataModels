@@ -1,0 +1,35 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.airquality.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Air Quality",
+  "definitions": {
+    "oic.r.airquality": {
+      "type": "object",
+      "properties": {
+        "contaminantvalue": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "The measured or qualitative value for the contaminant."
+        },
+        "contaminanttype": {
+          "enum": ["CH2O","CO2","CO","PM2.5","PM10","VOC","Smoke","Odor","AirPollution"],
+          "description": "The contaminant being measured.",
+          "readOnly": true
+        },
+        "valuetype": {
+          "enum": ["Qualitative","Measured"],
+          "description": "Indicates whether the provided value is qualitative or measured.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.airquality"}
+  ],
+  "required": ["contaminantvalue","contaminanttype","valuetype","range"]
+}

@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.create.json#",
+  "id": "http://openinterconnect.org/iotdatamodels/chemas/oic.create.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "definitions": {
     "oic.create": {
       "type": "object",
@@ -11,5 +11,7 @@
     }
   },
   "type": "object",
-  "$ref": "#/definitions/oic.create"
+  "allOf": [
+     {"$ref": "#/definitions/oic.create"}
+   ]
 }

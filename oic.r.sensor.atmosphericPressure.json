@@ -1,14 +1,15 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.sensor.atmosphericPressure.json",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.sensor.atmosphericPressure.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Atmospheric Pressure Sensor",
   "definitions": {
     "oic.r.sensor.atmosphericpressure": {
       "properties": {
         "atmosphericPressure": {
           "type": "number",
-          "description": "ReadOnly, Current atmospheric pressure in hPa."
+          "readOnly": true,
+          "description": "Current atmospheric pressure in hPa."
         }
       }
     }

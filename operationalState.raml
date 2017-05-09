@@ -1,14 +1,14 @@
 #%RAML 0.8
 title: OICOperation
-version: v1.1.0-20160229
+version: v1.1.0-20160519
 documentation:
-  - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
+  - title: © 2016 Open Connectivity Foundation, Inc. All rights reserved.
     content: |
         Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
         1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
         2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 
-        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 schemas:
   - Operation:        !include oic.r.operational.state.json
   - OperationUpdate:  !include oic.r.operational.state-Update.json
@@ -25,9 +25,9 @@ traits:
     The states can be read or set, setting indicates a desired state.
     A device may reject an attempt to set a state that would result
     in adverse operational characteristics.
-    The machineStates is a comma separated list of the possible operational states.
+    The machineStates is an array of the possible operational states.
     The currentMachineState is the current state of operation of the device.
-    The jobStates is a comma separated list of the possible job states.
+    The jobStates is an array of the possible job states.
     The currentJobState is the currently active jobState.
     The runningTime is the ISO8601 encoded elapsed time in the current operational state.
     The remainingTime is the ISO8601 encoded time till completion of the current operational state.
@@ -46,11 +46,11 @@ traits:
             schema: Operation
             example: |
               {
-                "rt":                   "oic.r.operational.state",
+                "rt":                   ["oic.r.operational.state"],
                 "id":                   "unique_example_id",
-                "machineStates":        "pause, standby, ready, active",
+                "machineStates":        ["pause", "stopped", "idle", "active"],
                 "currentMachineState":  "active",
-                "jobStates":            "pre-wash, wash, rinse, spin, dry, air-dry, wrinkle-prevent",
+                "jobStates":            ["preWash", "wash", "rinse", "spin", "dry", "airDry", "wrinklePrevent"],
                 "currentJobState":      "rinse",
                 "runningTime":          "PT15M20S",
                 "remainingTime":        "PT10M40S",
@@ -93,9 +93,9 @@ traits:
             example: |
               {
                 "id":                   "unique_example_id",
-                "machineStates":        "pause, standby, ready, active",
+                "machineStates":        ["pause", "stopped", "idle", "active"],
                 "currentMachineState":  "active",
-                "jobStates":            "pre-wash, wash, rinse, spin, dry, air-dry, wrinkle-prevent",
+                "jobStates":            ["preWash", "wash", "rinse", "spin", "dry", "airDry", "wrinklePrevent"],
                 "currentJobState":      "rinse",
                 "runningTime":          "PT15M20S",
                 "remainingTime":        "PT10M40S",

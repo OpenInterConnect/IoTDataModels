@@ -1,23 +1,26 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.body.weight#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.body.weight.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description": "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Body weight",
   "definitions": {
-    "oic.r.bodyweight": {
+    "oic.r.body.weight": {
       "type": "object",
-      "properties": {
-        "$ref": "oic.r.weight.json#/definitions/oic.r.weight",
-        "units": {
-          "type": "string",
-          "enum": ["kg", "lb"],
-          "description": "ReadOnly, Unit of a person's weight"
-        },
-        "observedtime": {
-          "type": "string",
-          "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
+      "allOf": [
+        {"$ref": "oic.r.weight.json#/definitions/oic.r.weight"},
+        {"properties": {
+          "weightunits": {
+            "type": "string",
+            "enum": ["kg", "lb"],
+            "description": "ReadOnly, Unit of a person's weight"
+          },
+          "observedtime": {
+            "type": "string",
+            "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
+          }
+         }
         }
-      }
+      ]
     }
   },
   "type": "object",
@@ -26,5 +29,5 @@
     {"$ref": "oic.baseresource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.body.weight"}
   ],
-  "required": ["weight", "units"]
+  "required": ["weight", "weightunits"]
 }

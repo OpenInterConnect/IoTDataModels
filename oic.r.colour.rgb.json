@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.colour.rgb#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.colour.rgb.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Colour RGB",
   "definitions": {
     "oic.r.colour.rgb": {
@@ -12,15 +12,6 @@
           "description": "RGB value; the first item is the R, second the G, third the B.",
           "minItems": 3,
           "maxItems": 3,
-          "items": {
-            "type": "integer"
-          }
-        },
-        "range":    {
-          "type": "array",
-          "description": "ReadOnly, min max value of RGB",
-          "minItems": 2,
-          "maxItems": 2,
           "items": {
             "type": "integer"
           }

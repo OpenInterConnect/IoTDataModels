@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICBloodGlucoseSensor
-version: v1.0-2016____
+version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -35,7 +35,7 @@ traits:
     queryParameters:
       units:
         displayName: Units
-        enum: ["mg/dl", "mmol/L"]
+        enum: ["mg/dL", "mmol/L"]
     responses:
       200:
         body:
@@ -43,10 +43,10 @@ traits:
             schema: BloodGlucoseSensor
             example: |
               {
-                "rt":           "oic.r.health.blood.glucose",
+                "rt":           ["oic.r.blood.glucose"],
                 "id":           "unique_example_id",
                 "bloodsugar":   100,
-                "units":        "mg/dl",
+                "units":        "mg/dL",
                 "site":         "GS48148",
                 "observedtime":  "2016-02-15T09:19Z"
               }

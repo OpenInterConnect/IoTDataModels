@@ -1,14 +1,15 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.sensor.acceleration.json#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.sensor.acceleration.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Acceleration Sensor",
   "definitions": {
     "oic.r.sensor.acceleration": {
       "properties": {
         "acceleration": {
             "type": "number",
-            "description": "ReadOnly, sensed acceleration experienced in 'g'."
+            "readOnly": true,
+            "description": "sensed acceleration experienced in 'g'."
         }
       }
     }

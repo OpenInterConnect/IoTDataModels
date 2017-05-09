@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICCGM
-version: v1.0-2016____
+version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -36,10 +36,10 @@ traits:
             schema: CGM
             example: |
               {
-                "rt":         "oic.r.cgm",
+                "rt":         ["oic.r.cgm"],
                 "id":         "unique_example_id",
                 "bloodsugar": 100,
-                "units":      "mg/dl",
+                "units":      "mg/dL",
                 "interval": 10,
                 "observedtime": "2016-02-15T09:19Z"
               }
@@ -67,7 +67,7 @@ traits:
                 "id":     "unique_example_id",
                 "bgl": {
                   "bloodsugar": 100,
-                  "units":      "mg/dl"
+                  "units":      "mg/dL"
                   },
                 "interval": 5,
                 "observedtime": "2016-02-15T09:19Z"

@@ -1,15 +1,25 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.temperature-Error.json",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.temperature-Error.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Temperature",
   "definitions": {
     "oic.r.temperature": {
       "type": "object",
       "properties": {
         "units":  {
-          "enum": ["C","F","K"],
-          "description": "ReadOnly, Units for the temperature value"
+          "oneOf": [
+            {
+              "enum": ["C","F","K"],
+              "description": "ReadOnly, Units for the temperature value"
+            },
+            {
+              "type": "array",
+              "items": {
+                "enum": ["C","F","K"]
+              }
+            }
+          ]
         },
         "range":  {
           "type": "string",

@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.movement.linear#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.movement.linear.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Linear Movement",
   "definitions": {
     "oic.r.movement.linear": {
@@ -9,7 +9,8 @@
       "properties": {
         "movementSettings":  {
           "type": "array",
-          "description": "ReadOnly, array of possible movement values",
+          "readOnly": true,
+          "description": "array of possible movement values",
           "items": {
             "type": "string"
           }
@@ -20,7 +21,7 @@
         },
         "movementModifier":  {
           "type": "string",
-          "description": "Modfier to the movement value (e.g. spin-90, left-20), units are device dependent"
+          "description": "Modifier to the movement value (e.g. spin-90, left-20), units are device dependent"
         }
       }
     }

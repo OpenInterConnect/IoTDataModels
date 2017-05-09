@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICFatFreeMass
-version: v1.0-2016____
+version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -22,7 +22,7 @@ traits:
   description: |
     This resource describes the properties associated with fat free mass.
     FFM (Fat Free Mass) describes the current value measured. Refer to the "ffm" (oic.r.ffm)
-    Units (units) is a body fat measurement units which can either be in "kg" or "lb". 
+    Units (units) is a body fat measurement units which can either be in "kg" or "lb".
 
   displayName: Fat Free Mass
   is: [ interface ]
@@ -42,7 +42,7 @@ traits:
             schema: FFM
             example: |
               {
-                "rt":     "oic.r.ffm",
+                "rt":     ["oic.r.ffm"],
                 "id":     "unique_example_id",
                 "ffm": 30,
                 "units":   "kg",

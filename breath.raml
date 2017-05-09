@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICBreath
-version: v1.0-2016____
+version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -36,7 +36,7 @@ traits:
             schema: Breath
             example: |
               {
-                "rt":         "oic.r.breath",
+                "rt":         ["oic.r.breath"],
                 "id":         "unique_example_id",
                 "bl":  0.4,
                 "bpm": {

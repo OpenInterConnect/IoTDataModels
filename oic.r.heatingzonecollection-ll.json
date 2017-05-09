@@ -1,0 +1,21 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.heatingzonecollection-ll#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Heating Zone Collection Link List Schema",
+  "definitions": {
+    "oic.r.heatingzonecollection-ll": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "oic.collection.linkslist-schema.json#/definitions/oic.collection.alllinks"
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "#/definitions/oic.r.heatingzonecollection-ll"}
+  ]
+}

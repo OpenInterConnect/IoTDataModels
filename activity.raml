@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICActivity
-version: v1.0-2016____
+version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -21,10 +21,10 @@ traits:
 /ActivityResURI:
   description: |
     This resource describes the properties associated with activity.
-    Activity show User’s current activity type, accumulated active time per day within moving condition (stand, walk, run) and total used calories per day that calculated by user’s activity. 
+    Activity show User’s current activity type, accumulated active time per day within moving condition (stand, walk, run) and total used calories per day that calculated by user’s activity.
   displayName: Activity
   is: [ interface ]
-  
+
   get:
     description: |
       Retrieves the acitivity information.
@@ -35,10 +35,10 @@ traits:
             schema: Activity
             example: |
               {
-                "rt":         "oic.r.activity",
+                "rt":         ["oic.r.activity"],
                 "id":         "unique_example_id",
                 "Type":       "sleep",
-                "Atime":       100, 
+                "Atime":       100,
                 "Acalory":     3000,
                 "observedtime": "2016-02-15T09:19Z"
               }

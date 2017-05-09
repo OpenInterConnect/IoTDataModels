@@ -1,14 +1,16 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.audio#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.audio.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "definitions": {
     "oic.r.audio": {
       "type": "object",
       "properties": {
         "volume":   {
           "type": "integer",
-          "description": "Volume setting of an audio rendering device."
+          "description": "Volume setting of an audio rendering device.",
+          "minimum": 0,
+          "maximum": 100
         },
         "mute":    {
           "type": "boolean",

@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICAltimeter
-version: v1.1.0-20160229
+version: v1.1.0-20160519
 documentation:
   - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -36,43 +36,7 @@ traits:
             schema: Altimeter
             example: |
               {
-                "rt":  "oic.r.altimeter",
+                "rt":  ["oic.r.altimeter"],
                 "id":  "unique_example_id",
-                "alt": 1500
-              }
-  post:
-    description: |
-      Sets the desired height of the position (metres).
-    body:
-      application/json:
-        schema: Altimeter
-        example: |
-          {
-            "id":     "unique_example_id",
-            "alt": 1500
-          }
-    responses:
-      200:
-        description: |
-          Indicates that the alt number was successfully changed.
-          The new alt number is provided in the response.
-        body:
-          application/json:
-            schema: Altimeter
-            example: |
-              {
-                "id":     "unique_example_id",
-                "alt": 1500
-              }
-      403:
-        description: |
-          Indicates that OIC client sent an invalid property value to the server.
-          The server responds with the required input representation.
-        body:
-          application/json:
-            schema: Altimeter
-            example: |
-              {
-                "id":     "unique_example_id",
-                "alt": 1500
+                "alt": 1500.0
               }

@@ -1,12 +1,22 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.airFlow#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.airFlow.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Air Flow",
   "definitions": {
     "oic.r.airflow": {
       "type": "object",
       "properties": {
+        "supporteddirections": {
+            "type": "array",
+            "description": "Array of possible direction settings for this instance of the Resource Type",
+            "readOnly": true,
+            "items": {
+                "type": "string",
+                "minItems": 1,
+                "uniqueItems": true
+            }
+        },
         "direction": {
           "type": "string",
           "description": "Directionality of the air flow"
@@ -15,12 +25,9 @@
           "type": "integer",
           "description": "Current speed level"
         },
-        "range": {
-          "type": "array",
-          "description": "ReadOnly, Min,max values for the speed level",
-          "items": {
-            "type": "integer"
-          }
+        "automode": {
+          "enum": ["On", "Off"],
+          "description": "Status of the automode feature, if on speed is set by the device"
         }
       }
     }

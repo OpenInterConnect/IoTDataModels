@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.sensor.radiation.uv#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.sensor.radiation.uv.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "UV Radiation",
   "definitions": {
     "oic.r.sensor.radiation.uv": {
@@ -9,7 +9,8 @@
       "properties": {
         "measurement":   {
           "type": "number",
-          "description": "ReadOnly, the measured UV Index"
+          "readOnly": true,
+          "description": "The measured UV Index"
         }
       }
     }

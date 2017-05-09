@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.light.dimming#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.light.dimming.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Dimming",
   "definitions": {
     "oic.r.light.dimming": {
@@ -10,17 +10,6 @@
         "dimmingSetting":  {
           "type": "integer",
           "description": "Current dimming value"
-        },
-        "step":   {
-          "type": "integer",
-          "description": "ReadOnly, step increment for dimming values"
-        },
-        "range":  {
-          "type": "array",
-          "description": "ReadOnly, Min and Max values for the dimming setting",
-          "items": {
-            "type": "integer"
-          }
         }
       }
     }

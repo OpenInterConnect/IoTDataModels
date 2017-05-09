@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICHeight
-version: v1.1.0-20160229
+version: v1.1.0-20160519
 documentation:
   - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -20,7 +20,7 @@ traits:
 
 /HeightResURI:
   description: |
-    This resource describes the properties associated with height of an object.
+    This resource describes the properties associated with height of an object's physical size.
     Height (height) is height of an object.
   displayName: Height
   is: [ interface ]
@@ -35,9 +35,9 @@ traits:
             schema: Height
             example: |
               {
-                "rt":     "oic.r.height",
+                "rt":     ["oic.r.height"],
                 "id":     "unique_example_id",
-                "height": 100
+                "height": 100.0
               }
   post:
     description: |
@@ -48,7 +48,7 @@ traits:
         example: |
           {
             "id":     "unique_example_id",
-            "height": 200
+            "height": 200.0
           }
     responses:
       200:
@@ -61,7 +61,7 @@ traits:
             example: |
               {
                 "id":     "unique_example_id",
-                "height": 200
+                "height": 200.0
               }
       403:
         description: |
@@ -73,5 +73,5 @@ traits:
             example: |
               {
                 "id":     "unique_example_id",
-                "height": 200
+                "height": 200.0
               }

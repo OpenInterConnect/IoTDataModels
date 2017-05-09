@@ -1,0 +1,32 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.ecomode#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Eco Mode",
+  "definitions": {
+    "oic.r.ecomode": {
+      "type": "object",
+      "allOf": [
+          {
+            "$ref": "oic.r.mode.json#/definitions/oic.r.mode"
+          },
+          {
+            "properties": {
+                "adminforced": {
+                    "type": "boolean",
+                    "readOnly": true,
+                    "description": "Indicator that the current mode of operation has been forced by admin action."
+                }
+            }
+          }
+        ]
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.ecomode"}
+  ],
+  "required": ["supportedModes","modes"]
+}

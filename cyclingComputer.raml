@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICCyclingComputer
-version: v1.0-2016____
+version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -44,7 +44,7 @@ traits:
             schema: CyclingComputer
             example: |
               {
-                "rt":         "oic.r.cycling.computer",
+                "rt":         ["oic.r.cycling.computer"],
                 "id":         "unique_example_id",
                 "biketime":  "00:10",
                 "c-time": {

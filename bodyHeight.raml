@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICBodyHeight
-version: v1.0-2016____
+version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -36,10 +36,10 @@ traits:
             schema: BodyHeight
             example: |
               {
-                "rt":     "oic.r.body.height",
+                "rt":     ["oic.r.body.height"],
                 "id":     "unique_example_id",
                 "height": 180,
-                "units":   "cm",
+                "heightunits":   "cm",
                 "observedtime": "2016-02-15T09:19Z"
               }
   post:
@@ -52,7 +52,7 @@ traits:
           {
             "id":     "unique_example_id",
             "height": 75,
-            "units":   "inch"
+            "heightunits":   "inch"
           }
     responses:
       200:
@@ -66,7 +66,7 @@ traits:
               {
                 "id":     "unique_example_id",
                 "height": 75,
-                "units":   "inch",
+                "heightunits":   "inch",
                 "observedtime": "2016-02-15T09:19Z"
               }
       403:
@@ -80,6 +80,6 @@ traits:
               {
                 "id":     "unique_example_id",
                 "height": 75,
-                "units":   "inch",
+                "heightunits":   "inch",
                 "observedtime": "2016-02-15T09:19Z"
               }

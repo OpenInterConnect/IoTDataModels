@@ -30,5 +30,5 @@
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.speed"}
   ],
-  "required": ["speed", "units"] 
+  "required": ["speed", "units"]
 }

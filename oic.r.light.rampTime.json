@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.light.rampTime#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.light.rampTime.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Ramp Time",
   "definitions": {
     "oic.r.light.ramptime": {
@@ -10,13 +10,6 @@
         "rampTime": {
           "type": "integer",
           "description": "Actual speed of changing between 2 dimming values"
-        },
-        "range": {
-          "type": "array",
-          "description": "ReadOnly, Min and Max of possible values",
-          "items": {
-            "type": "integer"
-          }
         }
       }
     }

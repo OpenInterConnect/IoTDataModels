@@ -1,0 +1,30 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.heatingzone.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Heating Zone",
+  "definitions": {
+    "oic.r.heatingzone": {
+      "type": "object",
+      "properties": {
+        "maxheatinglevel": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Maximum heating level for the zone indicated."
+        },
+        "heatinglevel": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Current heating level for the zone indicated."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.heatingzone"}
+  ],
+  "required": ["maxheatinglevel","heatinglevel"]
+}

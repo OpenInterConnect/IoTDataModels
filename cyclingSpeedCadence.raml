@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: OICCyclingSpeedCadence
-version: v1.0-2016____
+version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
     content: |
@@ -36,9 +36,9 @@ traits:
             schema: CyclingSpeedCadence
             example: |
               {
-                "rt":         "oic.r.cycling.speedcadence",
+                "rt":         ["oic.r.cycling.speedcadence"],
                 "id":         "unique_example_id",
                 "cadence":  100,
-                "speed": 50, 
+                "speed": 50,
                 "observedtime": "2016-02-15T09:19Z"
               }

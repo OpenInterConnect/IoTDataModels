@@ -1,10 +1,10 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.body.site#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.body.site.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description": "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Body site",
   "definitions": {
-    "oic.r.bodysite": {
+    "oic.r.body.site": {
       "type": "object",
       "properties": {
         "bodysite": {

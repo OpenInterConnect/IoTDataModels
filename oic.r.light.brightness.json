@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.light.brightness#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.light.brightness.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Brightness",
   "definitions": {
     "oic.r.light.brightness": {
@@ -9,7 +9,10 @@
       "properties": {
         "brightness": {
           "type": "integer",
-          "description": "Current sensed or set value for Brightness"}
+          "description": "Quantized representation in the range 0-100 of the current sensed or set value for Brightness",
+          "minimum": 0,
+          "maximum": 100
+        }
       }
     }
   },
