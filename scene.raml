@@ -54,11 +54,11 @@ traits:
     description: |
       Collection that models a set of Scenes.
       This resource is a generic collection resource with additional parameters.
-      The rts value shall contain oic.sceneMember resource types.
+      The rts value shall contain oic.scenemember resource types.
       The additional parameters are
-        lastScene, this is the scene value last set by any OIC Client
-        sceneValueList, this is the list of available scenes
-        lastScene shall be listed in sceneValueList.
+        lastScene, this is the scene value last set by any OCF Client
+        sceneValues, this is the list of available scenes
+        lastScene shall be listed in sceneValues.
     displayName: Scene Collections
 
     get:
@@ -81,12 +81,12 @@ traits:
                                  ]
                             }
 
-    put:
+    post:
         description: |
-          Provides the action to change the last settted scene selection.
-          Calling this method shall update of all sceneMembers to the prescribed membervalue.
+          Provides the action to change the last set scene selection.
+          Calling this method shall update  all scene members to the prescribed membervalue.
           When this method is called with the same value as the current lastScene value
-          then all sceneMembers shall be updated.
+          then all scene members shall be updated.
 
         body:
             application/json:
