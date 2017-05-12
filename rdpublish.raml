@@ -143,7 +143,8 @@ schemas:
         description: |
           This is used to determine which set of links to delete. (Need authentication to ensure that there is no spoofing). 
           It's the form of di=value, where value is a device ID indicating the Device to operate on. 
-          When included, the entire set of links corresponding to the device ID is deleted. 
+          When included, the entire set of links corresponding to the device ID is deleted,  
+	  i.e. the Links published by the publishing Device with the same device ID are deleted. 
         type: string 
         required: false 
         example: |
