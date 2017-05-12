@@ -40,6 +40,11 @@ schemas:
   - slinks: !include schemas/oic.collection.linkslist-schema.json
 
 traits:
+  - interface-all:
+      queryParameters:
+        if:
+          enum: ["oic.if.ll", "oic.if.baseline", "oic.if.b"]
+
   - interface-baseline:
       queryParameters:
         if:
