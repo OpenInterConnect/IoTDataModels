@@ -21,7 +21,7 @@ schemas:
   displayName: Resource directory resource
   description: |
     Resource to be exposed by any Device that can act as a Resource Directory.
-    1) Provides selector criteria (e.g. integer) with GET request 
+    1) Provides selector criteria (e.g., integer) with GET request 
     2) Publish or Update a Link in /oic/res with POST request 
     3) Delete a Link in /oic/res with DELETE request 
 
@@ -49,11 +49,11 @@ schemas:
   post:
     description: |
       Publish the resource information for the first time or Update the existing one in /oic/res. 
-      Appropriates parts of the information, i.e. Links of the published Resources will be discovered through /oic/res. 
+      Appropriates parts of the information, i.e., Links of the published Resources will be discovered through /oic/res. 
       1) When a Device first publishes a Link, the request payload to RD may include the Links without "ins" Parameter.  	 
       2) Upon granting the request, the RD assigns a unique instance value identifying the Link among all the Links it advertises  
          and sends back the instance value in "ins" Parameter in the Link to the publishing Device.  
-      3) When later the publishing Device updates the existing Link, i.e. changing its Endpoint information,   
+      3) When later the publishing Device updates the existing Link, i.e., changing its Endpoint information,   
          the request payload to RD needs to include the instance value in "ins" Parameter to identify the Link to update.  
     queryParameters:
       rt:
@@ -143,9 +143,9 @@ schemas:
       di:
         description: |
           This is used to determine which set of links to delete. (Need authentication to ensure that there is no spoofing). 
-          It's the form of di=value, where value is a device ID indicating the Device to operate on. 
+          The query is the form of di=value, where value is a device ID indicating the Device to operate on. 
           When included, the entire set of links corresponding to the device ID is deleted,  
-	  i.e. the Links published by the publishing Device with the same device ID are deleted. 
+          i.e., the Links published by the publishing Device with the same device ID are deleted. 
         type: string 
         required: false 
         example: |
