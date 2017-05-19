@@ -77,8 +77,8 @@ schemas:
                     "if":     ["oic.if.a", "oic.if.baseline"],
                     "p":      {"bm": 3}, 
                     "eps": [
-                        {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2},
-                        {"ep": "coaps://[fe80::b1d6]:1122"},
+                        {"ep": "coaps://[2001:db8:a::b1d6]:1111", "pri": 2},
+                        {"ep": "coaps://[2001:db8:a::b1d6]:1122"},
                         {"ep": "coaps+tcp://[2001:db8:a::123]:2222", "pri": 3}
                     ]
                   },
@@ -114,8 +114,8 @@ schemas:
                     "if":     ["oic.if.a", "oic.if.baseline"],
                     "p":      {"bm": 3}, 
                     "eps": [
-                        {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2},
-                        {"ep": "coaps://[fe80::b1d6]:1122"},
+                        {"ep": "coaps://[2001:db8:a::b1d6]:1111", "pri": 2},
+                        {"ep": "coaps://[2001:db8:a::b1d6]:1122"},
                         {"ep": "coaps+tcp://[2001:db8:a::123]:2222", "pri": 3}
                     ],
                     "ins":    "11235"
@@ -127,7 +127,7 @@ schemas:
                     "if":     ["oic.if.a", "oic.if.baseline"],
                     "p":      {"bm": 3}, 
                     "eps": [
-                        {"ep": "coaps://[[2001:db8:a::123]:2222"}
+                        {"ep": "coaps://[2001:db8:a::123]:2222"}
                     ],
                     "ins":    "112358"
                   }
