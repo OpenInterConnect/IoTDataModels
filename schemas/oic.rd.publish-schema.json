@@ -1,13 +1,17 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016,2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description": "Copyright (c) 2016,2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.rd.publish-schema.json#",
   "title": "RD Publish & Update",
   "definitions": {
     "oic.rd.publish": {
       "description": "Publishes resources as OIC Links into the resource directory",
       "properties": {
-        "linkSet": {
+        "di": {
+          "$ref": "oic.types-schema.json#/definitions/uuid",
+          "description": "A unique identifier for the publishing Device, i.e., its device ID"
+        },
+        "links": {
           "$ref": "oic.collection-schema.json#/definitions/oic.collection.setoflinks"
         },
         "ttl": {
@@ -19,11 +23,16 @@
   },
   "type": "object",
   "allOf": [
-    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
-    { "$ref": "#/definitions/oic.rd.publish" }
+    {
+      "$ref": "oic.core-schema.json#/definitions/oic.core"
+    },
+    {
+      "$ref": "#/definitions/oic.rd.publish"
+    }
   ],
-  "required": [ "links" ],
-  "dependencies": {
-    "links": [ "ttl" ]
-  }
+  "required": [
+    "di",
+    "links",
+    "ttl"
+  ]
 }
