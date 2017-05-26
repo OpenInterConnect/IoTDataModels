@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.sceneMember-schema.json#",
   "title" : "Scene Member",
   "definitions": {
@@ -9,8 +9,7 @@
       "properties": {
         "n": {
           "type": "string",
-          "description": "Used to name the Scene collection",
-          "format": "UTF8"
+          "description": "Used to name the Scene collection"
         },
         "id": {
           "type": "string",
@@ -19,8 +18,7 @@
         "SceneMappings" : {
           "type": "array",
            "description": "array of mappings per scene, can be 1",
-          "items": [
-            {
+          "items": {
               "type": "object",
               "properties": {
                 "scene": {
@@ -40,13 +38,12 @@
               },
               "required": [ "scene", "memberProperty", "memberValue" ]
             }
-          ]
         },
 
         "link": {
           "type": "string",
-          "description": "web link that points at an resource",
-          "$ref": "oic.oic-link-schema.json#"
+          "description": "web link that points at a resource",
+          "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
         }
       },
       "required": [ "link" ]

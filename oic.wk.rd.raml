@@ -1,0 +1,167 @@
+#%RAML 0.8
+#RAML for Resource Directory
+title: Resource Directory
+version: v1-20160622
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+schemas:
+  # rdSelection represents the payload of GET response.  
+  # rdPublish represents the payload in POST request. 
+-  rdSelection: !include schemas/oic.rd.selection-schema.json
+-  rdPublish: !include schemas/oic.rd.publish-schema.json
+	
+/oic/rd:
+  displayName: Resource directory resource
+  description: |
+    Resource to be exposed by any Device that can act as a Resource Directory.
+    1) Provides selector criteria (e.g., integer) with GET request 
+    2) Publish or Update a Link in /oic/res with POST request 
+    3) Delete a Link in /oic/res with DELETE request 
+
+  get:
+    description: |
+      Get the attributes of the Resource Directory for selection purposes.
+    queryParameters:
+      if:
+        description: "The Interface to be used."
+        enum: ["oic.if.baseline"]
+    responses:
+      200:
+        description: |
+          Respond with the selector criteria - either the set of attributes or the bias factor
+        body:
+          application/json:
+            schema: rdSelection
+            example: |
+              {
+                "rt": ["oic.wk.rd"],
+                "if": ["oic.if.baseline"], 
+                "sel": 50
+              }
+
+  post:
+    description: |
+      Publish the resource information for the first time or Update the existing one in /oic/res. 
+      Appropriates parts of the information, i.e., Links of the published Resources will be discovered through /oic/res. 
+      1) When a Device first publishes a Link, the request payload to RD may include the Links without "ins" Parameter.  	 
+      2) Upon granting the request, the RD assigns a unique instance value identifying the Link among all the Links it advertises  
+         and sends back the instance value in "ins" Parameter in the Link to the publishing Device.  
+      3) When later the publishing Device updates the existing Link, i.e., changing its Endpoint information,   
+         the request payload to RD needs to include the instance value in "ins" Parameter to identify the Link to update.  
+    queryParameters:
+      rt:
+        description: "used in POST request to ask the RD to add the Links in payload to /oic/res."
+        enum: ["oic.wk.rdpub"]		
+        example: |
+          POST /oic/rd?rt=oic.wk.rdpub        
+      #"rt" query is used in POST request but such usage is unprecedented & out-of-sync with existing "rt" query practice, 
+      # so I recommend to remove this if IoTivity allows. Take notice here the absence of "rt" would produce the same result.  			
+    body:
+      application/json:
+        schema: rdPublish
+        example: |
+              {
+                "di": "e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9", 
+                "links": [
+                  {
+                    "anchor": "ocf://e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",                   
+                    "href":   "/myLightSwitch",
+                    "rt":     ["oic.r.switch.binary"],
+                    "if":     ["oic.if.a", "oic.if.baseline"],
+                    "p":      {"bm": 3}, 
+                    "eps": [
+                        {"ep": "coaps://[2001:db8:a::b1d6]:1111", "pri": 2},
+                        {"ep": "coaps://[2001:db8:a::b1d6]:1122"},
+                        {"ep": "coaps+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                    ]
+                  },
+                  {
+                    "anchor": "ocf://e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                    "href":   "/myLightBrightness",
+                    "rt":     ["oic.r.brightness"],
+                    "if":     ["oic.if.a", "oic.if.baseline"],
+                    "p":      {"bm": 3}, 
+                    "eps": [
+                        {"ep": "coaps://[[2001:db8:a::123]:2222"}
+                    ]
+                  }
+                ],
+                "ttl": 600
+              }
+    responses:
+      200:
+        description: |
+          Respond with the same schema as publish but, when a Link is first published, 
+          with the additional "ins" Parameter in the Link.  
+          This value is used by the receiver to manage that OCF Link instance. 
+        body:
+          application/json:
+            schema: rdPublish
+            example: |
+              {
+                "di": "e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9", 
+                "links": [
+                  {
+                    "anchor": "ocf://e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",                   
+                    "href":   "/myLightSwitch",
+                    "rt":     ["oic.r.switch.binary"],
+                    "if":     ["oic.if.a", "oic.if.baseline"],
+                    "p":      {"bm": 3}, 
+                    "eps": [
+                        {"ep": "coaps://[2001:db8:a::b1d6]:1111", "pri": 2},
+                        {"ep": "coaps://[2001:db8:a::b1d6]:1122"},
+                        {"ep": "coaps+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                    ],
+                    "ins":    "11235"
+                  },
+                  {
+                    "anchor": "ocf://e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                    "href":   "/myLightBrightness",
+                    "rt":     ["oic.r.brightness"],
+                    "if":     ["oic.if.a", "oic.if.baseline"],
+                    "p":      {"bm": 3}, 
+                    "eps": [
+                        {"ep": "coaps://[2001:db8:a::123]:2222"}
+                    ],
+                    "ins":    "112358"
+                  }
+                ],
+                "ttl": 600
+              }
+
+  delete:
+    description: |
+      Delete a particular OIC Link - the link may be a simple link or a link in a tagged set.
+    queryParameters:
+      di:
+        description: |
+          This is used to determine which set of links to delete. (Need authentication to ensure that there is no spoofing). 
+          The query is the form of di=value, where value is a device ID indicating the Device to operate on. 
+          When included, the entire set of links corresponding to the device ID is deleted,  
+          i.e., the Links published by the publishing Device with the same device ID are deleted. 
+        type: string 
+        required: false 
+        example: |
+          DELETE /oic/rd?di=0685B960-736F-46F7-BEC0-9E6CBD671ADC1
+      ins:
+        description: |
+          Instance of the link to delete
+          Value of parameter is a string indicating the instance to be deleted. 
+          When included, the Link with the same instance value is deleted. 		  
+        type: string
+        required: false
+        example: |
+          DELETE /oic/rd?ins=20
+    responses:
+      200:
+ 		
+# The discovery through the /oic/res of the resource directory is the same 
+# as specified in 11.3.6.4.1 /oic/res and retrieving of the resources  
+

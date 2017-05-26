@@ -4,7 +4,7 @@ version: v1-20160622
 documentation:
 
   - title: OCF Copyright
-    content: Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.
+    content: Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.
   - title: OCF License
     content: !include LICENSE.md
   - title: OCF Disclaimer
@@ -33,7 +33,20 @@ traits:
             schema: PING
             example: |
               {
-                "rt":   ["oic.wk.ping"],
-                "n": "Ping Information",
-                "in":   16
+                "rt": ["oic.wk.ping"],
+                "n":  "Ping Information",
+                "in": 16
               }
+  post:
+    description: Update or reset the alive interval
+    body:
+      application/json:
+        schema: PING
+        example: |
+          {
+            "in": 16
+          }
+
+    responses:
+      203:
+        description: Successfully updated & restarted alive interval timer.

@@ -6,6 +6,12 @@ title: Collections
 version: 1.0
 documentation:
 
+  - title: OCF Copyright
+    content: Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
   - title: OIC Collections
     content: |
       Collection is an extensions of OIC Resource concept.
@@ -34,6 +40,11 @@ schemas:
   - slinks: !include schemas/oic.collection.linkslist-schema.json
 
 traits:
+  - interface-all:
+      queryParameters:
+        if:
+          enum: ["oic.if.ll", "oic.if.baseline", "oic.if.b"]
+
   - interface-baseline:
       queryParameters:
         if:
@@ -78,12 +89,22 @@ traits:
                   {
                     "href": "switch",
                     "rt":   ["oic.r.switch.binary"],
-                    "if":   ["oic.if.a", "oic.if.baseline"]
+                    "if":   ["oic.if.a", "oic.if.baseline"],
+                    "eps": [
+                        {"ep": "coap://[fe80::b1d6]:1111", "pri": 2},
+                        {"ep": "coaps://[fe80::b1d6]:1122"},
+                        {"ep": "coap+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                    ]
                   },
                   {
                     "href": "airFlow",
                     "rt":   ["oic.r.airflow"],
-                    "if":   ["oic.if.a", "oic.if.baseline"]
+                    "if":   ["oic.if.a", "oic.if.baseline"],
+                    "eps": [
+                        {"ep": "coap://[fe80::b1d6]:1111", "pri": 2},
+                        {"ep": "coaps://[fe80::b1d6]:1122"},
+                        {"ep": "coap+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                    ]
                   }
                 ]
               }
@@ -256,12 +277,22 @@ traits:
                       {
                         "href": "switch",
                         "rt":   ["oic.r.switch.binary"],
-                        "if":   ["oic.if.a", "oic.if.baseline"]
+                        "if":   ["oic.if.a", "oic.if.baseline"],
+                        "eps": [
+                            {"ep": "coap://[fe80::b1d6]:1111", "pri": 2},
+                            {"ep": "coaps://[fe80::b1d6]:1122"},
+                            {"ep": "coap+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                        ]
                       },
                       {
                         "href": "airFlow",
                         "rt":   ["oic.r.airflow"],
-                        "if":   ["oic.if.a", "oic.if.baseline"]
+                        "if":   ["oic.if.a", "oic.if.baseline"],
+                        "eps": [
+                            {"ep": "coap://[fe80::b1d6]:1111", "pri": 2},
+                            {"ep": "coaps://[fe80::b1d6]:1122"},
+                            {"ep": "coap+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                        ]
                       }
                     ]
                 }

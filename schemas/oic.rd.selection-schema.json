@@ -1,17 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.rd.selection-schema.json#",
   "title" : "RD Selection",
   "definitions": {
     "oic.rd.attributes": {
       "type": "object",
       "properties": {
-        "n": {
-          "type": "string",
-          "description": "A human friendly name for the Resource Directory",
-          "format": "UTF8"
-        },
         "di": {
           "$ref": "oic.types-schema.json#/definitions/uuid",
           "description": "A unique identifier for the Resource Directory - the same as the device ID of the RD"
@@ -65,6 +60,9 @@
     }
   },
   "type": "object",
-  "allOf": [ {"$ref": "#/definitions/oic.rd.attributes"}],
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core" },
+    { "$ref": "#/definitions/oic.rd.attributes" }
+  ],
   "required": ["sel"]
 }

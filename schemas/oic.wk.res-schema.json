@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-v4/schema#",
-  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.res-schema.json#",
   "definitions": {
     "oic.res-baseline": {
@@ -8,24 +8,20 @@
       "properties": {
         "rt": {
           "type": "array",
-          "items" : [
-            {
+          "items" : {
               "type" : "string",
               "maxLength": 64
-            }
-          ],
+            },
           "minItems" : 1,
           "readOnly": true,
           "description": "Resource Type"
         },
         "if": {
           "type": "array",
-          "items": [
-            {
+          "items": {
               "type" : "string",
               "enum" : ["oic.if.baseline", "oic.if.ll"]
-            }
-          ],
+            },
           "minItems": 1,
           "readOnly": true,
           "description": "The interface set supported by this resource"
@@ -35,11 +31,6 @@
           "maxLength": 64,
           "readOnly": true,
           "description": "Human friendly name"
-        },
-        "di": {
-          "$ref": "oic.types-schema.json#/definitions/uuid",
-          "readOnly": true,
-          "description": "Unique identifier for device (UUID) as indicated by the /oic/d resource of the device"
         },
         "mpro": {
           "readOnly": true,
@@ -54,7 +45,7 @@
           }
         }
       },
-      "required": ["rt", "if", "di", "links"]
+      "required": ["rt", "if", "links"]
     }
   },
   "description": "The list of resources expressed as OIC links",

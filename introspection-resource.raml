@@ -1,0 +1,290 @@
+#%RAML 0.8
+title: OICIntrospection
+version: v1.0.0-20160707
+documentation:
+  - title: Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: [ "oic.if.r", "oic.if.baseline"]
+
+schemas:
+    - oic.wk.introspectionInfo: !include schemas/oic.wk.introspectionInfo.json
+
+/IntrospectionResURI:
+  description: |
+      This resource provides the means to get the device introspection data specifiying all the endpoints of the device.
+      The url hosted by this resource is either a local or an external url.
+
+  displayName: Introspection Resource
+  is: [ interface ] # valid for all methods
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: oic.wk.introspectionInfo
+            example: |
+              {
+                "rt" : ["oic.wk.introspection"],
+                "urlInfo" : [
+                  {
+                    "content-type" : "application/cbor",
+                    "protocol" : "coap",
+                    "url" : "coap://[fe80::1]:1234/IntrospectionExampleURI"
+                  }
+                ]
+              }
+
+
+/IntrospectionExampleURL:
+  description: |
+    The example is an actual Swagger 2.0 file that would be hosted by the endpoint.
+
+  displayName: Introspection URL Example Swagger 2.0 File
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example:  |
+              {
+                "swagger": "2.0",
+                "info": {
+                  "title": "my_example_device",
+                  "version": "my device version"
+                },
+                "schemes": [
+                  "http"
+                ],
+                "consumes": [
+                  "application/json"
+                ],
+                "produces": [
+                  "application/json"
+                ],
+                "paths": {
+                  "/switch": {
+                    "get": {
+                      "parameters": [
+                        {
+                          "name": "if",
+                          "in": "query",
+                          "description": "",
+                          "enum": [ "oic.if.a","oic.if.baseline" ],
+                          "type": "string"
+                        }
+                      ],
+                      "responses": {
+                        "200" : {
+                          "description" : "",
+                          "schema" : {
+                            "$ref": "#/definitions/BinarySwitch"
+                          }
+                        }
+                      }
+                    },
+                    "post": {
+                      "parameters": [
+                        {
+                          "name": "if",
+                          "in": "query",
+                          "description": "",
+                          "enum": [ "oic.if.a","oic.if.baseline" ],
+                          "type": "string"
+                        },
+                        {
+                          "name": "body",
+                          "in": "body",
+                          "required": false,
+                          "schema" : {
+                            "$ref": "#/definitions/BinarySwitch"
+                          }
+                        }
+                      ],
+                      "responses": {
+                        "200" : {
+                          "description" : "",
+                          "schema" : {
+                            "$ref": "#/definitions/BinarySwitch"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "/brightness": {
+                    "get": {
+                      "parameters": [
+                        {
+                          "name": "if",
+                          "in": "query",
+                          "description": "",
+                          "enum": [ "oic.if.a","oic.if.baseline" ],
+                          "type": "string"
+                        }
+                      ],
+                      "responses": {
+                        "200" : {
+                          "description" : "",
+                          "schema" : {
+                            "$ref": "#/definitions/Brightness"
+                          }
+                        }
+                      }
+                    },
+                    "post": {
+                      "parameters": [
+                        {
+                          "name": "if",
+                          "in": "query",
+                          "description": "",
+                          "enum": [ "oic.if.a","oic.if.baseline" ],
+                          "type": "string"
+                        },
+                        {
+                          "name": "body",
+                          "in": "body",
+                          "required": false,
+                          "schema" : {
+                            "$ref": "#/definitions/Brightness"
+                          }
+                        }
+                      ],
+                      "responses": {
+                        "200" : {
+                          "description" : "",
+                          "schema" : {
+                            "$ref": "#/definitions/Brightness"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "definitions": {
+                  "BinarySwitch": {
+                    "type": "object",
+                    "required": ["id"],
+                    "properties":  {
+                      "value": {
+                        "type": "boolean",
+                        "description": "Status of the switch"
+                      },
+                      "rt": {
+                        "type": "array",
+                        "items" : [
+                          {
+                            "type" : "string",
+                            "maxLength": 64
+                          }
+                        ],
+                        "minItems" : 1,
+                        "description": "Resource Type",
+                        "readOnly" : true,
+                        "default" : [ "oic.r.switch.binary" ]
+                      },
+                      "if": {
+                        "type": "array",
+                        "description": "The interface set supported by this resource",
+                        "readOnly" : true,
+                        "items": {
+                          "type": "string",
+                          "enum": ["oic.if.baseline","oic.if.a"]
+                        }
+                      },
+                      "p": {
+                        "type": "integer",
+                        "description": "Bitmap indicating observable and discoverable",
+                        "readOnly" : true
+                      },
+                      "n": {
+                        "type": "string",
+                        "description": "Friendly name of the resource",
+                        "readOnly" : true
+                      },
+                      "id": {
+                        "type": "string",
+                        "description": "Instance ID of this specific resource",
+                        "readOnly" : true
+                      },
+                      "range": {
+                        "type": "array",
+                        "description": "The valid range for the value Property",
+                        "readOnly" : true,
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  },
+                  "Brightness": {
+                    "type": "object",
+                    "required": ["id"],
+                    "properties":  {
+                      "brighness": {
+                        "type": "integer",
+                        "description": "Current sensed or set value for Brightness"
+                      },
+                      "rt": {
+                        "type": "array",
+                        "items" : [
+                          {
+                            "type" : "string",
+                            "maxLength": 64
+                          }
+                        ],
+                        "minItems" : 1,
+                        "description": "Resource Type",
+                        "readOnly" : true,
+                        "default" : [ "oic.r.light.brightness" ]
+                      },
+                      "if": {
+                        "type": "array",
+                        "description": "The interface set supported by this resource",
+                        "readOnly" : true,
+                        "items": {
+                          "type": "string",
+                          "enum": ["oic.if.baseline","oic.if.a"]
+                        }
+                      },
+                      "p": {
+                        "type": "integer",
+                        "description": "Bitmap indicating observable and discoverable",
+                        "readOnly" : true
+                      },
+                      "n": {
+                        "type": "string",
+                        "description": "Friendly name of the resource",
+                        "readOnly" : true
+                      },
+                      "id": {
+                        "type": "string",
+                        "description": "Instance ID of this specific resource",
+                        "readOnly" : true
+                      },
+                      "range": {
+                        "type": "array",
+                        "description": "The valid range for the value Property",
+                        "readOnly" : true,
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
