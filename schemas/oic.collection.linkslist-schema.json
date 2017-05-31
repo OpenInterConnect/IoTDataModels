@@ -7,10 +7,5 @@
 		       "$ref": "oic.collection-schema.json#/definitions/oic.collection.alllinks"
     }
   },
-  "type": "object",
-  "properties": {
-    "links":  {
-      "$ref": "#/definitions/oic.collection.alllinks"
-    }
-  }
+  "$ref": "#/definitions/oic.collection.alllinks"
 }
