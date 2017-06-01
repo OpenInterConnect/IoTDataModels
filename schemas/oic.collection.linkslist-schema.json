@@ -7,5 +7,7 @@
 		       "$ref": "oic.collection-schema.json#/definitions/oic.collection.alllinks"
     }
   },
-  "$ref": "#/definitions/oic.collection.alllinks"
+  "allOf": [
+    { "$ref": "#/definitions/oic.collection.alllinks" }
+  ]
 }
