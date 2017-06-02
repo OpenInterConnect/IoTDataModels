@@ -4,7 +4,7 @@
   "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.linkslist-schema.json#",
   "definitions": {
     "oic.collection.alllinks": {
-		       "$ref": "oic.collection-schema.json#/definitions/oic.collection.alllinks"
+		  "$ref": "oic.collection-schema.json#/definitions/oic.collection.alllinks"
     }
   },
   "allOf": [
