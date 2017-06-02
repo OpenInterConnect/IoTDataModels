@@ -70,9 +70,7 @@ traits:
           application/json:
             schema: AirQuality-ll
             example: |
-              {
-                "links": [
+              [
                   {"href": "/myCOMeasureResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
                   {"href": "/myCO2ResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
-                ]
-              }
+              ]

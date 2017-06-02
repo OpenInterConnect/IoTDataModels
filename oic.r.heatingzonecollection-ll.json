@@ -4,7 +4,7 @@
   "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Heating Zone Collection Link List Schema",
   "definitions": {
-    "heatingzonecollection-ll": {
+    "heatingzonecollection-11": {
       "allOf": [
         {"$ref": "oic.collection.linkslist-schema.json#/definitions/oic.collection.alllinks"}
       ]
