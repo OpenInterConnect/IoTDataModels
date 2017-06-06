@@ -27,7 +27,7 @@
               "maxItems": 2,
               "uniqueItems": true,
               "items": {
-                "oneOf": [
+                "anyOf": [
                   {
                     "enum": ["oic.r.airquality","oic.r.value.conditional"]
                   },

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.mediaSourceList.json#",
   "title": "Media Source List",
   "definitions": {
@@ -10,7 +10,7 @@
           "type": "array",
           "items": {
             "oneOf": [
-              { "$ref": "oic.r.mediaSource.json#" }
+              { "$ref": "oic.r.mediaSource.json#/definitions/oic.r.mediasource" }
             ]
           }
         }
@@ -19,7 +19,6 @@
   },
   "type": "object",
   "allOf": [
-    { "$ref": "oic.core.json#/definitions/oic.core"},
     { "$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     { "$ref": "#/definitions/oic.r.mediasourcelist"}
   ],

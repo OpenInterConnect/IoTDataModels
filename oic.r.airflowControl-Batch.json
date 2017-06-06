@@ -1,7 +1,7 @@
 {
   "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.airFlowControl-Batch.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Air Flow Control",
   "definitions": {
     "oic.r.airflowcontrol": {
@@ -11,8 +11,8 @@
           "type": "array",
           "items": {
             "anyOf": [
-              {"$ref": "oic.r.switch.binary.json#"},
-              {"$ref": "oic.r.airflow.json#"}
+              {"$ref": "oic.r.switch.binary.json#/definitions/oic.r.switch.binary"},
+              {"$ref": "oic.r.airFlow.json#/definitions/oic.r.airflow"}
             ]
           }
         }
@@ -21,7 +21,6 @@
   },
   "type": "object",
   "allOf": [
-    {"$ref": "oic.core.json#/definitions/oic.core"},
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.airflowcontrol"}
   ],
