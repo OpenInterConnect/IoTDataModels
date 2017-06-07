@@ -1,0 +1,43 @@
+#%RAML 0.8
+title: OICIcon
+version: v1.1.0-20161107
+documentation:
+        - title: OCF Copyright
+          content: Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.
+        - title: OCF License
+          content: !include LICENSE.md
+        - title: OCF Disclaimer
+          content: !include DISCLAIMER.md
+schemas:
+  - Icon: !include schemas/oic.r.icon-schema.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.r","oic.if.baseline"]
+
+/IconResURI:
+  description: |
+    This resource describes the attributes associated with an Icon.
+
+  displayName: Icon
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Retrieves the current icon properties.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Icon
+            example: |
+              {
+              "rt": ["oic.r.icon"],
+              "id": "unique_example_id",
+              "mimetype": "image/png",
+              "width": 256,
+              "height": 256,
+              "media": "http://findbetter.ru/public/uploads/1481662800/2043.png"
+              }
