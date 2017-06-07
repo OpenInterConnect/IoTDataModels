@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.d-schema.json#",
+  "definitions": {
+    "oic.wk.d": {
+      "type": "object",
+      "properties": {
+        "di": {
+          "$ref": "oic.types-schema.json#/definitions/uuid",
+          "readOnly": true,
+          "description": "Unique identifier for device (UUID)"
+        },
+        "icv": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "The version of the OIC Server"
+        },
+        "dmv": {
+          "type": "string",
+          "maxLength": 256,
+          "readOnly": true,
+          "description": "Spec versions of the Resource and Device Specifications to which this device data model is implemented"
+        },
+        "ld": {
+            "type": "array",
+            "items" : [
+              {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "$ref": "oic.types-schema.json#/definitions/language-tag",
+                    "readOnly": true,
+                    "description": "An RFC 5646 language tag."
+                  },
+                  "value": {
+                    "type": "string",
+                    "maxLength": 64,
+                    "readOnly": true,
+                    "description": "Device description in the indicated language."
+                  }
+                }
+              }
+            ],
+            "minItems" : 1,
+            "readOnly": true,
+            "description": "Localized Description."
+        },
+        "sv": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Software version."
+        },
+        "dmn": {
+          "type": "array",
+          "items" : [
+            {
+              "type": "object",
+              "properties": {
+                "language": {
+                  "$ref": "oic.types-schema.json#/definitions/language-tag",
+                  "readOnly": true,
+                  "description": "An RFC 5646 language tag."
+                },
+                "value": {
+                  "type": "string",
+                  "maxLength": 64,
+                  "readOnly": true,
+                  "description": "Device description in the indicated language."
+                }
+              }
+            }
+          ],
+          "minItems" : 1,
+          "readOnly": true,
+          "description": "Localized Description."
+        },
+        "dmno": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Model number as designated by manufacturer."
+        },
+        "piid": {
+          "$ref": "oic.types-schema.json#/definitions/uuid",
+          "readOnly": true,
+          "description": "Protocol independent unique identifier for device (UUID) that is immutable."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.wk.d" }
+  ],
+  "required": [ "n", "di", "icv", "dmv", "piid" ]
+}

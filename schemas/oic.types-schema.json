@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+    "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.types-schema.json#",
+    "definitions" : {
+        "uuid": {
+            "description": "An identifier formatted according to IETF RFC 4122.",
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+        },
+        "date": {
+            "description": "As defined in ISO 8601. The format is [yyyy]-[mm]-[dd].",
+            "type": "string",
+            "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])$"
+        },
+        "language-tag": {
+          "description": "An identifier formatted according to IETF RFC 5646 (langusge tag).",
+          "type": "string",
+          "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1-8})*$"
+        },
+        "int64": {
+          "description": "A string instance is valid against this attribute if it contains an integer in the range [-(2**63), (2**63)-1]",
+          "type": "string",
+          "pattern": "^0|(-?[1-9][0-9]{0,18)}$"
+        },
+        "uint64": {
+          "description": "A string instance is valid against this attribute if it contains an integer in the range [0, (2**64)-1]",
+          "type": "string",
+          "pattern": "^0|([1-9][0-9]{0,19})$"
+        }
+    }
+}

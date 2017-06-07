@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-v4/schema#",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.res-schema.json#",
+  "definitions": {
+    "oic.res-baseline": {
+      "type": "object",
+      "properties": {
+        "rt": {
+          "type": "array",
+          "items" : {
+              "type" : "string",
+              "maxLength": 64
+            },
+          "minItems" : 1,
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "if": {
+          "type": "array",
+          "items": {
+              "type" : "string",
+              "enum" : ["oic.if.baseline", "oic.if.ll"]
+            },
+          "minItems": 1,
+          "readOnly": true,
+          "description": "The interface set supported by this resource"
+        },
+        "n": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Human friendly name"
+        },
+        "di": {
+          "$ref": "oic.types-schema.json#/definitions/uuid",
+          "readOnly": true,
+          "description": "Unique identifier for device (UUID) as indicated by the /oic/d resource of the device"
+        },
+        "mpro": {
+          "readOnly": true,
+          "description": "Supported messaging protocols",
+          "type": "string",
+          "maxLength": 64
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
+          }
+        }
+      },
+      "required": ["rt", "if", "di", "links"]
+    }
+  },
+  "description": "The list of resources expressed as OIC links",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/oic.res-baseline"
+  }
+}

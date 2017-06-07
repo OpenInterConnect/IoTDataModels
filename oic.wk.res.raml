@@ -1,0 +1,92 @@
+#%RAML 0.8
+title: Discoverable Resources
+version: v1-20160622
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+
+schemas:
+  - sbaseline: !include schemas/oic.wk.res-schema.json
+  - slinklist: !include schemas/oic.wk.res-schema-ll.json
+
+traits:
+  - interface-baseline:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline"]
+
+  - interface-ll:
+      queryParameters:
+        if:
+          enum: ["oic.if.ll"]
+
+
+/oic-res-baseline-URI:
+  displayName: Discoverable Resources, baseline interface
+  is: [ interface-baseline ]
+  description: |
+    Baseline representation of /oic/res; list of discoverable resources
+  get:
+    description: |
+      Retrieve the discoverable resource set, baseline interface
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: sbaseline
+            example: |
+              [
+                {
+                "rt": ["oic.wk.res"],
+                "if": ["oic.if.baseline", "oic.if.ll" ],
+                "di": "0685B960-736F-46F7-BEC0-9E6CBD61ADC1",
+                "links":
+                  [
+                    {
+                      "href": "/humidity",
+                      "rt":   ["oic.r.humidity"],
+                      "if":   ["oic.if.s"]
+                    },
+                    {
+                      "href": "/temperature",
+                      "rt":   ["oic.r.temperature"],
+                      "if":   ["oic.if.s"]
+                    }
+                  ]
+                }
+              ]
+
+/oic-res-ll-URI:
+  displayName: Discoverable Resources, link list interface
+  is: [ interface-ll]
+  description: |
+    Link list representation of /oic/res; list of discoverable resources
+  get:
+    description: |
+      Retrieve the discoverable resource set, link list interface
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: slinklist
+            example: |
+              [
+                  {
+                    "href": "/humidity",
+                    "rt":   ["oic.r.humidity"],
+                    "if":   ["oic.if.s"]
+                  },
+                  {
+                    "href": "/temperature",
+                    "rt":   ["oic.r.temperature"],
+                    "if":   ["oic.if.s"]
+                  }
+              ]
