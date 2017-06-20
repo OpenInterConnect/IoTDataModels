@@ -50,8 +50,7 @@
           "description": "The interface set supported by this resource"
         },
         "di": {
-           "$ref": "oic.types-schema.json#/definitions/uuid",
-           "description": "Unique identifier for device (UUID)"
+          "$ref": "oic.types-schema.json#/definitions/uuid"
         },
         "p": {
           "description": "Specifies the framework policies on the Resource referenced by the target URI",
@@ -89,7 +88,6 @@
             },
             {
               "$ref": "oic.types-schema.json#/definitions/uuid",
-              "description": "Unique identifier (UUID)"
             }
           ],
           "description": "The instance identifier for this web link in an array of web links - used in collections"

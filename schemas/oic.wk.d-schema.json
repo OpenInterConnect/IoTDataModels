@@ -7,9 +7,15 @@
       "type": "object",
       "properties": {
         "di": {
-          "$ref": "oic.types-schema.json#/definitions/uuid",
-          "readOnly": true,
-          "description": "Unique identifier for device (UUID)"
+          "allOf": [
+            {
+              "$ref": "oic.types-schema.json#/definitions/uuid"
+            },
+            {
+              "readOnly": true,
+              "description": "Unique identifier for device (UUID)"
+            }
+          ]
         },
         "icv": {
           "type": "string",
@@ -82,9 +88,15 @@
           "description": "Model number as designated by manufacturer."
         },
         "piid": {
-          "$ref": "oic.types-schema.json#/definitions/uuid",
-          "readOnly": true,
-          "description": "Protocol independent unique identifier for device (UUID) that is immutable."
+          "allOf": [
+            {
+              "$ref": "oic.types-schema.json#/definitions/uuid"
+            },
+            {
+              "readOnly": true,
+              "description": "Protocol independent unique identifier for device (UUID) that is immutable."
+            }
+          ]
         }
       }
     }

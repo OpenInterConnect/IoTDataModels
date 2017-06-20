@@ -7,9 +7,15 @@
       "type": "object",
       "properties": {
         "pi": {
-          "$ref": "oic.types-schema.json#/definitions/uuid",
-          "readOnly": true,
-          "description": "Platform Identifier as a UUID"
+          "allOf": [
+            {
+              "$ref": "oic.types-schema.json#/definitions/uuid"
+            },
+            {
+              "readOnly": true,
+              "description": "Platform Identifier as a UUID"
+            }
+          ]
         },
         "mnmn": {
           "type": "string",
@@ -31,9 +37,15 @@
           "description": "Model number as designated by manufacturer"
         },
         "mndt": {
-          "$ref": "oic.types-schema.json#/definitions/date",
-          "readOnly": true,
-          "description": "Manufacturing Date."
+          "allOf": [
+            {
+              "$ref": "oic.types-schema.json#/definitions/date"
+            },
+            {
+              "readOnly": true,
+              "description": "Manufacturing Date."
+            }
+          ]
         },
         "mnpv": {
           "type": "string",

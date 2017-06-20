@@ -26,27 +26,37 @@
                 "id": {
                     "anyOf": [
                         {
-                            "type": "integer",
-                            "description": "A number that is unique to that collection; like an ordinal number that is not repeated"
+                          "type": "string",
+                          "readOnly": true,
+                          "description": "A unique string that could be a hash or similarly unique"
                         },
                         {
-                            "type": "string",
-                            "description": "A unique string that could be a hash or similarly unique"
-                        },
-                        {
-                            "$ref": "oic.types-schema.json#/definitions/uuid",
-                            "description": "A unique string that could be a UUIDv4"
+                          "$ref": "oic.types-schema.json#/definitions/uuid"
                         }
                     ],
+                    "readOnly": true,
                     "description": "ID for the collection. Can be an value that is unique to the use context or a UUIDv4"
                 },
                 "di": {
-                    "$ref": "oic.types-schema.json#/definitions/uuid",
-                    "description": "The device ID which is an UUIDv4 string; used for backward compatibility with Spec A definition of /oic/res"
+                  "allOf": [
+                    {
+                      "$ref": "oic.types-schema.json#/definitions/uuid"
+                    },
+                    {
+                      "description": "The device ID which is a UUIDv4 string"
+                    }
+                  ]
                 },
                 "rts": {
-                    "$ref": "oic.core-schema.json#/definitions/oic.core/properties/rt",
-                    "description": "Defines the list of allowable resource types (for Target and anchors) in links included in the collection; new links being created can only be from this list"                },
+                  "allOf": [
+                    {
+                      "$ref": "oic.core-schema.json#/definitions/oic.core/properties/rt"
+                    },
+                    {
+                      "description": "Defines the list of allowable resource types (for Target and anchors) in links included in the collection; new links being created can only be from this list"
+                    }
+                  ]
+                },
                 "drel": {
                     "type": "string",
                     "description": "When specified this is the default relationship to use when an OIC Link does not specify an explicit relationship with *rel* parameter"
