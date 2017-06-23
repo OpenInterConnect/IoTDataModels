@@ -23,20 +23,6 @@
             "type": "object",
             "description": "A collection is a set (array) of tagged-link or set (array) of simple links along with additional properties to describe the collection itself",
             "properties": {
-                "id": {
-                    "anyOf": [
-                        {
-                          "type": "string",
-                          "readOnly": true,
-                          "description": "A unique string that could be a hash or similarly unique"
-                        },
-                        {
-                          "$ref": "oic.types-schema.json#/definitions/uuid"
-                        }
-                    ],
-                    "readOnly": true,
-                    "description": "ID for the collection. Can be an value that is unique to the use context or a UUIDv4"
-                },
                 "di": {
                   "allOf": [
                     {
