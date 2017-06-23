@@ -87,7 +87,7 @@
               "description": "Any unique string including a URI"
             },
             {
-              "$ref": "oic.types-schema.json#/definitions/uuid",
+              "$ref": "oic.types-schema.json#/definitions/uuid"
             }
           ],
           "description": "The instance identifier for this web link in an array of web links - used in collections"

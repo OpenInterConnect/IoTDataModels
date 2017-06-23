@@ -37,7 +37,7 @@
             "anyOf": [
                 {
                   "type": "string",
-                  "maxLength": 64,
+                  "maxLength": 64
                 },
                 {
                   "$ref": "oic.types-schema.json#/definitions/uuid"
