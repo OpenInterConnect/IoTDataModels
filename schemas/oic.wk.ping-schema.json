@@ -9,7 +9,7 @@
         "in": {
           "type": "integer",
           "readOnly": false,
-          "description": "Indicates the interval for which connection shall be kept alive"
+          "description": "Indicates the interval as an integer number of minutes for which connection shall be kept alive"
         }
       }
     }

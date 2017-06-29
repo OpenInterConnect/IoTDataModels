@@ -13,7 +13,7 @@
               "$ref": "oic.types-schema.json#/definitions/uuid"
             },
             {
-              "description": "A unique identifier for the publishing Device, i.e., its device ID"
+              "description": "A UUID formatted string that is the identifier for the publishing Device"
             }
           ]
         },
@@ -22,7 +22,7 @@
         },
         "ttl": {
           "type": "integer",
-          "description": "Time to indicate a RD, how long to keep this published item. After this time (in seconds) elapses, the RD invalidates the links. To keep link alive the publishing device updates the ttl using the update schema"
+          "description": "Time to indicate a RD, i.e. how long to keep this published item. This is an integer number of seconds"
         }
       }
     }

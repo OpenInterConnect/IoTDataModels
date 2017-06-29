@@ -14,7 +14,7 @@
             },
           "minItems" : 1,
           "readOnly": true,
-          "description": "Resource Type"
+          "description": "Resource Type of the Resource encoded as a string array"
         },
         "if": {
           "type": "array",
@@ -24,17 +24,17 @@
             },
           "minItems": 1,
           "readOnly": true,
-          "description": "The interface set supported by this resource"
+          "description": "The interface set supported by this resource encoded as a string array"
         },
         "n": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "Human friendly name"
+          "description": "Human friendly name encoded as a string"
         },
         "mpro": {
           "readOnly": true,
-          "description": "Supported messaging protocols",
+          "description": "Supported messaging protocols encoded as a string",
           "type": "string",
           "maxLength": 64
         },

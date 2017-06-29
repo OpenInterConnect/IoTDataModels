@@ -8,7 +8,7 @@
       "properties": {
         "loc": {
           "type": "array",
-          "description": "Location information",
+          "description": "Location information encoded as a 2-elment array of floats (lat, long)",
           "items": {
             "type": "number"
           },
@@ -18,17 +18,17 @@
         "locn": {
           "type": "string",
           "maxLength": 64,
-          "description": "Human Friendly Name for location"
+          "description": "Human Friendly Name for location encoded as a string"
         },
         "c": {
           "type": "string",
           "maxLength": 64,
-          "description": "Currency"
+          "description": "Currency encoded as a string"
         },
         "r": {
           "type": "string",
           "maxLength": 64,
-          "description": "Region"
+          "description": "Region encoded as a string"
         },
         "ln": {
           "type": "array",
@@ -42,19 +42,19 @@
                       "$ref": "oic.types-schema.json#/definitions/language-tag"
                     },
                     {
-                      "description": "An RFC 5646 language tag."
+                      "description": "A string formatted as an RFC 5646 language tag."
                     }
                   ]
                 },
                 "value": {
                   "type": "string",
                   "maxLength": 64,
-                  "description": "Device description in the indicated language."
+                  "description": "String containing the Device name in the indicated language."
                 }
               }
             },
           "minItems" : 1,
-          "description": "Localized names"
+          "description": "Localized names encoded as an array of objects"
         },
         "dl": {
           "allOf": [
@@ -62,7 +62,7 @@
               "$ref": "oic.types-schema.json#/definitions/language-tag"
             },
             {
-              "description": "Default Language"
+              "description": "Default Language encoded as a string formatted as an RFC 5646 language tag."
             }
           ]
         }

@@ -12,7 +12,7 @@
             }
         },
         "oic.collection.alllinks": {
-            "description": "All forms of links in a collection",
+            "description": "All forms of links in a collection, represented as an array of links",
             "oneOf": [
                 {
                     "$ref": "#/definitions/oic.collection.setoflinks"
@@ -29,7 +29,7 @@
                       "$ref": "oic.types-schema.json#/definitions/uuid"
                     },
                     {
-                      "description": "The device ID which is a UUIDv4 string"
+                      "description": "The device ID which is a UUID formatted string"
                     }
                   ]
                 },
@@ -39,13 +39,9 @@
                       "$ref": "oic.core-schema.json#/definitions/oic.core/properties/rt"
                     },
                     {
-                      "description": "Defines the list of allowable resource types (for Target and anchors) in links included in the collection; new links being created can only be from this list"
+                      "description": "Array of strings that defines the list of allowable resource types (for Target and anchors) in links included in the collection; new links being created can only be from this list"
                     }
                   ]
-                },
-                "drel": {
-                    "type": "string",
-                    "description": "When specified this is the default relationship to use when an OIC Link does not specify an explicit relationship with *rel* parameter"
                 },
                 "links": {
                     "$ref": "#/definitions/oic.collection.alllinks"
