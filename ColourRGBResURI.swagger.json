@@ -1,0 +1,153 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Colour RGB",
+    "version": "v1.1.0-20160519",
+    "license": {
+      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
+      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
+    }
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/ColourRGBResURI" : {
+      "get": {
+        "description": "This resource specifies the actual colour in the RGB space represented as an array of integers.\nEach colour value is described with a Red, Green, Blue component.\nThese colour values are encoded as an array of integer values ([R,G,B]).\nThe minimum and maximum colour value per component may be described by range (from oic.r.baseresource).\nWhen range (from oic.r.baseresource) is omitted, then the range is [0,255].\nRetrieves the current colour in RGB.\nValue is an array of integer values in the order R,G,B.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "rt":       ["oic.r.colour.rgb"],
+                  "id":       "unique_example_id",
+                  "rgbValue": [255,255,255],
+                  "range":    [0,255]
+                }
+                ,
+              "schema": { "$ref": "#/definitions/ColourRGB" }
+            }
+        }
+      },
+      "post": {
+        "description": "Sets the current colourRGB value\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ColourRGB" },
+            "x-example":
+              {
+                "id":       "unique_example_id",
+                "rgbValue": [255,0,0]
+              }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "id":       "unique_example_id",
+                  "rgbValue": [255,0,0]
+                }
+                ,
+              "schema": { "$ref": "#/definitions/ColourRGB" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.a", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "ColourRGB" : 
+            {
+        "properties": {
+          "precision": {
+            "description": "Accuracy granularity of the exposed value",
+            "readOnly": true,
+            "type": "number"
+          },
+          "range": {
+            "description": "The valid range for the value Property",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "readOnly": true,
+            "type": "array"
+          },
+          "rgbValue": {
+            "description": "RGB value; the first item is the R, second the G, third the B.",
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 3,
+            "minItems": 3,
+            "type": "array"
+          },
+          "step": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "description": "Step value across the defined range",
+            "readOnly": true
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "description": "The value sensed or actuated by this Resource"
+          }
+        },
+        "required": [
+          "rgbValue"
+        ],
+        "type": "object"
+      }
+
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Pan Tilt Zoom Movement",
+    "version": "v1.1.0-20160519",
+    "license": {
+      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
+      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
+    }
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/PanTiltZoomResURI" : {
+      "get": {
+        "description": "This resource specifies the pan tilt and zoom capabilities of a device.\nThe resource rt is dynamic and reflects whether the values apply to\n  physical movement of the device or digital/virtual enhancements to the image.\nFor physical movement the rt is 'oic.r.movement.ptz'.\nFor digital/virtual image enhancements the rt is 'oic.r.image.ptz'.\nThe Pan and Tilt are specified in degrees.\nThe Zoom Factor is a value in the range 1-100 for linear (optical) zoom.\nThe Zoom Factor is a value in the range [1x, 2x, 4x, 8x, 16x, 32x] for digital zoom.\nIf there is no zoom value to set the Zoom Factor shall be '1x'.\nThe value 0 degrees means neutral, this is the vendor defined setting.\nNote that this resource also can be used to create an offset for physical movement.\nWhen that is the case, the rt value is: oic.r.movement.offset.ptz\nNote that this resource also can be used to create an offset for image movement.\nWhen that is the case, the rt value is: oic.r.image.offset.ptz\nWhen the pan_range value is omitted, then the range is [-180.0,180.0].\nIf pan is not supported then the range shall be [0.0,0.0]\nWhen the tilt_range value is omitted, then the range is [-180.0,180.0].\nIf tilt is not supported then the range shall be [0.0,0.0]\nRetrieves the current pan, tilt and zoom setting.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "rt":         ["oic.r.ptz"],
+                  "id":         "unique_example_id",
+                  "pan":        0.0,
+                  "tilt":       0.0,
+                  "zoomFactor": "2x"
+                }
+                ,
+              "schema": { "$ref": "#/definitions/PanTiltZoom" }
+            }
+        }
+      },
+      "post": {
+        "description": "Sets the current pan, tilt and zoom value\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/PanTiltZoom" },
+            "x-example":
+              {
+                "id":         "unique_example_id",
+                "pan":        10.0,
+                "tilt":       -10.0,
+                "zoomFactor": "4x"
+              }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "id":         "unique_example_id",
+                  "pan":        10.0,
+                  "tilt":       -10.0,
+                  "zoomFactor": "4x"
+                }
+                ,
+              "schema": { "$ref": "#/definitions/PanTiltZoom" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.a", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "PanTiltZoom" : 
+            {
+        "properties": {
+          "pan": {
+            "description": "horizontal pan in degrees",
+            "type": "number"
+          },
+          "pan_range": {
+            "description": "Min and Max values for the pan setting",
+            "items": {
+              "type": "number"
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "readOnly": true,
+            "type": "array"
+          },
+          "precision": {
+            "description": "Accuracy granularity of the exposed value",
+            "readOnly": true,
+            "type": "number"
+          },
+          "range": {
+            "description": "The valid range for the value Property",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "readOnly": true,
+            "type": "array"
+          },
+          "step": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "description": "Step value across the defined range",
+            "readOnly": true
+          },
+          "tilt": {
+            "description": "vertical tilt in degrees",
+            "type": "number"
+          },
+          "tilt_range": {
+            "description": "Min and Max values for the tilt setting",
+            "items": {
+              "type": "number"
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "readOnly": true,
+            "type": "array"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "description": "The value sensed or actuated by this Resource"
+          },
+          "zoomFactor": {
+            "description": "The Zoomfactor value",
+            "type": "string"
+          },
+          "zoomFactorRange": {
+            "description": "allowed Zoom Factor values. Linear equates to a 1-100 min/max.",
+            "enum": [
+              "linear",
+              "1x",
+              "2x",
+              "4x",
+              "8x",
+              "16x",
+              "32x"
+            ],
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "pan",
+          "tilt",
+          "zoomFactor"
+        ],
+        "type": "object"
+      }
+
+  }
+}

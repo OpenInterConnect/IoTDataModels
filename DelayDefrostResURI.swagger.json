@@ -1,0 +1,195 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Delay Defrost",
+    "version": "OCF_v1.0.0-2016____",
+    "license": {
+      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
+      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
+    }
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/DelayDefrostResURI" : {
+      "get": {
+        "description": "This resource describes the delay defrost function as defined by the US Energy Star Specifications.\nSee Energy Star Refrigerator Requirements Version 5 Section 4)G\n(https://www.energystar.gov/sites/default/files/specs//private/ENERGY%20STAR%20Final%20Version%205.0%20Residential%20Refrigerators%20and%20Freezers%20Program%20Requirements.pdf)\nThe status is a boolean indicating whether the function is on, if off then defrost is scheduled as part of normal device operation.\nstartTime, from oir.r.time.period (mandatory) is an ISO8601 encoded start time for the interval in which defrost shall not occur.\nstopTime, from oic.r.time.period is an ISO8601 encoded stop time for the interval in which defrost shall not occur.\ninterval, from oic.r.time.period with additional range restrictions is the time in minutes of the period that starts at starttime (if not present the default is 240).\nstopTime and interval are mutually exlusive; they cannot both be present in a Resource instance\nRetrieves the current Delay Defrost function status\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "rt":     ["oic.r.delaydefrost"],
+                  "id":     "unique_example_id",
+                  "startTime":  "06:00Z",
+                  "status": false
+                }
+                ,
+              "schema": { "$ref": "#/definitions/DelayDefrost" }
+            }
+        }
+      },
+      "post": {
+        "description": "Activates the desired Delay Defrost functions\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/DelayDefrost" },
+            "x-example":
+              {
+                "id":         "unique_example_id",
+                "status":     true,
+                "startTime":  "06:00Z",
+                "interval":   180
+              }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "Indicates that the DelayDefrost function was changed.\nThe new representation may be provided in the response.\n",
+              "x-example":
+                {
+                  "id":         "unique_example_id",
+                  "status":     true,
+                  "startTime":  "06:00Z",
+                  "interval":   180
+                }
+                ,
+              "schema": { "$ref": "#/definitions/DelayDefrost" }
+            },
+            "403": {
+              "description" : "Indicates the update to the time properties was rejected.\nReasons for rejection:\n  invalid time entry\nThe current unchanged representation may be provided in the response.\n",
+              "x-example":
+                {
+                  "id":         "unique_example_id",
+                  "status":     true,
+                  "startTime":  "06:00Z",
+                  "interval":   180
+                }
+                ,
+              "schema": { "$ref": "#/definitions/DelayDefrost" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.a", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "DelayDefrost" : 
+            {
+        "allOf": [
+          {
+            "properties": {
+              "interval": {
+                "description": "Time interval in minutes after the startTime, if present stopTime cannot be present",
+                "type": "integer"
+              },
+              "startTime": {
+                "description": "Start time for the time period",
+                "type": "string"
+              },
+              "stopTime": {
+                "description": "Stop time for the time period, if present interval cannot be present",
+                "type": "string"
+              }
+            },
+            "required": [
+              "startTime"
+            ],
+            "type": "object"
+          },
+          {
+            "properties": {
+              "interval": {
+                "default": 240,
+                "description": "Defrost interval as defined by Energy Star",
+                "maximum": 1440,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "precision": {
+                "description": "Accuracy granularity of the exposed value",
+                "readOnly": true,
+                "type": "number"
+              },
+              "range": {
+                "description": "The valid range for the value Property",
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "integer"
+                    }
+                  ]
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "readOnly": true,
+                "type": "array"
+              },
+              "status": {
+                "description": "Indicates whether any supported delay defrost function is active",
+                "type": "boolean"
+              },
+              "step": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "description": "Step value across the defined range",
+                "readOnly": true
+              },
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "array"
+                  },
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ],
+                "description": "The value sensed or actuated by this Resource"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          }
+        ],
+        "type": "object"
+      }
+
+  }
+}

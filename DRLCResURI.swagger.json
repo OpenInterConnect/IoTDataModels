@@ -1,0 +1,188 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Demand Response Load Control (DRLC).",
+    "version": "v1.1.0-20160519",
+    "license": {
+      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
+      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
+    }
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/DRLCResURI" : {
+      "get": {
+        "description": "This resource describes any to be applied or currently being applied DRLC signal.\nThe DRType is the ApplianceLoadReductionType defined in Zigbee/HA Smart Energy Profile 2.0.\nStart is a string containing an ISO8601 encoded start time.\nThe duration value is in minutes.\nOverride indicates whether the consumer has overridden the request (true) or not (false).\nProvides the current DRLC action that is being applied.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "rt":       ["oic.r.energy.drlc"],
+                  "id":       "unique_example_id",
+                  "DRType":   1,
+                  "start":    "2015-01-09T16:45Z",
+                  "duration": 10,
+                  "override": false
+                }
+                ,
+              "schema": { "$ref": "#/definitions/DRLC" }
+            }
+        }
+      },
+      "put": {
+        "description": "Provides the DRLC action to be applied to the device or updates an existing action.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/DRLC" },
+            "x-example":
+              {
+                "rt":       ["oic.r.energy.drlc"],
+                "id":       "unique_example_id",
+                "DRType":   1,
+                "start":    "2015-01-09T16:45Z",
+                "duration": 10
+              }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "Indicates that the target DRLC resource was changed.\nThe new resource attributes are provided in the response.\n",
+              "x-example":
+                {
+                  "DRType":   1,
+                  "id":       "unique_example_id",
+                  "start":    "2015-01-09T17:00Z",
+                  "duration": 15,
+                  "override": false
+                }
+                ,
+              "schema": { "$ref": "#/definitions/DRLC" }
+            },
+            "201": {
+              "description" : "Indicates successful creation of the DRLC resource with the attributes provided.\nThe response includes the URI of the created resource.\n",
+              "x-example":
+                {
+                  "ResURI":   "/MyDevice/MyDRLCURI"
+                }
+                ,
+              "schema": { "$ref": "#/definitions/CreateResponse" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.b", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "DRLC" : 
+            {
+        "properties": {
+          "DRType": {
+            "description": "The to be applied demand-response type",
+            "type": "integer"
+          },
+          "duration": {
+            "description": "The duration of the to be applied DR type",
+            "type": "integer"
+          },
+          "override": {
+            "description": "Whether the consumer has overriden the application of DR",
+            "type": "boolean"
+          },
+          "precision": {
+            "description": "Accuracy granularity of the exposed value",
+            "readOnly": true,
+            "type": "number"
+          },
+          "range": {
+            "description": "The valid range for the value Property",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "readOnly": true,
+            "type": "array"
+          },
+          "start": {
+            "description": "The start time for the application of DR",
+            "type": "string"
+          },
+          "step": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "description": "Step value across the defined range",
+            "readOnly": true
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "description": "The value sensed or actuated by this Resource"
+          }
+        },
+        "required": [
+          "DRType"
+        ],
+        "type": "object"
+      }
+
+    ,
+    "CreateResponse" : 
+            {
+        "properties": {
+          "ResURI": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+
+  }
+}
