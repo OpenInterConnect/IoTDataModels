@@ -13,7 +13,7 @@
             },
             {
               "readOnly": true,
-              "description": "Unique identifier for device as UUID formatted string"
+              "description": "Unique identifier for device"
             }
           ]
         },
@@ -21,13 +21,13 @@
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "The version of the OIC Server encoded as a string"
+          "description": "The version of the OIC Server"
         },
         "dmv": {
           "type": "string",
           "maxLength": 256,
           "readOnly": true,
-          "description": "Spec versions of the Resource and Device Specifications to which this device data model is implemented encoded as a string containing comma separated values"
+          "description": "Spec versions of the Resource and Device Specifications to which this device data model is implemented"
         },
         "ld": {
           "type": "array",
@@ -42,7 +42,7 @@
                     },
                     {
                       "readOnly": true,
-                      "description": "A string formatted as an RFC 5646 language tag."
+                      "description": "An RFC 5646 language tag."
                     }
                   ]
                 },
@@ -50,19 +50,19 @@
                   "type": "string",
                   "maxLength": 64,
                   "readOnly": true,
-                  "description": "Device description in the indicated language encoded as a string."
+                  "description": "Device description in the indicated language."
                 }
               }
             },
           "minItems" : 1,
           "readOnly": true,
-          "description": "Localized Descriptions encoded as an array of objects."
+          "description": "Localized Descriptions."
         },
         "sv": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "Software version encoded as a string."
+          "description": "Software version."
         },
         "dmn": {
           "type": "array",
@@ -77,7 +77,7 @@
                     },
                     {
                       "readOnly": true,
-                      "description": "A string formatted as an RFC 5646 language tag."
+                      "description": "An RFC 5646 language tag."
                     }
                   ]
                 },
@@ -85,19 +85,19 @@
                   "type": "string",
                   "maxLength": 64,
                   "readOnly": true,
-                  "description": "Manufacturer name in the indicated language emcoded as a string."
+                  "description": "Manufacturer name in the indicated language."
                 }
               }
             },
           "minItems" : 1,
           "readOnly": true,
-          "description": "Manufacturer Name encoded as a string."
+          "description": "Manufacturer Name."
         },
         "dmno": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "Model number as designated by manufacturer encoded as a string."
+          "description": "Model number as designated by manufacturer."
         },
         "piid": {
           "allOf": [
@@ -106,7 +106,7 @@
             },
             {
               "readOnly": true,
-              "description": "Protocol independent unique identifier for device that is immutable; encoded as a UUID formatted string."
+              "description": "Protocol independent unique identifier for device that is immutable."
             }
           ]
         }

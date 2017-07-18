@@ -8,7 +8,7 @@
       "properties": {
         "loc": {
           "type": "array",
-          "description": "Location information encoded as a 2-elment array of floats (lat, long)",
+          "description": "Location information (lat, long)",
           "items": {
             "type": "number"
           },
@@ -18,17 +18,17 @@
         "locn": {
           "type": "string",
           "maxLength": 64,
-          "description": "Human Friendly Name for location encoded as a string"
+          "description": "Human Friendly Name for location"
         },
         "c": {
           "type": "string",
           "maxLength": 64,
-          "description": "Currency encoded as a string"
+          "description": "Currency"
         },
         "r": {
           "type": "string",
           "maxLength": 64,
-          "description": "Region encoded as a string"
+          "description": "Region"
         },
         "ln": {
           "type": "array",
@@ -42,19 +42,19 @@
                       "$ref": "oic.types-schema.json#/definitions/language-tag"
                     },
                     {
-                      "description": "A string formatted as an RFC 5646 language tag."
+                      "description": "An RFC 5646 language tag."
                     }
                   ]
                 },
                 "value": {
                   "type": "string",
                   "maxLength": 64,
-                  "description": "String containing the Device name in the indicated language."
+                  "description": "The Device name in the indicated language."
                 }
               }
             },
           "minItems" : 1,
-          "description": "Localized names encoded as an array of objects"
+          "description": "Localized names"
         },
         "dl": {
           "allOf": [
@@ -62,7 +62,7 @@
               "$ref": "oic.types-schema.json#/definitions/language-tag"
             },
             {
-              "description": "Default Language encoded as a string formatted as an RFC 5646 language tag."
+              "description": "Default Language as an RFC 5646 language tag."
             }
           ]
         }

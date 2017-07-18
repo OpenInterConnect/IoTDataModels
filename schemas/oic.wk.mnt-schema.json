@@ -12,11 +12,11 @@
       "properties": {
         "fr":{
           "type": "boolean",
-          "description": "Factory Reset booean"
+          "description": "Factory Reset"
         },
         "rb": {
           "type": "boolean",
-          "description": "Reboot Action boolean"
+          "description": "Reboot Action"
         }
       }
     }

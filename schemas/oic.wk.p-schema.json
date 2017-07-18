@@ -13,20 +13,20 @@
             },
             {
               "readOnly": true,
-              "description": "Platform Identifier as a UUID formatted string"
+              "description": "Platform Identifier"
             }
           ]
         },
         "mnmn": {
           "type": "string",
           "readOnly": true,
-          "description": "Manufacturer Name encoded as a string",
+          "description": "Manufacturer Name",
           "maxLength": 64
         },
         "mnml": {
           "type": "string",
           "readOnly": true,
-          "description": "Manufacturer's URL as a URL formatted string_all",
+          "description": "Manufacturer's URL",
           "maxLength": 256,
           "format": "uri"
         },
@@ -34,7 +34,7 @@
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "Model number as designated by manufacturer encoded as a string"
+          "description": "Model number as designated by the manufacturer"
         },
         "mndt": {
           "allOf": [
@@ -43,7 +43,7 @@
             },
             {
               "readOnly": true,
-              "description": "Manufacturing Date as an ISO8601 formatted string."
+              "description": "Manufacturing Date in ISO8601 format."
             }
           ]
         },
@@ -51,44 +51,44 @@
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "Platform Version encoded as a string"
+          "description": "Platform Version"
         },
         "mnos": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "Platform Resident OS Version encoded as a string"
+          "description": "Platform Resident OS Version"
         },
         "mnhw": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "Platform Hardware Version encoded as a string"
+          "description": "Platform Hardware Version"
         },
         "mnfv": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "Manufacturer's firmware version encoded as a string"
+          "description": "Manufacturer's firmware version"
         },
         "mnsl": {
           "type": "string",
           "readOnly": true,
-          "description": "Manufacturer's Support Information as a URL formatted string",
+          "description": "Manufacturer's Support Information URL",
           "maxLength": 256,
           "format": "uri"
         },
         "st": {
           "type": "string",
           "readOnly": true,
-          "description": "Reference time for the device as an ISO8601 formatted string, where concatenation of 'date' and 'time' with the 'T' as a delimiter between 'date' and 'time'.",
+          "description": "Reference time for the device in ISO8601 format.",
           "format": "date-time"
         },
         "vid": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "Manufacturer's defined string for the platform. The string is freeform and up to the manufacturer on what text to populate it"
+          "description": "Manufacturer's defined information for the platform. The content is freeform, with population rules up to the manufacturer"
         }
       }
     }

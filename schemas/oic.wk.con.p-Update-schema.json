@@ -18,19 +18,19 @@
                       "$ref": "oic.types-schema.json#/definitions/language-tag"
                     },
                     {
-                      "description": "A string formatted as an RFC 5646 language tag."
+                      "description": "An RFC 5646 language tag."
                     }
                   ]
                 },
                 "value": {
                   "type": "string",
                   "maxLength": 64,
-                  "description": "String containing the Platform description in the indicated language."
+                  "description": "The Platform description in the indicated language."
                 }
               }
             },
           "minItems" : 1,
-          "description": "Platform names as an array of objects"
+          "description": "Platform names"
         }
       }
     }

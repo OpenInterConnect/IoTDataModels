@@ -5,14 +5,14 @@
     "title": "Collection",
     "definitions": {
         "oic.collection.setoflinks": {
-            "description": "A set (array) of simple or individual OIC Links. In addition to properties required for an OIC Link, the identifier for that link in this set is also required",
+            "description": "A set of simple or individual OIC Links.",
             "type": "array",
             "items": {
                 "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
             }
         },
         "oic.collection.alllinks": {
-            "description": "All forms of links in a collection, represented as an array of links",
+            "description": "All forms of links in a collection.",
             "oneOf": [
                 {
                     "$ref": "#/definitions/oic.collection.setoflinks"
@@ -21,7 +21,7 @@
         },
         "oic.collection": {
             "type": "object",
-            "description": "A collection is a set (array) of tagged-link or set (array) of simple links along with additional properties to describe the collection itself",
+            "description": "A collection is a set of links along with additional properties to describe the collection itself",
             "properties": {
                 "di": {
                   "allOf": [
@@ -29,7 +29,7 @@
                       "$ref": "oic.types-schema.json#/definitions/uuid"
                     },
                     {
-                      "description": "The device ID which is a UUID formatted string"
+                      "description": "The device ID."
                     }
                   ]
                 },
@@ -39,7 +39,7 @@
                       "$ref": "oic.core-schema.json#/definitions/oic.core/properties/rt"
                     },
                     {
-                      "description": "Array of strings that defines the list of allowable resource types (for Target and anchors) in links included in the collection; new links being created can only be from this list"
+                      "description": "The list of allowable resource types (for Target and anchors) in links included in the collection"
                     }
                   ]
                 },

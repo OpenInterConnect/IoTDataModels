@@ -15,7 +15,7 @@
             },
           "minItems" : 1,
           "readOnly": true,
-          "description": "Resource Type of the Resource encoded as a string array"
+          "description": "Resource Type of the Resource"
         },
         "if": {
           "type": "array",
@@ -25,12 +25,12 @@
             },
           "minItems": 1,
           "readOnly": true,
-          "description": "The interface set supported by this resource encoded as a string array"
+          "description": "The interface set supported by this resource"
         },
         "n": {
           "type": "string",
           "maxLength": 64,
-          "description": "Friendly name of the resource encoded as a string"
+          "description": "Friendly name of the resource"
         },
         "id": {
             "anyOf": [
@@ -43,7 +43,7 @@
                 }
             ],
             "readOnly": true,
-            "description": "Instance ID of this specific resource which is a UUID formatted string"
+            "description": "Instance ID of this specific resource"
         }
       }
     }

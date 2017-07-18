@@ -13,7 +13,7 @@
               "$ref": "oic.types-schema.json#/definitions/uuid"
             },
             {
-              "description": "A UUID formatted string that is the identifier for the publishing Device"
+              "description": "A UUID that is the identifier for the publishing Device"
             }
           ]
         },
@@ -22,7 +22,7 @@
         },
         "ttl": {
           "type": "integer",
-          "description": "Time to indicate a RD, i.e. how long to keep this published item. This is an integer number of seconds"
+          "description": "Time to indicate a RD, i.e. how long to keep this published item."
         }
       }
     }
