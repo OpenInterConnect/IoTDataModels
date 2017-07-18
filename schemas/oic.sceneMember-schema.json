@@ -15,7 +15,7 @@
               "properties": {
                 "scene": {
                   "type": "string",
-                  "description": "Specifies a scene value that will acted upon"
+                  "description": "Specifies a scene value that will be acted upon"
                 },
                 "memberProperty": {
                   "type":  "string",

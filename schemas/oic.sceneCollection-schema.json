@@ -14,7 +14,7 @@
           "properties": {
             "lastScene": {
               "type": "string",
-              "description": "Last selected Scene, shall be part of sceneValues"
+              "description": "Last selected Scene from the set of sceneValues"
             },
             "sceneValues": {
               "type": "array",
