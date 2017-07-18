@@ -7,9 +7,15 @@
       "type": "object",
       "properties": {
         "pi": {
-          "$ref": "oic.types-schema.json#/definitions/uuid",
-          "readOnly": true,
-          "description": "Platform Identifier as a UUID"
+          "allOf": [
+            {
+              "$ref": "oic.types-schema.json#/definitions/uuid"
+            },
+            {
+              "readOnly": true,
+              "description": "Platform Identifier"
+            }
+          ]
         },
         "mnmn": {
           "type": "string",
@@ -28,12 +34,18 @@
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "Model number as designated by manufacturer"
+          "description": "Model number as designated by the manufacturer"
         },
         "mndt": {
-          "$ref": "oic.types-schema.json#/definitions/date",
-          "readOnly": true,
-          "description": "Manufacturing Date."
+          "allOf": [
+            {
+              "$ref": "oic.types-schema.json#/definitions/date"
+            },
+            {
+              "readOnly": true,
+              "description": "Manufacturing Date in ISO8601 format."
+            }
+          ]
         },
         "mnpv": {
           "type": "string",
@@ -69,14 +81,14 @@
         "st": {
           "type": "string",
           "readOnly": true,
-          "description": "Reference time for the device as defined in ISO 8601, where concatenation of 'date' and 'time' with the 'T' as a delimiter between 'date' and 'time'.",
+          "description": "Reference time for the device in ISO8601 format.",
           "format": "date-time"
         },
         "vid": {
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "Manufacturer's defined string for the platform. The string is freeform and up to the manufacturer on what text to populate it"
+          "description": "Manufacturer's defined information for the platform. The content is freeform, with population rules up to the manufacturer"
         }
       }
     }

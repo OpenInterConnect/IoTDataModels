@@ -8,7 +8,7 @@
       "properties": {
         "loc": {
           "type": "array",
-          "description": "Location information",
+          "description": "Location information (lat, long)",
           "items": {
             "type": "number"
           },
@@ -37,13 +37,19 @@
               "type": "object",
               "properties": {
                 "language": {
-                  "$ref": "oic.types-schema.json#/definitions/language-tag",
-                  "description": "An RFC 5646 language tag."
+                  "allOf": [
+                    {
+                      "$ref": "oic.types-schema.json#/definitions/language-tag"
+                    },
+                    {
+                      "description": "An RFC 5646 language tag."
+                    }
+                  ]
                 },
                 "value": {
                   "type": "string",
                   "maxLength": 64,
-                  "description": "Device description in the indicated language."
+                  "description": "The Device name in the indicated language."
                 }
               }
             },
@@ -51,8 +57,14 @@
           "description": "Localized names"
         },
         "dl": {
-          "$ref": "oic.types-schema.json#/definitions/language-tag",
-          "description": "Default Language"
+          "allOf": [
+            {
+              "$ref": "oic.types-schema.json#/definitions/language-tag"
+            },
+            {
+              "description": "Default Language as an RFC 5646 language tag."
+            }
+          ]
         }
       }
     }

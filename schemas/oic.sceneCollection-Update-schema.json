@@ -9,7 +9,7 @@
       "properties": {
         "lastScene": {
           "type": "string",
-          "description": "Last selected Scene, shall be part of sceneValues"
+          "description": "Last selected Scene from the set of sceneValues"
         },
         "sceneValues": {
           "type": "string",
@@ -22,15 +22,15 @@
         },
         "id": {
             "type": "string",
-                        "description" : "A unique string that could be a hash or similarly unique"
+            "description" : "A unique string that could be a hash or similarly unique"
         },
         "rts": {
           "$ref": "oic.core-schema.json#/definitions/oic.core/properties/rt",
-          "description": "Defines the list of allowable resource types in links included in the collection; new links being created can only be from this list"
+          "description": "Defines the list of allowable resource types in links included in the collection"
         },
         "links": {
           "type": "array",
-          "description": "Array of OIC web links that are reference from this collection",
+          "description": "Array of links that are referenced from this collection",
           "items" : {
             "allOf": [
               { "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link" },
