@@ -13,13 +13,19 @@
               "type": "object",
               "properties": {
                 "language": {
-                  "$ref": "oic.types-schema.json#/definitions/language-tag",
-                  "description": "An RFC 5646 language tag."
+                  "allOf": [
+                    {
+                      "$ref": "oic.types-schema.json#/definitions/language-tag"
+                    },
+                    {
+                      "description": "An RFC 5646 language tag."
+                    }
+                  ]
                 },
                 "value": {
                   "type": "string",
                   "maxLength": 64,
-                  "description": "Platform description in the indicated language."
+                  "description": "The Platform description in the indicated language."
                 }
               }
             },

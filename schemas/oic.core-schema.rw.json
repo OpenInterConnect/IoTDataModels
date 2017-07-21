@@ -15,7 +15,7 @@
             },
           "minItems" : 1,
           "readOnly": true,
-          "description": "Resource Type"
+          "description": "Resource Type of the Resource"
         },
         "if": {
           "type": "array",
@@ -33,10 +33,17 @@
           "description": "Friendly name of the resource"
         },
         "id": {
-          "type": "string",
-          "maxLength": 64,
-          "readOnly": true,
-          "description": "Instance ID of this specific resource"
+            "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 64
+                },
+                {
+                  "$ref": "oic.types-schema.json#/definitions/uuid"
+                }
+            ],
+            "readOnly": true,
+            "description": "Instance ID of this specific resource"
         }
       }
     }
