@@ -16,6 +16,11 @@ schemas:
   - slinklist: !include schemas/oic.wk.res-schema-ll.json
 
 traits:
+  - interface-all:
+      queryParameters:
+        if:
+          enum: ["oic.if.ll", "oic.if.baseline"]
+
   - interface-baseline:
       queryParameters:
         if:
