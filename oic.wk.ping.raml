@@ -50,3 +50,10 @@ traits:
     responses:
       203:
         description: Successfully updated & restarted alive interval timer.
+        body:
+          application/json:
+            schema: PING
+            example: |
+              {
+                "in": 16
+              }

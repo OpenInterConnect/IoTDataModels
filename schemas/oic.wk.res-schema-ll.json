@@ -3,8 +3,13 @@
   "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.res-schema-ll.json#",
   "description": "The list of resources expressed as OCF links without di",
+  "definitions": {
+    "oic.res-ll": {
+      "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
+    }
+  },
   "type": "array",
   "items": {
-    "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
+    "$ref": "#/definitions/oic.res-ll"
   }
 }

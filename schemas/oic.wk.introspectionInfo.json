@@ -9,7 +9,7 @@
       "properties": {
         "urlInfo": {
           "type": "array",
-          "description": "The valid range for the value Property",
+          "description": "Information on the location of the introspection data.",
           "readOnly": true,
           "minItems": 1,
           "items": {
@@ -18,12 +18,12 @@
               "url": {
                 "type": "string",
                 "format": "uri",
-                "description" : "url to download the description"
+                "description" : "The URL of the introspection information."
               },
               "protocol": {
                 "type": "string",
                 "enum": [ "coap", "coaps", "http", "https", "coap+tcp", "coaps+tcp" ],
-                "description" : "protocol to be used to download the introspection"
+                "description" : "Identifier for the protocol to be used to obtain the introspection information"
               },
               "content-type": {
                 "type": "string",
@@ -35,7 +35,7 @@
                 "type": "integer",
                 "enum": [ 1 ],
                 "default" : 1,
-                "description" : "version the introspection data that can be downloaded"
+                "description" : "The version of the introspection data that can be downloaded"
               }
             },
             "required" : [ "url","protocol"]

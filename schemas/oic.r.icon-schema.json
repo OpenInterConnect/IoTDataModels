@@ -10,26 +10,26 @@
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "Specifies the format of the MIME Type"
+          "description": "The format of the MIME Type"
         },
         "width": {
           "type": "integer",
           "minimum": 1,
           "readOnly": true,
-          "description": "Specifies the width in pixels"
+          "description": "The width in pixels"
         },
         "height": {
           "type": "integer",
           "minimum": 1,
           "readOnly": true,
-          "description": "Specifies the height in pixels"
+          "description": "The height in pixels"
         },
         "media": {
           "type": "string",
           "maxLength": 256,
           "format" : "uri",
           "readOnly": true,
-          "description": "Specifies the media URL to icon"
+          "description": "Specifies the URI to the icon"
         }
       }
     }

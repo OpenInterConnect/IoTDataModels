@@ -14,7 +14,7 @@
             },
           "minItems" : 1,
           "readOnly": true,
-          "description": "Resource Type"
+          "description": "Resource Type of the Resource"
         },
         "if": {
           "type": "array",
@@ -48,7 +48,7 @@
       "required": ["rt", "if", "links"]
     }
   },
-  "description": "The list of resources expressed as OIC links",
+  "description": "The list of resources expressed as Links",
   "type": "array",
   "items": {
     "$ref": "#/definitions/oic.res-baseline"

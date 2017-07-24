@@ -9,7 +9,7 @@
         "href": {
           "type": "string",
           "maxLength": 256,
-          "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
+          "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
           "format": "uri"
         },
         "rel": {
@@ -38,7 +38,7 @@
               "maxLength": 64
             },
           "minItems" : 1,
-          "description": "Resource Type"
+          "description": "Resource Type of the Resource"
         },
         "if": {
           "type": "array",
@@ -50,8 +50,14 @@
           "description": "The interface set supported by this resource"
         },
         "di": {
-           "$ref": "oic.types-schema.json#/definitions/uuid",
-           "description": "Unique identifier for device (UUID)"
+          "allOf": [
+            {
+              "$ref": "oic.types-schema.json#/definitions/uuid"
+            },
+            {
+              "description": "The device ID"
+            }
+          ]
         },
         "p": {
           "description": "Specifies the framework policies on the Resource referenced by the target URI",
@@ -67,36 +73,42 @@
         "title": {
           "type": "string",
           "maxLength": 64,
-          "description": "A title for the link relation. Can be used by the UI to provide a context"
+          "description": "A title for the link relation. Can be used by the UI to provide a context."
         },
         "anchor": {
           "type": "string",
           "maxLength": 256,
-          "description": "This is used to override the context URI e.g. override the URI of the containing collection",
+          "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
           "format": "uri"
         },
         "ins": {
           "oneOf": [
             {
               "type": "integer",
-              "description": "An ordinal number that is not repeated - must be unique in the collection context"
+              "description": "An ordinal number that is not repeated - must be unique in the collection context."
             },
             {
               "type": "string",
               "maxLength": 256,
               "format" : "uri",
-              "description": "Any unique string including a URI"
+              "description": "A unique string"
             },
             {
-              "$ref": "oic.types-schema.json#/definitions/uuid",
-              "description": "Unique identifier (UUID)"
+              "allOf": [
+                {
+                  "$ref": "oic.types-schema.json#/definitions/uuid"
+                },
+                {
+                  "description": "A UUID"
+                }
+              ]
             }
           ],
           "description": "The instance identifier for this web link in an array of web links - used in collections"
         },
         "type": {
           "type": "array",
-          "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting",
+          "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
           "items" : {
             "type": "string",
             "maxLength": 64
@@ -113,12 +125,12 @@
               "ep": {
                 "type": "string",
                 "format": "uri",
-                "description": "URI with Transport Protocol Suites + Endpoint Locator as specified in 10.2.1"
+                "description": "Transport Protocol Suites + Endpoint Locator"
               },
               "pri": {
                 "type": "integer",
                 "minimum": 1,
-                "description": "The priority among multiple Endpoints as specified in 10.2.3"
+                "description": "The priority among multiple Endpoints"
               }
             }
           }

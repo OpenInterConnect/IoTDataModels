@@ -1,0 +1,476 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Resource Directory",
+    "version": "v1-20160622",
+    "license": {
+      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
+      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
+    }
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/oic/rd" : {
+      "get": {
+        "description": "Resource to be exposed by any Device that can act as a Resource Directory.\n1) Provides selector criteria (e.g., integer) with GET request\n2) Publish or Update a Link in /oic/res with POST request\n3) Delete a Link in /oic/res with DELETE request\nGet the attributes of the Resource Directory for selection purposes.\n",
+        "parameters": [
+          {"$ref": "#/parameters/rdgetinterface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "Respond with the selector criteria - either the set of attributes or the bias factor\n",
+              "x-example":
+                {
+                  "rt": ["oic.wk.rd"],
+                  "if": ["oic.if.baseline"],
+                  "sel": 50
+                }
+                ,
+              "schema": { "$ref": "#/definitions/rdSelection" }
+            }
+        }
+      },
+      "post": {
+        "description": "Publish the resource information for the first time or Update the existing one in /oic/res.\nAppropriates parts of the information, i.e., Links of the published Resources will be discovered through /oic/res.\n1) When a Device first publishes a Link, the request payload to RD may include the Links without \"ins\" Parameter.\n2) Upon granting the request, the RD assigns a unique instance value identifying the Link among all the Links it advertises\n   and sends back the instance value in \"ins\" Parameter in the Link to the publishing Device.\n3) When later the publishing Device updates the existing Link, i.e., changing its Endpoint information,\n   the request payload to RD needs to include the instance value in \"ins\" Parameter to identify the Link to update.\n",
+        "parameters": [
+          {"$ref": "#/parameters/rdpostinterface"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/rdPublish" },
+            "x-example":
+              {
+                "di": "e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                "links": [
+                  {
+                    "anchor": "ocf://e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                    "href":   "/myLightSwitch",
+                    "rt":     ["oic.r.switch.binary"],
+                    "if":     ["oic.if.a", "oic.if.baseline"],
+                    "p":      {"bm": 3},
+                    "eps": [
+                        {"ep": "coaps://[2001:db8:a::b1d6]:1111", "pri": 2},
+                        {"ep": "coaps://[2001:db8:a::b1d6]:1122"},
+                        {"ep": "coaps+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                    ]
+                  },
+                  {
+                    "anchor": "ocf://e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                    "href":   "/myLightBrightness",
+                    "rt":     ["oic.r.brightness"],
+                    "if":     ["oic.if.a", "oic.if.baseline"],
+                    "p":      {"bm": 3},
+                    "eps": [
+                        {"ep": "coaps://[[2001:db8:a::123]:2222"}
+                    ]
+                  }
+                ],
+                "ttl": 600
+              }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "Respond with the same schema as publish but, when a Link is first published,\nwith the additional \"ins\" Parameter in the Link.\nThis value is used by the receiver to manage that OCF Link instance.\n",
+              "x-example":
+                {
+                  "di": "e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                  "links": [
+                    {
+                      "anchor": "ocf://e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                      "href":   "/myLightSwitch",
+                      "rt":     ["oic.r.switch.binary"],
+                      "if":     ["oic.if.a", "oic.if.baseline"],
+                      "p":      {"bm": 3},
+                      "eps": [
+                          {"ep": "coaps://[2001:db8:a::b1d6]:1111", "pri": 2},
+                          {"ep": "coaps://[2001:db8:a::b1d6]:1122"},
+                          {"ep": "coaps+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                      ],
+                      "ins":    "11235"
+                    },
+                    {
+                      "anchor": "ocf://e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                      "href":   "/myLightBrightness",
+                      "rt":     ["oic.r.brightness"],
+                      "if":     ["oic.if.a", "oic.if.baseline"],
+                      "p":      {"bm": 3},
+                      "eps": [
+                          {"ep": "coaps://[2001:db8:a::123]:2222"}
+                      ],
+                      "ins":    "112358"
+                    }
+                  ],
+                  "ttl": 600
+                }
+                ,
+              "schema": { "$ref": "#/definitions/rdPublish" }
+            }
+        }
+      },
+      "delete": {
+        "description": "Delete a particular OIC Link - the link may be a simple link or a link in a tagged set.\n",
+        "parameters": [
+          {"$ref": "#/parameters/rddelete-di"},
+          {"$ref": "#/parameters/rddelete-ins"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "The delete succeeded",
+              "x-example":
+                {}
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "rddelete-di" : {
+      "in" : "query",
+      "name" : "di",
+      "type" : "string",
+      "description" : "description"
+    },
+    "rddelete-ins" : {
+      "in" : "query",
+      "name" : "ins",
+      "type" : "string",
+      "description" : "description"
+    },
+    "rdgetinterface" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.baseline"],
+      "description" : "enumdescription"
+    },
+    "rdpostinterface" : {
+      "in" : "query",
+      "name" : "rt",
+      "type" : "string",
+      "enum" : ["oic.wk.rdpub"],
+      "description" : "enumdescription"
+    }
+  },
+  "definitions": {
+    "rdSelection" : 
+            {
+        "oneOf": [
+          {
+            "properties": {
+              "sel": {
+                "description": "A bias factor calculated by the Resource directory - the value is in the range of 0 to 100 - 0 implies that RD is not to be selected. Client chooses RD with highest bias factor or randomly between RDs that have same bias factor",
+                "maximum": 100,
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "sel"
+            ]
+          },
+          {
+            "properties": {
+              "id": {
+                "description": "Instance ID of this specific resource",
+                "maxLength": 64,
+                "readOnly": true,
+                "type": "string"
+              },
+              "if": {
+                "description": "The interface set supported by this resource",
+                "items": {
+                  "enum": [
+                    "oic.if.baseline",
+                    "oic.if.ll",
+                    "oic.if.b",
+                    "oic.if.lb",
+                    "oic.if.rw",
+                    "oic.if.r",
+                    "oic.if.a",
+                    "oic.if.s"
+                  ],
+                  "type": "string"
+                },
+                "minItems": 1,
+                "readOnly": true,
+                "type": "array"
+              },
+              "n": {
+                "description": "Friendly name of the resource",
+                "maxLength": 64,
+                "readOnly": true,
+                "type": "string"
+              },
+              "rt": {
+                "description": "Resource Type",
+                "items": {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                "minItems": 1,
+                "readOnly": true,
+                "type": "array"
+              },
+              "sel": {
+                "description": "Selection criteria that a device wanting to publish to any RD can use to choose this Resource Directory over others that are discovered",
+                "properties": {
+                  "bw": {
+                    "description": "Qualitative bandwidth of the connection",
+                    "enum": [
+                      "high",
+                      "low",
+                      "lossy"
+                    ],
+                    "type": "string"
+                  },
+                  "conn": {
+                    "description": "A hint about the networking connectivity of the RD. *wrd* if wired connected and *wrls* if wireless connected.",
+                    "enum": [
+                      "wrd",
+                      "wrls"
+                    ],
+                    "type": "string"
+                  },
+                  "load": {
+                    "description": "Current load capacity of the RD. Expressed as a load factor 3-tuple (upto two decimal points each). Load factor is based on request processed in a 1 minute, 5 minute window and 15 minute window",
+                    "items": {
+                      "type": "number"
+                    },
+                    "maxItems": 3,
+                    "minItems": 3,
+                    "type": "array"
+                  },
+                  "mf": {
+                    "description": "Memory factor - Ratio of available memory to total memory expressed as a percentage",
+                    "type": "integer"
+                  },
+                  "pwr": {
+                    "description": "A hint about how the RD is powered. If AC then this is stronger than battery powered. If source is reliable (safe) then appropriate mechanism for managing power failure exists",
+                    "enum": [
+                      "ac",
+                      "batt",
+                      "safe"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "required": [
+              "sel"
+            ]
+          }
+        ],
+        "type": "object"
+      }
+
+    ,
+    "rdPublish" : 
+            {
+        "description": "Publishes resources as OIC Links into the resource directory",
+        "properties": {
+          "di": {
+            "description": "A unique identifier for the publishing Device, i.e., its device ID",
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+            "type": "string"
+          },
+          "id": {
+            "description": "Instance ID of this specific resource",
+            "maxLength": 64,
+            "readOnly": true,
+            "type": "string"
+          },
+          "if": {
+            "description": "The interface set supported by this resource",
+            "items": {
+              "enum": [
+                "oic.if.baseline",
+                "oic.if.ll",
+                "oic.if.b",
+                "oic.if.lb",
+                "oic.if.rw",
+                "oic.if.r",
+                "oic.if.a",
+                "oic.if.s"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "readOnly": true,
+            "type": "array"
+          },
+          "links": {
+            "description": "A set (array) of simple or individual OIC Links. In addition to properties required for an OIC Link, the identifier for that link in this set is also required",
+            "items": {
+              "properties": {
+                "anchor": {
+                  "description": "This is used to override the context URI e.g. override the URI of the containing collection",
+                  "format": "uri",
+                  "maxLength": 256,
+                  "type": "string"
+                },
+                "di": {
+                  "description": "Unique identifier for device (UUID)",
+                  "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                  "type": "string"
+                },
+                "eps": {
+                  "description": "the Endpoint information of the target Resource",
+                  "items": {
+                    "properties": {
+                      "ep": {
+                        "description": "URI with Transport Protocol Suites + Endpoint Locator as specified in 10.2.1",
+                        "format": "uri",
+                        "type": "string"
+                      },
+                      "pri": {
+                        "description": "The priority among multiple Endpoints as specified in 10.2.3",
+                        "minimum": 1,
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "href": {
+                  "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
+                  "format": "uri",
+                  "maxLength": 256,
+                  "type": "string"
+                },
+                "if": {
+                  "description": "The interface set supported by this resource",
+                  "items": {
+                    "enum": [
+                      "oic.if.baseline",
+                      "oic.if.ll",
+                      "oic.if.b",
+                      "oic.if.rw",
+                      "oic.if.r",
+                      "oic.if.a",
+                      "oic.if.s"
+                    ],
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "type": "array"
+                },
+                "ins": {
+                  "description": "The instance identifier for this web link in an array of web links - used in collections",
+                  "oneOf": [
+                    {
+                      "description": "An ordinal number that is not repeated - must be unique in the collection context",
+                      "type": "integer"
+                    },
+                    {
+                      "description": "Any unique string including a URI",
+                      "format": "uri",
+                      "maxLength": 256,
+                      "type": "string"
+                    },
+                    {
+                      "description": "Unique identifier (UUID)",
+                      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "p": {
+                  "description": "Specifies the framework policies on the Resource referenced by the target URI",
+                  "properties": {
+                    "bm": {
+                      "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "bm"
+                  ],
+                  "type": "object"
+                },
+                "rel": {
+                  "description": "The relation of the target URI referenced by the link to the context URI",
+                  "oneOf": [
+                    {
+                      "default": [
+                        "hosts"
+                      ],
+                      "items": {
+                        "maxLength": 64,
+                        "type": "string"
+                      },
+                      "minItems": 1,
+                      "type": "array"
+                    },
+                    {
+                      "default": "hosts",
+                      "maxLength": 64,
+                      "type": "string"
+                    }
+                  ]
+                },
+                "rt": {
+                  "description": "Resource Type",
+                  "items": {
+                    "maxLength": 64,
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "type": "array"
+                },
+                "title": {
+                  "description": "A title for the link relation. Can be used by the UI to provide a context",
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                "type": {
+                  "default": "application/cbor",
+                  "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting",
+                  "items": {
+                    "maxLength": 64,
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "href",
+                "rt",
+                "if"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "n": {
+            "description": "Friendly name of the resource",
+            "maxLength": 64,
+            "readOnly": true,
+            "type": "string"
+          },
+          "rt": {
+            "description": "Resource Type",
+            "items": {
+              "maxLength": 64,
+              "type": "string"
+            },
+            "minItems": 1,
+            "readOnly": true,
+            "type": "array"
+          },
+          "ttl": {
+            "description": "Time to indicate a RD, how long to keep this published item. After this time (in seconds) elapses, the RD invalidates the links. To keep link alive the publishing device updates the ttl using the update schema",
+            "type": "integer"
+          }
+        }
+      }
+
+  }
+}
