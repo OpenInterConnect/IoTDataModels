@@ -125,7 +125,7 @@
               "ep": {
                 "type": "string",
                 "format": "uri",
-                "description": "Transport Protocol Suites + Endpoint Locator"
+                "description": "Transport Protocol Suite + Endpoint Locator"
               },
               "pri": {
                 "type": "integer",
