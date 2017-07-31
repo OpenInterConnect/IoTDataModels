@@ -7,30 +7,22 @@
     "oic.sceneMember": {
       "type": "object",
       "properties": {
-        "n": {
-          "type": "string",
-          "description": "Used to name the Scene collection"
-        },
-        "id": {
-          "type": "string",
-          "description": "Can be an value that is unique to the use context or a UUIDv4"
-        },
         "SceneMappings" : {
           "type": "array",
-           "description": "array of mappings per scene, can be 1",
-          "items": {
+           "description": "array of mappings per scene, can be one(1)",
+           "items": {
               "type": "object",
               "properties": {
                 "scene": {
                   "type": "string",
-                  "description": "Specifies a scene value that will acted upon"
+                  "description": "Specifies a scene value that will be acted upon"
                 },
                 "memberProperty": {
                   "type":  "string",
                   "readOnly": true,
                   "description": "property name that will be mapped"
                 },
-                  "memberValue": {
+                "memberValue": {
                   "type": "string",
                   "readOnly": true,
                   "description": "value of the Member Property"
@@ -39,11 +31,15 @@
               "required": [ "scene", "memberProperty", "memberValue" ]
             }
         },
-
         "link": {
-          "type": "string",
-          "description": "web link that points at a resource",
-          "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
+          "allOf": [
+            {
+              "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
+            },
+            {
+              "description": "OCF link that points to a resource"
+            }
+          ]
         }
       },
       "required": [ "link" ]
