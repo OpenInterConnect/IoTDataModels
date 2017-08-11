@@ -10,18 +10,21 @@ documentation:
   - title: OCF Disclaimer
     content: !include DISCLAIMER.md
 
-
 schemas:
   - MNT: !include schemas/oic.wk.mnt-schema.json
+  
 traits:
-  - interface:
+  - interface-all:
       queryParameters:
         if:
           enum: ["oic.if.rw","oic.if.r","oic.if.baseline"]
+  - interface-rw:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw","oic.if.baseline"]
 
 /oic/mnt:
   displayName: Maintenance
-  is: [ interface ]
   description: |
     The resource through which a Device is maintained and can be used for diagnostic purposes.
     fr (Factory Reset) is a boolean.
@@ -32,10 +35,8 @@ traits:
     After Reboot, this value shall be changed back to the default value
 
   get:
+    is: [ interface-all ]
     description: Retrieve the maintenance action status
-    queryParameters:
-      if:
-        enum: ["oic.if.rw","oic.if.r","oic.if.baseline"]
     responses:
       200:
         body:
@@ -49,11 +50,9 @@ traits:
               }
 
   post:
+    is: [ interface-rw ]
     description: |
       Set the maintenance action(s)
-    queryParameters:
-      if:
-        enum: ["oic.if.rw","oic.if.baseline"]
     body:
       application/json:
         schema: MNT
