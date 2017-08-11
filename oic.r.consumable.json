@@ -22,7 +22,9 @@
         "orderpercentage": {
           "type": "integer",
           "description": "Percentage at which re-ordering is recommended by the manufacturer",
-          "readOnly": true
+          "readOnly": true,
+          "minimum": 0,
+          "maximum": 100
         },
         "url": {
           "type": "string",

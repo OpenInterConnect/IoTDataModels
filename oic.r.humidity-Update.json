@@ -9,7 +9,9 @@
       "properties": {
         "desiredHumidity":  {
           "type": "integer",
-          "description": "Desired value for Humidity"
+          "description": "Desired value for Humidity",
+          "minimum": 0,
+          "maximum": 100
         }
       }
     }

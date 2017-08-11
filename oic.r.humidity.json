@@ -10,11 +10,15 @@
         "humidity":    {
           "type": "integer",
           "readOnly": true,
-          "description": "Current sensed value for Humidity"
+          "description": "Current sensed value for Humidity",
+          "minimum": 0,
+          "maximum": 100
         },
         "desiredHumidity":  {
           "type": "integer",
-          "description": "Desired value for Humidity"
+          "description": "Desired value for Humidity",
+          "minimum": 0,
+          "maximum": 100
         }
       }
     }

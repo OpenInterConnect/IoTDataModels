@@ -16,7 +16,9 @@
         "filter":       {
           "type": "integer",
           "readOnly": true,
-          "description": "Percentage life time remaining for the water filter"
+          "description": "Percentage life time remaining for the water filter",
+          "minimum": 0,
+          "maximum": 100
         },
         "rapidFreeze":  {
           "type": "boolean",

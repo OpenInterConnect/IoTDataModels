@@ -44,7 +44,9 @@
         "progressPercentage":   {
           "type": "integer",
           "readOnly": true,
-          "description": "Percentage completeness of the current jobState"
+          "description": "Percentage completeness of the current jobState",
+          "minimum": 0,
+          "maximum": 100
         }
       }
     }
