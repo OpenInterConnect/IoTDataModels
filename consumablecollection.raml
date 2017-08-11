@@ -14,6 +14,11 @@ schemas:
   - consumables-ll: !include oic.r.consumablecollection-ll.json
 
 traits:
+  - interface-all:
+      queryParameters:
+        if:
+          enum: ["oic.if.ll","oic.if.baseline"]
+          
   - interface-baseline:
       queryParameters:
         if:
