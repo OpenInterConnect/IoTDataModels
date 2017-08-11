@@ -23,16 +23,6 @@
             "type": "object",
             "description": "A collection is a set of links along with additional properties to describe the collection itself",
             "properties": {
-                "di": {
-                  "allOf": [
-                    {
-                      "$ref": "oic.types-schema.json#/definitions/uuid"
-                    },
-                    {
-                      "description": "The device ID."
-                    }
-                  ]
-                },
                 "rts": {
                   "allOf": [
                     {
