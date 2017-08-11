@@ -1,8 +1,8 @@
 #%RAML 0.8
-title: OICColourChroma
-version: v1.1.0-20160519
+title: OCFColourHueSaturation
+version: v1.0-2017
 documentation:
-  - title: (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.
     content: |
         Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
         1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -10,73 +10,72 @@ documentation:
 
         THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 schemas:
-  - ColourChroma: !include oic.r.colour.chroma.json
+  - ColourHS: !include oic.r.colour.hs.json
 
 traits:
-  - interface:
+  - interface-all:
       queryParameters:
         if:
           enum: ["oic.if.a","oic.if.baseline"]
 
-/example/ColourChromaResURI:
-  description: |
-    This resource describes the colour using chroma conventions.
-    Properties are hue, saturation, csc, and ct.
-    hue is the hue angle, it is an integer value as defined by the CIECAM02 model definition (see reference [CIE CIE159:2004]).
-    saturation is an integer value as defined by the CIECAM02 model definition (see reference [CIE CIE159:2004]).
-    maximumsaturation is the upper bound on the saturation supported by the Device.
-        If not present the maximum value for saturation is 32767.
-    csc is the colour space coordinates in CIE colour space.
-      The first item in the array is the X coordinate.
-      The second item in the array is the Y coordinate.
-    ct is the Mired colour temperature.
+  - interface-a:
+      queryParameters:
+        if:
+          enum: ["oic.if.a"]
 
-  displayName: Colour Chroma
-  is: [ interface ] # valid for all methods
+/example/ColourHueSaturationResURI:
+  description: |
+    This resource describes the colour using hue-saturation conventions.
+    hue is the hue angle, it is a number value as defined by the CIECAM02 model definition (see reference [CIE CIE159:2004]).
+      A Device that does not support fractional hue angles can provide integer values.
+      If precision (from oic.r.baseresource) is provided it applies to the hue angle.
+    saturation is an integer value as defined by the CIECAM02 model definition (see reference [CIE CIE159:2004]).
+      saturation can be converted to a percentage by saturation/maximumsaturation X 100; where maximumsaturation is 32767 if the Property itself is not present.
+    maximumsaturation is the upper bound on the saturation supported by the Device.
+      If not present the maximum value for saturation is 32767.
+
+  displayName: Colour Hue and Saturation
 
   get:
+    is: [ interface-all ] # valid for all methods
     description: |
-      Provides the colour using chroma conventions.
+      Provides the colour using hue and saturation conventions.
     responses:
       200:
         body:
           application/json:
-            schema: ColourChroma
+            schema: ColourHS
             example: |
               {
-                "rt":         ["oic.r.colour.chroma"],
+                "rt":         ["oic.r.colour.hs"],
                 "id":         "unique_example_id",
-                "hue":        256.0,
+                "hue":        300.0,
                 "saturation": 212,
-                "maximumsaturation": 1000,
-                "csc":        [0.41,0.51],
-                "ct":         457
+                "maximumsaturation": 1000
               }
 
   post:
+    is: [ interface-a ]
     description: |
-      Sets current colour chroma values
+      Sets current colour hue and saturation values.
+      At least one of hue or saturation shall be provided in the payload.
     body:
       application/json:
-        schema: ColourChroma
+        schema: ColourHS
         example: |
           {
             "id":         "unique_example_id",
             "hue":        300.0,
-            "saturation": 212,
-            "csc":        [0.41,0.51],
-            "ct":         457
+            "saturation": 212
           }
     responses:
       200:
         body:
           application/json:
-            schema: ColourChroma
+            schema: ColourHS
             example: |
               {
                 "id":          "unique_example_id",
                 "hue":         300.0,
-                "saturation":  212,
-                "csc":         [0.41,0.51],
-                "ct":          467
+                "saturation":  212
               }

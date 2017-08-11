@@ -6,31 +6,11 @@
   "definitions": {
     "oic.r.colour.chroma": {
       "type": "object",
-      "properties": {
-        "hue":             {
-          "type": "integer",
-          "description": "Hue as defined by the CIECAM02 model definition"
-        },
-        "saturation":      {
-          "type": "integer",
-          "description": "Saturation as defined by the CIECAM02 model definition"
-        },
-        "csc": {
-          "type": "array",
-          "description": "X and Y coordinates of the colour in CIE colour space",
-          "minItems": 2,
-          "maxItems": 2,
-          "items": {
-            "type": "number",
-            "minimum": 0,
-            "maximum": 1
-          }
-        },
-        "ct": {
-          "type": "integer",
-          "description": "Mired colour temperature"
-        }
-      }
+      "allOf": [
+        {"$ref": "oic.r.colour.hs.json#/definitions/oic.r.colour.hs"},
+        {"$ref": "oic.r.colour.csc.json#/definitions/oic.r.colour.csc"},
+        {"$ref": "oic.r.colour.colourtemperature.json#/definitions/oic.r.colour.colourtemperature"}
+      ]
     }
   },
   "type": "object",
@@ -39,5 +19,4 @@
     {"$ref": "#/definitions/oic.r.colour.chroma"}
   ],
   "required": [ "hue", "saturation", "csc" ]
-
 }
