@@ -6,58 +6,15 @@
   "definitions": {
     "oic.rd.attributes": {
       "type": "object",
-      "oneOf": [
-        {
-          "properties": {
-            "sel": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 100,
-              "description": "A bias factor calculated by the Resource directory"
-            }
-          },
-          "required": ["sel"]
-        },
-        {
-          "properties": {
-            "sel": {
-              "description": "Selection criteria that a device wanting to publish to any RD can use to choose this Resource Directory over others that are discovered",
-              "type": "object",
-              "properties": {
-                "pwr": {
-                  "type": "string",
-                  "enum": [ "ac", "batt", "safe" ],
-                  "description": "An indication of how the RD is powered."
-                },
-                "conn": {
-                  "type": "string",
-                  "enum": [ "wrd", "wrls" ],
-                  "description": "An indication of the networking connectivity of the RD. 'wrd' if wired connected and 'wrls' if wireless connected."
-                },
-                "bw": {
-                  "type": "string",
-                  "description": "A description of the qualitative bandwidth of the connection",
-                  "enum": [ "high", "low", "lossy" ]
-                },
-                "mf": {
-                  "type": "integer",
-                  "description": "Memory factor - Ratio of available memory to total memory expressed as a percentage"
-                },
-                "load": {
-                  "type": "array",
-                  "items": {
-                    "type": "number"
-                  },
-                  "minItems": 3,
-                  "maxItems": 3,
-                  "description": "Current load capacity of the RD. Load factor is based on requests processed in a 1 minute, 5 minute window and 15 minute window"
-                }
-              }
-            }
-          },
-          "required": ["sel"]
+      "properties": {
+        "sel": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "A bias factor calculated by the Resource directory"
         }
-      ]
+      },
+      "required": ["sel"]
     }
   },
   "type": "object",
