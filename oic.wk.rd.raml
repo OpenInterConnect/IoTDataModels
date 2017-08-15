@@ -23,20 +23,18 @@ traits:
       if:
         description: |
           Interface is optional since there is only one interface supported for the Resource Type
-          Both for RD selectin and for publish.
+          Both for RD selection and for publish.
           Example:  GET /oic/rd?if=oic.if.baseline
         enum: [ "oic.if.baseline" ]
 
 - rdpostinterface:
     queryParameters:
-      rt:
+      if:
         description: |
-          Used in POST request to ask the RD to add the Links in payload to /oic/res.
-          Example: POST /oic/rd?rt=oic.wk.rdpub
-        enum: ["oic.wk.rdpub"]
-
-      #"rt" query is used in POST request but such usage is unprecedented & out-of-sync with existing "rt" query practice,
-      # so I recommend to remove this if IoTivity allows. Take notice here the absence of "rt" would produce the same result.
+          Interface is optional since there is only one interface supported for the Resource Type
+          Both for RD selection and for publish.
+          Example:  POST /oic/rd?if=oic.if.baseline
+        enum: ["oic.if.baseline"]
 
 - rddelete-di:
     queryParameters:
