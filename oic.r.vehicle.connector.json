@@ -1,0 +1,34 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.vehicle.connector.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "VehicleConnector",
+  "definitions": {
+    "oic.r.vehicle.connector": {
+      "type": "object",
+      "properties": {
+        "connected" : {
+          "type": "boolean",
+          "description": "The connection state.",
+          "readOnly": true
+        },
+        "ratedchargingapacity" : {
+          "type": "number",
+          "description": "The rated charging capacity in Amps (A).",
+          "readOnly": true
+        },
+        "rateddischargingcapacity" : {
+          "type": "number",
+          "description": "The rated discharging capacity in Amps (A).",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.vehicle.connector"}
+  ],
+  "required": [ "connected" ]
+}

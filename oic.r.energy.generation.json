@@ -1,0 +1,24 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.energy.generation.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "EnergyGeneration",
+  "definitions": {
+    "oic.r.energy.generation": {
+      "type": "object",
+      "properties": {
+        "energygenerated" : {
+          "type": "number",
+          "description": "The energy generated in Watt-hour(Wh).",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.energy.generation"}
+  ],
+  "required": [ "energygenerated" ]
+}

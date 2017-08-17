@@ -13,6 +13,32 @@
           "readOnly": true,
           "minimum": 0,
           "maximum": 100
+        },
+        "capacity" : {
+          "type": "number",
+          "description": "The total capacity in Amp-hours (Ah).",
+          "readOnly": true
+        },
+        "charging" : {
+          "type": "boolean",
+          "description": "The status of charging.",
+          "readOnly": true
+        },
+        "discharging" : {
+          "type": "boolean",
+          "description": "The status of discharging.",
+          "readOnly": true
+        },
+        "lowbattery" : {
+          "type": "boolean",
+          "description": "The status of the low battery warning based upon the defined threshold.",
+          "readOnly": true
+        },
+        "batterythreshold" : {
+          "type": "integer",
+          "description": "The threshold percentage for the low battery warning.",
+          "minimum": 0,
+          "maximum": 100
         }
       }
     }
