@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Resource Directory",
+    "title": "Resource directory resource",
     "version": "v1-20160622",
     "license": {
       "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
@@ -149,122 +149,75 @@
     },
     "rdpostinterface" : {
       "in" : "query",
-      "name" : "rt",
+      "name" : "if",
       "type" : "string",
-      "enum" : ["oic.wk.rdpub"],
+      "enum" : ["oic.if.baseline"],
       "description" : "enumdescription"
     }
   },
   "definitions": {
     "rdSelection" : 
             {
-        "oneOf": [
-          {
-            "properties": {
-              "sel": {
-                "description": "A bias factor calculated by the Resource directory - the value is in the range of 0 to 100 - 0 implies that RD is not to be selected. Client chooses RD with highest bias factor or randomly between RDs that have same bias factor",
-                "maximum": 100,
-                "minimum": 0,
-                "type": "integer"
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "type": "string"
+              },
+              {
+                "description": "Format pattern according to IETF RFC 4122.",
+                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                "type": "string"
               }
-            },
-            "required": [
-              "sel"
-            ]
+            ],
+            "description": "Instance ID of this specific resource",
+            "readOnly": true
           },
-          {
-            "properties": {
-              "id": {
-                "description": "Instance ID of this specific resource",
-                "maxLength": 64,
-                "readOnly": true,
-                "type": "string"
-              },
-              "if": {
-                "description": "The interface set supported by this resource",
-                "items": {
-                  "enum": [
-                    "oic.if.baseline",
-                    "oic.if.ll",
-                    "oic.if.b",
-                    "oic.if.lb",
-                    "oic.if.rw",
-                    "oic.if.r",
-                    "oic.if.a",
-                    "oic.if.s"
-                  ],
-                  "type": "string"
-                },
-                "minItems": 1,
-                "readOnly": true,
-                "type": "array"
-              },
-              "n": {
-                "description": "Friendly name of the resource",
-                "maxLength": 64,
-                "readOnly": true,
-                "type": "string"
-              },
-              "rt": {
-                "description": "Resource Type",
-                "items": {
-                  "maxLength": 64,
-                  "type": "string"
-                },
-                "minItems": 1,
-                "readOnly": true,
-                "type": "array"
-              },
-              "sel": {
-                "description": "Selection criteria that a device wanting to publish to any RD can use to choose this Resource Directory over others that are discovered",
-                "properties": {
-                  "bw": {
-                    "description": "Qualitative bandwidth of the connection",
-                    "enum": [
-                      "high",
-                      "low",
-                      "lossy"
-                    ],
-                    "type": "string"
-                  },
-                  "conn": {
-                    "description": "A hint about the networking connectivity of the RD. *wrd* if wired connected and *wrls* if wireless connected.",
-                    "enum": [
-                      "wrd",
-                      "wrls"
-                    ],
-                    "type": "string"
-                  },
-                  "load": {
-                    "description": "Current load capacity of the RD. Expressed as a load factor 3-tuple (upto two decimal points each). Load factor is based on request processed in a 1 minute, 5 minute window and 15 minute window",
-                    "items": {
-                      "type": "number"
-                    },
-                    "maxItems": 3,
-                    "minItems": 3,
-                    "type": "array"
-                  },
-                  "mf": {
-                    "description": "Memory factor - Ratio of available memory to total memory expressed as a percentage",
-                    "type": "integer"
-                  },
-                  "pwr": {
-                    "description": "A hint about how the RD is powered. If AC then this is stronger than battery powered. If source is reliable (safe) then appropriate mechanism for managing power failure exists",
-                    "enum": [
-                      "ac",
-                      "batt",
-                      "safe"
-                    ],
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              }
+          "if": {
+            "description": "The interface set supported by this resource",
+            "items": {
+              "enum": [
+                "oic.if.baseline",
+                "oic.if.ll",
+                "oic.if.b",
+                "oic.if.lb",
+                "oic.if.rw",
+                "oic.if.r",
+                "oic.if.a",
+                "oic.if.s"
+              ],
+              "type": "string"
             },
-            "required": [
-              "sel"
-            ]
+            "minItems": 1,
+            "readOnly": true,
+            "type": "array"
+          },
+          "n": {
+            "description": "Friendly name of the resource",
+            "maxLength": 64,
+            "readOnly": true,
+            "type": "string"
+          },
+          "rt": {
+            "description": "Resource Type of the Resource",
+            "items": {
+              "maxLength": 64,
+              "type": "string"
+            },
+            "minItems": 1,
+            "readOnly": true,
+            "type": "array"
+          },
+          "sel": {
+            "description": "A bias factor calculated by the Resource directory",
+            "maximum": 100,
+            "minimum": 0,
+            "type": "integer"
           }
+        },
+        "required": [
+          "sel"
         ],
         "type": "object"
       }
@@ -275,15 +228,31 @@
         "description": "Publishes resources as OIC Links into the resource directory",
         "properties": {
           "di": {
-            "description": "A unique identifier for the publishing Device, i.e., its device ID",
-            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-            "type": "string"
+            "allOf": [
+              {
+                "description": "Format pattern according to IETF RFC 4122.",
+                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                "type": "string"
+              },
+              {
+                "description": "A UUID that is the identifier for the publishing Device"
+              }
+            ]
           },
           "id": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "type": "string"
+              },
+              {
+                "description": "Format pattern according to IETF RFC 4122.",
+                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                "type": "string"
+              }
+            ],
             "description": "Instance ID of this specific resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
+            "readOnly": true
           },
           "if": {
             "description": "The interface set supported by this resource",
@@ -305,31 +274,38 @@
             "type": "array"
           },
           "links": {
-            "description": "A set (array) of simple or individual OIC Links. In addition to properties required for an OIC Link, the identifier for that link in this set is also required",
+            "description": "A set of simple or individual OIC Links.",
             "items": {
               "properties": {
                 "anchor": {
-                  "description": "This is used to override the context URI e.g. override the URI of the containing collection",
+                  "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
                   "format": "uri",
                   "maxLength": 256,
                   "type": "string"
                 },
                 "di": {
-                  "description": "Unique identifier for device (UUID)",
-                  "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                  "type": "string"
+                  "allOf": [
+                    {
+                      "description": "Format pattern according to IETF RFC 4122.",
+                      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                      "type": "string"
+                    },
+                    {
+                      "description": "The device ID"
+                    }
+                  ]
                 },
                 "eps": {
                   "description": "the Endpoint information of the target Resource",
                   "items": {
                     "properties": {
                       "ep": {
-                        "description": "URI with Transport Protocol Suites + Endpoint Locator as specified in 10.2.1",
+                        "description": "Transport Protocol Suite + Endpoint Locator",
                         "format": "uri",
                         "type": "string"
                       },
                       "pri": {
-                        "description": "The priority among multiple Endpoints as specified in 10.2.3",
+                        "description": "The priority among multiple Endpoints",
                         "minimum": 1,
                         "type": "integer"
                       }
@@ -339,7 +315,7 @@
                   "type": "array"
                 },
                 "href": {
-                  "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
+                  "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
                   "format": "uri",
                   "maxLength": 256,
                   "type": "string"
@@ -365,19 +341,26 @@
                   "description": "The instance identifier for this web link in an array of web links - used in collections",
                   "oneOf": [
                     {
-                      "description": "An ordinal number that is not repeated - must be unique in the collection context",
+                      "description": "An ordinal number that is not repeated - must be unique in the collection context.",
                       "type": "integer"
                     },
                     {
-                      "description": "Any unique string including a URI",
+                      "description": "A unique string",
                       "format": "uri",
                       "maxLength": 256,
                       "type": "string"
                     },
                     {
-                      "description": "Unique identifier (UUID)",
-                      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                      "type": "string"
+                      "allOf": [
+                        {
+                          "description": "Format pattern according to IETF RFC 4122.",
+                          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                          "type": "string"
+                        },
+                        {
+                          "description": "A UUID"
+                        }
+                      ]
                     }
                   ]
                 },
@@ -416,7 +399,7 @@
                   ]
                 },
                 "rt": {
-                  "description": "Resource Type",
+                  "description": "Resource Type of the Resource",
                   "items": {
                     "maxLength": 64,
                     "type": "string"
@@ -425,13 +408,13 @@
                   "type": "array"
                 },
                 "title": {
-                  "description": "A title for the link relation. Can be used by the UI to provide a context",
+                  "description": "A title for the link relation. Can be used by the UI to provide a context.",
                   "maxLength": 64,
                   "type": "string"
                 },
                 "type": {
                   "default": "application/cbor",
-                  "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting",
+                  "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
                   "items": {
                     "maxLength": 64,
                     "type": "string"
@@ -456,7 +439,7 @@
             "type": "string"
           },
           "rt": {
-            "description": "Resource Type",
+            "description": "Resource Type of the Resource",
             "items": {
               "maxLength": 64,
               "type": "string"
@@ -466,7 +449,7 @@
             "type": "array"
           },
           "ttl": {
-            "description": "Time to indicate a RD, how long to keep this published item. After this time (in seconds) elapses, the RD invalidates the links. To keep link alive the publishing device updates the ttl using the update schema",
+            "description": "Time to indicate a RD, i.e. how long to keep this published item.",
             "type": "integer"
           }
         }

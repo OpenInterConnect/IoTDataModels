@@ -47,10 +47,19 @@
             {
         "properties": {
           "id": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "type": "string"
+              },
+              {
+                "description": "Format pattern according to IETF RFC 4122.",
+                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                "type": "string"
+              }
+            ],
             "description": "Instance ID of this specific resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
+            "readOnly": true
           },
           "if": {
             "description": "The interface set supported by this resource",
@@ -72,10 +81,17 @@
             "type": "array"
           },
           "mndt": {
-            "description": "Manufacturing Date.",
-            "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])$",
-            "readOnly": true,
-            "type": "string"
+            "allOf": [
+              {
+                "description": "Format pattern as defined in ISO 8601. The format is [yyyy]-[mm]-[dd].",
+                "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])$",
+                "type": "string"
+              },
+              {
+                "description": "Manufacturing Date in ISO8601 format.",
+                "readOnly": true
+              }
+            ]
           },
           "mnfv": {
             "description": "Manufacturer's firmware version",
@@ -103,7 +119,7 @@
             "type": "string"
           },
           "mnmo": {
-            "description": "Model number as designated by manufacturer",
+            "description": "Model number as designated by the manufacturer",
             "maxLength": 64,
             "readOnly": true,
             "type": "string"
@@ -134,13 +150,20 @@
             "type": "string"
           },
           "pi": {
-            "description": "Platform Identifier as a UUID",
-            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-            "readOnly": true,
-            "type": "string"
+            "allOf": [
+              {
+                "description": "Format pattern according to IETF RFC 4122.",
+                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                "type": "string"
+              },
+              {
+                "description": "Platform Identifier",
+                "readOnly": true
+              }
+            ]
           },
           "rt": {
-            "description": "Resource Type",
+            "description": "Resource Type of the Resource",
             "items": {
               "maxLength": 64,
               "type": "string"
@@ -150,13 +173,13 @@
             "type": "array"
           },
           "st": {
-            "description": "Reference time for the device as defined in ISO 8601, where concatenation of 'date' and 'time' with the 'T' as a delimiter between 'date' and 'time'.",
+            "description": "Reference time for the device in ISO8601 format.",
             "format": "date-time",
             "readOnly": true,
             "type": "string"
           },
           "vid": {
-            "description": "Manufacturer's defined string for the platform. The string is freeform and up to the manufacturer on what text to populate it",
+            "description": "Manufacturer's defined information for the platform. The content is freeform, with population rules up to the manufacturer",
             "maxLength": 64,
             "readOnly": true,
             "type": "string"

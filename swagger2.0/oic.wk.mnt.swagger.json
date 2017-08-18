@@ -16,13 +16,7 @@
       "get": {
         "description": "The resource through which a Device is maintained and can be used for diagnostic purposes.\nfr (Factory Reset) is a boolean.\n  The value 0 means No action (Default), the value 1 means Start Factory Reset\nAfter factory reset, this value shall be changed back to the default value\nrb (Reboot) is a boolean.\n  The value 0 means No action (Default), the value 1 means Start Reboot\nAfter Reboot, this value shall be changed back to the default value\nRetrieve the maintenance action status",
         "parameters": [
-          {"$ref": "#/parameters/interface"},
-          {
-            "in": "query",
-            "type": "string",
-            "enum": ["oic.if.rw", "oic.if.r", "oic.if.baseline"],
-            "name": "if"
-          }
+          {"$ref": "#/parameters/interface-all"}
         ],
         "responses": {
             "200": {
@@ -41,13 +35,7 @@
       "post": {
         "description": "Set the maintenance action(s)\n",
         "parameters": [
-          {"$ref": "#/parameters/interface"},
-          {
-            "in": "query",
-            "type": "string",
-            "enum": ["oic.if.rw", "oic.if.baseline"],
-            "name": "if"
-          },
+          {"$ref": "#/parameters/interface-rw"},
           {
             "name": "body",
             "in": "body",
@@ -76,7 +64,13 @@
     }
   },
   "parameters": {
-    "interface" : {
+    "interface-rw" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw", "oic.if.baseline"]
+    },
+    "interface-all" : {
       "in" : "query",
       "name" : "if",
       "type" : "string",
@@ -104,10 +98,19 @@
             "type": "boolean"
           },
           "id": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "type": "string"
+              },
+              {
+                "description": "Format pattern according to IETF RFC 4122.",
+                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                "type": "string"
+              }
+            ],
             "description": "Instance ID of this specific resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
+            "readOnly": true
           },
           "if": {
             "description": "The interface set supported by this resource",
@@ -139,7 +142,7 @@
             "type": "boolean"
           },
           "rt": {
-            "description": "Resource Type",
+            "description": "Resource Type of the Resource",
             "items": {
               "maxLength": 64,
               "type": "string"
