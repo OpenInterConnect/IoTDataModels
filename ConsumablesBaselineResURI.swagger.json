@@ -23,10 +23,10 @@
               "description" : "",
               "x-example":
                 [
-                  {"href": "/myTonerBlackResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
-                  {"href": "/myTonerCyanResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
-                  {"href": "/myTonerMagentaResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
-                  {"href": "/myTonerYellowResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
+                    {"href": "/myTonerBlackResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                    {"href": "/myTonerCyanResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                    {"href": "/myTonerMagentaResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                    {"href": "/myTonerYellowResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
                 ]
                 ,
               "schema": { "$ref": "#/definitions/consumables-ll" }
@@ -75,6 +75,12 @@
       "name" : "if",
       "type" : "string",
       "enum" : ["oic.if.baseline"]
+    },
+    "interface-all" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.ll", "oic.if.baseline"]
     }
   },
   "definitions": {

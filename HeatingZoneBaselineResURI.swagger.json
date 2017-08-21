@@ -23,11 +23,11 @@
               "description" : "",
               "x-example":
                 [
-                  {"href": "/myZone1ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
-                  {"href": "/myZone2ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
-                  {"href": "/myZone3ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
-                  {"href": "/myZone4ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
-                ]
+                    {"href": "/myZone1ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                    {"href": "/myZone2ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                    {"href": "/myZone3ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                    {"href": "/myZone4ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
+                 ]
                 ,
               "schema": { "$ref": "#/definitions/HeatingZone-ll" }
             }
@@ -73,6 +73,12 @@
       "name" : "if",
       "type" : "string",
       "enum" : ["oic.if.baseline"]
+    },
+    "interface-all" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.ll", "oic.if.baseline"]
     }
   },
   "definitions": {

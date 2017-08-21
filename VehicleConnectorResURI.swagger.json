@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Consumable",
-    "version": "OCF-v1.0.0-20160620",
+    "title": "VehicleConnector",
+    "version": "v1.1.0-20170815",
     "license": {
       "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
       "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
@@ -12,9 +12,9 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/ConsumableResURI" : {
+    "/VehicleConnectorResURI" : {
       "get": {
-        "description": "This resource specifies a thing that can be consumed such as filter material, printer toner etc\nThe type is an enumeration defining the thing being consumed as defined by the Smart Home Device Specification\nThe remaining is an integer capturing the percentatge remaining life\nThe orderpercentage is an integer capturing the percentage life at which replacement or replenishment is recommended by the manufacturer\nThe url is a string containing a URL at which further information may be obtained with respect to the consumable\n",
+        "description": "This resource describes the attributes associated with an electric vehicle charging connector. The connected state is a boolean indicating the status of the connector (False = disconnected, True = connected). The rated charging capacity and rated discharging capacity are in Amps (A).\nRetrieves the state of the vehicle connector.\n",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -23,15 +23,14 @@
               "description" : "",
               "x-example":
                 {
-                  "rt":               ["oic.r.consumable"],
-                  "id":               "unique_example_id",
-                  "typeofconsumable": "tonerBlack",
-                  "remaining":        20,
-                  "orderpercentage":  10,
-                  "url":              "http://myreorderURL"
+                  "rt":     ["oic.r.vehicle.connector"],
+                  "id":     "unique_example_id",
+                  "connected": true,
+                  "ratedchargingcapacity": 20.0,
+                  "rateddischargingcapacity": 5.0
                 }
                 ,
-              "schema": { "$ref": "#/definitions/consumable" }
+              "schema": { "$ref": "#/definitions/VehicleConnector" }
             }
         }
       }
@@ -46,38 +45,27 @@
     }
   },
   "definitions": {
-    "consumable" : 
+    "VehicleConnector" : 
             {
         "properties": {
-          "orderpercentage": {
-            "description": "Percentage at which re-ordering is recommended by the manufacturer",
-            "maximum": 100,
-            "minimum": 0,
+          "connected": {
+            "description": "The connection state.",
             "readOnly": true,
-            "type": "integer"
+            "type": "boolean"
           },
-          "remaining": {
-            "description": "Percentage remaining lifespan.",
-            "maximum": 100,
-            "minimum": 0,
+          "ratedchargingapacity": {
+            "description": "The rated charging capacity in Amps (A).",
             "readOnly": true,
-            "type": "integer"
+            "type": "number"
           },
-          "typeofconsumable": {
-            "description": "Thing that is being consumed.",
+          "rateddischargingcapacity": {
+            "description": "The rated discharging capacity in Amps (A).",
             "readOnly": true,
-            "type": "string"
-          },
-          "url": {
-            "description": "URL at which additional ordering information may be found.",
-            "format": "uri",
-            "readOnly": true,
-            "type": "string"
+            "type": "number"
           }
         },
         "required": [
-          "typeofconsumable",
-          "remaining"
+          "connected"
         ],
         "type": "object"
       }

@@ -70,6 +70,12 @@
       "name" : "if",
       "type" : "string",
       "enum" : ["oic.if.baseline"]
+    },
+    "interface-all" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.ll", "oic.if.baseline"]
     }
   },
   "definitions": {
@@ -473,7 +479,7 @@
               },
               "rts": {
                 "items": {
-                  "oneOf": [
+                  "anyOf": [
                     {
                       "enum": [
                         "oic.r.airquality",

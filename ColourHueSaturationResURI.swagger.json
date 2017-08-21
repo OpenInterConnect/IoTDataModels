@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Battery",
-    "version": "v1.2.0-20170814",
+    "title": "Colour Hue and Saturation",
+    "version": "v1.0-2017",
     "license": {
       "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
       "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
@@ -12,44 +12,42 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/BatteryResURI" : {
+    "/example/ColourHueSaturationResURI" : {
       "get": {
-        "description": "This resource describes the attributes associated with a battery. The charge is an integer showing the current battery charge level as a percentage in the range 0 (fully discharged) to 100 (fully charged). The capacity represents the total capacity of battery in Amp Hours (Ah). The charging status and discharging status are represented by boolean values set to \"True\" indicating enabled and \"False\" indicating disabled. Low battery status is represented by a boolean value set to \"True\" indicating low charge level and \"False\" indicating otherwise, based upon the battery threshold represented as a percentage.\nRetrieves the state of the battery.\n",
+        "description": "This resource describes the colour using hue-saturation conventions.\nhue is the hue angle, it is a number value as defined by the CIECAM02 model definition (see reference [CIE CIE159:2004]).\n  A Device that does not support fractional hue angles can provide integer values.\n  If precision (from oic.r.baseresource) is provided it applies to the hue angle.\nsaturation is an integer value as defined by the CIECAM02 model definition (see reference [CIE CIE159:2004]).\n  saturation can be converted to a percentage by saturation/maximumsaturation X 100; where maximumsaturation is 32767 if the Property itself is not present.\nmaximumsaturation is the upper bound on the saturation supported by the Device.\n  If not present the maximum value for saturation is 32767.\nProvides the colour using hue and saturation conventions.\n",
         "parameters": [
-          {"$ref": "#/parameters/interface"}
+          {"$ref": "#/parameters/interface-all"}
         ],
         "responses": {
             "200": {
               "description" : "",
               "x-example":
                 {
-                  "rt":     ["oic.r.energy.battery"],
-                  "id":     "unique_example_id",
-                  "charge": 50,
-                  "capacity": 3000,
-                  "charging": true,
-                  "discharging": false,
-                  "lowbattery": false,
-                  "batterythreshold": 20
+                  "rt":         ["oic.r.colour.hs"],
+                  "id":         "unique_example_id",
+                  "hue":        300.0,
+                  "saturation": 212,
+                  "maximumsaturation": 1000
                 }
                 ,
-              "schema": { "$ref": "#/definitions/Battery" }
+              "schema": { "$ref": "#/definitions/ColourHS" }
             }
         }
       },
       "post": {
-        "description": "Sets current battery values\n",
+        "description": "Sets current colour hue and saturation values.\nAt least one of hue or saturation shall be provided in the payload.\n",
         "parameters": [
-          {"$ref": "#/parameters/interface"},
+          {"$ref": "#/parameters/interface-a"},
           {
             "name": "body",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/BatteryUpdate" },
+            "schema": { "$ref": "#/definitions/ColourHS" },
             "x-example":
               {
                 "id":         "unique_example_id",
-                "batterythreshold": 20
+                "hue":        300.0,
+                "saturation": 212
               }
           }
         ],
@@ -59,80 +57,57 @@
               "x-example":
                 {
                   "id":          "unique_example_id",
-                  "batterythreshold": 20
+                  "hue":         300.0,
+                  "saturation":  212
                 }
                 ,
-              "schema": { "$ref": "#/definitions/BatteryUpdate" }
+              "schema": { "$ref": "#/definitions/ColourHS" }
             }
         }
       }
     }
   },
   "parameters": {
-    "interface" : {
+    "interface-a" : {
       "in" : "query",
       "name" : "if",
       "type" : "string",
-      "enum" : ["oic.if.rw", "oic.if.baseline"]
+      "enum" : ["oic.if.a"]
+    },
+    "interface-all" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.a", "oic.if.baseline"]
     }
   },
   "definitions": {
-    "Battery" : 
+    "ColourHS" : 
             {
         "properties": {
-          "batterythreshold": {
-            "description": "The threshold percentage for the low battery warning.",
-            "maximum": 100,
+          "hue": {
+            "description": "Hue angle as defined by the CIECAM02 model definition",
+            "maximum": 360,
             "minimum": 0,
-            "type": "integer"
-          },
-          "capacity": {
-            "description": "The total capacity in Amp-hours (Ah).",
-            "readOnly": true,
             "type": "number"
           },
-          "charge": {
-            "description": "The current charge percentage.",
-            "maximum": 100,
+          "maximumsaturation": {
+            "description": "Maximum supported value of Saturation for this Device",
+            "maximum": 32767,
             "minimum": 0,
             "readOnly": true,
             "type": "integer"
           },
-          "charging": {
-            "description": "The status of charging.",
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "discharging": {
-            "description": "The status of discharging.",
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "lowbattery": {
-            "description": "The status of the low battery warning based upon the defined threshold.",
-            "readOnly": true,
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "charge"
-        ],
-        "type": "object"
-      }
-
-    ,
-    "BatteryUpdate" : 
-            {
-        "properties": {
-          "batterythreshold": {
-            "description": "The threshold percentage for the low battery warning.",
-            "maximum": 100,
+          "saturation": {
+            "description": "Saturation as defined by the CIECAM02 model definition",
+            "maximum": 32767,
             "minimum": 0,
             "type": "integer"
           }
         },
         "required": [
-          "batterythreshold"
+          "hue",
+          "saturation"
         ],
         "type": "object"
       }

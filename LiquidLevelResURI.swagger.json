@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Humidity",
+    "title": "LiquidLevel",
     "version": "v1.1.0-20160519",
     "license": {
       "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
@@ -12,9 +12,9 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/HumidityResURI" : {
+    "/LiquidLevelResURI" : {
       "get": {
-        "description": "This resource describes a sensed or desired humidity.\nThe value humidity is an integer describing the percentage measured relative humidity.\nThe value desiredHumidity is an integer showing the desired target relative humidity.\nRetrieves the current (relative) humidity level.\n",
+        "description": "This resource describes the attributes associated with liquid level. The current level and desired level are defined in terms of a percentage. The behaviour of when the currentlevel and desiredlevel are not equal is determined by the device manufacturer.\nRetrieves the state of liquid level.\n",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -23,42 +23,42 @@
               "description" : "",
               "x-example":
                 {
-                  "rt":               ["oic.r.humidity"],
-                  "id":               "unique_example_id",
-                  "humidity":         40,
-                  "desiredHumidity":  40
+                  "rt":     ["oic.r.liquidlevel"],
+                  "id":     "unique_example_id",
+                  "currentlevel": 60,
+                  "desiredlevel": 80
                 }
                 ,
-              "schema": { "$ref": "#/definitions/Humidity" }
+              "schema": { "$ref": "#/definitions/LiquidLevel" }
             }
         }
       },
       "post": {
-        "description": "Sets the desired relative humidity level.\n",
+        "description": "Sets liquid level values\n",
         "parameters": [
           {"$ref": "#/parameters/interface"},
           {
             "name": "body",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/HumidityUpdate" },
+            "schema": { "$ref": "#/definitions/LiquidLevelUpdate" },
             "x-example":
               {
-                "id":               "unique_example_id",
-                "desiredHumidity" : 45
+                "id":         "unique_example_id",
+                "desiredlevel": 80
               }
           }
         ],
         "responses": {
             "200": {
-              "description" : "Indicates that the relative humidity level was changed.\nThe new relative humidity level is provided in the response.\n",
+              "description" : "",
               "x-example":
                 {
-                  "id":              "unique_example_id",
-                  "desiredHumidity": 45
+                  "id":          "unique_example_id",
+                  "desiredlevel": 80
                 }
                 ,
-              "schema": { "$ref": "#/definitions/HumidityUpdate" }
+              "schema": { "$ref": "#/definitions/LiquidLevelUpdate" }
             }
         }
       }
@@ -69,44 +69,47 @@
       "in" : "query",
       "name" : "if",
       "type" : "string",
-      "enum" : ["oic.if.a", "oic.if.s", "oic.if.baseline"]
+      "enum" : ["oic.if.rw", "oic.if.r", "oic.if.baseline"]
     }
   },
   "definitions": {
-    "Humidity" : 
+    "LiquidLevel" : 
             {
         "properties": {
-          "desiredHumidity": {
-            "description": "Desired value for Humidity",
-            "maximum": 100,
-            "minimum": 0,
-            "type": "integer"
-          },
-          "humidity": {
-            "description": "Current sensed value for Humidity",
+          "currentlevel": {
+            "description": "The current level of the liquid in percentage.",
             "maximum": 100,
             "minimum": 0,
             "readOnly": true,
             "type": "integer"
+          },
+          "desiredlevel": {
+            "description": "The desired level of the liquid in percentage.",
+            "maximum": 100,
+            "minimum": 0,
+            "type": "integer"
           }
         },
         "required": [
-          "humidity"
+          "currentlevel"
         ],
         "type": "object"
       }
 
     ,
-    "HumidityUpdate" : 
+    "LiquidLevelUpdate" : 
             {
         "properties": {
-          "desiredHumidity": {
-            "description": "Desired value for Humidity",
+          "desiredlevel": {
+            "description": "The desired level of the liquid in percentage.",
             "maximum": 100,
             "minimum": 0,
             "type": "integer"
           }
         },
+        "required": [
+          "desiredlevel"
+        ],
         "type": "object"
       }
 

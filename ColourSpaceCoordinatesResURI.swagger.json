@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Humidity",
-    "version": "v1.1.0-20160519",
+    "title": "Colour Space Coordinates",
+    "version": "OCFv1.1.0-2017",
     "license": {
       "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
       "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
@@ -12,101 +12,90 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/HumidityResURI" : {
+    "/example/ColourSpaceCoordinatesResURI" : {
       "get": {
-        "description": "This resource describes a sensed or desired humidity.\nThe value humidity is an integer describing the percentage measured relative humidity.\nThe value desiredHumidity is an integer showing the desired target relative humidity.\nRetrieves the current (relative) humidity level.\n",
+        "description": "This resource describes the colour using colour space co-ordinates.\ncsc is the colour space coordinates in CIE colour space.\n  The first item in the array is the X coordinate.\n  The second item in the array is the Y coordinate.\n  If precision (from oic.r.baseresource) is provided it applies to both the X and Y coordinates.\nProvides the colour using colour space coordinates.\n",
         "parameters": [
-          {"$ref": "#/parameters/interface"}
+          {"$ref": "#/parameters/interface-all"}
         ],
         "responses": {
             "200": {
               "description" : "",
               "x-example":
                 {
-                  "rt":               ["oic.r.humidity"],
-                  "id":               "unique_example_id",
-                  "humidity":         40,
-                  "desiredHumidity":  40
+                  "rt":         ["oic.r.colour.csc"],
+                  "id":         "unique_example_id",
+                  "csc":        [0.41,0.51]
                 }
                 ,
-              "schema": { "$ref": "#/definitions/Humidity" }
+              "schema": { "$ref": "#/definitions/ColourCSC" }
             }
         }
       },
       "post": {
-        "description": "Sets the desired relative humidity level.\n",
+        "description": "Sets current colour space coordinates\n",
         "parameters": [
-          {"$ref": "#/parameters/interface"},
+          {"$ref": "#/parameters/interface-a"},
           {
             "name": "body",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/HumidityUpdate" },
+            "schema": { "$ref": "#/definitions/ColourCSC" },
             "x-example":
               {
-                "id":               "unique_example_id",
-                "desiredHumidity" : 45
+                "id":         "unique_example_id",
+                "csc":        [0.40,0.70]
               }
           }
         ],
         "responses": {
             "200": {
-              "description" : "Indicates that the relative humidity level was changed.\nThe new relative humidity level is provided in the response.\n",
+              "description" : "",
               "x-example":
                 {
-                  "id":              "unique_example_id",
-                  "desiredHumidity": 45
+                  "id":          "unique_example_id",
+                  "csc":         [0.40,0.70]
                 }
                 ,
-              "schema": { "$ref": "#/definitions/HumidityUpdate" }
+              "schema": { "$ref": "#/definitions/ColourCSC" }
             }
         }
       }
     }
   },
   "parameters": {
-    "interface" : {
+    "interface-a" : {
       "in" : "query",
       "name" : "if",
       "type" : "string",
-      "enum" : ["oic.if.a", "oic.if.s", "oic.if.baseline"]
+      "enum" : ["oic.if.a"]
+    },
+    "interface-all" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.a", "oic.if.baseline"]
     }
   },
   "definitions": {
-    "Humidity" : 
+    "ColourCSC" : 
             {
         "properties": {
-          "desiredHumidity": {
-            "description": "Desired value for Humidity",
-            "maximum": 100,
-            "minimum": 0,
-            "type": "integer"
-          },
-          "humidity": {
-            "description": "Current sensed value for Humidity",
-            "maximum": 100,
-            "minimum": 0,
-            "readOnly": true,
-            "type": "integer"
+          "csc": {
+            "description": "X and Y coordinates of the colour in CIE colour space",
+            "items": {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array"
           }
         },
         "required": [
-          "humidity"
+          "csc"
         ],
-        "type": "object"
-      }
-
-    ,
-    "HumidityUpdate" : 
-            {
-        "properties": {
-          "desiredHumidity": {
-            "description": "Desired value for Humidity",
-            "maximum": 100,
-            "minimum": 0,
-            "type": "integer"
-          }
-        },
         "type": "object"
       }
 
