@@ -21,7 +21,7 @@ traits:
 /BatteryMaterialResURI:
   description: |
     This resource describes the battery material represented as an enumerated set of strings.
-  displayName: BatteryMaterial
+  displayName: Battery Material
   is: [ interface ] # valid for all methods
 
   get:
@@ -34,7 +34,7 @@ traits:
             schema: BatteryMaterial
             example: |
                 {
-                    "rt": "oic.r.batterymaterial",
+                    "rt": ["oic.r.batterymaterial"],
                     "id":     "unique_example_id",
                     "material": "Alkaline"
                 }

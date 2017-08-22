@@ -12,7 +12,7 @@
           "description": "The connection state.",
           "readOnly": true
         },
-        "ratedchargingapacity" : {
+        "ratedchargingcapacity" : {
           "type": "number",
           "description": "The rated charging capacity in Amps (A).",
           "readOnly": true

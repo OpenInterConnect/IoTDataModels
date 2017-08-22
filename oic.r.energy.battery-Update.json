@@ -19,7 +19,7 @@
   "type": "object",
   "allOf": [
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
-    {"$ref": "#/definitions/oic.r.liquid.level"}
+    {"$ref": "#/definitions/oic.r.energy.battery"}
   ],
   "required": [ "batterythreshold" ]
 }

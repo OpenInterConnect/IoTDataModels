@@ -24,7 +24,7 @@
   "type": "object",
   "allOf": [
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
-    {"$ref": "#/definitions/oic.r.grinding"}
+    {"$ref": "#/definitions/oic.r.grinder"}
   ],
   "required": ["coarseness"]
 }

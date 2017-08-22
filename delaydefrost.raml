@@ -27,7 +27,7 @@ traits:
     startTime, from oir.r.time.period (mandatory) is an ISO8601 encoded start time for the interval in which defrost shall not occur.
     stopTime, from oic.r.time.period is an ISO8601 encoded stop time for the interval in which defrost shall not occur.
     interval, from oic.r.time.period with additional range restrictions is the time in minutes of the period that starts at starttime (if not present the default is 240).
-    stopTime and interval are mutually exlusive; they cannot both be present in a Resource instance
+    stopTime and interval are mutually exclusive; they cannot both be present in a Resource instance
   displayName: Delay Defrost
   is: ['interface'] # valid for all methods
 

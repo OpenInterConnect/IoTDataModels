@@ -22,7 +22,7 @@ traits:
 /LiquidLevelResURI:
   description: |
     This resource describes the attributes associated with liquid level. The current level and desired level are defined in terms of a percentage. The behaviour of when the currentlevel and desiredlevel are not equal is determined by the device manufacturer.
-  displayName: LiquidLevel
+  displayName: Liquid Level
   is: [ interface ] # valid for all methods
 
   get:
@@ -35,7 +35,7 @@ traits:
             schema: LiquidLevel
             example: |
               {
-                "rt":     ["oic.r.liquidlevel"],
+                "rt":     ["oic.r.liquid.level"],
                 "id":     "unique_example_id",
                 "currentlevel": 60,
                 "desiredlevel": 80
