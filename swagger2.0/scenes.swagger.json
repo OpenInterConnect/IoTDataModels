@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Scene",
+    "title": "Scenes (Top level)",
     "version": "v1-20160622",
     "license": {
       "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
@@ -92,7 +92,7 @@
               "x-example":
                 {
                     "lastScene": "off",
-                    "sceneValues": "off,Reading,TVWatching",
+                    "sceneValues": ["off","Reading","TVWatching"],
                     "rt":       ["oic.wk.scenecollection"],
                     "n":        "My Scenes for my living room",
                     "id":       "0685B960-736F-46F7-BEC0-9E6CBD671ADC1",
@@ -144,35 +144,38 @@
   "definitions": {
     "Collection" : 
             {
-        "description": "A set (array) of simple or individual OIC Links. In addition to properties required for an OIC Link, the identifier for that link in this set is also required",
+        "description": "A set of simple or individual OIC Links.",
         "items": {
           "properties": {
             "anchor": {
-              "description": "This is used to override the context URI e.g. override the URI of the containing collection",
+              "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
               "format": "uri",
               "maxLength": 256,
               "type": "string"
             },
             "di": {
-              "description": "Unique identifier for device (UUID)",
-              "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-              "type": "string"
-            },
-            "drel": {
-              "description": "When specified this is the default relationship to use when an OIC Link does not specify an explicit relationship with *rel* parameter",
-              "type": "string"
+              "allOf": [
+                {
+                  "description": "Format pattern according to IETF RFC 4122.",
+                  "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                  "type": "string"
+                },
+                {
+                  "description": "The device ID"
+                }
+              ]
             },
             "eps": {
               "description": "the Endpoint information of the target Resource",
               "items": {
                 "properties": {
                   "ep": {
-                    "description": "URI with Transport Protocol Suites + Endpoint Locator as specified in 10.2.1",
+                    "description": "Transport Protocol Suite + Endpoint Locator",
                     "format": "uri",
                     "type": "string"
                   },
                   "pri": {
-                    "description": "The priority among multiple Endpoints as specified in 10.2.3",
+                    "description": "The priority among multiple Endpoints",
                     "minimum": 1,
                     "type": "integer"
                   }
@@ -182,16 +185,25 @@
               "type": "array"
             },
             "href": {
-              "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
+              "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
               "format": "uri",
               "maxLength": 256,
               "type": "string"
             },
             "id": {
+              "anyOf": [
+                {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                {
+                  "description": "Format pattern according to IETF RFC 4122.",
+                  "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                  "type": "string"
+                }
+              ],
               "description": "Instance ID of this specific resource",
-              "maxLength": 64,
-              "readOnly": true,
-              "type": "string"
+              "readOnly": true
             },
             "if": {
               "description": "The interface set supported by this resource",
@@ -214,51 +226,65 @@
               "description": "The instance identifier for this web link in an array of web links - used in collections",
               "oneOf": [
                 {
-                  "description": "An ordinal number that is not repeated - must be unique in the collection context",
+                  "description": "An ordinal number that is not repeated - must be unique in the collection context.",
                   "type": "integer"
                 },
                 {
-                  "description": "Any unique string including a URI",
+                  "description": "A unique string",
                   "format": "uri",
                   "maxLength": 256,
                   "type": "string"
                 },
                 {
-                  "description": "Unique identifier (UUID)",
-                  "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                  "type": "string"
+                  "allOf": [
+                    {
+                      "description": "Format pattern according to IETF RFC 4122.",
+                      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                      "type": "string"
+                    },
+                    {
+                      "description": "A UUID"
+                    }
+                  ]
                 }
               ]
             },
             "links": {
-              "description": "All forms of links in a collection",
+              "description": "All forms of links in a collection.",
               "oneOf": [
                 {
-                  "description": "A set (array) of simple or individual OIC Links. In addition to properties required for an OIC Link, the identifier for that link in this set is also required",
+                  "description": "A set of simple or individual OIC Links.",
                   "items": {
                     "properties": {
                       "anchor": {
-                        "description": "This is used to override the context URI e.g. override the URI of the containing collection",
+                        "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
                         "format": "uri",
                         "maxLength": 256,
                         "type": "string"
                       },
                       "di": {
-                        "description": "Unique identifier for device (UUID)",
-                        "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                        "type": "string"
+                        "allOf": [
+                          {
+                            "description": "Format pattern according to IETF RFC 4122.",
+                            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                            "type": "string"
+                          },
+                          {
+                            "description": "The device ID"
+                          }
+                        ]
                       },
                       "eps": {
                         "description": "the Endpoint information of the target Resource",
                         "items": {
                           "properties": {
                             "ep": {
-                              "description": "URI with Transport Protocol Suites + Endpoint Locator as specified in 10.2.1",
+                              "description": "Transport Protocol Suite + Endpoint Locator",
                               "format": "uri",
                               "type": "string"
                             },
                             "pri": {
-                              "description": "The priority among multiple Endpoints as specified in 10.2.3",
+                              "description": "The priority among multiple Endpoints",
                               "minimum": 1,
                               "type": "integer"
                             }
@@ -268,7 +294,7 @@
                         "type": "array"
                       },
                       "href": {
-                        "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
+                        "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
                         "format": "uri",
                         "maxLength": 256,
                         "type": "string"
@@ -294,19 +320,26 @@
                         "description": "The instance identifier for this web link in an array of web links - used in collections",
                         "oneOf": [
                           {
-                            "description": "An ordinal number that is not repeated - must be unique in the collection context",
+                            "description": "An ordinal number that is not repeated - must be unique in the collection context.",
                             "type": "integer"
                           },
                           {
-                            "description": "Any unique string including a URI",
+                            "description": "A unique string",
                             "format": "uri",
                             "maxLength": 256,
                             "type": "string"
                           },
                           {
-                            "description": "Unique identifier (UUID)",
-                            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                            "type": "string"
+                            "allOf": [
+                              {
+                                "description": "Format pattern according to IETF RFC 4122.",
+                                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                                "type": "string"
+                              },
+                              {
+                                "description": "A UUID"
+                              }
+                            ]
                           }
                         ]
                       },
@@ -345,7 +378,7 @@
                         ]
                       },
                       "rt": {
-                        "description": "Resource Type",
+                        "description": "Resource Type of the Resource",
                         "items": {
                           "maxLength": 64,
                           "type": "string"
@@ -354,13 +387,13 @@
                         "type": "array"
                       },
                       "title": {
-                        "description": "A title for the link relation. Can be used by the UI to provide a context",
+                        "description": "A title for the link relation. Can be used by the UI to provide a context.",
                         "maxLength": 64,
                         "type": "string"
                       },
                       "type": {
                         "default": "application/cbor",
-                        "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting",
+                        "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
                         "items": {
                           "maxLength": 64,
                           "type": "string"
@@ -421,7 +454,7 @@
               ]
             },
             "rt": {
-              "description": "Resource Type",
+              "description": "Resource Type of the Resource",
               "items": {
                 "maxLength": 64,
                 "type": "string"
@@ -430,23 +463,30 @@
               "type": "array"
             },
             "rts": {
-              "description": "Defines the list of allowable resource types (for Target and anchors) in links included in the collection; new links being created can only be from this list",
-              "items": {
-                "maxLength": 64,
-                "type": "string"
-              },
-              "minItems": 1,
-              "readOnly": true,
-              "type": "array"
+              "allOf": [
+                {
+                  "description": "Resource Type of the Resource",
+                  "items": {
+                    "maxLength": 64,
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "readOnly": true,
+                  "type": "array"
+                },
+                {
+                  "description": "The list of allowable resource types (for Target and anchors) in links included in the collection"
+                }
+              ]
             },
             "title": {
-              "description": "A title for the link relation. Can be used by the UI to provide a context",
+              "description": "A title for the link relation. Can be used by the UI to provide a context.",
               "maxLength": 64,
               "type": "string"
             },
             "type": {
               "default": "application/cbor",
-              "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting",
+              "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
               "items": {
                 "maxLength": 64,
                 "type": "string"
@@ -470,7 +510,7 @@
             {
         "properties": {
           "SceneMappings": {
-            "description": "array of mappings per scene, can be 1",
+            "description": "array of mappings per scene, can be one(1)",
             "items": {
               "properties": {
                 "memberProperty": {
@@ -484,7 +524,7 @@
                   "type": "string"
                 },
                 "scene": {
-                  "description": "Specifies a scene value that will acted upon",
+                  "description": "Specifies a scene value that will be acted upon",
                   "type": "string"
                 }
               },
@@ -498,8 +538,19 @@
             "type": "array"
           },
           "id": {
-            "description": "Can be an value that is unique to the use context or a UUIDv4",
-            "type": "string"
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "type": "string"
+              },
+              {
+                "description": "Format pattern according to IETF RFC 4122.",
+                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                "type": "string"
+              }
+            ],
+            "description": "Instance ID of this specific resource",
+            "readOnly": true
           },
           "if": {
             "description": "The interface set supported by this resource",
@@ -521,101 +572,132 @@
             "type": "array"
           },
           "link": {
-            "description": "web link that points at a resource",
-            "properties": {
-              "anchor": {
-                "description": "This is used to override the context URI e.g. override the URI of the containing collection",
-                "format": "uri",
-                "maxLength": 256,
-                "type": "string"
-              },
-              "di": {
-                "description": "Unique identifier for device (UUID)",
-                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                "type": "string"
-              },
-              "eps": {
-                "description": "the Endpoint information of the target Resource",
-                "items": {
-                  "properties": {
-                    "ep": {
-                      "description": "URI with Transport Protocol Suites + Endpoint Locator as specified in 10.2.1",
-                      "format": "uri",
-                      "type": "string"
-                    },
-                    "pri": {
-                      "description": "The priority among multiple Endpoints as specified in 10.2.3",
-                      "minimum": 1,
-                      "type": "integer"
-                    }
-                  },
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              "href": {
-                "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
-                "format": "uri",
-                "maxLength": 256,
-                "type": "string"
-              },
-              "if": {
-                "description": "The interface set supported by this resource",
-                "items": {
-                  "enum": [
-                    "oic.if.baseline",
-                    "oic.if.ll",
-                    "oic.if.b",
-                    "oic.if.rw",
-                    "oic.if.r",
-                    "oic.if.a",
-                    "oic.if.s"
-                  ],
-                  "type": "string"
-                },
-                "minItems": 1,
-                "type": "array"
-              },
-              "ins": {
-                "description": "The instance identifier for this web link in an array of web links - used in collections",
-                "oneOf": [
-                  {
-                    "description": "An ordinal number that is not repeated - must be unique in the collection context",
-                    "type": "integer"
-                  },
-                  {
-                    "description": "Any unique string including a URI",
+            "allOf": [
+              {
+                "properties": {
+                  "anchor": {
+                    "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
                     "format": "uri",
                     "maxLength": 256,
                     "type": "string"
                   },
-                  {
-                    "description": "Unique identifier (UUID)",
-                    "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                  "di": {
+                    "allOf": [
+                      {
+                        "description": "Format pattern according to IETF RFC 4122.",
+                        "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                        "type": "string"
+                      },
+                      {
+                        "description": "The device ID"
+                      }
+                    ]
+                  },
+                  "eps": {
+                    "description": "the Endpoint information of the target Resource",
+                    "items": {
+                      "properties": {
+                        "ep": {
+                          "description": "Transport Protocol Suite + Endpoint Locator",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "pri": {
+                          "description": "The priority among multiple Endpoints",
+                          "minimum": 1,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "href": {
+                    "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
+                    "format": "uri",
+                    "maxLength": 256,
                     "type": "string"
-                  }
-                ]
-              },
-              "p": {
-                "description": "Specifies the framework policies on the Resource referenced by the target URI",
-                "properties": {
-                  "bm": {
-                    "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "bm"
-                ],
-                "type": "object"
-              },
-              "rel": {
-                "description": "The relation of the target URI referenced by the link to the context URI",
-                "oneOf": [
-                  {
-                    "default": [
-                      "hosts"
+                  },
+                  "if": {
+                    "description": "The interface set supported by this resource",
+                    "items": {
+                      "enum": [
+                        "oic.if.baseline",
+                        "oic.if.ll",
+                        "oic.if.b",
+                        "oic.if.rw",
+                        "oic.if.r",
+                        "oic.if.a",
+                        "oic.if.s"
+                      ],
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "type": "array"
+                  },
+                  "ins": {
+                    "description": "The instance identifier for this web link in an array of web links - used in collections",
+                    "oneOf": [
+                      {
+                        "description": "An ordinal number that is not repeated - must be unique in the collection context.",
+                        "type": "integer"
+                      },
+                      {
+                        "description": "A unique string",
+                        "format": "uri",
+                        "maxLength": 256,
+                        "type": "string"
+                      },
+                      {
+                        "allOf": [
+                          {
+                            "description": "Format pattern according to IETF RFC 4122.",
+                            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                            "type": "string"
+                          },
+                          {
+                            "description": "A UUID"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "p": {
+                    "description": "Specifies the framework policies on the Resource referenced by the target URI",
+                    "properties": {
+                      "bm": {
+                        "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "bm"
                     ],
+                    "type": "object"
+                  },
+                  "rel": {
+                    "description": "The relation of the target URI referenced by the link to the context URI",
+                    "oneOf": [
+                      {
+                        "default": [
+                          "hosts"
+                        ],
+                        "items": {
+                          "maxLength": 64,
+                          "type": "string"
+                        },
+                        "minItems": 1,
+                        "type": "array"
+                      },
+                      {
+                        "default": "hosts",
+                        "maxLength": 64,
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "rt": {
+                    "description": "Resource Type of the Resource",
                     "items": {
                       "maxLength": 64,
                       "type": "string"
@@ -623,51 +705,42 @@
                     "minItems": 1,
                     "type": "array"
                   },
-                  {
-                    "default": "hosts",
+                  "title": {
+                    "description": "A title for the link relation. Can be used by the UI to provide a context.",
                     "maxLength": 64,
                     "type": "string"
+                  },
+                  "type": {
+                    "default": "application/cbor",
+                    "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
+                    "items": {
+                      "maxLength": 64,
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "type": "array"
                   }
-                ]
-              },
-              "rt": {
-                "description": "Resource Type",
-                "items": {
-                  "maxLength": 64,
-                  "type": "string"
                 },
-                "minItems": 1,
-                "type": "array"
+                "required": [
+                  "href",
+                  "rt",
+                  "if"
+                ],
+                "type": "object"
               },
-              "title": {
-                "description": "A title for the link relation. Can be used by the UI to provide a context",
-                "maxLength": 64,
-                "type": "string"
-              },
-              "type": {
-                "default": "application/cbor",
-                "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting",
-                "items": {
-                  "maxLength": 64,
-                  "type": "string"
-                },
-                "minItems": 1,
-                "type": "array"
+              {
+                "description": "OCF link that points to a resource"
               }
-            },
-            "required": [
-              "href",
-              "rt",
-              "if"
-            ],
-            "type": "string"
+            ]
           },
           "n": {
-            "description": "Used to name the Scene collection",
+            "description": "Friendly name of the resource",
+            "maxLength": 64,
+            "readOnly": true,
             "type": "string"
           },
           "rt": {
-            "description": "Resource Type",
+            "description": "Resource Type of the Resource",
             "items": {
               "maxLength": 64,
               "type": "string"
@@ -686,133 +759,140 @@
     ,
     "SceneCollection" : 
             {
-        "properties": {
-          "id": {
-            "description": "A unique string that could be a hash or similarly unique",
-            "type": "string"
-          },
-          "if": {
-            "description": "The interface set supported by this resource",
-            "items": {
-              "enum": [
-                "oic.if.baseline",
-                "oic.if.ll",
-                "oic.if.b",
-                "oic.if.lb",
-                "oic.if.rw",
-                "oic.if.r",
-                "oic.if.a",
-                "oic.if.s"
-              ],
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "lastScene": {
-            "description": "Last selected Scene, shall be part of sceneValues",
-            "type": "string"
-          },
-          "links": {
-            "description": "Array of OIC web links that are reference from this collection",
-            "items": {
-              "allOf": [
-                {
-                  "properties": {
-                    "anchor": {
-                      "description": "This is used to override the context URI e.g. override the URI of the containing collection",
-                      "format": "uri",
-                      "maxLength": 256,
-                      "type": "string"
-                    },
-                    "di": {
-                      "description": "Unique identifier for device (UUID)",
-                      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                      "type": "string"
-                    },
-                    "eps": {
-                      "description": "the Endpoint information of the target Resource",
-                      "items": {
-                        "properties": {
-                          "ep": {
-                            "description": "URI with Transport Protocol Suites + Endpoint Locator as specified in 10.2.1",
-                            "format": "uri",
-                            "type": "string"
-                          },
-                          "pri": {
-                            "description": "The priority among multiple Endpoints as specified in 10.2.3",
-                            "minimum": 1,
-                            "type": "integer"
-                          }
-                        },
-                        "type": "object"
-                      },
-                      "type": "array"
-                    },
-                    "href": {
-                      "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
-                      "format": "uri",
-                      "maxLength": 256,
-                      "type": "string"
-                    },
-                    "if": {
-                      "description": "The interface set supported by this resource",
-                      "items": {
-                        "enum": [
-                          "oic.if.baseline",
-                          "oic.if.ll",
-                          "oic.if.b",
-                          "oic.if.rw",
-                          "oic.if.r",
-                          "oic.if.a",
-                          "oic.if.s"
-                        ],
-                        "type": "string"
-                      },
-                      "minItems": 1,
-                      "type": "array"
-                    },
-                    "ins": {
-                      "description": "The instance identifier for this web link in an array of web links - used in collections",
-                      "oneOf": [
-                        {
-                          "description": "An ordinal number that is not repeated - must be unique in the collection context",
-                          "type": "integer"
-                        },
-                        {
-                          "description": "Any unique string including a URI",
+        "allOf": [
+          {
+            "description": "A collection is a set of links along with additional properties to describe the collection itself",
+            "properties": {
+              "links": {
+                "description": "All forms of links in a collection.",
+                "oneOf": [
+                  {
+                    "description": "A set of simple or individual OIC Links.",
+                    "items": {
+                      "properties": {
+                        "anchor": {
+                          "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
                           "format": "uri",
                           "maxLength": 256,
                           "type": "string"
                         },
-                        {
-                          "description": "Unique identifier (UUID)",
-                          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                        "di": {
+                          "allOf": [
+                            {
+                              "description": "Format pattern according to IETF RFC 4122.",
+                              "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                              "type": "string"
+                            },
+                            {
+                              "description": "The device ID"
+                            }
+                          ]
+                        },
+                        "eps": {
+                          "description": "the Endpoint information of the target Resource",
+                          "items": {
+                            "properties": {
+                              "ep": {
+                                "description": "Transport Protocol Suite + Endpoint Locator",
+                                "format": "uri",
+                                "type": "string"
+                              },
+                              "pri": {
+                                "description": "The priority among multiple Endpoints",
+                                "minimum": 1,
+                                "type": "integer"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "href": {
+                          "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
+                          "format": "uri",
+                          "maxLength": 256,
                           "type": "string"
-                        }
-                      ]
-                    },
-                    "p": {
-                      "description": "Specifies the framework policies on the Resource referenced by the target URI",
-                      "properties": {
-                        "bm": {
-                          "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
-                          "type": "integer"
-                        }
-                      },
-                      "required": [
-                        "bm"
-                      ],
-                      "type": "object"
-                    },
-                    "rel": {
-                      "description": "The relation of the target URI referenced by the link to the context URI",
-                      "oneOf": [
-                        {
-                          "default": [
-                            "hosts"
+                        },
+                        "if": {
+                          "description": "The interface set supported by this resource",
+                          "items": {
+                            "enum": [
+                              "oic.if.baseline",
+                              "oic.if.ll",
+                              "oic.if.b",
+                              "oic.if.rw",
+                              "oic.if.r",
+                              "oic.if.a",
+                              "oic.if.s"
+                            ],
+                            "type": "string"
+                          },
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        "ins": {
+                          "description": "The instance identifier for this web link in an array of web links - used in collections",
+                          "oneOf": [
+                            {
+                              "description": "An ordinal number that is not repeated - must be unique in the collection context.",
+                              "type": "integer"
+                            },
+                            {
+                              "description": "A unique string",
+                              "format": "uri",
+                              "maxLength": 256,
+                              "type": "string"
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "description": "Format pattern according to IETF RFC 4122.",
+                                  "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                                  "type": "string"
+                                },
+                                {
+                                  "description": "A UUID"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "p": {
+                          "description": "Specifies the framework policies on the Resource referenced by the target URI",
+                          "properties": {
+                            "bm": {
+                              "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "bm"
                           ],
+                          "type": "object"
+                        },
+                        "rel": {
+                          "description": "The relation of the target URI referenced by the link to the context URI",
+                          "oneOf": [
+                            {
+                              "default": [
+                                "hosts"
+                              ],
+                              "items": {
+                                "maxLength": 64,
+                                "type": "string"
+                              },
+                              "minItems": 1,
+                              "type": "array"
+                            },
+                            {
+                              "default": "hosts",
+                              "maxLength": 64,
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "rt": {
+                          "description": "Resource Type of the Resource",
                           "items": {
                             "maxLength": 64,
                             "type": "string"
@@ -820,84 +900,120 @@
                           "minItems": 1,
                           "type": "array"
                         },
-                        {
-                          "default": "hosts",
+                        "title": {
+                          "description": "A title for the link relation. Can be used by the UI to provide a context.",
                           "maxLength": 64,
                           "type": "string"
+                        },
+                        "type": {
+                          "default": "application/cbor",
+                          "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
+                          "items": {
+                            "maxLength": 64,
+                            "type": "string"
+                          },
+                          "minItems": 1,
+                          "type": "array"
                         }
-                      ]
-                    },
-                    "rt": {
-                      "description": "Resource Type",
-                      "items": {
-                        "maxLength": 64,
-                        "type": "string"
                       },
-                      "minItems": 1,
-                      "type": "array"
+                      "required": [
+                        "href",
+                        "rt",
+                        "if"
+                      ],
+                      "type": "object"
                     },
-                    "title": {
-                      "description": "A title for the link relation. Can be used by the UI to provide a context",
+                    "type": "array"
+                  }
+                ]
+              },
+              "rts": {
+                "allOf": [
+                  {
+                    "description": "Resource Type of the Resource",
+                    "items": {
                       "maxLength": 64,
                       "type": "string"
                     },
-                    "type": {
-                      "default": "application/cbor",
-                      "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting",
-                      "items": {
-                        "maxLength": 64,
-                        "type": "string"
-                      },
-                      "minItems": 1,
-                      "type": "array"
-                    }
+                    "minItems": 1,
+                    "readOnly": true,
+                    "type": "array"
                   },
-                  "required": [
-                    "href",
-                    "rt",
-                    "if"
+                  {
+                    "description": "The list of allowable resource types (for Target and anchors) in links included in the collection"
+                  }
+                ]
+              }
+            },
+            "type": "object"
+          },
+          {
+            "properties": {
+              "id": {
+                "anyOf": [
+                  {
+                    "maxLength": 64,
+                    "type": "string"
+                  },
+                  {
+                    "description": "Format pattern according to IETF RFC 4122.",
+                    "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                    "type": "string"
+                  }
+                ],
+                "description": "Instance ID of this specific resource",
+                "readOnly": true
+              },
+              "if": {
+                "description": "The interface set supported by this resource",
+                "items": {
+                  "enum": [
+                    "oic.if.baseline",
+                    "oic.if.ll",
+                    "oic.if.b",
+                    "oic.if.lb",
+                    "oic.if.rw",
+                    "oic.if.r",
+                    "oic.if.a",
+                    "oic.if.s"
                   ],
-                  "type": "object"
+                  "type": "string"
                 },
-                {
-                  "required": [
-                    "ins"
-                  ]
-                }
-              ]
-            },
-            "type": "array"
-          },
-          "n": {
-            "description": "Used to name the Scene collection",
-            "type": "string"
-          },
-          "rt": {
-            "description": "Resource Type",
-            "items": {
-              "maxLength": 64,
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "rts": {
-            "description": "Defines the list of allowable resource types in links included in the collection; new links being created can only be from this list",
-            "items": {
-              "maxLength": 64,
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "sceneValues": {
-            "description": "All available scene values",
-            "readOnly": true,
-            "type": "string"
+                "minItems": 1,
+                "readOnly": true,
+                "type": "array"
+              },
+              "lastScene": {
+                "description": "Last selected Scene from the set of sceneValues",
+                "type": "string"
+              },
+              "n": {
+                "description": "Friendly name of the resource",
+                "maxLength": 64,
+                "readOnly": true,
+                "type": "string"
+              },
+              "rt": {
+                "description": "Resource Type of the Resource",
+                "items": {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                "minItems": 1,
+                "readOnly": true,
+                "type": "array"
+              },
+              "sceneValues": {
+                "description": "All available scene values",
+                "items": {
+                  "type": "string"
+                },
+                "readOnly": true,
+                "type": "array"
+              }
+            }
           }
-        },
+        ],
         "required": [
           "lastScene",
           "sceneValues",
@@ -910,133 +1026,140 @@
     ,
     "SceneCollectionUpdate" : 
             {
-        "properties": {
-          "id": {
-            "description": "A unique string that could be a hash or similarly unique",
-            "type": "string"
-          },
-          "if": {
-            "description": "The interface set supported by this resource",
-            "items": {
-              "enum": [
-                "oic.if.baseline",
-                "oic.if.ll",
-                "oic.if.b",
-                "oic.if.lb",
-                "oic.if.rw",
-                "oic.if.r",
-                "oic.if.a",
-                "oic.if.s"
-              ],
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "lastScene": {
-            "description": "Last selected Scene, shall be part of sceneValues",
-            "type": "string"
-          },
-          "links": {
-            "description": "Array of OIC web links that are reference from this collection",
-            "items": {
-              "allOf": [
-                {
-                  "properties": {
-                    "anchor": {
-                      "description": "This is used to override the context URI e.g. override the URI of the containing collection",
-                      "format": "uri",
-                      "maxLength": 256,
-                      "type": "string"
-                    },
-                    "di": {
-                      "description": "Unique identifier for device (UUID)",
-                      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                      "type": "string"
-                    },
-                    "eps": {
-                      "description": "the Endpoint information of the target Resource",
-                      "items": {
-                        "properties": {
-                          "ep": {
-                            "description": "URI with Transport Protocol Suites + Endpoint Locator as specified in 10.2.1",
-                            "format": "uri",
-                            "type": "string"
-                          },
-                          "pri": {
-                            "description": "The priority among multiple Endpoints as specified in 10.2.3",
-                            "minimum": 1,
-                            "type": "integer"
-                          }
-                        },
-                        "type": "object"
-                      },
-                      "type": "array"
-                    },
-                    "href": {
-                      "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
-                      "format": "uri",
-                      "maxLength": 256,
-                      "type": "string"
-                    },
-                    "if": {
-                      "description": "The interface set supported by this resource",
-                      "items": {
-                        "enum": [
-                          "oic.if.baseline",
-                          "oic.if.ll",
-                          "oic.if.b",
-                          "oic.if.rw",
-                          "oic.if.r",
-                          "oic.if.a",
-                          "oic.if.s"
-                        ],
-                        "type": "string"
-                      },
-                      "minItems": 1,
-                      "type": "array"
-                    },
-                    "ins": {
-                      "description": "The instance identifier for this web link in an array of web links - used in collections",
-                      "oneOf": [
-                        {
-                          "description": "An ordinal number that is not repeated - must be unique in the collection context",
-                          "type": "integer"
-                        },
-                        {
-                          "description": "Any unique string including a URI",
+        "allOf": [
+          {
+            "description": "A collection is a set of links along with additional properties to describe the collection itself",
+            "properties": {
+              "links": {
+                "description": "All forms of links in a collection.",
+                "oneOf": [
+                  {
+                    "description": "A set of simple or individual OIC Links.",
+                    "items": {
+                      "properties": {
+                        "anchor": {
+                          "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
                           "format": "uri",
                           "maxLength": 256,
                           "type": "string"
                         },
-                        {
-                          "description": "Unique identifier (UUID)",
-                          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                        "di": {
+                          "allOf": [
+                            {
+                              "description": "Format pattern according to IETF RFC 4122.",
+                              "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                              "type": "string"
+                            },
+                            {
+                              "description": "The device ID"
+                            }
+                          ]
+                        },
+                        "eps": {
+                          "description": "the Endpoint information of the target Resource",
+                          "items": {
+                            "properties": {
+                              "ep": {
+                                "description": "Transport Protocol Suite + Endpoint Locator",
+                                "format": "uri",
+                                "type": "string"
+                              },
+                              "pri": {
+                                "description": "The priority among multiple Endpoints",
+                                "minimum": 1,
+                                "type": "integer"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "href": {
+                          "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
+                          "format": "uri",
+                          "maxLength": 256,
                           "type": "string"
-                        }
-                      ]
-                    },
-                    "p": {
-                      "description": "Specifies the framework policies on the Resource referenced by the target URI",
-                      "properties": {
-                        "bm": {
-                          "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
-                          "type": "integer"
-                        }
-                      },
-                      "required": [
-                        "bm"
-                      ],
-                      "type": "object"
-                    },
-                    "rel": {
-                      "description": "The relation of the target URI referenced by the link to the context URI",
-                      "oneOf": [
-                        {
-                          "default": [
-                            "hosts"
+                        },
+                        "if": {
+                          "description": "The interface set supported by this resource",
+                          "items": {
+                            "enum": [
+                              "oic.if.baseline",
+                              "oic.if.ll",
+                              "oic.if.b",
+                              "oic.if.rw",
+                              "oic.if.r",
+                              "oic.if.a",
+                              "oic.if.s"
+                            ],
+                            "type": "string"
+                          },
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        "ins": {
+                          "description": "The instance identifier for this web link in an array of web links - used in collections",
+                          "oneOf": [
+                            {
+                              "description": "An ordinal number that is not repeated - must be unique in the collection context.",
+                              "type": "integer"
+                            },
+                            {
+                              "description": "A unique string",
+                              "format": "uri",
+                              "maxLength": 256,
+                              "type": "string"
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "description": "Format pattern according to IETF RFC 4122.",
+                                  "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                                  "type": "string"
+                                },
+                                {
+                                  "description": "A UUID"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "p": {
+                          "description": "Specifies the framework policies on the Resource referenced by the target URI",
+                          "properties": {
+                            "bm": {
+                              "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "bm"
                           ],
+                          "type": "object"
+                        },
+                        "rel": {
+                          "description": "The relation of the target URI referenced by the link to the context URI",
+                          "oneOf": [
+                            {
+                              "default": [
+                                "hosts"
+                              ],
+                              "items": {
+                                "maxLength": 64,
+                                "type": "string"
+                              },
+                              "minItems": 1,
+                              "type": "array"
+                            },
+                            {
+                              "default": "hosts",
+                              "maxLength": 64,
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "rt": {
+                          "description": "Resource Type of the Resource",
                           "items": {
                             "maxLength": 64,
                             "type": "string"
@@ -1044,84 +1167,112 @@
                           "minItems": 1,
                           "type": "array"
                         },
-                        {
-                          "default": "hosts",
+                        "title": {
+                          "description": "A title for the link relation. Can be used by the UI to provide a context.",
                           "maxLength": 64,
                           "type": "string"
+                        },
+                        "type": {
+                          "default": "application/cbor",
+                          "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
+                          "items": {
+                            "maxLength": 64,
+                            "type": "string"
+                          },
+                          "minItems": 1,
+                          "type": "array"
                         }
-                      ]
-                    },
-                    "rt": {
-                      "description": "Resource Type",
-                      "items": {
-                        "maxLength": 64,
-                        "type": "string"
                       },
-                      "minItems": 1,
-                      "type": "array"
+                      "required": [
+                        "href",
+                        "rt",
+                        "if"
+                      ],
+                      "type": "object"
                     },
-                    "title": {
-                      "description": "A title for the link relation. Can be used by the UI to provide a context",
+                    "type": "array"
+                  }
+                ]
+              },
+              "rts": {
+                "allOf": [
+                  {
+                    "description": "Resource Type of the Resource",
+                    "items": {
                       "maxLength": 64,
                       "type": "string"
                     },
-                    "type": {
-                      "default": "application/cbor",
-                      "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting",
-                      "items": {
-                        "maxLength": 64,
-                        "type": "string"
-                      },
-                      "minItems": 1,
-                      "type": "array"
-                    }
+                    "minItems": 1,
+                    "readOnly": true,
+                    "type": "array"
                   },
-                  "required": [
-                    "href",
-                    "rt",
-                    "if"
+                  {
+                    "description": "The list of allowable resource types (for Target and anchors) in links included in the collection"
+                  }
+                ]
+              }
+            },
+            "type": "object"
+          },
+          {
+            "properties": {
+              "id": {
+                "anyOf": [
+                  {
+                    "maxLength": 64,
+                    "type": "string"
+                  },
+                  {
+                    "description": "Format pattern according to IETF RFC 4122.",
+                    "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                    "type": "string"
+                  }
+                ],
+                "description": "Instance ID of this specific resource",
+                "readOnly": true
+              },
+              "if": {
+                "description": "The interface set supported by this resource",
+                "items": {
+                  "enum": [
+                    "oic.if.baseline",
+                    "oic.if.ll",
+                    "oic.if.b",
+                    "oic.if.lb",
+                    "oic.if.rw",
+                    "oic.if.r",
+                    "oic.if.a",
+                    "oic.if.s"
                   ],
-                  "type": "object"
+                  "type": "string"
                 },
-                {
-                  "required": [
-                    "ins"
-                  ]
-                }
-              ]
-            },
-            "type": "array"
-          },
-          "n": {
-            "description": "Used to name the Scene collection",
-            "type": "string"
-          },
-          "rt": {
-            "description": "Resource Type",
-            "items": {
-              "maxLength": 64,
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "rts": {
-            "description": "Defines the list of allowable resource types in links included in the collection; new links being created can only be from this list",
-            "items": {
-              "maxLength": 64,
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "sceneValues": {
-            "description": "All available scene values",
-            "readOnly": true,
-            "type": "string"
+                "minItems": 1,
+                "readOnly": true,
+                "type": "array"
+              },
+              "lastScene": {
+                "description": "Last selected Scene from the set of sceneValues",
+                "type": "string"
+              },
+              "n": {
+                "description": "Friendly name of the resource",
+                "maxLength": 64,
+                "readOnly": true,
+                "type": "string"
+              },
+              "rt": {
+                "description": "Resource Type of the Resource",
+                "items": {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                "minItems": 1,
+                "readOnly": true,
+                "type": "array"
+              }
+            }
           }
-        },
+        ],
         "required": [
           "lastScene"
         ],

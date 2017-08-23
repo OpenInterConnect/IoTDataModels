@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "OCF Platform Configuration",
+    "title": "Platform Configuration",
     "version": "v1-20160622",
     "license": {
       "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
@@ -81,10 +81,19 @@
             {
         "properties": {
           "id": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "type": "string"
+              },
+              {
+                "description": "Format pattern according to IETF RFC 4122.",
+                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                "type": "string"
+              }
+            ],
             "description": "Instance ID of this specific resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
+            "readOnly": true
           },
           "if": {
             "description": "The interface set supported by this resource",
@@ -110,12 +119,19 @@
             "items": {
               "properties": {
                 "language": {
-                  "description": "An RFC 5646 language tag.",
-                  "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
-                  "type": "string"
+                  "allOf": [
+                    {
+                      "description": "Format pattern according to IETF RFC 5646 (language tag).",
+                      "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
+                      "type": "string"
+                    },
+                    {
+                      "description": "An RFC 5646 language tag."
+                    }
+                  ]
                 },
                 "value": {
-                  "description": "Platform description in the indicated language.",
+                  "description": "The Platform description in the indicated language.",
                   "maxLength": 64,
                   "type": "string"
                 }
@@ -132,7 +148,7 @@
             "type": "string"
           },
           "rt": {
-            "description": "Resource Type",
+            "description": "Resource Type of the Resource",
             "items": {
               "maxLength": 64,
               "type": "string"
@@ -150,10 +166,19 @@
             {
         "properties": {
           "id": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "type": "string"
+              },
+              {
+                "description": "Format pattern according to IETF RFC 4122.",
+                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                "type": "string"
+              }
+            ],
             "description": "Instance ID of this specific resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
+            "readOnly": true
           },
           "if": {
             "description": "The interface set supported by this resource",
@@ -179,12 +204,19 @@
             "items": {
               "properties": {
                 "language": {
-                  "description": "An RFC 5646 language tag.",
-                  "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
-                  "type": "string"
+                  "allOf": [
+                    {
+                      "description": "Format pattern according to IETF RFC 5646 (language tag).",
+                      "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
+                      "type": "string"
+                    },
+                    {
+                      "description": "An RFC 5646 language tag."
+                    }
+                  ]
                 },
                 "value": {
-                  "description": "Platform description in the indicated language.",
+                  "description": "The Platform description in the indicated language.",
                   "maxLength": 64,
                   "type": "string"
                 }
@@ -200,7 +232,7 @@
             "type": "string"
           },
           "rt": {
-            "description": "Resource Type",
+            "description": "Resource Type of the Resource",
             "items": {
               "maxLength": 64,
               "type": "string"
