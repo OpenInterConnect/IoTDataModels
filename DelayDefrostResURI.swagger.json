@@ -14,7 +14,7 @@
   "paths": {
     "/DelayDefrostResURI" : {
       "get": {
-        "description": "This resource describes the delay defrost function as defined by the US Energy Star Specifications.\nSee Energy Star Refrigerator Requirements Version 5 Section 4)G\n(https://www.energystar.gov/sites/default/files/specs//private/ENERGY%20STAR%20Final%20Version%205.0%20Residential%20Refrigerators%20and%20Freezers%20Program%20Requirements.pdf)\nThe status is a boolean indicating whether the function is on, if off then defrost is scheduled as part of normal device operation.\nstartTime, from oir.r.time.period (mandatory) is an ISO8601 encoded start time for the interval in which defrost shall not occur.\nstopTime, from oic.r.time.period is an ISO8601 encoded stop time for the interval in which defrost shall not occur.\ninterval, from oic.r.time.period with additional range restrictions is the time in minutes of the period that starts at starttime (if not present the default is 240).\nstopTime and interval are mutually exlusive; they cannot both be present in a Resource instance\nRetrieves the current Delay Defrost function status\n",
+        "description": "This resource describes the delay defrost function as defined by the US Energy Star Specifications.\nSee Energy Star Refrigerator Requirements Version 5 Section 4)G\n(https://www.energystar.gov/sites/default/files/specs//private/ENERGY%20STAR%20Final%20Version%205.0%20Residential%20Refrigerators%20and%20Freezers%20Program%20Requirements.pdf)\nThe status is a boolean indicating whether the function is on, if off then defrost is scheduled as part of normal device operation.\nstartTime, from oir.r.time.period (mandatory) is an ISO8601 encoded start time for the interval in which defrost shall not occur.\nstopTime, from oic.r.time.period is an ISO8601 encoded stop time for the interval in which defrost shall not occur.\ninterval, from oic.r.time.period with additional range restrictions is the time in minutes of the period that starts at starttime (if not present the default is 240).\nstopTime and interval are mutually exclusive; they cannot both be present in a Resource instance\nRetrieves the current Delay Defrost function status\n",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -91,102 +91,128 @@
   "definitions": {
     "DelayDefrost" : 
             {
-        "allOf": [
-          {
-            "properties": {
-              "interval": {
-                "description": "Time interval in minutes after the startTime, if present stopTime cannot be present",
-                "type": "integer"
-              },
-              "startTime": {
-                "description": "Start time for the time period",
-                "type": "string"
-              },
-              "stopTime": {
-                "description": "Stop time for the time period, if present interval cannot be present",
-                "type": "string"
-              }
-            },
-            "required": [
-              "startTime"
-            ],
-            "type": "object"
+        "properties": {
+          "id": {
+            "description": "Instance ID of this specific resource",
+            "maxLength": 64,
+            "readOnly": true,
+            "type": "string"
           },
-          {
-            "properties": {
-              "interval": {
-                "default": 240,
-                "description": "Defrost interval as defined by Energy Star",
-                "maximum": 1440,
-                "minimum": 1,
+          "if": {
+            "description": "The interface set supported by this resource",
+            "items": {
+              "enum": [
+                "oic.if.baseline",
+                "oic.if.ll",
+                "oic.if.b",
+                "oic.if.lb",
+                "oic.if.rw",
+                "oic.if.r",
+                "oic.if.a",
+                "oic.if.s"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "readOnly": true,
+            "type": "array"
+          },
+          "interval": {
+            "default": 240,
+            "description": "Defrost interval as defined by Energy Star",
+            "maximum": 1440,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "n": {
+            "description": "Friendly name of the resource",
+            "maxLength": 64,
+            "readOnly": true,
+            "type": "string"
+          },
+          "precision": {
+            "description": "Accuracy granularity of the exposed value",
+            "readOnly": true,
+            "type": "number"
+          },
+          "range": {
+            "description": "The valid range for the value Property",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "readOnly": true,
+            "type": "array"
+          },
+          "rt": {
+            "description": "Resource Type",
+            "items": {
+              "maxLength": 64,
+              "type": "string"
+            },
+            "minItems": 1,
+            "readOnly": true,
+            "type": "array"
+          },
+          "startTime": {
+            "description": "Start time for the time period",
+            "type": "string"
+          },
+          "status": {
+            "description": "Indicates whether any supported delay defrost function is active",
+            "type": "boolean"
+          },
+          "step": {
+            "anyOf": [
+              {
                 "type": "integer"
               },
-              "precision": {
-                "description": "Accuracy granularity of the exposed value",
-                "readOnly": true,
+              {
                 "type": "number"
-              },
-              "range": {
-                "description": "The valid range for the value Property",
-                "items": {
-                  "anyOf": [
-                    {
-                      "type": "number"
-                    },
-                    {
-                      "type": "integer"
-                    }
-                  ]
-                },
-                "maxItems": 2,
-                "minItems": 2,
-                "readOnly": true,
+              }
+            ],
+            "description": "Step value across the defined range",
+            "readOnly": true
+          },
+          "stopTime": {
+            "description": "Stop time for the time period, if present interval cannot be present",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
                 "type": "array"
               },
-              "status": {
-                "description": "Indicates whether any supported delay defrost function is active",
+              {
+                "type": "string"
+              },
+              {
                 "type": "boolean"
               },
-              "step": {
-                "anyOf": [
-                  {
-                    "type": "integer"
-                  },
-                  {
-                    "type": "number"
-                  }
-                ],
-                "description": "Step value across the defined range",
-                "readOnly": true
+              {
+                "type": "integer"
               },
-              "value": {
-                "anyOf": [
-                  {
-                    "type": "array"
-                  },
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "boolean"
-                  },
-                  {
-                    "type": "integer"
-                  },
-                  {
-                    "type": "number"
-                  },
-                  {
-                    "type": "object"
-                  }
-                ],
-                "description": "The value sensed or actuated by this Resource"
+              {
+                "type": "number"
+              },
+              {
+                "type": "object"
               }
-            },
-            "required": [
-              "status"
-            ]
+            ],
+            "description": "The value sensed or actuated by this Resource"
           }
+        },
+        "required": [
+          "startTime",
+          "status"
         ],
         "type": "object"
       }

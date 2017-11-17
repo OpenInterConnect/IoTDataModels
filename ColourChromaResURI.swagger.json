@@ -84,58 +84,141 @@
   "definitions": {
     "ColourChroma" : 
             {
-        "allOf": [
-          {
-            "properties": {
-              "hue": {
-                "description": "Hue angle as defined by the CIECAM02 model definition",
-                "maximum": 360,
-                "minimum": 0,
-                "type": "number"
-              },
-              "maximumsaturation": {
-                "description": "Maximum supported value of Saturation for this Device",
-                "maximum": 32767,
-                "minimum": 0,
-                "readOnly": true,
-                "type": "integer"
-              },
-              "saturation": {
-                "description": "Saturation as defined by the CIECAM02 model definition",
-                "maximum": 32767,
-                "minimum": 0,
-                "type": "integer"
-              }
+        "properties": {
+          "csc": {
+            "description": "X and Y coordinates of the colour in CIE colour space",
+            "items": {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
             },
-            "type": "object"
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array"
           },
-          {
-            "properties": {
-              "csc": {
-                "description": "X and Y coordinates of the colour in CIE colour space",
-                "items": {
-                  "maximum": 1,
-                  "minimum": 0,
+          "ct": {
+            "description": "Mired colour temperature",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "hue": {
+            "description": "Hue angle as defined by the CIECAM02 model definition",
+            "maximum": 360,
+            "minimum": 0,
+            "type": "number"
+          },
+          "id": {
+            "description": "Instance ID of this specific resource",
+            "maxLength": 64,
+            "readOnly": true,
+            "type": "string"
+          },
+          "if": {
+            "description": "The interface set supported by this resource",
+            "items": {
+              "enum": [
+                "oic.if.baseline",
+                "oic.if.ll",
+                "oic.if.b",
+                "oic.if.lb",
+                "oic.if.rw",
+                "oic.if.r",
+                "oic.if.a",
+                "oic.if.s"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "readOnly": true,
+            "type": "array"
+          },
+          "maximumsaturation": {
+            "description": "Maximum supported value of Saturation for this Device",
+            "maximum": 32767,
+            "minimum": 0,
+            "readOnly": true,
+            "type": "integer"
+          },
+          "n": {
+            "description": "Friendly name of the resource",
+            "maxLength": 64,
+            "readOnly": true,
+            "type": "string"
+          },
+          "precision": {
+            "description": "Accuracy granularity of the exposed value",
+            "readOnly": true,
+            "type": "number"
+          },
+          "range": {
+            "description": "The valid range for the value Property",
+            "items": {
+              "anyOf": [
+                {
                   "type": "number"
                 },
-                "maxItems": 2,
-                "minItems": 2,
-                "type": "array"
-              }
+                {
+                  "type": "integer"
+                }
+              ]
             },
-            "type": "object"
+            "maxItems": 2,
+            "minItems": 2,
+            "readOnly": true,
+            "type": "array"
           },
-          {
-            "properties": {
-              "ct": {
-                "description": "Mired colour temperature",
-                "minimum": 0,
-                "type": "integer"
-              }
+          "rt": {
+            "description": "Resource Type",
+            "items": {
+              "maxLength": 64,
+              "type": "string"
             },
-            "type": "object"
+            "minItems": 1,
+            "readOnly": true,
+            "type": "array"
+          },
+          "saturation": {
+            "description": "Saturation as defined by the CIECAM02 model definition",
+            "maximum": 32767,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "step": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "description": "Step value across the defined range",
+            "readOnly": true
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "description": "The value sensed or actuated by this Resource"
           }
-        ],
+        },
         "required": [
           "hue",
           "saturation",

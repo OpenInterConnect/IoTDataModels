@@ -83,31 +83,6 @@
           }
         ],
         "properties": {
-          "id": {
-            "description": "Instance ID of this specific resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "if": {
-            "description": "The interface set supported by this resource",
-            "items": {
-              "enum": [
-                "oic.if.baseline",
-                "oic.if.ll",
-                "oic.if.b",
-                "oic.if.lb",
-                "oic.if.rw",
-                "oic.if.r",
-                "oic.if.a",
-                "oic.if.s"
-              ],
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
           "maxnotifyperiod": {
             "description": "Maximum elapsed time in ms before a notification must be sent.",
             "minimum": 0,
@@ -117,22 +92,6 @@
             "description": "Minimum elapsed time in ms before a notification is sent.",
             "minimum": 0,
             "type": "integer"
-          },
-          "n": {
-            "description": "Friendly name of the resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "rt": {
-            "description": "Resource Type",
-            "items": {
-              "maxLength": 64,
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
           },
           "threshold": {
             "description": "Amount by which the measured value must change before a notification is sent.",
