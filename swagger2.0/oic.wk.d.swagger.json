@@ -50,34 +50,20 @@
             {
         "properties": {
           "di": {
-            "allOf": [
-              {
-                "description": "Format pattern according to IETF RFC 4122.",
-                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                "type": "string"
-              },
-              {
-                "description": "Unique identifier for device",
-                "readOnly": true
-              }
-            ]
+            "description": "Unique identifier for device",
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+            "readOnly": true,
+            "type": "string"
           },
           "dmn": {
             "description": "Manufacturer Name.",
             "items": {
               "properties": {
                 "language": {
-                  "allOf": [
-                    {
-                      "description": "Format pattern according to IETF RFC 5646 (language tag).",
-                      "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
-                      "type": "string"
-                    },
-                    {
-                      "description": "An RFC 5646 language tag.",
-                      "readOnly": true
-                    }
-                  ]
+                  "description": "An RFC 5646 language tag.",
+                  "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
+                  "readOnly": true,
+                  "type": "string"
                 },
                 "value": {
                   "description": "Manufacturer name in the indicated language.",
@@ -110,56 +96,15 @@
             "readOnly": true,
             "type": "string"
           },
-          "id": {
-            "anyOf": [
-              {
-                "maxLength": 64,
-                "type": "string"
-              },
-              {
-                "description": "Format pattern according to IETF RFC 4122.",
-                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                "type": "string"
-              }
-            ],
-            "description": "Instance ID of this specific resource",
-            "readOnly": true
-          },
-          "if": {
-            "description": "The interface set supported by this resource",
-            "items": {
-              "enum": [
-                "oic.if.baseline",
-                "oic.if.ll",
-                "oic.if.b",
-                "oic.if.lb",
-                "oic.if.rw",
-                "oic.if.r",
-                "oic.if.a",
-                "oic.if.s"
-              ],
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
           "ld": {
             "description": "Localized Descriptions.",
             "items": {
               "properties": {
                 "language": {
-                  "allOf": [
-                    {
-                      "description": "Format pattern according to IETF RFC 5646 (language tag).",
-                      "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
-                      "type": "string"
-                    },
-                    {
-                      "description": "An RFC 5646 language tag.",
-                      "readOnly": true
-                    }
-                  ]
+                  "description": "An RFC 5646 language tag.",
+                  "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
+                  "readOnly": true,
+                  "type": "string"
                 },
                 "value": {
                   "description": "Device description in the indicated language.",
@@ -174,34 +119,11 @@
             "readOnly": true,
             "type": "array"
           },
-          "n": {
-            "description": "Friendly name of the resource",
-            "maxLength": 64,
+          "piid": {
+            "description": "Protocol independent unique identifier for device that is immutable.",
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
             "readOnly": true,
             "type": "string"
-          },
-          "piid": {
-            "allOf": [
-              {
-                "description": "Format pattern according to IETF RFC 4122.",
-                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                "type": "string"
-              },
-              {
-                "description": "Protocol independent unique identifier for device that is immutable.",
-                "readOnly": true
-              }
-            ]
-          },
-          "rt": {
-            "description": "Resource Type of the Resource",
-            "items": {
-              "maxLength": 64,
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
           },
           "sv": {
             "description": "Software version.",

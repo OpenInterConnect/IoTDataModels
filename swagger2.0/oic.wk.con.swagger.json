@@ -95,66 +95,18 @@
             "type": "string"
           },
           "dl": {
-            "allOf": [
-              {
-                "description": "Format pattern according to IETF RFC 5646 (language tag).",
-                "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
-                "type": "string"
-              },
-              {
-                "description": "Default Language as an RFC 5646 language tag."
-              }
-            ]
-          },
-          "id": {
-            "anyOf": [
-              {
-                "maxLength": 64,
-                "type": "string"
-              },
-              {
-                "description": "Format pattern according to IETF RFC 4122.",
-                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                "type": "string"
-              }
-            ],
-            "description": "Instance ID of this specific resource",
-            "readOnly": true
-          },
-          "if": {
-            "description": "The interface set supported by this resource",
-            "items": {
-              "enum": [
-                "oic.if.baseline",
-                "oic.if.ll",
-                "oic.if.b",
-                "oic.if.lb",
-                "oic.if.rw",
-                "oic.if.r",
-                "oic.if.a",
-                "oic.if.s"
-              ],
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
+            "description": "Default Language as an RFC 5646 language tag.",
+            "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
+            "type": "string"
           },
           "ln": {
             "description": "Localized names",
             "items": {
               "properties": {
                 "language": {
-                  "allOf": [
-                    {
-                      "description": "Format pattern according to IETF RFC 5646 (language tag).",
-                      "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
-                      "type": "string"
-                    },
-                    {
-                      "description": "An RFC 5646 language tag."
-                    }
-                  ]
+                  "description": "An RFC 5646 language tag.",
+                  "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
+                  "type": "string"
                 },
                 "value": {
                   "description": "The Device name in the indicated language.",
@@ -181,26 +133,10 @@
             "maxLength": 64,
             "type": "string"
           },
-          "n": {
-            "description": "Friendly name of the resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
           "r": {
             "description": "Region",
             "maxLength": 64,
             "type": "string"
-          },
-          "rt": {
-            "description": "Resource Type of the Resource",
-            "items": {
-              "maxLength": 64,
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
           }
         },
         "required": [
@@ -219,66 +155,18 @@
             "type": "string"
           },
           "dl": {
-            "allOf": [
-              {
-                "description": "Format pattern according to IETF RFC 5646 (language tag).",
-                "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
-                "type": "string"
-              },
-              {
-                "description": "Default Language as an RFC 5646 language tag."
-              }
-            ]
-          },
-          "id": {
-            "anyOf": [
-              {
-                "maxLength": 64,
-                "type": "string"
-              },
-              {
-                "description": "Format pattern according to IETF RFC 4122.",
-                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                "type": "string"
-              }
-            ],
-            "description": "Instance ID of this specific resource",
-            "readOnly": true
-          },
-          "if": {
-            "description": "The interface set supported by this resource",
-            "items": {
-              "enum": [
-                "oic.if.baseline",
-                "oic.if.ll",
-                "oic.if.b",
-                "oic.if.lb",
-                "oic.if.rw",
-                "oic.if.r",
-                "oic.if.a",
-                "oic.if.s"
-              ],
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
+            "description": "Default Language as an RFC 5646 language tag.",
+            "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
+            "type": "string"
           },
           "ln": {
             "description": "Localized names",
             "items": {
               "properties": {
                 "language": {
-                  "allOf": [
-                    {
-                      "description": "Format pattern according to IETF RFC 5646 (language tag).",
-                      "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
-                      "type": "string"
-                    },
-                    {
-                      "description": "An RFC 5646 language tag."
-                    }
-                  ]
+                  "description": "An RFC 5646 language tag.",
+                  "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
+                  "type": "string"
                 },
                 "value": {
                   "description": "The Device name in the indicated language.",
@@ -305,25 +193,10 @@
             "maxLength": 64,
             "type": "string"
           },
-          "n": {
-            "description": "Friendly name of the resource",
-            "maxLength": 64,
-            "type": "string"
-          },
           "r": {
             "description": "Region",
             "maxLength": 64,
             "type": "string"
-          },
-          "rt": {
-            "description": "Resource Type of the Resource",
-            "items": {
-              "maxLength": 64,
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
           }
         },
         "required": [
