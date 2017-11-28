@@ -5,6 +5,15 @@
   "definitions": {
     "oic.wk.con": {
       "type": "object",
+      "anyOf": [
+        {"required": ["loc"]},
+        {"required": ["locn"]},
+        {"required": ["c"]},
+        {"required": ["r"]},
+        {"required": ["ln"]},
+        {"required": ["dl"]},
+        {"required": ["n"]}
+      ],
       "properties": {
         "loc": {
           "type": "array",
@@ -73,6 +82,5 @@
   "allOf": [
     { "$ref": "oic.core-schema.rw.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.con" }
-  ],
-  "required": ["n"]
+  ]
 }
