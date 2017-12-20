@@ -143,16 +143,9 @@
                   "type": "string"
                 },
                 "di": {
-                  "allOf": [
-                    {
-                      "description": "Format pattern according to IETF RFC 4122.",
-                      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                      "type": "string"
-                    },
-                    {
-                      "description": "The device ID"
-                    }
-                  ]
+                  "description": "The device ID",
+                  "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                  "type": "string"
                 },
                 "eps": {
                   "description": "the Endpoint information of the target Resource",
@@ -210,16 +203,9 @@
                       "type": "string"
                     },
                     {
-                      "allOf": [
-                        {
-                          "description": "Format pattern according to IETF RFC 4122.",
-                          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                          "type": "string"
-                        },
-                        {
-                          "description": "A UUID"
-                        }
-                      ]
+                      "description": "A UUID",
+                      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                      "type": "string"
                     }
                   ]
                 },
@@ -265,6 +251,94 @@
                   },
                   "minItems": 1,
                   "type": "array"
+                },
+                "tag-locn": {
+                  "description": "Location of the Resource or Device",
+                  "enum": [
+                    "attic",
+                    "balcony",
+                    "ballroom",
+                    "bathroom",
+                    "bedroom",
+                    "border",
+                    "boxroom",
+                    "cellar",
+                    "cloakroom",
+                    "conservatory",
+                    "corridor",
+                    "deck",
+                    "den",
+                    "diningroom",
+                    "drawingroom",
+                    "driveway",
+                    "dungeon",
+                    "ensuite",
+                    "entrance",
+                    "familyroom",
+                    "garage",
+                    "garden",
+                    "guestroom",
+                    "hall",
+                    "kitchen",
+                    "larder",
+                    "lawn",
+                    "library",
+                    "livingroom",
+                    "lounge",
+                    "mancave",
+                    "masterbedroom",
+                    "musicroom",
+                    "office",
+                    "pantry",
+                    "parkinglot",
+                    "parlour",
+                    "patio",
+                    "receiptionroom",
+                    "roof",
+                    "roofterrace",
+                    "sauna",
+                    "shed",
+                    "sittingroom",
+                    "snug",
+                    "spa",
+                    "studio",
+                    "suite",
+                    "swimmingpool",
+                    "toilet",
+                    "utilityroom",
+                    "ward",
+                    "vegetableplot",
+                    "terrace"
+                  ]
+                },
+                "tag-pos-desc": {
+                  "oneOf": [
+                    {
+                      "enum": [
+                        "top",
+                        "bottom",
+                        "left",
+                        "right",
+                        "centre",
+                        "topleft",
+                        "bottomleft",
+                        "centreleft",
+                        "centreright",
+                        "bottomright",
+                        "topright"
+                      ]
+                    },
+                    {
+                      "description": "Relative position; as defined by UPnP relpos, relative position against a known [0,0,0] point.",
+                      "items": {
+                        "type": "number"
+                      },
+                      "maxItems": 3,
+                      "minItems": 3,
+                      "readOnly": true,
+                      "type": "array"
+                    }
+                  ]
                 },
                 "title": {
                   "description": "A title for the link relation. Can be used by the UI to provide a context.",
@@ -333,16 +407,9 @@
             "type": "string"
           },
           "di": {
-            "allOf": [
-              {
-                "description": "Format pattern according to IETF RFC 4122.",
-                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                "type": "string"
-              },
-              {
-                "description": "The device ID"
-              }
-            ]
+            "description": "The device ID",
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+            "type": "string"
           },
           "eps": {
             "description": "the Endpoint information of the target Resource",
@@ -400,16 +467,9 @@
                 "type": "string"
               },
               {
-                "allOf": [
-                  {
-                    "description": "Format pattern according to IETF RFC 4122.",
-                    "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                    "type": "string"
-                  },
-                  {
-                    "description": "A UUID"
-                  }
-                ]
+                "description": "A UUID",
+                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                "type": "string"
               }
             ]
           },
@@ -455,6 +515,94 @@
             },
             "minItems": 1,
             "type": "array"
+          },
+          "tag-locn": {
+            "description": "Location of the Resource or Device",
+            "enum": [
+              "attic",
+              "balcony",
+              "ballroom",
+              "bathroom",
+              "bedroom",
+              "border",
+              "boxroom",
+              "cellar",
+              "cloakroom",
+              "conservatory",
+              "corridor",
+              "deck",
+              "den",
+              "diningroom",
+              "drawingroom",
+              "driveway",
+              "dungeon",
+              "ensuite",
+              "entrance",
+              "familyroom",
+              "garage",
+              "garden",
+              "guestroom",
+              "hall",
+              "kitchen",
+              "larder",
+              "lawn",
+              "library",
+              "livingroom",
+              "lounge",
+              "mancave",
+              "masterbedroom",
+              "musicroom",
+              "office",
+              "pantry",
+              "parkinglot",
+              "parlour",
+              "patio",
+              "receiptionroom",
+              "roof",
+              "roofterrace",
+              "sauna",
+              "shed",
+              "sittingroom",
+              "snug",
+              "spa",
+              "studio",
+              "suite",
+              "swimmingpool",
+              "toilet",
+              "utilityroom",
+              "ward",
+              "vegetableplot",
+              "terrace"
+            ]
+          },
+          "tag-pos-desc": {
+            "oneOf": [
+              {
+                "enum": [
+                  "top",
+                  "bottom",
+                  "left",
+                  "right",
+                  "centre",
+                  "topleft",
+                  "bottomleft",
+                  "centreleft",
+                  "centreright",
+                  "bottomright",
+                  "topright"
+                ]
+              },
+              {
+                "description": "Relative position; as defined by UPnP relpos, relative position against a known [0,0,0] point.",
+                "items": {
+                  "type": "number"
+                },
+                "maxItems": 3,
+                "minItems": 3,
+                "readOnly": true,
+                "type": "array"
+              }
+            ]
           },
           "title": {
             "description": "A title for the link relation. Can be used by the UI to provide a context.",

@@ -46,52 +46,11 @@
     "Platform" : 
             {
         "properties": {
-          "id": {
-            "anyOf": [
-              {
-                "maxLength": 64,
-                "type": "string"
-              },
-              {
-                "description": "Format pattern according to IETF RFC 4122.",
-                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                "type": "string"
-              }
-            ],
-            "description": "Instance ID of this specific resource",
-            "readOnly": true
-          },
-          "if": {
-            "description": "The interface set supported by this resource",
-            "items": {
-              "enum": [
-                "oic.if.baseline",
-                "oic.if.ll",
-                "oic.if.b",
-                "oic.if.lb",
-                "oic.if.rw",
-                "oic.if.r",
-                "oic.if.a",
-                "oic.if.s"
-              ],
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
           "mndt": {
-            "allOf": [
-              {
-                "description": "Format pattern as defined in ISO 8601. The format is [yyyy]-[mm]-[dd].",
-                "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])$",
-                "type": "string"
-              },
-              {
-                "description": "Manufacturing Date in ISO8601 format.",
-                "readOnly": true
-              }
-            ]
+            "description": "Manufacturing Date in ISO8601 format.",
+            "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])$",
+            "readOnly": true,
+            "type": "string"
           },
           "mnfv": {
             "description": "Manufacturer's firmware version",
@@ -143,34 +102,11 @@
             "readOnly": true,
             "type": "string"
           },
-          "n": {
-            "description": "Friendly name of the resource",
-            "maxLength": 64,
+          "pi": {
+            "description": "Platform Identifier",
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
             "readOnly": true,
             "type": "string"
-          },
-          "pi": {
-            "allOf": [
-              {
-                "description": "Format pattern according to IETF RFC 4122.",
-                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                "type": "string"
-              },
-              {
-                "description": "Platform Identifier",
-                "readOnly": true
-              }
-            ]
-          },
-          "rt": {
-            "description": "Resource Type of the Resource",
-            "items": {
-              "maxLength": 64,
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
           },
           "st": {
             "description": "Reference time for the device in ISO8601 format.",

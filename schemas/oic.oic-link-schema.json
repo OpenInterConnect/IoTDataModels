@@ -82,28 +82,7 @@
           "format": "uri"
         },
         "ins": {
-          "oneOf": [
-            {
-              "type": "integer",
-              "description": "An ordinal number that is not repeated - must be unique in the collection context."
-            },
-            {
-              "type": "string",
-              "maxLength": 256,
-              "format" : "uri",
-              "description": "A unique string"
-            },
-            {
-              "allOf": [
-                {
-                  "$ref": "oic.types-schema.json#/definitions/uuid"
-                },
-                {
-                  "description": "A UUID"
-                }
-              ]
-            }
-          ],
+          "type": "integer",
           "description": "The instance identifier for this web link in an array of web links - used in collections"
         },
         "type": {
