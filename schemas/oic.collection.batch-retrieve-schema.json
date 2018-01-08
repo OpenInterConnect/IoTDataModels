@@ -4,7 +4,7 @@
     "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.batch-retrieve-schema.json#",
     "title": "Collection Batch Retrieve Format",
     "definitions": {
-	  "oic.batch-retrieve.item": {
+      "oic.batch-retrieve.item": {
         "type": "object",
         "properties": {
           "href": {
@@ -22,16 +22,16 @@
               {
                 "type": "array",
                 "description": " The response payload from a collection (batch) resource",
-				"items": {
-				  "$ref": "#/definitions/oic.batch-retrieve.item"
-				}
+		"items": {
+		  "$ref": "#/definitions/oic.batch-retrieve.item"
+		}
               }
             ]
           }
         },
         "additionalProperties": true,
         "required": ["href","rep"]
-	  },
+      },
       "oic.wk.col-batch-retrieve": {
         "type": "array",
         "minItems": 1,
