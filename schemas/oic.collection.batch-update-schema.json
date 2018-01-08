@@ -4,12 +4,9 @@
     "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.batch-update-schema.json#",
     "title": "Collection Batch Update Format",
     "definitions": {
-      "oic.wk.col-batch-update": {
+      "oic.batch-update.item": {
         "description": "array of resource representations to apply to the batch collection, using href to indicate which resource(s) in the batch to update. If the href property is empty, effectively making the URI reference to the collection itself, the representation is to be applied to all resources in the batch",
-        "type": "array",
-        "minItems": 1,
-        "items": {
-          "type": "object",
+        "type": "object",
           "properties": {
             "href": {
               "type": "string",
@@ -25,13 +22,23 @@
                 },
                 {
                   "type": "array",
-                  "description": " The response payload from a collection (batch) resource"
+                  "description": " The response payload from a collection (batch) resource",
+                  "items": {
+                    "$ref": "#/definitions/oic.batch-update.item"
+                  }
                 }
               ]
             }
           },
           "additionalProperties": true,
           "required": ["href","rep"]
+        },
+       "oic.wk.col-batch-update": {
+        "description": "array of resource representations to apply to the batch collection, using href to indicate which resource(s) in the batch to update. If the href property is empty, effectively making the URI reference to the collection itself, the representation is to be applied to all resources in the batch",
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "$ref": "#definitions/oic.batch-update.item"
         }
       }
     },
