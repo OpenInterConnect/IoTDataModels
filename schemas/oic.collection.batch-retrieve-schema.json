@@ -4,33 +4,39 @@
     "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.batch-retrieve-schema.json#",
     "title": "Collection Batch Retrieve Format",
     "definitions": {
+      "oic.batch-retrieve.item": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "maxLength": 256,
+            "format": "uri",
+            "description": "URI of the target resource relative assuming the collection URI as anchor"
+          },
+          "rep": {
+            "oneOf": [
+              {
+                "type": "object",
+                "description": "The response payload from a single resource"
+              },
+              {
+                "type": "array",
+                "description": " The response payload from a collection (batch) resource",
+		"items": {
+		  "$ref": "#/definitions/oic.batch-retrieve.item"
+		}
+              }
+            ]
+          }
+        },
+        "additionalProperties": true,
+        "required": ["href","rep"]
+      },
       "oic.wk.col-batch-retrieve": {
         "type": "array",
         "minItems": 1,
         "items": {
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "maxLength": 256,
-              "format": "uri",
-              "description": "URI of the target resource relative assuming the collection URI as anchor"
-            },
-            "rep": {
-              "oneOf": [
-                {
-                  "type": "object",
-                  "description": "The response payload from a single resource"
-                },
-                {
-                  "type": "array",
-                  "description": " The response payload from a collection (batch) resource"
-                }
-              ]
-            }
-          },
-          "additionalProperties": true,
-          "required": ["href","rep"]
+          "$ref": "#/definitions/oic.batch-retrieve.item"
         }
       }
     },
