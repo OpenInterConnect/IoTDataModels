@@ -10,7 +10,7 @@
           "type": "string",
           "maxLength": 64,
           "readOnly": true,
-          "description": "The format of the MIME Type"
+          "description": "The Media Type of the icon"
         },
         "width": {
           "type": "integer",

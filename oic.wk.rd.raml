@@ -36,28 +36,12 @@ traits:
           Example:  POST /oic/rd?if=oic.if.baseline
         enum: ["oic.if.baseline"]
 
-- rddelete-di:
-    queryParameters:
-      di:
-        description: |
-          This is used to determine which set of links to operata on. (Need authentication to ensure that there is no spoofing). If instance is ommitted then the entire set of links from this device ID is deleted
-          Example: DELETE /oic/rd?di="0685B960-736F-46F7-BEC0-9E6CBD671ADC1"
-
-- rddelete-ins:
-    queryParameters:
-      ins:
-        description: |
-          Instance of the link to delete
-          Value of parameter is a string where instance to be deleted are comma separated
-          Example: DELETE /oic/rd?di="0685B960-736F-46F7-BEC0-9E6CBD671ADC1";ins="20"
-
 /oic/rd:
   displayName: Resource directory resource
   description: |
     Resource to be exposed by any Device that can act as a Resource Directory.
     1) Provides selector criteria (e.g., integer) with GET request
-    2) Publish or Update a Link in /oic/res with POST request
-    3) Delete a Link in /oic/res with DELETE request
+    2) Publish a Link in /oic/res with POST request
 
   get:
     is: [ rdgetinterface ]
@@ -81,13 +65,11 @@ traits:
   post:
     is: [ rdpostinterface ]
     description: |
-      Publish the resource information for the first time or Update the existing one in /oic/res.
+      Publish the resource information for the first time in /oic/res. Updates to existing entries are not allowed.
       Appropriates parts of the information, i.e., Links of the published Resources will be discovered through /oic/res.
-      1) When a Device first publishes a Link, the request payload to RD may include the Links without "ins" Parameter.
+      1) When a Device first publishes a Link, the request payload to RD may include the Links without an "ins" Parameter.
       2) Upon granting the request, the RD assigns a unique instance value identifying the Link among all the Links it advertises
-         and sends back the instance value in "ins" Parameter in the Link to the publishing Device.
-      3) When later the publishing Device updates the existing Link, i.e., changing its Endpoint information,
-         the request payload to RD needs to include the instance value in "ins" Parameter to identify the Link to update.
+         and sends back the instance value in the "ins" Parameter in the Link to the publishing Device.
     body:
       application/json:
         schema: rdPublish
@@ -123,9 +105,7 @@ traits:
     responses:
       200:
         description: |
-          Respond with the same schema as publish but, when a Link is first published,
-          with the additional "ins" Parameter in the Link.
-          This value is used by the receiver to manage that OCF Link instance.
+          Respond with the same schema as publish with the additional "ins" Parameter in the Link.
         body:
           application/json:
             schema: rdPublish
@@ -160,18 +140,6 @@ traits:
                 ],
                 "ttl": 600
               }
-
-  delete:
-    is: ["rddelete-di","rddelete-ins"]
-    description: |
-      Delete a particular OIC Link - the link may be a simple link or a link in a tagged set.
-    responses:
-      200:
-        description: The delete succeeded
-        body:
-          application/json:
-            example: |
-              {}
 
 # The discovery through the /oic/res of the resource directory is the same
 # as specified in 11.3.6.4.1 /oic/res and retrieving of the resources
