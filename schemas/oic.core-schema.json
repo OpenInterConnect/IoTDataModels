@@ -34,17 +34,10 @@
           "description": "Friendly name of the resource"
         },
         "id": {
-            "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 64
-                },
-                {
-                  "$ref": "oic.types-schema.json#/definitions/uuid"
-                }
-            ],
-            "readOnly": true,
-            "description": "Instance ID of this specific resource"
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Instance ID of this specific resource"
         }
       }
     }
