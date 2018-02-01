@@ -1,0 +1,26 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.pulserate.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Pulse Rate",
+  "definitions": {
+    "oic.r.pulserate": {
+      "type": "object",
+      "properties": {
+        "pulserate": {
+          "type": "integer",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Pulse rate in bpm."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.pulserate"}
+  ],
+  "required": ["pulserate"]
+}
