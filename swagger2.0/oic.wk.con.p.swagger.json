@@ -12,7 +12,7 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/example/PlatformConfigurationResURI" : {
+    "/examplePlatformConfigurationResURI" : {
       "get": {
         "description": "Resource that allows for platform specific information to be configured.\nRetrieves the current platform configuration settings\n",
         "parameters": [
@@ -77,63 +77,179 @@
     }
   },
   "definitions": {
-    "Conf_Platform" : 
-            {
-        "properties": {
-          "mnpn": {
-            "description": "Platform names",
-            "items": {
-              "properties": {
-                "language": {
-                  "description": "An RFC 5646 language tag.",
-                  "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
-                  "type": "string"
-                },
-                "value": {
-                  "description": "The Platform description in the indicated language.",
-                  "maxLength": 64,
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "minItems": 1,
-            "type": "array"
-          }
+    "Conf_Platform" : {
+      "properties": {
+        "rt" :
+                {
+          "description": "Resource Type of the Resource",
+          "items": {
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
         },
-        "type": "object"
-      }
 
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "mnpn" :
+                {
+          "description": "Platform names",
+          "items": {
+            "properties": {
+              "language": {
+                "allOf": [
+                  {
+                    "description": "Format pattern according to IETF RFC 5646 (language tag).",
+                    "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
+                    "type": "string"
+                  },
+                  {
+                    "description": "An RFC 5646 language tag."
+                  }
+                ]
+              },
+              "value": {
+                "description": "The Platform description in the indicated language.",
+                "maxLength": 64,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+
+        "id" :
+                {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        }
+    }
     ,
-    "Update_Platform" : 
-            {
-        "properties": {
-          "mnpn": {
-            "description": "Platform names",
-            "items": {
-              "properties": {
-                "language": {
-                  "description": "An RFC 5646 language tag.",
-                  "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
-                  "type": "string"
-                },
-                "value": {
-                  "description": "The Platform description in the indicated language.",
-                  "maxLength": 64,
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "minItems": 1,
-            "type": "array"
-          }
+    "Update_Platform" : {
+      "properties": {
+        "rt" :
+                {
+          "description": "Resource Type of the Resource",
+          "items": {
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
         },
-        "required": [
-          "mnpn"
-        ],
-        "type": "object"
-      }
 
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "type": "string"
+        },
+
+        "mnpn" :
+                {
+          "description": "Platform names",
+          "items": {
+            "properties": {
+              "language": {
+                "allOf": [
+                  {
+                    "description": "Format pattern according to IETF RFC 5646 (language tag).",
+                    "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
+                    "type": "string"
+                  },
+                  {
+                    "description": "An RFC 5646 language tag."
+                  }
+                ]
+              },
+              "value": {
+                "description": "The Platform description in the indicated language.",
+                "maxLength": 64,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+
+        "id" :
+                {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "type": "string"
+            },
+            {
+              "description": "Format pattern according to IETF RFC 4122.",
+              "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+              "type": "string"
+            }
+          ],
+          "description": "Instance ID of this specific resource",
+          "readOnly": true
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        },
+      "required": ["mnpn"]
+    }
   }
 }

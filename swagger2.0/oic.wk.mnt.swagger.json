@@ -78,32 +78,70 @@
     }
   },
   "definitions": {
-    "MNT" : 
-            {
-        "anyOf": [
-          {
-            "required": [
-              "fr"
-            ]
+    "MNT" : {
+      "properties": {
+        "rt" :
+                {
+          "description": "Resource Type of the Resource",
+          "items": {
+            "maxLength": 64,
+            "type": "string"
           },
-          {
-            "required": [
-              "rb"
-            ]
-          }
-        ],
-        "properties": {
-          "fr": {
-            "description": "Factory Reset",
-            "type": "boolean"
-          },
-          "rb": {
-            "description": "Reboot Action",
-            "type": "boolean"
-          }
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
         },
-        "type": "object"
-      }
 
+        "fr" :
+                {
+          "description": "Factory Reset",
+          "type": "boolean"
+        },
+
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "rb" :
+                {
+          "description": "Reboot Action",
+          "type": "boolean"
+        },
+
+        "id" :
+                {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        }
+    }
   }
 }

@@ -16,7 +16,6 @@
       "get": {
         "description": "Known resource that is hosted by every Server.\nAllows for logical device specific information to be discovered.\nRetrieve the information about the Device\n",
         "parameters": [
-          {"$ref": "#/parameters/interface"}
         ],
         "responses": {
             "200": {
@@ -46,101 +45,185 @@
     }
   },
   "definitions": {
-    "Device" : 
-            {
-        "properties": {
-          "di": {
-            "description": "Unique identifier for device",
-            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-            "readOnly": true,
-            "type": "string"
-          },
-          "dmn": {
-            "description": "Manufacturer Name.",
-            "items": {
-              "properties": {
-                "language": {
-                  "description": "An RFC 5646 language tag.",
-                  "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
-                  "readOnly": true,
-                  "type": "string"
-                },
-                "value": {
-                  "description": "Manufacturer name in the indicated language.",
-                  "maxLength": 64,
-                  "readOnly": true,
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "dmno": {
-            "description": "Model number as designated by manufacturer.",
+    "Device" : {
+      "properties": {
+        "rt" :
+                {
+          "description": "Resource Type of the Resource",
+          "items": {
             "maxLength": 64,
-            "readOnly": true,
             "type": "string"
           },
-          "dmv": {
-            "description": "Spec versions of the Resource and Device Specifications to which this device data model is implemented",
-            "maxLength": 256,
-            "readOnly": true,
-            "type": "string"
-          },
-          "icv": {
-            "description": "The version of the OIC Server",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "ld": {
-            "description": "Localized Descriptions.",
-            "items": {
-              "properties": {
-                "language": {
-                  "description": "An RFC 5646 language tag.",
-                  "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
-                  "readOnly": true,
-                  "type": "string"
-                },
-                "value": {
-                  "description": "Device description in the indicated language.",
-                  "maxLength": 64,
-                  "readOnly": true,
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "piid": {
-            "description": "Protocol independent unique identifier for device that is immutable.",
-            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-            "readOnly": true,
-            "type": "string"
-          },
-          "sv": {
-            "description": "Software version.",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          }
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
         },
-        "required": [
-          "n",
-          "di",
-          "icv",
-          "dmv",
-          "piid"
-        ],
-        "type": "object"
-      }
 
+        "ld" :
+                {
+          "description": "Localized Descriptions.",
+          "items": {
+            "properties": {
+              "language": {
+                "allOf": [
+                  {
+                    "description": "Format pattern according to IETF RFC 5646 (language tag).",
+                    "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
+                    "type": "string"
+                  },
+                  {
+                    "description": "An RFC 5646 language tag.",
+                    "readOnly": true
+                  }
+                ]
+              },
+              "value": {
+                "description": "Device description in the indicated language.",
+                "maxLength": 64,
+                "readOnly": true,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "piid" :
+                {
+          "allOf": [
+            {
+              "description": "Format pattern according to IETF RFC 4122.",
+              "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+              "type": "string"
+            },
+            {
+              "description": "Protocol independent unique identifier for device that is immutable.",
+              "readOnly": true
+            }
+          ]
+        },
+
+        "di" :
+                {
+          "allOf": [
+            {
+              "description": "Format pattern according to IETF RFC 4122.",
+              "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+              "type": "string"
+            },
+            {
+              "description": "Unique identifier for device",
+              "readOnly": true
+            }
+          ]
+        },
+
+        "dmno" :
+                {
+          "description": "Model number as designated by manufacturer.",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "sv" :
+                {
+          "description": "Software version.",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "dmn" :
+                {
+          "description": "Manufacturer Name.",
+          "items": {
+            "properties": {
+              "language": {
+                "allOf": [
+                  {
+                    "description": "Format pattern according to IETF RFC 5646 (language tag).",
+                    "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
+                    "type": "string"
+                  },
+                  {
+                    "description": "An RFC 5646 language tag.",
+                    "readOnly": true
+                  }
+                ]
+              },
+              "value": {
+                "description": "Manufacturer name in the indicated language.",
+                "maxLength": 64,
+                "readOnly": true,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "icv" :
+                {
+          "description": "The version of the OIC Server",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "dmv" :
+                {
+          "description": "Spec versions of the Resource and Device Specifications to which this device data model is implemented",
+          "maxLength": 256,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "id" :
+                {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        },
+      "required": ["n", "di", "icv", "dmv", "piid"]
+    }
   }
 }

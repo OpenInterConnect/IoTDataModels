@@ -16,7 +16,6 @@
       "get": {
         "description": "This resource provides the means to get the device introspection data specifiying all the endpoints of the device.\nThe url hosted by this resource is either a local or an external url.\n",
         "parameters": [
-          {"$ref": "#/parameters/interface"}
         ],
         "responses": {
             "200": {
@@ -48,64 +47,109 @@
     }
   },
   "definitions": {
-    "oic.wk.introspectionInfo" : 
-            {
-        "properties": {
-          "urlInfo": {
-            "description": "Information on the location of the introspection data.",
-            "items": {
-              "properties": {
-                "content-type": {
-                  "default": "application/cbor",
-                  "description": "content-type of the introspection data",
-                  "enum": [
-                    "application/json",
-                    "application/cbor"
-                  ],
-                  "type": "string"
-                },
-                "protocol": {
-                  "description": "Identifier for the protocol to be used to obtain the introspection information",
-                  "enum": [
-                    "coap",
-                    "coaps",
-                    "http",
-                    "https",
-                    "coap+tcp",
-                    "coaps+tcp"
-                  ],
-                  "type": "string"
-                },
-                "url": {
-                  "description": "The URL of the introspection information.",
-                  "format": "uri",
-                  "type": "string"
-                },
-                "version": {
-                  "default": 1,
-                  "description": "The version of the introspection data that can be downloaded",
-                  "enum": [
-                    1
-                  ],
-                  "type": "integer"
-                }
-              },
-              "required": [
-                "url",
-                "protocol"
-              ],
-              "type": "object"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          }
+    "oic.wk.introspectionInfo" : {
+      "properties": {
+        "rt" :
+                {
+          "description": "Resource Type of the Resource",
+          "items": {
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
         },
-        "required": [
-          "urlInfo"
-        ],
-        "type": "object"
-      }
 
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "urlInfo" :
+                {
+          "description": "Information on the location of the introspection data.",
+          "items": {
+            "properties": {
+              "content-type": {
+                "default": "application/cbor",
+                "description": "content-type of the introspection data",
+                "enum": [
+                  "application/json",
+                  "application/cbor"
+                ],
+                "type": "string"
+              },
+              "protocol": {
+                "description": "Identifier for the protocol to be used to obtain the introspection information",
+                "enum": [
+                  "coap",
+                  "coaps",
+                  "http",
+                  "https",
+                  "coap+tcp",
+                  "coaps+tcp"
+                ],
+                "type": "string"
+              },
+              "url": {
+                "description": "The URL of the introspection information.",
+                "format": "uri",
+                "type": "string"
+              },
+              "version": {
+                "default": 1,
+                "description": "The version of the introspection data that can be downloaded",
+                "enum": [
+                  1
+                ],
+                "type": "integer"
+              }
+            },
+            "required": [
+              "url",
+              "protocol"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "id" :
+                {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        }
+    }
   }
 }

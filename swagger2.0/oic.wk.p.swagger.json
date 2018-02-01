@@ -16,7 +16,6 @@
       "get": {
         "description": "Known resource that is defines the platform on which an Server is hosted.\nAllows for platform specific information to be discovered.\nRetrieve the information about the Platform\n",
         "parameters": [
-          {"$ref": "#/parameters/interface"}
         ],
         "responses": {
             "200": {
@@ -43,90 +42,171 @@
     }
   },
   "definitions": {
-    "Platform" : 
-            {
-        "properties": {
-          "mndt": {
-            "description": "Manufacturing Date in ISO8601 format.",
-            "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])$",
-            "readOnly": true,
-            "type": "string"
-          },
-          "mnfv": {
-            "description": "Manufacturer's firmware version",
+    "Platform" : {
+      "properties": {
+        "rt" :
+                {
+          "description": "Resource Type of the Resource",
+          "items": {
             "maxLength": 64,
-            "readOnly": true,
             "type": "string"
           },
-          "mnhw": {
-            "description": "Platform Hardware Version",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "mnml": {
-            "description": "Manufacturer's URL",
-            "format": "uri",
-            "maxLength": 256,
-            "readOnly": true,
-            "type": "string"
-          },
-          "mnmn": {
-            "description": "Manufacturer Name",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "mnmo": {
-            "description": "Model number as designated by the manufacturer",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "mnos": {
-            "description": "Platform Resident OS Version",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "mnpv": {
-            "description": "Platform Version",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "mnsl": {
-            "description": "Manufacturer's Support Information URL",
-            "format": "uri",
-            "maxLength": 256,
-            "readOnly": true,
-            "type": "string"
-          },
-          "pi": {
-            "description": "Platform Identifier",
-            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-            "readOnly": true,
-            "type": "string"
-          },
-          "st": {
-            "description": "Reference time for the device in ISO8601 format.",
-            "format": "date-time",
-            "readOnly": true,
-            "type": "string"
-          },
-          "vid": {
-            "description": "Manufacturer's defined information for the platform. The content is freeform, with population rules up to the manufacturer",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          }
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
         },
-        "required": [
-          "pi",
-          "mnmn"
-        ],
-        "type": "object"
-      }
 
+        "pi" :
+                {
+          "allOf": [
+            {
+              "description": "Format pattern according to IETF RFC 4122.",
+              "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+              "type": "string"
+            },
+            {
+              "description": "Platform Identifier",
+              "readOnly": true
+            }
+          ]
+        },
+
+        "mnfv" :
+                {
+          "description": "Manufacturer's firmware version",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "vid" :
+                {
+          "description": "Manufacturer's defined information for the platform. The content is freeform, with population rules up to the manufacturer",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "mnmn" :
+                {
+          "description": "Manufacturer Name",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "mnmo" :
+                {
+          "description": "Model number as designated by the manufacturer",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "mnhw" :
+                {
+          "description": "Platform Hardware Version",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "mnos" :
+                {
+          "description": "Platform Resident OS Version",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "mndt" :
+                {
+          "allOf": [
+            {
+              "description": "Format pattern as defined in ISO 8601. The format is [yyyy]-[mm]-[dd].",
+              "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])$",
+              "type": "string"
+            },
+            {
+              "description": "Manufacturing Date in ISO8601 format.",
+              "readOnly": true
+            }
+          ]
+        },
+
+        "id" :
+                {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "mnsl" :
+                {
+          "description": "Manufacturer's Support Information URL",
+          "format": "uri",
+          "maxLength": 256,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "mnpv" :
+                {
+          "description": "Platform Version",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "st" :
+                {
+          "description": "Reference time for the device in ISO8601 format.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "mnml" :
+                {
+          "description": "Manufacturer's URL",
+          "format": "uri",
+          "maxLength": 256,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        },
+      "required": ["pi", "mnmn"]
+    }
   }
 }
