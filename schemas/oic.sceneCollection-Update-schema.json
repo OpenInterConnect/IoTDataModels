@@ -1,24 +1,17 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.sceneCollection-Update-schema.json#",
+  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.sceneCollection-Update-schema.json#",
   "title" : "Scene Collection",
   "definitions": {
     "oic.sceneCollection-Update": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "oic.collection-schema.json#/definitions/oic.collection"
-        },
-        {
-          "properties": {
-            "lastScene": {
-              "type": "string",
-              "description": "Last selected Scene from the set of sceneValues"
-            }
-          }
+      "properties": {
+        "lastScene": {
+          "type": "string",
+          "description": "Last selected Scene from the set of sceneValues"
         }
-      ],
+      },
       "required": [ "lastScene" ]
     }
   },

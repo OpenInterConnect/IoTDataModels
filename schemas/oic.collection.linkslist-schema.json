@@ -1,13 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-v4/schema#",
   "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.linkslist-schema.json#",
-  "definitions": {
-    "oic.collection.alllinks": {
-		  "$ref": "oic.collection-schema.json#/definitions/oic.collection.alllinks"
-    }
-  },
-  "allOf": [
-    { "$ref": "#/definitions/oic.collection.alllinks" }
-  ]
+  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.linkslist-schema.json#",
+  "type": "array",
+  "items": {
+    "$ref": "oic.collection-schema.json#/definitions/oic.oic-link"
+  }
 }

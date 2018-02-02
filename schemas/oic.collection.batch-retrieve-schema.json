@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
-    "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.batch-retrieve-schema.json#",
+    "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.batch-retrieve-schema.json#",
     "title": "Collection Batch Retrieve Format",
     "definitions": {
       "oic.batch-retrieve.item": {
@@ -22,9 +22,9 @@
               {
                 "type": "array",
                 "description": " The response payload from a collection (batch) resource",
-		"items": {
-		  "$ref": "#/definitions/oic.batch-retrieve.item"
-		}
+		        "items": {
+		          "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
+		        }
               }
             ]
           }
