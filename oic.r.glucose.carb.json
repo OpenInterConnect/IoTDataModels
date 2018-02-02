@@ -1,0 +1,31 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.glucose.carb.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Context Carbohydrates for Glucose Meter",
+  "definitions": {
+    "oic.r.glucose.carb": {
+      "type": "object",
+      "properties": {
+        "carb":    {
+          "type": "number",
+          "readOnly": true,
+          "description": "The amount of carbohydrates undertaken in grams"
+        },
+        "meal": {
+          "type": "string",
+          "readOnly": true,
+          "enum": ["breakfast", "lunch", "dinner", "snack", "drink", "supper", "brunch", "undetermined", "other", "no_entry", "no_ingestion"],
+          "description": "Recorded time of carbohydrates intake"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.glucose.carb"}
+  ],
+  "required": ["carb", "meal"]
+}

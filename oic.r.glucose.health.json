@@ -1,0 +1,26 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.glucose.health.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Context Health for Glucose Meter",
+  "definitions": {
+    "oic.r.glucose.health": {
+      "type": "object",
+      "properties": {
+        "health": {
+          "type": "string",
+          "readOnly": true,
+          "enum": ["minor", "major", "menses", "stress", "none"],
+          "description": "The various levels of health a person feels when taking a glucose."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.glucose.health"}
+  ],
+  "required": ["health"]
+}

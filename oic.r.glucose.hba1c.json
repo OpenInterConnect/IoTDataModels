@@ -1,0 +1,27 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.glucose.hba1c.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Hemoglobin Bound to Glucose A1c Form (HbA1c) for Glucose Meter",
+  "definitions": {
+    "oic.r.glucose.hba1c": {
+      "type": "object",
+      "properties": {
+        "hba1c":    {
+          "type": "number",
+          "readOnly": true,
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Current HbA1c measurement in percentage"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.glucose.hba1c"}
+  ],
+  "required": ["hba1c"]
+}
