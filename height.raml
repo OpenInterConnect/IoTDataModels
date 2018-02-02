@@ -2,7 +2,7 @@
 title: OICHeight
 version: v1.1.0-20160519
 documentation:
-  - title: © 2016 Open Interconnect Consortium, Inc. All rights reserved.
+  - title: Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.
     content: |
         Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
         1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -16,12 +16,16 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.a","oic.if.baseline"]
+          enum: ["oic.if.s","oic.if.baseline"]
 
 /HeightResURI:
   description: |
     This resource describes the properties associated with height of an object's physical size.
-    Height (height) is height of an object.
+    The units is a single value that is one of m, cm, ft or in.
+    If the units Property is missing the default is meters [m].
+    The units Property is a read-only value that is provided by the server.
+    When range (from oic.r.baseresource) is omitted the default is 0 to +MAXFLOAT.
+
   displayName: Height
   is: [ interface ]
 
@@ -37,41 +41,6 @@ traits:
               {
                 "rt":     ["oic.r.height"],
                 "id":     "unique_example_id",
-                "height": 100.0
-              }
-  post:
-    description: |
-      Sets the Height.
-    body:
-      application/json:
-        schema: Height
-        example: |
-          {
-            "id":     "unique_example_id",
-            "height": 200.0
-          }
-    responses:
-      200:
-        description: |
-          Indicates that the height was successfully changed.
-          The new height is provided in the response.
-        body:
-          application/json:
-            schema: Height
-            example: |
-              {
-                "id":     "unique_example_id",
-                "height": 200.0
-              }
-      403:
-        description: |
-          Indicates that OIC client sent an invalid property value to the server.
-          The server responds with the current resource representation.
-        body:
-          application/json:
-            schema: Height
-            example: |
-              {
-                "id":     "unique_example_id",
-                "height": 200.0
+                "height": 1.8,
+                "units":   "m"
               }

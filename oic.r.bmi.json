@@ -1,0 +1,26 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.bmi.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Body Mass Index (BMI)",
+  "definitions": {
+    "oic.r.bmi": {
+      "type": "object",
+      "properties": {
+        "bmi":    {
+          "type": "number",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Body Mass Index (BMI) in kg/m^2"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.bmi"}
+  ],
+  "required": ["bmi"]
+}
