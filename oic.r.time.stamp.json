@@ -1,0 +1,25 @@
+{
+    "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.time.stamp.json#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description" : "Copyright (c) 2017, 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+    "title": "Observed Time",
+    "definitions": {
+        "oic.r.time.stamp": {
+        "type": "object",
+            "properties": {
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time",
+	                "description": "An RFC3339 formated time indicating when the data was observed (e.g.: 2016-02-15T09:19Z, 1996-12-19T16:39:57-08:00)",
+	                "readOnly": true
+                }
+            }
+        }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.time.stamp"}
+  ],
+  "required": ["timestamp"]
+}
