@@ -1,13 +1,14 @@
 {
   "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.airqualitycollection-ll#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2017,2018 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Air Quality Collection Link List Schema",
   "definitions": {
     "airqualitycollection-ll": {
-      "allOf": [
-        {"$ref": "oic.collection.linkslist-schema.json#/definitions/oic.collection.alllinks"}
-      ]
+      "type": "array",
+      "items": {
+        "$ref": "oic.collection-schema.json#/definitions/oic.oic-link"
+      }
     }
   },
   "allOf": [
