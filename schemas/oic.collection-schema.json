@@ -113,7 +113,7 @@
       },
       "required": [ "href", "rt", "if" ]
     },
-		"oic.collection.links.arrayoflinks": {
+    "oic.collection.links.arrayoflinks": {
       "properties": {
         "links": {
           "description": "A set of simple or individual OIC Links.",
@@ -230,7 +230,7 @@
         }
       }
     },
-		"oic.core": {
+    "oic.core": {
       "type": "object",
       "properties": {
         "rt": {
@@ -250,17 +250,17 @@
       "type": "string",
       "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
     },
-		"oic.collection.links": {
+    "oic.collection.links": {
       "properties": {
         "links": {
-				  "description": "A set of simple or individual OIC Links.",
+	  "description": "A set of simple or individual OIC Links.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/oic.oic-link"
-			    }
+	  }
         }
       }
-		},
+    },
     "oic.collection.properties": {
       "type": "object",
       "description": "A collection is a set of links along with additional properties to describe the collection itself",
