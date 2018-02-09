@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016,2018 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection-schema.json#",
   "title": "Collection",
   "definitions": {
@@ -113,8 +113,7 @@
       },
       "required": [ "href", "rt", "if" ]
     },
-		"oic.collection.linksexpanded": {
-      "type": "object",
+		"oic.collection.links.arrayoflinks": {
       "properties": {
         "links": {
           "description": "A set of simple or individual OIC Links.",
@@ -246,13 +245,12 @@
         }
       }
     },
-		"uuid": {
+    "uuid": {
       "description": "Format pattern according to IETF RFC 4122.",
       "type": "string",
       "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
     },
 		"oic.collection.links": {
-      "type": "object",
       "properties": {
         "links": {
 				  "description": "A set of simple or individual OIC Links.",
@@ -278,6 +276,6 @@
   "allOf": [
     {"$ref": "oic.core-schema.json#/definitions/oic.core"},
     {"$ref": "#/definitions/oic.collection.properties"},
-		{"$ref": "#/definitions/oic.collection.links"}
+    {"$ref": "#/definitions/oic.collection.links"}
   ]
 }
