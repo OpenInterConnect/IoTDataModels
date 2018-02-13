@@ -1,38 +1,33 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.sceneCollection-schema.json#",
+  "description" : "Copyright (c) 2016-2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.sceneCollection-schema.json#",
   "title" : "Scene Collection",
   "definitions": {
     "oic.sceneCollection": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "oic.collection-schema.json#/definitions/oic.collection"
+      "properties": {
+        "lastScene": {
+          "type": "string",
+          "description": "Last selected Scene from the set of sceneValues"
         },
-        {
-          "properties": {
-            "lastScene": {
-              "type": "string",
-              "description": "Last selected Scene from the set of sceneValues"
-            },
-            "sceneValues": {
-              "type": "array",
-              "readOnly": true,
-              "description": "All available scene values",
-              "items": {
-                "type": "string"
-              }
-            }
+        "sceneValues": {
+          "type": "array",
+          "readOnly": true,
+          "description": "All available scene values",
+          "items": {
+            "type": "string"
           }
         }
-      ],
-      "required": [ "lastScene","sceneValues","rts","id" ]
+      },
+	  "required": [ "lastScene","sceneValues","rts","id" ]
     }
   },
   "type": "object",
   "allOf" : [
     { "$ref": "oic.core-schema.json#/definitions/oic.core" },
+    { "$ref": "oic.collection-schema.json#/definitions/oic.collection.properties"},
+    { "$ref": "oic.collection-schema.json#/definitions/oic.collection.links.arrayoflinks"},
     { "$ref": "#/definitions/oic.sceneCollection" }
   ]
 }

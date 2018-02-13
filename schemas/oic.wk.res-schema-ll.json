@@ -1,15 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-v4/schema#",
-  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.res-schema-ll.json#",
-  "description": "The list of resources expressed as OCF links without di",
-  "definitions": {
-    "oic.res-ll": {
-      "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
-    }
-  },
+  "description" : "Copyright (c) 2016-2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.res-schema-ll.json#",
+  "description": "The list of resources expressed as Links",
   "type": "array",
   "items": {
-    "$ref": "#/definitions/oic.res-ll"
+    "$ref": "oic.collection-schema.json#/definitions/oic.oic-link"
   }
 }

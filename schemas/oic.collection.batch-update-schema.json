@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
-    "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.batch-update-schema.json#",
+    "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.batch-update-schema.json#",
     "title": "Collection Batch Update Format",
     "definitions": {
       "oic.batch-update.item": {
@@ -24,7 +24,7 @@
                   "type": "array",
                   "description": " The response payload from a collection (batch) resource",
                   "items": {
-                    "$ref": "#/definitions/oic.batch-update.item"
+                    "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
                   }
                 }
               ]
@@ -42,6 +42,7 @@
         }
       }
     },
+	"type": "object",
     "allOf": [
       {"$ref": "#/definitions/oic.wk.col-batch-update"}
     ]
