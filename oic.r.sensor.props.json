@@ -1,0 +1,27 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.sensor.props.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Sensor Properties",
+  "definitions": {
+    "oic.r.sensor.props": {
+      "type": "object",
+      "properties": {
+        "silenttime" : {
+          "type": "integer",
+          "description": "The time in seconds from the previous report that the Sensor restrains from sending a state change. This is used to avoid repeated state change reports."
+        },
+        "sensitivity": {
+          "type": "number",
+          "description": "The level of the detection accuracy of the Sensor. This is used to control the level at which the Senor detects a state change. Range should be specified per manufacturer device capabilities."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.sensor.properties"}
+  ],
+  "required": ["silenttime", "sensitivity" ]
+}
