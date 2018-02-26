@@ -20,7 +20,7 @@
   "allOf": [
     {"$ref": "oic.core.json#/definitions/oic.core"},
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
-    {"$ref": "#/definitions/oic.r.body.location"},
+    {"$ref": "oic.r.body.location.json#/definitions/oic.r.body.location"},
     {"$ref": "#/definitions/oic.r.body.location.temperature"}
   ],
   "required": ["bloc"]
