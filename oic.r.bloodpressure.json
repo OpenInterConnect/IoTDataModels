@@ -25,7 +25,7 @@
           "readOnly": true,
           "description": "Mean Arterial Pressure (MAP)"
         },
-        "units": {
+        "unit": {
           "type": "string",
           "readOnly": true,
           "enum": ["mmHg", "kPa"],
