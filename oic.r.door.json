@@ -8,6 +8,7 @@
       "type": "object",
       "properties": {
         "openState" : {
+          "type": "string",
           "enum": ["Open","Closed"],
           "readOnly": true,
           "description": "The state of the door (open or closed)"
