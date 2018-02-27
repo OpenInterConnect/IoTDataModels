@@ -8,6 +8,7 @@
       "type": "object",
       "properties": {
         "status": {
+          "type": "string",
           "enum": ["on","off","full"],
           "description": "Status of the Ice Maker"
         }
