@@ -12,6 +12,7 @@
           "description": "Current temperature setting or measurement"
         },
         "units":  {
+          "type": "string",
           "enum": ["C","F","K"],
           "description": "Units for the temperature value",
           "readOnly": true
