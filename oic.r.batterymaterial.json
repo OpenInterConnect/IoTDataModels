@@ -8,6 +8,7 @@
       "type": "object",
       "properties": {
         "material" : {
+          "type" : "string", 
           "enum": [
              "Alkaline",
              "Aluminium Air",
