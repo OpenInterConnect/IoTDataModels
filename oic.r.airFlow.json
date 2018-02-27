@@ -26,6 +26,7 @@
           "description": "Current speed level"
         },
         "automode": {
+          "type": "string",
           "enum": ["On", "Off"],
           "description": "Status of the automode feature, if on speed is set by the device"
         }
