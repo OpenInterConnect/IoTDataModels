@@ -16,6 +16,7 @@
       "get": {
         "description": "Link list representation of /oic/res; list of discoverable resources\nRetrieve the discoverable resource set, link list interface\n",
         "parameters": [
+          {"$ref": "#/parameters/interface-ll"}
         ],
         "responses": {
             "200": {
@@ -53,6 +54,7 @@
       "get": {
         "description": "Baseline representation of /oic/res; list of discoverable resources\nRetrieve the discoverable resource set, baseline interface\n",
         "parameters": [
+          {"$ref": "#/parameters/interface-baseline"}
         ],
         "responses": {
             "200": {
@@ -126,17 +128,10 @@
             "type": "string"
           },
           "di": {
-            "allOf": [
-              {
                 "description": "Format pattern according to IETF RFC 4122.",
                 "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
                 "type": "string"
               },
-              {
-                "description": "The device ID"
-              }
-            ]
-          },
           "eps": {
             "description": "the Endpoint information of the target Resource",
             "items": {
@@ -282,17 +277,10 @@
                   "type": "string"
                 },
                 "di": {
-                  "allOf": [
-                    {
                       "description": "Format pattern according to IETF RFC 4122.",
                       "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
                       "type": "string"
                     },
-                    {
-                      "description": "The device ID"
-                    }
-                  ]
-                },
                 "eps": {
                   "description": "the Endpoint information of the target Resource",
                   "items": {
