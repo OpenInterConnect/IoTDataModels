@@ -16,6 +16,7 @@
       "get": {
         "description": "OCF Collection Resource Type contains properties and links.\nThe oic.if.baseline interface exposes a representation of\nthe links and the properties of the collection resource itself\nRetrieve on Baseline Interface\n",
         "parameters": [
+          {"$ref": "#/parameters/interface-baseline"}
         ],
         "responses": {
             "200": {
@@ -56,6 +57,7 @@
       "post": {
         "description": "Update on Baseline Interface\n",
         "parameters": [
+          {"$ref": "#/parameters/interface-baseline"},
           {
             "name": "body",
             "in": "body",
@@ -75,6 +77,7 @@
       "get": {
         "description": "OCF Collection Resource Type contains properties and links.\nThe oic.if.b interfacce exposes a composite representation of the\nresources pointed to by the links\nRetrieve on Batch Interface\n",
         "parameters": [
+          {"$ref": "#/parameters/interface-b"}
         ],
         "responses": {
             "200": {
@@ -120,6 +123,7 @@
       "post": {
         "description": "Update on Batch Interface\n",
         "parameters": [
+          {"$ref": "#/parameters/interface-b"},
           {
             "name": "body",
             "in": "body",
@@ -199,6 +203,7 @@
       "get": {
         "description": "OCF Collection Resource Type contains properties and links.\nThe oic.if.ll interface exposes a representation of the links\nRetrieve on Link List Interface\n",
         "parameters": [
+          {"$ref": "#/parameters/interface-ll"}
         ],
         "responses": {
             "200": {
@@ -569,7 +574,7 @@
                 "type": "string"
               },
               "di": {
-                "description": "Format pattern according to IETF RFC 4122.",
+                "description": "The Device ID formatted according to IETF RFC 4122.",
                 "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
                 "type": "string"
               },
@@ -715,8 +720,9 @@
           "type": "string"
         },
         "di": {
-          "$ref": "#/definitions/uuid",
-          "description": "The device ID"
+          "description": "The Device ID formatted according to IETF RFC 4122.",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "type": "string"
         },
         "eps": {
           "description": "the Endpoint information of the target Resource",

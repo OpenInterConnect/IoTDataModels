@@ -16,6 +16,7 @@
       "get": {
         "description": "This resource describes the attributes associated with an Icon.\nRetrieves the current icon properties.\n",
         "parameters": [
+          {"$ref": "#/parameters/interface"}
         ],
         "responses": {
             "200": {
