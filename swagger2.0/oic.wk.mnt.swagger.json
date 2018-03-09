@@ -25,7 +25,8 @@
                 {
                   "rt":   ["oic.wk.mnt"],
                   "fr":   false,
-                  "rb":   false
+                  "rb":   false,
+                  "err":   503
                 }
                 ,
               "schema": { "$ref": "#/definitions/MNT" }
@@ -105,7 +106,13 @@
           "readOnly": true,
           "type": "string"
         },
-
+        "err": {
+          "type": "integer",
+          "readOnly" : true,
+          "description": "last HTTP occurred error",
+          "minimum" : 399,
+          "maximum" : 599
+         },
         "rb" :
                 {
           "description": "Reboot Action",
