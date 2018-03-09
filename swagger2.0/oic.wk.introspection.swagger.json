@@ -16,6 +16,7 @@
       "get": {
         "description": "This resource provides the means to get the device introspection data specifiying all the endpoints of the device.\nThe url hosted by this resource is either a local or an external url.\n",
         "parameters": [
+          {"$ref": "#/parameters/interface"}
         ],
         "responses": {
             "200": {

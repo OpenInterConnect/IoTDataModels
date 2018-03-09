@@ -16,6 +16,7 @@
       "get": {
         "description": "Known resource that is hosted by every Server.\nAllows for logical device specific information to be discovered.\nRetrieve the information about the Device\n",
         "parameters": [
+          {"$ref": "#/parameters/interface"}
         ],
         "responses": {
             "200": {

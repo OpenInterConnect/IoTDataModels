@@ -16,6 +16,7 @@
       "get": {
         "description": "Known resource that is defines the platform on which an Server is hosted.\nAllows for platform specific information to be discovered.\nRetrieve the information about the Platform\n",
         "parameters": [
+          {"$ref": "#/parameters/interface"}
         ],
         "responses": {
             "200": {
