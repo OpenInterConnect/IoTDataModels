@@ -1,0 +1,300 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Network Monitoring",
+    "version": "v1-20180306",
+    "license": {
+      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
+      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
+    }
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/nmonResURI" : {
+      "get": {
+        "description": "The resource through which a Device can monitor network traffic.\nRetrieve the network monitor action status",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "rt":   ["oic.wk.nmon"],
+                  "ianaifType":   71,
+                  "reset":   false,
+                  "col" : false,
+                  "time" : "2018-01-30T19:43:37Z",
+                  "tx" : 10,
+                  "rx" : 15,
+                  "mmstx" : 50,
+                  "amstx" : 35,
+                  "mmsrx" : 35,
+                  "amsrx" : 20
+                }
+                ,
+              "schema": { "$ref": "#/definitions/nmon" }
+            }
+        }
+      },
+      "post": {
+        "description": "Start/Stop collecting and reset the networking monitor resource\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-rw"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/nmon-update" },
+            "x-example":
+              {
+                "col":   true,
+                "reset":   true
+              }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "rt":   ["oic.wk.nmon"],
+                  "ianaifType":   71,
+                  "reset":   false,
+                  "col" : true,
+                  "time" : "2018-01-30T19:44:37Z",
+                  "tx" : 0,
+                  "rx" : 0,
+                  "mms-tx" : 0,
+                  "ams-tx" : 0,
+                  "mms-rx" : 0,
+                  "ams-rx" : 0
+                },
+              "schema": { "$ref": "#/definitions/nmon" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-rw" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw"]
+    },
+    "interface-all" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "nmon" : {
+      "properties": {
+        "amstx" :
+                {
+          "description": "Average transmitted message size in bytes (tx) in the collection period",
+          "readOnly": true,
+          "type": "integer"
+        },
+
+        "reset" :
+                {
+          "description": "True: reset the collected values",
+          "readOnly": false,
+          "type": "boolean"
+        },
+
+        "mmsrx" :
+                {
+          "description": "Maximum received message size in bytes (rx) in the collection period",
+          "readOnly": true,
+          "type": "integer"
+        },
+
+        "mmstx" :
+                {
+          "description": "Maximum transmitted message size in bytes (tx) in the collection period",
+          "readOnly": true,
+          "type": "integer"
+        },
+
+        "tx" :
+                {
+          "description": "Amount of transmitted kilo bytes from collection start time 'time'",
+          "readOnly": true,
+          "type": "integer"
+        },
+
+        "rt" :
+                {
+          "description": "Resource Type of the Resource",
+          "items": {
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "ianaifType" :
+                {
+          "description": "The type of the network connection, as defined by iana https://www.iana.org/assignments/ianaiftype-mib/ianaiftype-mib",
+          "readOnly": true,
+          "type": "integer"
+        },
+
+        "rx" :
+                {
+          "description": "Amount of received kilo bytes from collection start time 'time'",
+          "readOnly": true,
+          "type": "integer"
+        },
+
+        "id" :
+                {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "amsrx" :
+                {
+          "description": "Average received message size in bytes (rx) in the collection period",
+          "readOnly": true,
+          "type": "integer"
+        },
+
+        "time" :
+                {
+          "description": "start time of collecting data",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "col" :
+                {
+          "description": "True: Device is collecting values",
+          "readOnly": false,
+          "type": "boolean"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        },
+      "required": ["reset", "col", "ianaifType"]
+    }
+    ,
+    "nmon-update" : {
+      "properties": {
+        "reset" :
+                {
+          "description": "True: reset the collected values",
+          "readOnly": false,
+          "type": "boolean"
+        },
+
+        "rt" :
+                {
+          "description": "Resource Type of the Resource",
+          "items": {
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "type": "string"
+        },
+
+        "id" :
+                {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "type": "string"
+            },
+            {
+              "description": "Format pattern according to IETF RFC 4122.",
+              "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+              "type": "string"
+            }
+          ],
+          "description": "Instance ID of this specific resource",
+          "readOnly": true
+        },
+
+        "col" :
+                {
+          "description": "True: Device is collecting values",
+          "readOnly": false,
+          "type": "boolean"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        },
+      "required": ["reset", "col"]
+    }
+  }
+}
