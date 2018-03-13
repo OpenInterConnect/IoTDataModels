@@ -147,8 +147,13 @@
           "readOnly": true,
           "type": "array"
         }
-
-        }
+        },
+        "anyOf": [
+                {"required": ["fr"]},
+                {"required": ["rb"]},
+                {"required": ["err"]}
+            ],
+        "type" : "object"
     }
   }
 }
