@@ -1,14 +1,13 @@
 {
   "$schema": "http://json-schemas.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016, 2017, 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016, 2018 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.mnt-schema.json#",
   "definitions": {
-    "oic.wk.mnt": {
+    "oic.wk.mnt-update": {
       "type": "object",
       "anyOf": [
         {"required": ["fr"]},
-        {"required": ["rb"]},
-        {"required": ["err"]}
+        {"required": ["rb"]}
       ],
       "properties": {
         "fr":{
@@ -18,13 +17,6 @@
         "rb": {
           "type": "boolean",
           "description": "Reboot Action"
-        },
-        "err": {
-          "type": "integer",
-          "readOnly" : true,
-          "description": "last HTTP occurred error",
-          "minimum" : 399,
-          "maximum" : 599
         }
       }
     }
@@ -32,6 +24,6 @@
   "type": "object",
   "allOf": [
     { "$ref": "oic.core-schema.json#/definitions/oic.core"},
-    { "$ref": "#/definitions/oic.wk.mnt" }
+    { "$ref": "#/definitions/oic.wk.mnt-update" }
   ]
 }
