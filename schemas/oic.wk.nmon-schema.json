@@ -25,13 +25,6 @@
             "description": "True: Device is collecting values",
             "readOnly" : false
         },
-        "time" :
-        {
-            "type" : "string",
-            "format" : "date-time",
-            "description": "start time of collecting data",
-            "readOnly" : true
-        },
         "tx" :
         {
             "type" : "integer",

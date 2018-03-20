@@ -27,7 +27,6 @@
                   "ianaifType":   71,
                   "reset":   false,
                   "col" : false,
-                  "time" : "2018-01-30T19:43:37Z",
                   "tx" : 10,
                   "rx" : 15,
                   "mmstx" : 50,
@@ -65,7 +64,6 @@
                   "ianaifType":   71,
                   "reset":   false,
                   "col" : true,
-                  "time" : "2018-01-30T19:44:37Z",
                   "tx" : 0,
                   "rx" : 0,
                   "mms-tx" : 0,
@@ -170,14 +168,6 @@
           "description": "Average received message size in bytes (rx) in the collection period",
           "readOnly": true,
           "type": "integer"
-        },
-
-        "time" :
-                {
-          "description": "start time of collecting data",
-          "format": "date-time",
-          "readOnly": true,
-          "type": "string"
         },
 
         "n" :
