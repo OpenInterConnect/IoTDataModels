@@ -32,12 +32,6 @@
           "readOnly": true,
           "description": "Human friendly name"
         },
-        "mpro": {
-          "readOnly": true,
-          "description": "Supported messaging protocols",
-          "type": "string",
-          "maxLength": 64
-        },
         "links": {
           "type": "array",
           "items": {
