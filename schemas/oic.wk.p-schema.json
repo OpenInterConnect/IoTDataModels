@@ -36,6 +36,12 @@
           "readOnly": true,
           "description": "Model number as designated by the manufacturer"
         },
+        "mnsel": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Serial number as designated by the manufacturer"
+        },
         "mndt": {
           "allOf": [
             {
