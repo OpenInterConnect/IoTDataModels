@@ -1,0 +1,81 @@
+#%RAML 0.8
+title: Network Monitoring
+version: v1-20180306
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+schemas:
+  - nmon: !include schemas/oic.wk.nmon-schema.json
+  - nmon-update: !include schemas/oic.wk.nmon-Update-schema.json
+
+traits:
+  - interface-all:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw","oic.if.baseline"]
+  - interface-rw:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw"]
+
+/nmonResURI:
+  displayName: Network Monitoring
+  description: |
+    The resource through which a Device can monitor network traffic.
+  get:
+    is: [ interface-all ]
+    description: Retrieve the network monitor action status
+    responses:
+      200:
+        body:
+          application/json:
+            schema: nmon
+            example: |
+              {
+                "rt":   ["oic.wk.nmon"],
+                "ianaifType":   71,
+                "reset":   false,
+                "col" : false,
+                "tx" : 10,
+                "rx" : 15,
+                "mmstx" : 50,
+                "amstx" : 35,
+                "mmsrx" : 35,
+                "amsrx" : 20
+              }
+  post:
+    is: [ interface-rw ]
+    description: |
+      Start/Stop collecting and reset the networking monitor resource
+    body:
+      application/json:
+        schema: nmon-update
+        example: |
+          {
+            "col":   true,
+            "reset":   true
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: nmon
+            example: |
+              {
+                "rt":   ["oic.wk.nmon"],
+                "ianaifType":   71,
+                "reset":   false,
+                "col" : true,
+                "tx" : 0,
+                "rx" : 0,
+                "mms-tx" : 0,
+                "ams-tx" : 0,
+                "mms-rx" : 0,
+                "ams-rx" : 0
+              }
