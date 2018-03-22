@@ -49,7 +49,7 @@
             },
             {
               "readOnly": true,
-              "description": "Manufacturing Date in ISO8601 format."
+              "description": "Manufacturing Date."
             }
           ]
         },
@@ -87,7 +87,7 @@
         "st": {
           "type": "string",
           "readOnly": true,
-          "description": "Reference time for the device in ISO8601 format.",
+          "description": "The date-time format pattern according to IETF RFC 3339.",
           "format": "date-time"
         },
         "vid": {
