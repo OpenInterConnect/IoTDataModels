@@ -1,0 +1,52 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.printqueue.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Print Queue",
+  "definitions": {
+    "oic.r.print.queueitem": {
+      "type": "object",
+      "properties": {
+        "uri" : {
+          "type": "string",
+          "format": "uri",
+          "maxLength": 256,
+          "description": "The URI of the queue item.",
+          "readOnly": true
+        },
+        "status" : {
+          "type": "string",    
+          "enum": [
+             "Printing",
+             "Pending",
+             "Paused",
+             "Error",
+             "Unknown"
+            ],
+          "description": "The status of the queue item.",
+          "readOnly": true
+        }
+      },
+      "required": [ "uri", "status" ]
+    },
+    "oic.r.printqueue": {
+      "type": "object",
+      "properties": {
+        "queue" : {
+          "type": "array",
+          "description": "The array of queue items for the printer.",
+          "items" : {
+             "$ref": "#/definitions/oic.r.print.queueitem"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.printqueue"}
+  ],
+  "required": [ "queue" ]
+}
