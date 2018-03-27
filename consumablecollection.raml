@@ -30,7 +30,7 @@ traits:
             enum: ["oic.if.ll"]
 
 
-/ConsumablesBaselineResURI:
+/ConsumablesResURI?if=oic.if.baseline:
   description: |
     This resource specifies things that can be consumed such as filter material, printer toner etc
     The resource is a collection of instances of oic.r.consumable detailing the individual consumed items
@@ -59,7 +59,7 @@ traits:
                 ]
               }
 
-/ConsumablesLLResURI:
+/ConsumablesResURI?if=oic.if.ll:
   description: |
     This resource specifies things that can be consumed such as filter material, printer toner etc
     The resource is a collection of instances of oic.r.consumable detailing the individual consumed items
