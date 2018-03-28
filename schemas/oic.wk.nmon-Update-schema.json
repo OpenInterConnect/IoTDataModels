@@ -1,0 +1,32 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.wk.nmon-update#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "network monitoring",
+  "definitions": {
+    "oic.wk.nmon-update": {
+      "type": "object",
+      "properties": {
+
+        "reset" :
+        {
+            "type" : "boolean",
+            "description": "True: reset the collected values",
+            "readOnly" : false
+        },
+        "col" :
+        {
+            "type" : "boolean",
+            "description": "True: Device is collecting values",
+            "readOnly" : false
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core-schema.rw.json#/definitions/oic.core"},
+    {"$ref": "#/definitions/oic.wk.nmon-update"}
+  ],
+  "required": ["reset", "col"]
+}

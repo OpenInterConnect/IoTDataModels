@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.p-schema.json#",
+  "definitions": {
+    "oic.wk.p": {
+      "type": "object",
+      "properties": {
+        "pi": {
+          "allOf": [
+            {
+              "$ref": "oic.types-schema.json#/definitions/uuid"
+            },
+            {
+              "readOnly": true,
+              "description": "Platform Identifier"
+            }
+          ]
+        },
+        "mnmn": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Manufacturer Name",
+          "maxLength": 64
+        },
+        "mnml": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Manufacturer's URL",
+          "maxLength": 256,
+          "format": "uri"
+        },
+        "mnmo": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Model number as designated by the manufacturer"
+        },
+        "mnsel": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Serial number as designated by the manufacturer"
+        },
+        "mndt": {
+          "allOf": [
+            {
+              "$ref": "oic.types-schema.json#/definitions/date"
+            },
+            {
+              "readOnly": true,
+              "description": "Manufacturing Date."
+            }
+          ]
+        },
+        "mnpv": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Platform Version"
+        },
+        "mnos": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Platform Resident OS Version"
+        },
+        "mnhw": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Platform Hardware Version"
+        },
+        "mnfv": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Manufacturer's firmware version"
+        },
+        "mnsl": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Manufacturer's Support Information URL",
+          "maxLength": 256,
+          "format": "uri"
+        },
+        "st": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The date-time format pattern according to IETF RFC 3339.",
+          "format": "date-time"
+        },
+        "vid": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Manufacturer's defined information for the platform. The content is freeform, with population rules up to the manufacturer"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.wk.p" }
+  ],
+  "required": [ "pi", "mnmn" ]
+}

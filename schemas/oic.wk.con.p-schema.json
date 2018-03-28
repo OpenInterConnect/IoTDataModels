@@ -1,0 +1,43 @@
+{
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.con.p-schema.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "definitions": {
+    "oic.wk.con.p": {
+      "type": "object",
+      "properties": {
+        "mnpn": {
+          "type": "array",
+          "items" :
+            {
+              "type": "object",
+              "properties": {
+                "language": {
+                  "allOf": [
+                    {
+                      "$ref": "oic.types-schema.json#/definitions/language-tag"
+                    },
+                    {
+                      "description": "An RFC 5646 language tag."
+                    }
+                  ]
+                },
+                "value": {
+                  "type": "string",
+                  "maxLength": 64,
+                  "description": "The Platform description in the indicated language."
+                }
+              }
+            },
+          "minItems" : 1,
+          "description": "Platform names"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.wk.con.p" }
+  ]
+}

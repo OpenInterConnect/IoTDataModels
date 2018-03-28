@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.sceneMember-schema.json#",
+  "title" : "Scene Member",
+  "definitions": {
+    "oic.sceneMember": {
+      "type": "object",
+      "properties": {
+        "SceneMappings" : {
+          "type": "array",
+           "description": "array of mappings per scene, can be one(1)",
+           "items": {
+              "type": "object",
+              "properties": {
+                "scene": {
+                  "type": "string",
+                  "description": "Specifies a scene value that will be acted upon"
+                },
+                "memberProperty": {
+                  "type":  "string",
+                  "readOnly": true,
+                  "description": "property name that will be mapped"
+                },
+                "memberValue": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "value of the Member Property"
+                }
+              },
+              "required": [ "scene", "memberProperty", "memberValue" ]
+            }
+        },
+        "link": {
+          "allOf": [
+            {
+              "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
+            },
+            {
+              "description": "OCF link that points to a resource"
+            }
+          ]
+        }
+      },
+      "required": [ "link" ]
+    }
+  },
+
+  "type": "object",
+  "allOf" : [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core" },
+    { "$ref": "#/definitions/oic.sceneMember" }
+  ]
+}

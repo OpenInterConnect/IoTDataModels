@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/draft-v4/schema#",
+  "description" : "Copyright (c) 2016-2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.res-schema-ll.json#",
+  "description": "The list of resources expressed as Links",
+  "type": "array",
+  "items": {
+    "$ref": "oic.collection-schema.json#/definitions/oic.oic-link"
+  }
+}

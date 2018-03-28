@@ -1,0 +1,170 @@
+#%RAML 0.8
+title: Scene
+version: v1-20160622
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+
+schemas:
+  - Collection:        !include schemas/oic.collection-schema.json
+  - SceneCollection:   !include schemas/oic.sceneCollection-schema.json
+  - SceneCollectionUpdate:   !include schemas/oic.sceneCollection-Update-schema.json
+  - SceneMember:       !include schemas/oic.sceneMember-schema.json
+
+traits:
+  - interface-all:
+      queryParameters:
+        if:
+          enum: ["oic.if.a", "oic.if.ll", "oic.if.baseline"]
+  - interface-update:
+      queryParameters:
+        if:
+          enum: ["oic.if.a"]
+  - interface-baseline:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline"]
+
+
+/SceneListResURI:
+  description: |
+    Toplevel Scene resource.
+    This resource is a generic collection resource.
+    The rts value shall contain oic.wk.scenecollection resource types.
+  displayName: Scenes (Top level)
+  is: [ interface-baseline ]
+
+  get:
+    description: |
+      Provides the current list of web links pointing to scenes
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Collection
+            example: |
+              {
+                "rt":       ["oic.wk.scenelist"],
+                "n":        "list of scene Collections",
+                "rts":      ["oic.wk.scenecollection"],
+                "links": [
+                ]
+              }
+
+
+
+/SceneCollectionResURI:
+  description: |
+    Collection that models a set of Scenes.
+    This resource is a generic collection resource with additional parameters.
+    The rts value shall contain oic.scenemember resource types.
+    The additional parameters are
+      lastScene, this is the scene value last set by any OCF Client
+      sceneValues, this is the list of available scenes
+      lastScene shall be listed in sceneValues.
+  displayName: Scene Collections
+
+  get:
+    is: [ interface-baseline ]
+    description: |
+      Provides the current list of web links pointing to scenes
+    responses:
+      200:
+        body:
+          application/json:
+            schema: SceneCollection
+            example: |
+              {
+                "lastScene": "off",
+                "sceneValues": ["off","Reading","TVWatching"],
+                "rt":       ["oic.wk.scenecollection"],
+                "n":        "My Scenes for my living room",
+                "id":       "0685B960-736F-46F7-BEC0-9E6CBD671ADC1",
+                "rts":      ["oic.wk.scenemember"],
+                "links": [
+                   ]
+              }
+
+  post:
+    is: [ interface-update ]
+    description: |
+      Provides the action to change the last set scene selection.
+      Calling this method shall update  all scene members to the prescribed membervalue.
+      When this method is called with the same value as the current lastScene value
+      then all scene members shall be updated.
+
+    body:
+      application/json:
+        schema: SceneCollectionUpdate
+        example: |
+          {
+             "lastScene": "Reading"
+          }
+
+    responses:
+      200:
+        description: |
+         Indicates that the value is changed.
+         The changed properties are provided in the response.
+        body:
+          application/json:
+            schema: SceneCollectionUpdate
+            example: |
+              {
+                "lastScene": "Reading"
+              }
+
+
+/SceneMemberResURI:
+  description: |
+    Collection that models a scene member.
+  displayName: Scene Member
+  is: [ interface-baseline ]
+
+  get:
+    description: |
+      Provides the scene member
+    responses:
+      200:
+        body:
+          application/json:
+           schema: SceneMember
+           example: |
+            {
+              "rt": ["oic.wk.scenemember"],
+              "id": "0685B960-FFFF-46F7-BEC0-9E6234671ADC1",
+              "n": "my binary switch (for light bulb) mappings",
+              "link": {
+                "href": "binarySwitch",
+                "rt":   ["oic.r.switch.binary"],
+                "if":   ["oic.if.a", "oic.if.baseline"],
+                "eps": [
+                  {"ep": "coap://[fe80::b1d6]:1111", "pri": 2},
+                  {"ep": "coaps://[fe80::b1d6]:1122"},
+                  {"ep": "coap+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                ]
+              },
+              "SceneMappings": [
+               {
+                 "scene":           "off",
+                 "memberProperty":  "value",
+                 "memberValue":     "true"
+               },
+               {
+                 "scene":           "Reading",
+                 "memberProperty":  "value",
+                 "memberValue":     "false"
+               },
+               {
+                 "scene":           "TVWatching",
+                 "memberProperty":  "value",
+                 "memberValue":     "true"
+               }
+              ]
+            }

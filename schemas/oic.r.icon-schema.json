@@ -1,0 +1,43 @@
+{
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.icon.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Icon",
+  "definitions": {
+    "oic.r.icon": {
+      "properties": {
+        "mimetype": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "The Media Type of the icon"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "readOnly": true,
+          "description": "The width in pixels"
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "readOnly": true,
+          "description": "The height in pixels"
+        },
+        "media": {
+          "type": "string",
+          "maxLength": 256,
+          "format" : "uri",
+          "readOnly": true,
+          "description": "Specifies the URI to the icon"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.r.icon"}
+  ],
+  "required": ["mimetype","width","height","media"]
+}

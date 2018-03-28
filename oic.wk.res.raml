@@ -1,0 +1,116 @@
+#%RAML 0.8
+title: Discoverable Resources
+version: v1-20160622
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+
+schemas:
+  - sbaseline: !include schemas/oic.wk.res-schema.json
+  - slinklist: !include schemas/oic.wk.res-schema-ll.json
+
+traits:
+  - interface-all:
+      queryParameters:
+        if:
+          enum: ["oic.if.ll", "oic.if.baseline"]
+
+  - interface-baseline:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline"]
+
+  - interface-ll:
+      queryParameters:
+        if:
+          enum: ["oic.if.ll"]
+
+
+/oic/res?if=oic.if.baseline:
+  displayName: Discoverable Resources Baseline Interface
+  is: [ interface-baseline ]
+  description: |
+    Baseline representation of /oic/res; list of discoverable resources
+  get:
+    description: |
+      Retrieve the discoverable resource set, baseline interface
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: sbaseline
+            example: |
+              [
+                {
+                "rt": ["oic.wk.res"],
+                "if": ["oic.if.baseline", "oic.if.ll" ],
+                "links":
+                  [
+                    {
+                      "href": "/humidity",
+                      "rt":   ["oic.r.humidity"],
+                      "if":   ["oic.if.s"],
+                      "p":    {"bm": 3},
+                      "eps": [
+                          {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2},
+                          {"ep": "coaps://[fe80::b1d6]:1122"},
+                          {"ep": "coap+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                      ]
+                    },
+                    {
+                      "href": "/temperature",
+                      "rt":   ["oic.r.temperature"],
+                      "if":   ["oic.if.s"],
+                      "p":    {"bm": 3},
+                      "eps": [
+                          {"ep": "coaps://[[2001:db8:a::123]:2222"}
+                      ]
+                    }
+                  ]
+                }
+              ]
+
+/oic/res?if=oic.if.ll:
+  displayName: Discoverable Resources Link List interface
+  is: [ interface-ll]
+  description: |
+    Link list representation of /oic/res; list of discoverable resources
+  get:
+    description: |
+      Retrieve the discoverable resource set, link list interface
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: slinklist
+            example: |
+              [
+                {
+                  "href": "/humidity",
+                  "rt":   ["oic.r.humidity"],
+                  "if":   ["oic.if.s"],
+                  "p":    {"bm": 3},
+                  "eps": [
+                    {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2},
+                    {"ep": "coaps://[fe80::b1d6]:1122"},
+                    {"ep": "coaps+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                  ]
+                },
+                {
+                  "href": "/temperature",
+                  "rt":   ["oic.r.temperature"],
+                  "if":   ["oic.if.s"],
+                  "p":    {"bm": 3},
+                  "eps": [
+                    {"ep": "coaps://[[2001:db8:a::123]:2222"}
+                  ]
+                }
+              ]

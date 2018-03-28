@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016, 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.mnt-schema.json#",
+  "definitions": {
+    "oic.wk.mnt-update": {
+      "type": "object",
+      "anyOf": [
+        {"required": ["fr"]},
+        {"required": ["rb"]}
+      ],
+      "properties": {
+        "fr":{
+          "type": "boolean",
+          "description": "Factory Reset"
+        },
+        "rb": {
+          "type": "boolean",
+          "description": "Reboot Action"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.wk.mnt-update" }
+  ]
+}

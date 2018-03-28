@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+    "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.types-schema.json#",
+    "definitions" : {
+        "uuid": {
+            "description": "Format pattern according to IETF RFC 4122.",
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+        },
+        "date": {
+            "description": "The full-date format pattern according to IETF RFC 3339",
+            "type": "string",
+            "pattern": "^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])$"
+        },
+        "duration": {
+            "description": "A string representing duration formatted as defined in ISO 8601. Allowable formats are: P[n]Y[n]M[n]DT[n]H[n]M[n]S, P[n]W, P[n]Y[n]-M[n]-DT[0-23]H[0-59]:M[0-59]:S, and P[n]W, P[n]Y[n]M[n]DT[0-23]H[0-59]M[0-59]S. P is mandatory, all other elements are optional, time elements must follow a T.",
+            "type": "string",
+            "pattern": "^(P(?!$)([0-9]+Y)?([0-9]+M)?([0-9]+W)?([0-9]+D)?((T(?=[0-9]+[HMS])([0-9]+H)?([0-9]+M)?([0-9]+S)?)?))$|^(P[0-9]+W)$|^(P[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|2[0-9]|1[0-9]|0[1-9])T(2[0-3]|1[0-9]|0[1-9]):([0-5][0-9]):([0-5][0-9])$|^(P[0-9]{4})(1[0-2]|0[1-9])(3[0-1]|2[0-9]|1[0-9]|0[1-9])T(2[0-3]|1[0-9]|0[1-9])([0-5][0-9])([0-5][0-9])$"
+        },
+        "language-tag": {
+          "description": "Format pattern according to IETF RFC 5646 (language tag).",
+          "type": "string",
+          "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$"
+        },
+        "int64": {
+          "description": "A string instance is valid against this attribute if it contains an integer in the range [-(2**63), (2**63)-1]",
+          "type": "string",
+          "pattern": "^0|(-?[1-9][0-9]{0,18})$"
+        },
+        "uint64": {
+          "description": "A string instance is valid against this attribute if it contains an integer in the range [0, (2**64)-1]",
+          "type": "string",
+          "pattern": "^0|([1-9][0-9]{0,19})$"
+        }
+    }
+}

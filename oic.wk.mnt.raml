@@ -1,0 +1,75 @@
+#%RAML 0.8
+title: Maintenance
+version: v1-20180313
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2016, 2017, 2018 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+schemas:
+  - mnt: !include schemas/oic.wk.mnt-schema.json
+  - mnt-update: !include schemas/oic.wk.mnt-UPdate-schema.json
+  
+traits:
+  - interface-all:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw", "oic.if.baseline"]
+  - interface-rw:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw","oic.if.baseline"]
+
+/oic/mnt:
+  displayName: Maintenance
+  description: |
+    The resource through which a Device is maintained and can be used for diagnostic purposes.
+    fr (Factory Reset) is a boolean.
+      The value 0 means No action (Default), the value 1 means Start Factory Reset
+    After factory reset, this value shall be changed back to the default value
+    rb (Reboot) is a boolean.
+      The value 0 means No action (Default), the value 1 means Start Reboot
+    After Reboot, this value shall be changed back to the default value
+
+  get:
+    is: [ interface-all ]
+    description: Retrieve the maintenance action status
+    responses:
+      200:
+        body:
+          application/json:
+            schema: mnt
+            example: |
+              {
+                "rt":   ["oic.wk.mnt"],
+                "fr":   false,
+                "rb":   false,
+                "err" : 503
+              }
+
+  post:
+    is: [ interface-rw ]
+    description: |
+      Set the maintenance action(s)
+    body:
+      application/json:
+        schema: mnt-update
+        example: |
+          {
+            "fr":   false,
+            "rb":   false
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: mnt
+            example: |
+              {
+                "fr":   false,
+                "rb":   false
+              }
