@@ -7,7 +7,7 @@
     "oic.wk.nmon": {
       "type": "object",
       "properties": {
-        "ianaifType": 
+        "ianaifType":
         {
             "type" : "integer",
             "description": "The type of the network connection, as defined by iana https://www.iana.org/assignments/ianaiftype-mib/ianaiftype-mib",
@@ -66,8 +66,7 @@
   },
   "type": "object",
   "allOf": [
-    {"$ref": "oic.core.json#/definitions/oic.core"},
-    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "oic.core-schema.json#/definitions/oic.core"},
     {"$ref": "#/definitions/oic.wk.nmon"}
   ],
   "required": ["reset", "col", "ianaifType"]
