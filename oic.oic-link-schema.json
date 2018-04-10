@@ -76,7 +76,7 @@
           "format": "uri"
         },
         "ins": {
-          "oneOf": [
+          "anyOf": [
             {
               "type": "integer",
               "description": "An ordinal number that is not repeated - must be unique in the collection context"
