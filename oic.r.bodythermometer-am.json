@@ -1,0 +1,49 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.bodythermometer-am.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Body Thermometer Atomic Measurement",
+  "definitions": {
+    "oic.r.bodythermometer-am": {
+      "type": "object",
+      "properties": {
+          "rt": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "uniqueItems": true,
+            "items": {
+              "enum": ["oic.r.bodythermometer-am", "oic.wk.atomicmeasurement"]
+            }
+          },
+          "rts": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": ["oic.r.temperature", "oic.r.body.location.temperature", "oic.r.time.observed", "oic.r.userid"]
+            },
+            "description": "This contains all possible resource types for this atomic measurement."
+          },
+          "rts-m": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": ["oic.r.temperature"]
+            },
+            "description": "This contains all mandatory resource types for this atomic measurement."
+          }
+        }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.collection-schema.json#/definitions/oic.collection.properties"},
+    {"$ref": "oic.collection-schema.json#/definitions/oic.collection.links.arrayoflinks"},
+    {"$ref": "#/definitions/oic.r.bodythermometer-am"}
+  ],
+  "required": ["rts-m"]
+}

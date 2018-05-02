@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+    "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection.batch-retrieve-schema.json#",
+    "title": "Collection Batch Retrieve Format",
+    "type": "array",
+    "minItems": 1,
+    "items": {
+       "type": "object",
+         "properties": {
+            "href": {
+              "type": "string",
+              "description": "URI of the target resource relative assuming the collection URI as anchor"
+            },
+            "rep": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "description": "The response payload from a single resource"
+                },
+                {
+                  "type": "array",
+                  "description": " The response payload from a collection (batch) resource"
+                }
+            ]
+         }
+       },
+       "additionalProperties": true,
+       "required": [
+          "href",
+          "rep"
+       ]
+    }
+}

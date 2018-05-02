@@ -1,0 +1,27 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.body.location.temperature.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Body location for temperature",
+  "definitions": {
+    "oic.r.body.location.temperature": {
+      "type": "object",
+      "properties": {
+        "bloc": {
+          "type": "string",
+          "enum": ["axillary", "body", "ear", "finger", "gitract", "mouth", "rectum", "toe", "tympanum"],
+          "readOnly": true,
+          "description": "A list specific to temperature site"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "oic.r.body.location.json#/definitions/oic.r.body.location"},
+    {"$ref": "#/definitions/oic.r.body.location.temperature"}
+  ],
+  "required": ["bloc"]
+}

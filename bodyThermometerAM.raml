@@ -1,0 +1,131 @@
+#%RAML 0.8
+title: OICBodyThermometerAM
+version: v1.1.0-20160519
+documentation:
+  - title: © 2018 Open Connectivity Foundation, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - batch-retrieve: !include oic.collection.batch-retrieve-schema.json
+  - links: !include oic.collection.linkslist-schema.json
+  - baseline: !include oic.r.bodythermometer-am.json
+
+traits:
+  - interface-all:
+      queryParameters:
+        if:
+          enum: ["oic.if.b", "oic.if.ll", "oic.if.baseline"]
+  - interface-b:
+      queryParameters:
+        if:
+          enum: ["oic.if.b"]
+  - interface-ll:
+      queryParameters:
+        if:
+          enum: ["oic.if.ll"]
+  - interface-baseline:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline"]
+
+/BodyThermometerAMResURI?if=oic.if.b:
+  description: |
+    This resource describes the proporties associated with body thermometer.
+    The resource is an atomic measurement of temperature (oic.r.temperature), body location for temperature (oic.r.body.location.temperature), observed time (oic.r.time.stamp), and user ID (oic.r.userid).
+  displayName: Body Thermometer Atomic Measurement Batch Representation
+  is: [ interface-b ]
+
+  get:
+    description: |
+      Retrieves the current body temperature.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: batch-retrieve
+            example: |
+              [
+                {
+                  "href": "/myTemperatureResURI",
+                  "rep":
+                  {
+                    "temperature": 38,
+                    "units": "C"
+                  }
+                },
+                {
+                  "href": "/myBodyLocationForTemperatureResURI",
+                  "rep":
+                  {
+                    "bloc": "mouth"
+                  }
+                }
+              ]
+
+/BodyThermometerAMResURI?if=oic.if.ll:
+  description: |
+    This resource describes the proporties associated with body thermometer.
+    The resource is an atomic measurement of temperature (oic.r.temperature), body location for temperature (oic.r.body.location.temperature), observed time (oic.r.time.stamp), and user ID (oic.r.userid).
+  displayName: Body Thermometer Atomic Measurement Linked List Representation
+  is: [ interface-ll ]
+
+  get:
+    description: |
+      Retrieves the current body temperature.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: links
+            example: |
+              [
+                {
+                  "href": "/myTemperatureResURI",
+                  "rt":   ["oic.r.temperature"],
+                  "if":   ["oic.if.s", "oic.if.baseline"]
+                },
+                {
+                  "href": "/myBodyLocationForTemperatureResURI",
+                  "rt":   ["oic.r.body.location.temperature"],
+                  "if":   ["oic.if.s", "oic.if.baseline"]
+                }
+              ]
+
+/BodyThermometerAMResURI?if=oic.if.baseline:
+  description: |
+    This resource describes the proporties associated with body thermometer.
+    The resource is an atomic measurement of temperature (oic.r.temperature), body location for temperature (oic.r.body.location.temperature), observed time (oic.r.time.stamp), and user ID (oic.r.userid).
+  displayName: Body Thermometer Atomic Measurement Baseline Representation
+  is: [ interface-baseline ]
+
+  get:
+    description: |
+      Retrieves the current body temperature.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: baseline
+            example: |
+              {
+                "rt": ["oic.r.bodythermometer-am", "oic.wk.atomicmeasurement"],
+                "if": ["oic.if.b", "oic.if.ll", "oic.if.baseline"],
+                "rts": ["oic.r.temperature", "oic.r.body.location.temperature"],
+                "rts-m": ["oic.r.temperature"],
+                "links": [
+                  {
+                    "href": "/myTemperatureResURI",
+                    "rt":   ["oic.r.temperature"],
+                    "if":   ["oic.if.s", "oic.if.baseline"]
+                  },
+                  {
+                    "href": "/myBodyLocationForTemperatureResURI",
+                    "rt":   ["oic.r.body.location.temperature"],
+                    "if":   ["oic.if.s", "oic.if.baseline"]
+                  }
+                ]
+              }
