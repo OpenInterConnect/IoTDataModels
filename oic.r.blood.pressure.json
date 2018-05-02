@@ -1,0 +1,44 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.blood.pressure.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Blood Pressure",
+  "definitions": {
+    "oic.r.blood.pressure": {
+      "type": "object",
+      "properties": {
+        "systolic":    {
+          "type": "number",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Systolic blood pressure"
+        },
+        "diastolic":    {
+          "type": "number",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Diastolic blood pressure"
+        },
+        "map":    {
+          "type": "number",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Mean Arterial Pressure (MAP)"
+        },
+        "units": {
+          "type": "string",
+          "readOnly": true,
+          "enum": ["mmHg", "kPa"],
+          "description": "Blood pressure unit"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.blood.pressure"}
+  ],
+  "required": ["systolic", "diastolic"]
+}
