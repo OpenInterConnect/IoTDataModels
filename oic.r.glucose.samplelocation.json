@@ -1,0 +1,26 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.glucose.samplelocation.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Context Sample Location for Glucose Meter",
+  "definitions": {
+    "oic.r.glucose.samplelocation": {
+      "type": "object",
+      "properties": {
+        "samplelocation": {
+          "type": "string",
+          "readOnly": true,
+          "enum": ["finger", "ast", "earlobe", "ctrlsolution"],
+          "description": "The possible blood locations where the blood sample may be taken."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.glucose.samplelocation"}
+  ],
+  "required": ["samplelocation"]
+}

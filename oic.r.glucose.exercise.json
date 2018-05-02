@@ -1,0 +1,27 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.glucose.exercise.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Exercise",
+  "definitions": {
+    "oic.r.glucose.exercise": {
+      "type": "object",
+      "properties": {
+        "exercise": {
+          "type": "number",
+          "readOnly": true,
+          "minimum": 0,
+          "maximum": 100,
+          "description": "The level of exercise undertaken in percentage"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.glucose.exercise"}
+  ],
+  "required": ["exercise"]
+}

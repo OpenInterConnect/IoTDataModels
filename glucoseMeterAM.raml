@@ -1,0 +1,132 @@
+#%RAML 0.8
+title: OICGlucoseMeterAM
+version: v1.1.0-20160519
+documentation:
+  - title: © 2018 Open Connectivity Foundation, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - batch-retrieve: !include oic.collection.batch-retrieve-schema.json
+  - links: !include oic.collection.linkslist-schema.json
+  - baseline: !include oic.r.glucosemeter-am.json
+
+traits:
+  - interface-all:
+      queryParameters:
+        if:
+          enum: ["oic.if.b", "oic.if.ll", "oic.if.baseline"]
+  - interface-b:
+      queryParameters:
+        if:
+          enum: ["oic.if.b"]
+  - interface-ll:
+      queryParameters:
+        if:
+          enum: ["oic.if.ll"]
+  - interface-baseline:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline"]
+
+/GlucoseMeterAMResURI?if=oic.if.b:
+  description: |
+    This resource describes the proporties associated with glucose meter.
+    The resource is an atomic measurement of glucose (oic.r.glucose), context carbohydrates (oic.r.glucose.carb), context exercise (oic.r.glucose.exercise), Hemoglobin Bound to Glucose A1c Form (HbA1c) (oic.r.glucose.hba1c), context health (oic.r.glucose.health), context meal (oic.r.glucose.meal), context medication (oic.r.glucose.medication), context sample location (oic.r.glucose.samplelocation), context tester (oic.r.glucose.tester), observed time (oic.r.time.stamp), and user ID (oic.r.userid).
+
+  displayName: Glucose Meter Atomic Measurement Batch Representation
+  is: [ interface-b ]
+
+  get:
+    description: |
+      Retrieves the current glucose.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: batch-retrieve
+            example: |
+              [
+                {
+                  "href": "/myGlucoseResURI",
+                  "rep":
+                  {
+                    "glucose": 100,
+                    "units": "mg/dL"
+                  }
+                },
+                {
+                  "href": "/myHbA1cResURI",
+                  "rep":
+                  {
+                    "hba1c": 5
+                  }
+                }
+              ]
+
+/GlucoseMeterAMResURI?if=oic.if.ll:
+  description: |
+    This resource describes the proporties associated with glucose meter.
+    The resource is an atomic measurement of glucose (oic.r.glucose), context carbohydrates (oic.r.glucose.carb), context exercise (oic.r.glucose.exercise), Hemoglobin Bound to Glucose A1c Form (HbA1c) (oic.r.glucose.hba1c), context health (oic.r.glucose.health), context meal (oic.r.glucose.meal), context medication (oic.r.glucose.medication), context sample location (oic.r.glucose.samplelocation), context tester (oic.r.glucose.tester), observed time (oic.r.time.stamp), and user ID (oic.r.userid).
+  displayName: Glucose Meter Atomic Measurement Linked List Representation
+  is: [ interface-ll ]
+
+  get:
+    description: |
+      Retrieves the current glucose.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: links
+            example: |
+              [
+                {
+                  "href": "/myGlucoseResURI",
+                  "rt":   ["oic.r.glucose"],
+                  "if":   ["oic.if.s", "oic.if.baseline"]
+                },
+                {
+                  "href": "/myHbA1cResURI",
+                  "rt":   ["oic.r.glucose.hba1c"],
+                  "if":   ["oic.if.s", "oic.if.baseline"]
+                }
+              ]
+
+/GlucoseMeterAMResURI?if=oic.if.baseline:
+  description: |
+    This resource describes the proporties associated with glucose meter.
+    The resource is an atomic measurement of glucose (oic.r.glucose), context carbohydrates (oic.r.glucose.carb), context exercise (oic.r.glucose.exercise), Hemoglobin Bound to Glucose A1c Form (HbA1c) (oic.r.glucose.hba1c), context health (oic.r.glucose.health), context meal (oic.r.glucose.meal), context medication (oic.r.glucose.medication), context sample location (oic.r.glucose.samplelocation), context tester (oic.r.glucose.tester), observed time (oic.r.time.stamp), and user ID (oic.r.userid).
+  displayName: Glucose Meter Atomic Measurement Baseline Representation
+  is: [ interface-baseline ]
+
+  get:
+    description: |
+      Retrieves the current glucose.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: baseline
+            example: |
+              {
+                "rt": ["oic.r.glucosemeter-am", "oic.wk.atomicmeasurement"],
+                "if": ["oic.if.b", "oic.if.ll", "oic.if.baseline"],
+                "rts": ["oic.r.glucose", "oic.r.glucose.hba1c"],
+                "rts-m": ["oic.r.glucose"],
+                "links": [
+                  {
+                    "href": "/myGlucoseResURI",
+                    "rt":   ["oic.r.glucose"],
+                    "if":   ["oic.if.s", "oic.if.baseline"]
+                  },
+                  {
+                    "href": "/myHbA1cResURI",
+                    "rt":   ["oic.r.glucose.hba1c"],
+                    "if":   ["oic.if.s", "oic.if.baseline"]
+                  }
+                ]
+              }

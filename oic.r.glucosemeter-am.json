@@ -1,0 +1,49 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.glucosemeter-am.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Glucose Meter Atomic Measurement",
+  "definitions": {
+    "oic.r.glucosemeter-am": {
+      "type": "object",
+      "properties": {
+          "rt": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "uniqueItems": true,
+            "items": {
+              "enum": ["oic.r.glucosemeter-am", "oic.wk.atomicmeasurement"]
+            }
+          },
+          "rts": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": ["oic.r.glucose", "oic.r.glucose.carb", "oic.r.glucose.exercise", "oic.r.glucose.hba1c", "oic.r.glucose.health", "oic.r.glucose.meal", "oic.r.glucose.medication", "oic.r.glucose.samplelocation", "oic.r.glucose.tester", "oic.r.time.observed", "oic.r.userid"]
+            },
+            "description": "This contains all possible resource types for this atomic measurement."
+          },
+          "rts-m": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": ["oic.r.glucose"]
+            },
+            "description": "This contains all mandatory resource types for this atomic measurement."
+          }
+        }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.collection-schema.json#/definitions/oic.collection.properties"},
+    {"$ref": "oic.collection-schema.json#/definitions/oic.collection.links.arrayoflinks"},
+    {"$ref": "#/definitions/oic.r.glucosemeter-am"}
+  ],
+  "required": ["rts-m"]
+}

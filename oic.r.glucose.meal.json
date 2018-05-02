@@ -1,0 +1,26 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.glucose.meal.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Context Meal for Glucose Meter",
+  "definitions": {
+    "oic.r.glucose.meal": {
+      "type": "object",
+      "properties": {
+        "meal": {
+          "type": "string",
+          "readOnly": true,
+          "enum": ["preprandial", "postprandial", "fasting", "bedtime", "casual"],
+          "description": "Time of day when the measurement is taken."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.glucose.meal"}
+  ],
+  "required": ["meal"]
+}

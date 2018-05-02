@@ -1,0 +1,26 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.glucose.tester.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Context Tester for Glucose Meter",
+  "definitions": {
+    "oic.r.glucose.tester": {
+      "type": "object",
+      "properties": {
+        "tester": {
+          "type": "string",
+          "readOnly": true,
+          "enum": ["self", "hcp", "lab"],
+          "description": "The possible cases of testers who may perform the blood sugar measurement."
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.glucose.tester"}
+  ],
+  "required": ["tester"]
+}

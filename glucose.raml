@@ -1,0 +1,46 @@
+#%RAML 0.8
+title: OICGlucose
+version: v1.1.0-20160519
+documentation:
+  - title: Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - Glucose: !include oic.r.glucose.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s","oic.if.baseline"]
+
+/GlucoseResURI:
+  description: |
+    This resource describes the properties associated with a person's Glucose level.
+    The unit is a single value that is one of mg/dL, mmol/L.
+    If the unit Property is missing the default is milligrams per decilitre [mg/dL].
+    The glucose and unit Properties are read-only values that are provided by the server.
+    When range (from oic.r.baseresource) is omitted the default is 0 to +MAXFLOAT.
+
+  displayName: Glucose
+  is: [ interface ]
+
+  get:
+    description: |
+      Retrieves glucose level of a person.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Glucose
+            example: |
+              {
+                "rt":       ["oic.r.glucose"],
+                "id":       "unique_example_id",
+                "glucose":  90,
+                "units":     "mg/dL"
+              }

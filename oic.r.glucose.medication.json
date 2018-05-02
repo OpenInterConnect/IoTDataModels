@@ -1,0 +1,37 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.glucose.medication.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Context Medication for Glucose Meter",
+  "definitions": {
+    "oic.r.glucose.medication": {
+      "type": "object",
+      "properties": {
+        "medication":    {
+          "type": "number",
+          "readOnly": true,
+          "description": "The level of medication undertaken"
+        },
+        "units": {
+          "type": "string",
+          "readOnly": true,
+          "enum": ["mg", "mL"],
+          "description": "Current exercise movement type measurement"
+        },
+        "regimen": {
+          "type": "string",
+          "readOnly": true,
+          "enum": ["rapidacting", "shortacting", "intermediateacting", "longacting", "premix"],
+          "description": "Medication regimen"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.glucose.medication"}
+  ],
+  "required": ["medication"]
+}
