@@ -1,0 +1,49 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.bodyscale-am.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Body Scale Atomic Measurement",
+  "definitions": {
+    "oic.r.bodyscale-am": {
+      "type": "object",
+      "properties": {
+          "rt": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "uniqueItems": true,
+            "items": {
+              "enum": ["oic.r.bodyscale-am", "oic.wk.atomicmeasurement"]
+            }
+          },
+          "rts": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": ["oic.r.weight", "oic.r.bmi", "oic.r.height", "oic.r.body.fat", "oic.r.body.water", "oic.r.body.slm", "oic.r.body.ffm", "oic.r.time.stamp", "oic.r.userid"]
+            },
+            "description": "This contains all possible resource types for this atomic measurement."
+          },
+          "rts-m": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": ["oic.r.weight"]
+            },
+            "description": "This contains all mandatory resource types for this atomic measurement."
+          }
+        }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.collection-schema.json#/definitions/oic.collection.properties"},
+    {"$ref": "oic.collection-schema.json#/definitions/oic.collection.links.arrayoflinks"},
+    {"$ref": "#/definitions/oic.r.bodyscale-am"}
+  ],
+  "required": ["rts-m"]
+}

@@ -1,23 +1,23 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.weight.json#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.body.water.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
-  "title": "Weight",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Body Water",
   "definitions": {
-    "oic.r.weight": {
+    "oic.r.body.water": {
       "type": "object",
       "properties": {
-        "weight": {
+        "bwater": {
           "type": "number",
           "minimum": 0,
           "readOnly": true,
-          "description": "Weight of an object"
+          "description": "Body water."
         },
         "units": {
           "type": "string",
           "readOnly": true,
-          "enum": ["kg", "g", "lb", "oz"],
-          "description": "Weight unit"
+          "enum": ["kg", "lb"],
+          "description": "Body water unit"
         }
       }
     }
@@ -26,7 +26,7 @@
   "allOf": [
     {"$ref": "oic.core.json#/definitions/oic.core"},
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
-    {"$ref": "#/definitions/oic.r.weight"}
+    {"$ref": "#/definitions/oic.r.body.water"}
   ],
-  "required": ["weight", "units"]
+  "required": ["bwater"]
 }

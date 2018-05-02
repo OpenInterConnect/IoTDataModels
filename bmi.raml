@@ -1,5 +1,5 @@
 #%RAML 0.8
-title: OICHeight
+title: OICBMI
 version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.
@@ -10,76 +10,35 @@ documentation:
 
         THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 schemas:
-  - Height: !include oic.r.height.json
+  - BMI: !include oic.r.bmi.json
 
 traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.a","oic.if.baseline"]
+          enum: ["oic.if.s","oic.if.baseline"]
 
-/HeightResURI:
+/BMIResURI:
   description: |
-    This resource describes the properties associated with height of an object's physical size.
-    The unit is a single value that is one of m, cm, ft or in.
-    If the unit Property is missing the default is meters [m].
-    The unit Property is a read-only value that is provided by the server.
+    This resource describes the properties associated with a person's Body Mass Index (BMI).
+    The unit, which is the default unit, is kg/m^2.
+    The bmi and unit Properties are read-only values that are provided by the server.
     When range (from oic.r.baseresource) is omitted the default is 0 to +MAXFLOAT.
 
-  displayName: Height
+  displayName: BMI
   is: [ interface ]
 
   get:
     description: |
-      Retrieves height of an object.
+      Retrieves BMI of an object.
     responses:
       200:
         body:
           application/json:
-            schema: Height
+            schema: BMI
             example: |
               {
-                "rt":     ["oic.r.height"],
+                "rt":     ["oic.r.bmi"],
                 "id":     "unique_example_id",
-                "height": 1.8,
-                "units":   "m"
-              }
-  post:
-    description: |
-      Sets the Height.
-    body:
-      application/json:
-        schema: Height
-        example: |
-          {
-            "id":     "unique_example_id",
-            "height": 1.8,
-            "units":   "m"
-          }
-    responses:
-      200:
-        description: |
-          Indicates that the height was successfully changed.
-          The new height is provided in the response.
-        body:
-          application/json:
-            schema: Height
-            example: |
-              {
-                "id":     "unique_example_id",
-                "height": 1.8,
-                "units":   "m"
-              }
-      403:
-        description: |
-          Indicates that OCF client sent an invalid property value to the server.
-          The server responds with the current resource representation.
-        body:
-          application/json:
-            schema: Height
-            example: |
-              {
-                "id":     "unique_example_id",
-                "height": 1.8,
-                "units":   "m"
+                "bmi":    20
               }

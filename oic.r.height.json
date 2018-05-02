@@ -1,7 +1,7 @@
 {
   "id": "http://openinterconnect.org/schemas/oic.r.height.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Copyright (c) 2016, 2017 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description": "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "Height",
   "definitions": {
     "oic.r.height": {
@@ -11,12 +11,19 @@
           "type": "number",
           "minimum": 0,
           "description": "Height of an object"
+        },
+        "units":  {
+          "type": "string",
+          "readOnly": true,
+          "enum": ["m", "cm", "ft", "in"],
+          "description": "Height unit"
         }
       }
     }
   },
   "type": "object",
   "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.height"}
   ],
