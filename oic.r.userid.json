@@ -1,0 +1,25 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.userid.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "User ID",
+  "definitions": {
+    "oic.r.userid": {
+      "type": "object",
+      "properties": {
+        "userid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ID of a patient/user of healthcare devices"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.userid"}
+  ],
+  "required": ["userid"]
+}
