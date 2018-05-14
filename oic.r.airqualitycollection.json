@@ -13,6 +13,7 @@
           "maxItems": 2,
           "uniqueItems": true,
           "items": {
+            "type" : "string",  
             "enum": ["oic.r.airqualitycollection","oic.wk.col"]
           }
         },
@@ -24,9 +25,11 @@
           "items": {
             "anyOf": [
               {
+                "type" : "string",  
                 "enum": ["oic.r.airquality","oic.r.value.conditional"]
               },
               {
+                "type" : "string",  
                 "enum": ["oic.r.airquality"]
               }
             ]

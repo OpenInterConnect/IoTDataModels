@@ -1,0 +1,28 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.oifid.tag.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "ORFID",
+  "definitions": {
+    "oic.r.orfid.tag": {
+      "properties": {
+          "tagid" : { 
+              "type" : "integer",
+              "description" : "the tag read by the reader",
+              "readOnly" : true
+          },
+          "reading" : { 
+              "type" : "boolean",
+              "description" : "true, the tagid is read e.g. being valid. false, the tagid is invalid",
+              "readOnly" : true
+          }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.orfid.tag"}
+  ],
+  "required": ["tagid", "reading"]
+}

@@ -1,0 +1,47 @@
+#%RAML 0.8
+title: 3DPrinter
+version: v1.1.0-20180115
+documentation:
+  - title: (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - 3DPrinter:   !include oic.r.3dprinter.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.r","oic.if.baseline"]
+
+/3DPrinterResURI:
+  description: |
+    This resource describes the attributes associated with 3D Printer. The type of 3D printing technology is specified by an enumerated string value. The maximum sizes in mm are included for the x, y, and z dimensions. A designation of whether the device is capable of WAN connectivity is represented in a boolean. The memory capacity is captured in MB.
+    
+    The print
+  displayName: 3D Printer
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Retrieves the current 3D Printer attributes.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: 3DPrinter
+            example: |
+              {
+                "rt"           : ["oic.r.3dprinter"],
+                "id"           : "unique_example_id",
+                "3dprinttype"  : "Digital Light Processing",
+                "printsizex"   : 300.00,
+                "printsizey"   : 200.50,
+                "printsizez"   : 250.75,
+                "wanconnected" : false,
+                "memorysize"   : 120.5
+              }

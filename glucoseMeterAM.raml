@@ -12,7 +12,7 @@ documentation:
 schemas:
   - batch-retrieve: !include oic.collection.batch-retrieve-schema.json
   - links: !include oic.collection.linkslist-schema.json
-  - baseline: !include oic.collection-schema.json
+  - baseline: !include oic.r.glucosemeter-am.json
 
 traits:
   - interface-all:
@@ -113,7 +113,7 @@ traits:
             schema: baseline
             example: |
               {
-                "rt": ["oic.r.glucosemeter-am", "oic.wk.col.atomic"],
+                "rt": ["oic.r.glucosemeter-am", "oic.wk.atomicmeasurement"],
                 "if": ["oic.if.b", "oic.if.ll", "oic.if.baseline"],
                 "rts": ["oic.r.glucose", "oic.r.glucose.hba1c"],
                 "rts-m": ["oic.r.glucose"],

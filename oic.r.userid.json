@@ -10,7 +10,7 @@
         "userid": {
           "type": "string",
           "readOnly": true,
-          "description": "ID of an OCF client"
+          "description": "ID of a patient/user of healthcare devices"
         }
       }
     }

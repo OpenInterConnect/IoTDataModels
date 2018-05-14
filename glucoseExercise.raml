@@ -1,5 +1,5 @@
 #%RAML 0.8
-title: OICExercise
+title: OICGlucoseExercise
 version: v1.1.0-20160519
 documentation:
   - title: Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.
@@ -20,11 +20,11 @@ traits:
 
 /ExerciseResURI:
   description: |
-    This resource describes the properties associated with exercise.
+    This resource describes the properties associated with glucose exercise.
     The exercise property has a default unit of percentage[%].
     The exercise property is a read-only value that is provided by the server.
 
-  displayName: Exercise
+  displayName: Exercise for Glucose Meter
   is: [ interface ]
 
   get:

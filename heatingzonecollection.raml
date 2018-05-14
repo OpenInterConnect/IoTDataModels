@@ -29,7 +29,7 @@ traits:
           if:
              enum: ["oic.if.ll"]
 
-/HeatingZoneBaselineResURI:
+/HeatingZoneResURI?if=oic.if.baseline:
   description: |
     This Resource provides information about the status of the heating zones of a Cook-Top.
     It describes the case of a Cook-Top whose zones can be activated dynamically (i.e. the device implements pot recognition).
@@ -58,7 +58,7 @@ traits:
                 ]
               }
 
-/HeatingZoneLLResURI:
+/HeatingZoneResURI?if=oic.if.ll:
   description: |
     This Resource provides information about the status of the heating zones of a Cook-Top.
     It describes the case of a Cook-Top whose zones can be activated dynamically (i.e. the device implements pot recognition).

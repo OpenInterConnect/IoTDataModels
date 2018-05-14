@@ -16,14 +16,14 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.s","oic.if.baseline"]
+          enum: ["oic.if.a","oic.if.baseline"]
 
 /HeightResURI:
   description: |
     This resource describes the properties associated with height of an object's physical size.
-    The units is a single value that is one of m, cm, ft or in.
-    If the units Property is missing the default is meters [m].
-    The units Property is a read-only value that is provided by the server.
+    The unit is a single value that is one of m, cm, ft or in.
+    If the unit Property is missing the default is meters [m].
+    The unit Property is a read-only value that is provided by the server.
     When range (from oic.r.baseresource) is omitted the default is 0 to +MAXFLOAT.
 
   displayName: Height
@@ -40,6 +40,45 @@ traits:
             example: |
               {
                 "rt":     ["oic.r.height"],
+                "id":     "unique_example_id",
+                "height": 1.8,
+                "units":   "m"
+              }
+  post:
+    description: |
+      Sets the Height.
+    body:
+      application/json:
+        schema: Height
+        example: |
+          {
+            "id":     "unique_example_id",
+            "height": 1.8,
+            "units":   "m"
+          }
+    responses:
+      200:
+        description: |
+          Indicates that the height was successfully changed.
+          The new height is provided in the response.
+        body:
+          application/json:
+            schema: Height
+            example: |
+              {
+                "id":     "unique_example_id",
+                "height": 1.8,
+                "units":   "m"
+              }
+      403:
+        description: |
+          Indicates that OCF client sent an invalid property value to the server.
+          The server responds with the current resource representation.
+        body:
+          application/json:
+            schema: Height
+            example: |
+              {
                 "id":     "unique_example_id",
                 "height": 1.8,
                 "units":   "m"

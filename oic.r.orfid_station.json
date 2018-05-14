@@ -1,0 +1,32 @@
+{
+  "id": "http://openinterconnect.org/schemas/oic.r.oifid.station.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "ORFID",
+  "definitions": {
+    "oic.r.orfid.station": {
+      "properties": {
+          "process" : {
+              "type" : "integer",
+              "description" : "the process step that is being performed at this station",
+              "readOnly" : true
+          },
+          "event" : {
+              "type" : "boolean",
+              "description" : "when True, the action request should be applied to the product identified by the tagid"
+          },
+          "actionrequest" : {
+              "type" : "integer",
+              "description" : "the action request identifier"
+          }
+          
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.orfid.station"}
+  ],
+  "required": ["event","actionrequest"]
+}

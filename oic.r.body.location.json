@@ -21,6 +21,5 @@
     {"$ref": "oic.core.json#/definitions/oic.core"},
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.body.location"}
-  ],
-  "required": ["bloc"]
+  ]
 }

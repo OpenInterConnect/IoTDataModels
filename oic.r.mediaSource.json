@@ -16,6 +16,7 @@
           "description": "Numeric identifier to specify the instance"
         },
         "sourceType": {
+          "type": "string",
           "enum": [ "audioOnly", "videoOnly", "audioPlusVideo" ],
           "readOnly": true,
           "description": "Specifies the type of the source"

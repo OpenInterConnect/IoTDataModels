@@ -29,7 +29,7 @@ traits:
         if:
             enum: ["oic.if.ll"]
 
-/AirQualityBaselineResURI:
+/AirQualityResURI?if=oic.if.baseline:
   description: |
     This resource describes a sensor that provides the qualitative or measured Air Quality.
     The resource is a collection of instances of oic.r.airquality detailing the individual exposed contaminant measures
@@ -57,7 +57,7 @@ traits:
                 ]
               }
 
-/AirQualityLLResURI:
+/AirQualityResURI?if=oic.if.ll:
   description: |
     This resource describes a sensor that provides the qualitative or measured Air Quality.
     The resource is a collection of instances of oic.r.airquality detailing the individual exposed contaminant measures

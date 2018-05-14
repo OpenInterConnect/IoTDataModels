@@ -6,21 +6,19 @@
   "definitions": {
     "oic.r.bodyscale-am": {
       "type": "object",
-      "allOf": [
-        {
+      "properties": {
           "rt": {
             "type": "array",
             "minItems": 2,
             "maxItems": 2,
             "uniqueItems": true,
             "items": {
-              "enum": ["oic.r.bodyscale-am", "oic.wk.col.atomic"]
+              "enum": ["oic.r.bodyscale-am", "oic.wk.atomicmeasurement"]
             }
           },
           "rts": {
             "type": "array",
             "minItems": 1,
-            "maxItems": 9,
             "uniqueItems": true,
             "items": {
               "enum": ["oic.r.weight", "oic.r.bmi", "oic.r.height", "oic.r.body.fat", "oic.r.body.water", "oic.r.body.slm", "oic.r.body.ffm", "oic.r.time.stamp", "oic.r.userid"]
@@ -38,14 +36,14 @@
             "description": "This contains all mandatory resource types for this atomic measurement."
           }
         }
-      ]
     }
   },
   "type": "object",
   "allOf": [
     {"$ref": "oic.core.json#/definitions/oic.core"},
-    {"$ref": "#/definitions/oic.r.bodyscale-am"},
-    {"$ref": "oic.collection-schema.json#/definitions/oic.collection"}
+    {"$ref": "oic.collection-schema.json#/definitions/oic.collection.properties"},
+    {"$ref": "oic.collection-schema.json#/definitions/oic.collection.links.arrayoflinks"},
+    {"$ref": "#/definitions/oic.r.bodyscale-am"}
   ],
   "required": ["rts-m"]
 }

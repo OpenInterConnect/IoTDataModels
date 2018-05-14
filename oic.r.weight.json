@@ -28,5 +28,5 @@
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.weight"}
   ],
-  "required": ["weight"]
+  "required": ["weight", "units"]
 }

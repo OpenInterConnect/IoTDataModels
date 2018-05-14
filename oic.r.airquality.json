@@ -13,11 +13,13 @@
           "description": "The measured or qualitative value for the contaminant."
         },
         "contaminanttype": {
+          "type": "string",
           "enum": ["CH2O","CO2","CO","PM2.5","PM10","VOC","Smoke","Odor","AirPollution"],
           "description": "The contaminant being measured.",
           "readOnly": true
         },
         "valuetype": {
+          "type": "string",
           "enum": ["Qualitative","Measured"],
           "description": "Indicates whether the provided value is qualitative or measured.",
           "readOnly": true

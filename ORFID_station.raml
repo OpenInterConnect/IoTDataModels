@@ -1,0 +1,66 @@
+#%RAML 0.8
+title: OpticalRFIDSmartfactory Station
+version: Version 2018-01-30
+documentation:
+  - title: © 2016 Open Connectivity Foundation, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - ORFID: !include oic.r.orfid_station.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+            enum: ["oic.if.rw","oic.if.baseline"]
+
+/ORFIDSmartFactoryResURI:
+  description: |
+    In OCF interface, optical augmented RFID reader+tag became a single OCF resource. The tagid is an integer showing the currently read optical augmented RFID tag's identity information. The process represents the stage of the product in the product line which has an optical RFID tag on its body. Event is represented by a Boolean value set to "True" and "False" alarming the issue when additional action is requested for the tagged product. Actionrequest represent necessary actions like the isolation of the product, to send the product back to other specific line to modify or fix the issue.
+
+
+  displayName: Optical RFID
+  is: [ interface ]
+  
+  get:
+    description: |
+      Retrieves the tag information from optical augmented RFID reader in smart factory environment.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: ORFID
+            example: |
+              {
+                "rt":                   ["oic.r.orfid.tag"],
+                "id":                   "unique_example_id",
+                "process":              17,
+                "event":                true,
+                "actionrequest":        2
+              }
+
+  post:
+    description: |
+      Sets necessary action in accordance with Tag Information
+    body:
+      application/json:
+        schema: ORFID
+        example: |
+          {
+            "event":                false,
+            "actionrequest":        0
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: ORFID
+            example: |
+              {
+                "event":                false,
+                "actionrequest":        0
+              }

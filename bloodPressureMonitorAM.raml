@@ -12,7 +12,7 @@ documentation:
 schemas:
   - batch-retrieve: !include oic.collection.batch-retrieve-schema.json
   - links: !include oic.collection.linkslist-schema.json
-  - baseline: !include oic.collection-schema.json
+  - baseline: !include oic.r.bloodpressuremonitor-am.json
 
 traits:
   - interface-all:
@@ -35,7 +35,7 @@ traits:
 /BloodPressureMonitorAMResURI?if=oic.if.b:
   description: |
     This resource describes the proporties associated with Blood Pressure Monitor.
-    The resource is an atomic measurement of blood pressure (oic.r.bloodpressure),  pulse rate (oic.r.pulserate), observed time (oic.r.time.stamp), and user ID (oic.r.userid).
+    The resource is an atomic measurement of blood pressure (oic.r.blood.pressure),  pulse rate (oic.r.pulserate), observed time (oic.r.time.stamp), and user ID (oic.r.userid).
   displayName: Blood Pressure Monitor Atomic Measurement Batch Representation
   is: [ interface-b ]
 
@@ -70,7 +70,7 @@ traits:
 /BloodPressureMonitorAMResURI?if=oic.if.ll:
   description: |
     This resource describes the proporties associated with Blood Pressure Monitor.
-    The resource is an atomic measurement of blood pressure (oic.r.bloodpressure),  pulse rate (oic.r.pulserate), observed time (oic.r.time.stamp), and user ID (oic.r.userid).
+    The resource is an atomic measurement of blood pressure (oic.r.blood.pressure),  pulse rate (oic.r.pulserate), observed time (oic.r.time.stamp), and user ID (oic.r.userid).
   displayName: Blood Pressure Monitor Atomic Measurement Linked List Representation
   is: [ interface-ll ]
 
@@ -86,7 +86,7 @@ traits:
                 [
                     {
                         "href": "/myBloodPressureResURI",
-                        "rt":   ["oic.r.bloodpressure"],
+                        "rt":   ["oic.r.blood.pressure"],
                         "if":   ["oic.if.s", "oic.if.baseline"]
                     },
                     {
@@ -94,13 +94,13 @@ traits:
                         "rt":   ["oic.r.pulserate"],
                         "if":   ["oic.if.s", "oic.if.baseline"]
                     }
-                ]    
+                ]
 
 
 /BloodPressureMonitorAMResURI?if=oic.if.baseline:
   description: |
     This resource describes the proporties associated with Blood Pressure Monitor.
-    The resource is an atomic measurement of blood pressure (oic.r.bloodpressure),  pulse rate (oic.r.pulserate), observed time (oic.r.time.stamp), and user ID (oic.r.userid).
+    The resource is an atomic measurement of blood pressure (oic.r.blood.pressure),  pulse rate (oic.r.pulserate), observed time (oic.r.time.stamp), and user ID (oic.r.userid).
   displayName: Blood Pressure Monitor Atomic Measurement Baseline Representation
   is: [ interface-baseline ]
 
@@ -114,14 +114,14 @@ traits:
             schema: baseline
             example: |
               {
-                "rt": ["oic.r.bloodpressuremonitor-am", "oic.wk.col.atomic"],
+                "rt": ["oic.r.bloodpressuremonitor-am", "oic.wk.atomicmeasurement"],
                 "if": ["oic.if.b", "oic.if.ll", "oic.if.baseline"],
-                "rts-m": ["oic.r.bloodpressure"],
-                "rts": ["oic.r.bloodpressure", "oic.r.pulserate"],
+                "rts-m": ["oic.r.blood.pressure"],
+                "rts": ["oic.r.blood.pressure", "oic.r.pulserate"],
                 "links": [
                   {
                     "href": "/myBloodPressureResURI",
-                    "rt":   ["oic.r.bloodpressure"],
+                    "rt":   ["oic.r.blood.pressure"],
                     "if":   ["oic.if.s", "oic.if.baseline"]
                   },
                   {
