@@ -1,0 +1,56 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.motionsensor.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Motion Sensor",
+  "definitions": {
+    "onem2m.m.motionSensor": {
+      "type": "object",
+      "properties": {
+        "motionSensor": {
+          "type": "boolean",
+          "description": "Alarm State",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.sensor.motion.value = alarm"
+            ],
+            "x-from-ocf": [
+              "alarm = oic.r.sensor.motion.value"
+            ]
+          }
+        },
+        "silentTime": {
+          "type": "integer",
+          "description": "Silent Time",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.sensor.props.silenttime = silentTime"
+            ],
+            "x-from-ocf": [
+              "silentTime = oic.r.sensor.props.silenttime"
+            ]
+          }
+        },
+        "sensitivity": {
+          "type": "number",
+          "description": "Sensitivity",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.sensor.props.sensitivity = sensitivity",
+              "OCF sensitivity is a number and oneM2M sensitivity is an integer, so this arithmetic assignment works, but an arithmetic conversion may be necessary depending on how the value is interpreted"
+            ],
+            "x-from-ocf": [
+              "sensitivity = oic.r.sensor.props.sensitivity",
+              "OCF sensitivity is a number and the oneM2M is an integer, so arithmetic conversion may be necessary depending on how the value is interpreted"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.motionsensor"}
+  ],
+  "required": [ "alarm" ]
+}

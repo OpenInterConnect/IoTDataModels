@@ -1,0 +1,54 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.colour.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Colour",
+  "definitions": {
+    "onem2m.m.colour": {
+      "type": "object",
+      "properties": {
+        "red": {
+          "type": "integer",
+          "description": "The value of the Red colour channel of RGB. The range is [0,255]",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.colour.rgb.rgbValue[0] = red"
+            ],
+            "x-from-ocf": [
+              "red = oic.r.colour.rgb.rgbValue[0]"
+            ]
+          }
+        },
+        "green": {
+          "type": "integer",
+          "description": "The value of the Green colour channel of RGB. The range is [0,255]",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.colour.rgb.rgbValue[1] = green"
+            ],
+            "x-from-ocf": [
+              "green = oic.r.colour.rgb.rgbValue[1]"
+            ]
+          }
+        },
+        "blue": {
+          "type": "integer",
+          "description": "The value of the Blue colour channel of RGB. The range is [0,255]",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.colour.rgb.rgbValue[2] = blue"
+            ],
+            "x-from-ocf": [
+              "blue = oic.r.colour.rgb.rgbValue[2]"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.colour.json"}
+  ],
+  "required": [ "red", "green", "blue"]
+}

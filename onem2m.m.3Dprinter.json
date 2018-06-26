@@ -1,0 +1,90 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.3Dprinter.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "3D Printer",
+  "definitions": {
+    "onem2m.m.3Dprinter": {
+      "type": "object",
+      "properties": {
+        "printType": {
+          "type": "string",
+          "description": "3D Printer Type",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.3dprinter.3dprinttype = printType"
+            ],
+            "x-from-ocf": [
+              "printType = oic.r.3dprinter.3dprintype"
+            ]
+          }
+        },
+        "printSizeX": {
+          "type": "number",
+          "description": "Print Size X",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.3dprinter.printsizex = printSizeX"
+            ],
+            "x-from-ocf": [
+              "printSizeX = oic.r.3dprinter.printsizex"
+            ]
+          }
+        },
+        "printSizeY": {
+          "type": "number",
+          "description": "Print Size Y",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.3dprinter.printsizey = printSizeY"
+            ],
+            "x-from-ocf": [
+              "printSizeY = oic.r.3dprinter.printsizey"
+            ]
+          }
+        },
+        "printSizeZ": {
+          "type": "number",
+          "description": "Print Size Z",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.3dprinter.printsizez = printSizeZ"
+            ],
+            "x-from-ocf": [
+              "printSizeZ = oic.r.3dprinter.printsizez"
+            ]
+          }
+        },
+        "network": {
+          "type": "boolean",
+          "description": "WAN Connected",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.3dprinter.wanconnected = network"
+            ],
+            "x-from-ocf": [
+              "network = oic.r.3dprinter.wanconnected"
+            ]
+          }
+        },
+        "memorySize": {
+          "type": "number",
+          "description": "Memory Size",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.3dprinter.memorysize = memorySize"
+            ],
+            "x-from-ocf": [
+              "memorySize = oic.r.3dprinter.memorysize"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.3Dprinter"}
+  ],
+  "required": [ "printType", "printSizeX", "printSizeY", "printSizeZ", "network", "memorySize" ]
+}

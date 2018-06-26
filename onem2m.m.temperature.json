@@ -1,0 +1,141 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.temperature.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Temperature",
+  "definitions": {
+    "onem2m.m.temperature": {
+      "type": "object",
+      "properties": {
+        "currentTemperature": {
+          "type": "number",
+          "description": "The current temperature",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.temperature.temperature = currentTemperature",
+              "units = C",
+              "During translation, need to set the description of the multi-instance temperature resource to indicate whether this is the current or target temperature being translated"
+            ],
+            "x-from-ocf": {
+              "oneOf": [
+                {
+                  "properties": {
+                    "units": "string",
+                    "enum": ["C"]
+                  },
+                  "x-from-ocf": [
+                    "currentTemperature = oic.r.temperature.temperature"
+                  ]
+                },
+                {
+                  "properties": {
+                    "units": "string",
+                    "enum": ["F"]
+                  },
+                  "x-from-ocf": [
+                    "currentTemperature = (oic.r.temperature.temperature-32)*5/9"
+                  ]
+                },
+                {
+                  "properties": {
+                    "units": "string",
+                    "enum": ["K"]
+                  },
+                  "x-from-ocf": [
+                    "currentTemperature = oic.r.temperature.temperature-273.15"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "targetTemperature": {
+          "type": "number",
+          "description": "The desired temperature to reach",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.temperature.temperature = targetTemperature",
+              "units = C",
+              "During translation, need to set the description of the multi-instance temperature resource to indicate whether this is the current or target temperature being translated"
+            ],
+            "x-from-ocf": {
+              "oneOf": [
+                {
+                  "properties": {
+                    "units": "string",
+                    "enum": ["C"]
+                  },
+                  "x-from-ocf": [
+                    "targetTemperature = oic.r.temperature.temperature"
+                  ]
+                },
+                {
+                  "properties": {
+                    "units": "string",
+                    "enum": ["F"]
+                  },
+                  "x-from-ocf": [
+                    "targetTemperature = (oic.r.temperature.temperature-32)*5/9"
+                  ]
+                },
+                {
+                  "properties": {
+                    "units": "string",
+                    "enum": ["K"]
+                  },
+                  "x-from-ocf": [
+                    "targetTemperature = oic.r.temperature.temperature-273.15"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "minValue": {
+          "type": "number",
+          "description": "Minimum value of 'targetTemperature'",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.temperature.range[0] = minValue"
+            ],
+            "x-from-ocf": [
+              "minValue = oic.r.temperature.range[0]",
+              "otherwise: minValue = -MAXINT"
+            ]
+          }
+        },
+        "maxValue": {
+          "type": "number",
+          "description": "Maximum value of 'targetTemperature'",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.temperature.range[1] = maxValue"
+            ],
+            "x-from-ocf": [
+              "maxValue =oic.r.temperature.range[1]",
+              "otherwise: maxValue = MAXINT"
+            ]
+          }
+        },
+        "stepValue": {
+          "type": "number",
+          "description": "Step value allowed for 'targetTemperature'",          
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.temperature.step = stepValue"
+            ],
+            "x-from-ocf": [
+              "stepValue = oic.r.temperature.step",
+              "otherwise: stepValue = 1"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.temperature"}
+  ],
+  "required": [ "currentTemperature" ]
+}

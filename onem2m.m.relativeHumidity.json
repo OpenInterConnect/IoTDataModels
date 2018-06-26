@@ -1,0 +1,42 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.relativeHumidity.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "relativeHumidity",
+  "definitions": {
+    "onem2m.m.relativeHumidity": {
+      "type": "object",
+      "properties": {
+        "relativeHumidity": {
+          "type": "number",
+          "description": "The measurement of the relative humidity value; the unit of measure is percentage",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.humidity.humidity = int(relativeHumidity)"
+            ],
+            "x-from-ocf": [
+              "relativeHumidity = float(oic.r.humidity.humidity)"
+            ]
+          }
+        },
+        "desiredHumidity": {
+          "type": "number",
+          "description": "Desired value for humidity. This data point indicates the desired humidity",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.humidity.desiredhumidity = int(desiredHumidity)"
+            ],
+            "x-from-ocf": [
+              "desiredHumidity = float(oic.r.humidity.desiredhumidity)"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.relativeHumidity"}
+  ],
+  "required": [ "relativeHumidity" ]
+}

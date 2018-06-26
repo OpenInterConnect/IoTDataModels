@@ -1,0 +1,127 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.battery.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Battery",
+  "definitions": {
+    "onem2m.m.battery": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "type": "integer",
+          "description": "The rounded percentage of the current charging level of a battery in the range of [0, 100]",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.energy.battery.charge = level"
+            ],
+            "x-from-ocf": [
+              "level = oic.r.energy.battery.charge"
+            ]
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "description": "The total capacity of battery in mAh",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.energy.battery.capacity = capacity / 1000"
+            ],
+            "x-from-ocf": [
+              "capacity = oic.r.energy.battery.capacity * 1000"
+            ]
+          }
+        },
+        "charging": {
+          "type": "boolean",
+          "description": "The status of charging. 'True' indicates enabled, and ''False' indicates not enabled",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.energy.battery.charging = charging"
+            ],
+            "x-from-ocf": [
+              "charging = oic.r.energy.battery.charging"
+            ]
+          }
+        },
+        "discharging": {
+          "type": "boolean",
+          "description": "The status of discharging. 'True' indicates charging, and 'False' indicates not charging",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.energy.battery.discharging = discharging"
+            ],
+            "x-from-ocf": [
+              "discharging = oic.r.energy.battery.discharging"
+            ]
+          }
+        },
+        "lowBattery": {
+          "type": "boolean",
+          "description": "To indicate that the battery is on a low charge level",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.energy.battery.lowbattery = lowBattery"
+            ],
+            "x-from-ocf": [
+              "lowBattery = oic.r.energy.battery.lowbattery"
+            ]
+          }
+        },
+        "batteryThreshold": {
+          "type": "integer",
+          "description": "When a battery’s 'level' is less than 'batteryThreshold' then 'lowBattery' is set to 'True'. This datapoint can be used to raise an alarm, depending on the implementation",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.energy.battery.batterythreshold = batteryThreshold"
+            ],
+            "x-from-ocf": [
+              "batteryThreshold = oic.r.energy.battery.batterythreshold"
+            ]
+          }
+        },
+        "electricEnergy": {
+          "type": "integer",
+          "description": "Rated electric energy. The unit of measure is ampere (A)",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.energy.electrical.current = electricEnergy"
+            ],
+            "x-from-ocf": [
+              "electricEnergy = oic.r.energy.electrical.current"
+            ]
+          }
+        },
+        "voltage": {
+          "type": "integer",
+          "description": "Rated voltage. The unit of measure is volts (V)",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.energy.electrical.voltage = voltage"
+            ],
+            "x-from-ocf": [
+              "voltage = oic.r.energy.electrical.voltage"
+            ]
+          }
+        },
+        "material": {
+          "type": "string",
+          "description": "The material of the cell (for example lithium ion, nickel and lead",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.batterymaterial.material = material",
+              "Direct translation is difficult as OCF has declared an enumeration of strings where oneM2M has a free-form string. Translation code will need to determine which oneM2M strings can be mapped to the OCF enumerated values in oic.r.batterymaterial"
+            ],
+            "x-from-ocf": [
+              "material = oic.r.batterymaterial.material[INDEX]"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.battery"}
+  ],
+  "required": [ "level" ]
+}

@@ -1,0 +1,68 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.audioVolume.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "audioVolume",
+  "definitions": {
+    "onem2m.m.audioVolume": {
+      "type": "object",
+      "properties": {
+        "volumePercentage": {
+          "type": "number",
+          "description": "The rounded percentage of the current volume",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.audio.volume = volumePercentage"
+            ],
+            "x-from-ocf": [
+              "volumePercentage = oic.r.audio.volume"
+            ]
+          }
+        },
+        "muteEnabled": {
+          "type": "boolean",
+          "description": "The current status of the mute enablement",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.audio.mute = muteEnabled"
+            ],
+            "x-from-ocf": [
+              "muteEnabled = oic.r.audio.mute"
+            ]
+          }
+        },
+        "stepValue": {
+          "type": "integer",
+          "description": "Step value used by the 'UpVolume' and 'DownVolume' actions",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.audio.step = stepValue"
+            ],
+            "x-from-ocf": [
+              "stepValue = oic.r.audio.step"
+            ]
+          }
+        },
+        "maxValue": {
+          "type": "integer",
+          "description": "Maximum value allowed for Volume. maxValue is 100 by default if 'maxValue' is not provided",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.audio.range[0] = 0",
+              "oic.r.audio.range[1] = maxValue"
+            ],
+            "x-from-ocf": [
+              "maxValue = oic.r.audio.range[1]",
+              "otherwise: maxvalue = 100"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.audioVolume"}
+  ],
+  "required": [ "volumePercentage", "muteEnabled" ]
+}

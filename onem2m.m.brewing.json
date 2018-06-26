@@ -1,0 +1,46 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.brewing.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Brewing",
+  "definitions": {
+    "onem2m.m.brewing": {
+      "type": "object",
+      "properties": {
+        "cupsNumber": {
+          "type": "integer",
+          "description": "The current number of the cups requested to brew",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.brewing.amountrequested = cupsNumber * 150"
+            ],
+            "x-from-ocf": [
+              "cupsNumber = floor(oic.r.brewing.amountrequested / 150)"
+            ]
+          }
+        },
+        "strength": {
+          "type": "integer",
+          "description": "The current strength of the drink taste. A higher value indicates a stronger taste",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.brewing.strengthrange[0] = 1",
+              "oic.r.brewing.strengthrange[1] = 5",
+              "oic.r.brewing.strength = strength"
+            ],
+            "x-from-ocf": [
+              "oic.r.brewing.strengthrange[0] = 1",
+              "oic.r.brewing.strengthrange[1] = 5",
+              "strength = oic.r.brewing.strength"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.brewing"}
+  ],
+  "required": [ "cupsNumber"]
+}
