@@ -78,161 +78,183 @@
     }
   },
   "definitions": {
-    "PanTiltZoom" : 
-            {
-        "properties": {
-          "id": {
-            "description": "Instance ID of this specific resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "if": {
-            "description": "The interface set supported by this resource",
-            "items": {
-              "enum": [
-                "oic.if.baseline",
-                "oic.if.ll",
-                "oic.if.b",
-                "oic.if.lb",
-                "oic.if.rw",
-                "oic.if.r",
-                "oic.if.a",
-                "oic.if.s"
-              ],
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "n": {
-            "description": "Friendly name of the resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "pan": {
-            "description": "horizontal pan in degrees",
-            "type": "number"
-          },
-          "pan_range": {
-            "description": "Min and Max values for the pan setting",
-            "items": {
-              "type": "number"
-            },
-            "maxItems": 2,
-            "minItems": 2,
-            "readOnly": true,
-            "type": "array"
-          },
-          "precision": {
-            "description": "Accuracy granularity of the exposed value",
-            "readOnly": true,
-            "type": "number"
-          },
-          "range": {
-            "description": "The valid range for the value Property",
-            "items": {
-              "anyOf": [
+    "PanTiltZoom" : {
+      "properties": {
+        "rt" :
                 {
-                  "type": "number"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "maxItems": 2,
-            "minItems": 2,
-            "readOnly": true,
-            "type": "array"
-          },
-          "rt": {
-            "description": "Resource Type",
-            "items": {
-              "maxLength": 64,
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "step": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "number"
-              }
-            ],
-            "description": "Step value across the defined range",
-            "readOnly": true
-          },
-          "tilt": {
-            "description": "vertical tilt in degrees",
-            "type": "number"
-          },
-          "tilt_range": {
-            "description": "Min and Max values for the tilt setting",
-            "items": {
-              "type": "number"
-            },
-            "maxItems": 2,
-            "minItems": 2,
-            "readOnly": true,
-            "type": "array"
-          },
-          "value": {
-            "anyOf": [
-              {
-                "type": "array"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "integer"
-              },
-              {
-                "type": "number"
-              },
-              {
-                "type": "object"
-              }
-            ],
-            "description": "The value sensed or actuated by this Resource"
-          },
-          "zoomFactor": {
-            "description": "The Zoomfactor value",
+          "description": "Resource Type",
+          "items": {
+            "maxLength": 64,
             "type": "string"
           },
-          "zoomFactorRange": {
-            "description": "allowed Zoom Factor values. Linear equates to a 1-100 min/max.",
-            "enum": [
-              "linear",
-              "1x",
-              "2x",
-              "4x",
-              "8x",
-              "16x",
-              "32x"
-            ],
-            "readOnly": true,
-            "type": "string"
-          }
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
         },
-        "required": [
-          "pan",
-          "tilt",
-          "zoomFactor"
-        ],
-        "type": "object"
-      }
 
+        "tilt_range" :
+                {
+          "description": "Min and Max values for the tilt setting",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "zoomFactor" :
+                {
+          "description": "The Zoomfactor value",
+          "type": "string"
+        },
+
+        "tilt" :
+                {
+          "description": "vertical tilt in degrees",
+          "type": "number"
+        },
+
+        "precision" :
+                {
+          "description": "Accuracy granularity of the exposed value",
+          "readOnly": true,
+          "type": "number"
+        },
+
+        "value" :
+                {
+          "anyOf": [
+            {
+              "type": "array"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "description": "The value sensed or actuated by this Resource"
+        },
+
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "range" :
+                {
+          "description": "The valid range for the value Property",
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "pan_range" :
+                {
+          "description": "Min and Max values for the pan setting",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "step" :
+                {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "description": "Step value across the defined range",
+          "readOnly": true
+        },
+
+        "zoomFactorRange" :
+                {
+          "description": "allowed Zoom Factor values. Linear equates to a 1-100 min/max.",
+          "enum": [
+            "linear",
+            "1x",
+            "2x",
+            "4x",
+            "8x",
+            "16x",
+            "32x"
+          ],
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "id" :
+                {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "pan" :
+                {
+          "description": "horizontal pan in degrees",
+          "type": "number"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        }
+        ,"type" : "object"
+      ,"required": ["pan", "tilt", "zoomFactor"]
+    }
   }
 }

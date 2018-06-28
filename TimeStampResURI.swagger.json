@@ -1,0 +1,175 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Time Stamp",
+    "version": "v1.1.0-20170830",
+    "license": {
+      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
+      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
+    }
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/TimeStampResURI" : {
+      "get": {
+        "description": "This resource describes the properties associated with a timestamp.\nTimeStamp is a string that captures the timestamp using the RFC3339 datetime format (e.g: 2007-04-05T14:30Z) (Time+Date+Timezone)\nRetrieves the current timestamp data.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                    "rt":         ["oic.r.time.stamp"],
+                    "id":         "unique_example_id",
+                    "timestamp":  "2015-11-05T14:30Z"
+                }
+                ,
+              "schema": { "$ref": "#/definitions/TimeStamp" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.s", "oic.if.r", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "TimeStamp" : {
+      "properties": {
+        "rt" :
+                {
+          "description": "Resource Type",
+          "items": {
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "timestamp" :
+                {
+          "description": "An RFC3339 formated time indicating when the data was observed (e.g.: 2016-02-15T09:19Z, 1996-12-19T16:39:57-08:00)",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "precision" :
+                {
+          "description": "Accuracy granularity of the exposed value",
+          "readOnly": true,
+          "type": "number"
+        },
+
+        "value" :
+                {
+          "anyOf": [
+            {
+              "type": "array"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "description": "The value sensed or actuated by this Resource"
+        },
+
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "range" :
+                {
+          "description": "The valid range for the value Property",
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "step" :
+                {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "description": "Step value across the defined range",
+          "readOnly": true
+        },
+
+        "id" :
+                {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        }
+        ,"type" : "object"
+      ,"required": ["timestamp"]
+    }
+  }
+}

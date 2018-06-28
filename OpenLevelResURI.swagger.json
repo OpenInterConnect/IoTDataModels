@@ -86,122 +86,138 @@
     }
   },
   "definitions": {
-    "OpenLevel" : 
-            {
-        "properties": {
-          "id": {
-            "description": "Instance ID of this specific resource",
+    "OpenLevel" : {
+      "properties": {
+        "rt" :
+                {
+          "description": "Resource Type",
+          "items": {
             "maxLength": 64,
-            "readOnly": true,
             "type": "string"
           },
-          "if": {
-            "description": "The interface set supported by this resource",
-            "items": {
-              "enum": [
-                "oic.if.baseline",
-                "oic.if.ll",
-                "oic.if.b",
-                "oic.if.lb",
-                "oic.if.rw",
-                "oic.if.r",
-                "oic.if.a",
-                "oic.if.s"
-              ],
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "increment": {
-            "description": "Deprecated, use 'step' instead.",
-            "readOnly": true,
-            "type": "integer"
-          },
-          "n": {
-            "description": "Friendly name of the resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "openLevel": {
-            "description": "How open or ajar the entity is",
-            "type": "integer"
-          },
-          "precision": {
-            "description": "Accuracy granularity of the exposed value",
-            "readOnly": true,
-            "type": "number"
-          },
-          "range": {
-            "description": "The valid range for the value Property",
-            "items": {
-              "anyOf": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "maxItems": 2,
-            "minItems": 2,
-            "readOnly": true,
-            "type": "array"
-          },
-          "rt": {
-            "description": "Resource Type",
-            "items": {
-              "maxLength": 64,
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "step": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "number"
-              }
-            ],
-            "description": "Step value across the defined range",
-            "readOnly": true
-          },
-          "value": {
-            "anyOf": [
-              {
-                "type": "array"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "integer"
-              },
-              {
-                "type": "number"
-              },
-              {
-                "type": "object"
-              }
-            ],
-            "description": "The value sensed or actuated by this Resource"
-          }
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
         },
-        "required": [
-          "openLevel"
-        ],
-        "type": "object"
-      }
 
+        "openLevel" :
+                {
+          "description": "How open or ajar the entity is",
+          "type": "integer"
+        },
+
+        "precision" :
+                {
+          "description": "Accuracy granularity of the exposed value",
+          "readOnly": true,
+          "type": "number"
+        },
+
+        "value" :
+                {
+          "anyOf": [
+            {
+              "type": "array"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "description": "The value sensed or actuated by this Resource"
+        },
+
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "range" :
+                {
+          "description": "The valid range for the value Property",
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "increment" :
+                {
+          "description": "Deprecated, use 'step' instead.",
+          "readOnly": true,
+          "type": "integer"
+        },
+
+        "step" :
+                {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "description": "Step value across the defined range",
+          "readOnly": true
+        },
+
+        "id" :
+                {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        }
+        ,"type" : "object"
+      ,"required": ["openLevel"]
+    }
   }
 }

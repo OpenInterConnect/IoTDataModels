@@ -97,148 +97,164 @@
     }
   },
   "definitions": {
-    "mediaSourceList" : 
+    "mediaSourceList" : {
+      "properties": {
+        "rt" :
+                {
+          "description": "Resource Type",
+          "items": {
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "precision" :
+                {
+          "description": "Accuracy granularity of the exposed value",
+          "readOnly": true,
+          "type": "number"
+        },
+
+        "value" :
+                {
+          "anyOf": [
             {
-        "properties": {
-          "id": {
-            "description": "Instance ID of this specific resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "if": {
-            "description": "The interface set supported by this resource",
-            "items": {
-              "enum": [
-                "oic.if.baseline",
-                "oic.if.ll",
-                "oic.if.b",
-                "oic.if.lb",
-                "oic.if.rw",
-                "oic.if.r",
-                "oic.if.a",
-                "oic.if.s"
-              ],
+              "type": "array"
+            },
+            {
               "type": "string"
             },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "n": {
-            "description": "Friendly name of the resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "precision": {
-            "description": "Accuracy granularity of the exposed value",
-            "readOnly": true,
-            "type": "number"
-          },
-          "range": {
-            "description": "The valid range for the value Property",
-            "items": {
-              "anyOf": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
+            {
+              "type": "boolean"
             },
-            "maxItems": 2,
-            "minItems": 2,
-            "readOnly": true,
-            "type": "array"
-          },
-          "rt": {
-            "description": "Resource Type",
-            "items": {
-              "maxLength": 64,
-              "type": "string"
+            {
+              "type": "integer"
             },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "sources": {
-            "items": {
-              "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "description": "The value sensed or actuated by this Resource"
+        },
+
+        "n" :
                 {
-                  "properties": {
-                    "sourceName": {
-                      "description": "Specifies a pre-defined media input or output",
-                      "type": "string"
-                    },
-                    "sourceNumber": {
-                      "description": "Numeric identifier to specify the instance",
-                      "readOnly": true,
-                      "type": [
-                        "integer",
-                        "string"
-                      ]
-                    },
-                    "sourceType": {
-                      "description": "Specifies the type of the source",
-                      "enum": [
-                        "audioOnly",
-                        "videoOnly",
-                        "audioPlusVideo"
-                      ],
-                      "readOnly": true
-                    },
-                    "status": {
-                      "description": "Specifies if the specific source instance is selected or not",
-                      "type": "boolean"
-                    }
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "sources" :
+                {
+          "items": {
+            "oneOf": [
+              {
+                "properties": {
+                  "sourceName": {
+                    "description": "Specifies a pre-defined media input or output",
+                    "type": "string"
+                  },
+                  "sourceNumber": {
+                    "description": "Numeric identifier to specify the instance",
+                    "readOnly": true,
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  },
+                  "sourceType": {
+                    "description": "Specifies the type of the source",
+                    "enum": [
+                      "audioOnly",
+                      "videoOnly",
+                      "audioPlusVideo"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "status": {
+                    "description": "Specifies if the specific source instance is selected or not",
+                    "type": "boolean"
                   }
                 }
-              ]
-            },
-            "type": "array"
-          },
-          "step": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "number"
               }
-            ],
-            "description": "Step value across the defined range",
-            "readOnly": true
+            ]
           },
-          "value": {
-            "anyOf": [
-              {
-                "type": "array"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "integer"
-              },
-              {
-                "type": "number"
-              },
-              {
-                "type": "object"
-              }
-            ],
-            "description": "The value sensed or actuated by this Resource"
-          }
+          "type": "array"
         },
-        "required": [
-          "sources"
-        ]
-      }
 
+        "range" :
+                {
+          "description": "The valid range for the value Property",
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "step" :
+                {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "description": "Step value across the defined range",
+          "readOnly": true
+        },
+
+        "id" :
+                {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        }
+        ,"type" : "object"
+      ,"required": ["sources"]
+    }
   }
 }
