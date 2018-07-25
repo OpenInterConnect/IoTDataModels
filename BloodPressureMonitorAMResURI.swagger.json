@@ -200,7 +200,8 @@
           "maxItems": 2,
           "minItems": 2,
           "type": "array",
-          "uniqueItems": true
+          "uniqueItems": true,
+          "readOnly": true
         },
 
         "links" :
