@@ -16,7 +16,7 @@
         "units": {
           "type": "string",
           "readOnly": true,
-          "enum": ["kg", "lb"],
+          "enum": ["kg", "lb", "%"],
           "description": "Body water unit"
         }
       }
