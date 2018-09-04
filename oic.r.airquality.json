@@ -14,7 +14,7 @@
         },
         "contaminanttype": {
           "type": "string",
-          "enum": ["CH2O","CO2","CO","PM2.5","PM10","VOC","Smoke","Odor","AirPollution"],
+          "enum": ["CH2O","CO2","CO","PM1","PM2.5","PM10","VOC","Smoke","Odor","AirPollution"],
           "description": "The contaminant being measured.",
           "readOnly": true
         },
