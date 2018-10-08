@@ -1,0 +1,29 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.soundpressure.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "definitions": {
+    "oic.r.soundpressure": {
+      "type": "object",
+      "properties": {
+        "dba": {
+          "type": "number",
+          "description": "The common unit of the sound pressure in dBa."
+        },
+        "percentage": {
+          "type": "integer",
+          "description": "The rounded percentage of the current sound pressure as compared to the sensitivity range of the sensor.",
+          "minimum": 0,
+          "maximum": 100
+
+        } 
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.soundpressure"},
+    {"$ref": "#/definitions/oic.r.soundpressure"}
+  ],
+  "required": ["dba"]
+}

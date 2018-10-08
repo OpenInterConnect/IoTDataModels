@@ -1,0 +1,136 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.airflow.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "airflow Mapping",
+  "definitions": {
+    "onem2m.m.airflow": {
+      "type": "object",
+      "properties": {
+        "speed": {
+          "type": "integer",
+          "description": "current speed level in the range of [minSpeed, maxSpeed]",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.airflow",
+            "x-to-ocf": [
+              "ocf.speed = speed"
+            ],
+            "x-from-ocf": [
+              "speed = ocf.speed"
+            ]
+          }
+        },
+		"minSpeed": {
+          "type": "integer",
+          "description": "Min value for the speed level. If not present, the default is 0.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.airflow",
+            "x-to-ocf": [
+              "range[0] = minSpeed"
+            ],
+            "x-from-ocf": [
+              "minSpeed = range[0]",
+              "otherwise: minSpeed = 0"
+            ]
+          }
+        },
+		"maxSpeed": {
+          "type": "integer",
+          "description": "Max value for the speed level. If not present, the default is 100.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.airflow",
+            "x-to-ocf": [
+              "range[1] = maxSpeed"
+            ],
+            "x-from-ocf": [
+              "maxSpeed = range[1]",
+              "otherwise: maxSpeed = 100"
+            ]
+          }
+        },
+		"verticalDirection": {
+          "enum": ["auto", "center", "up", "down"],
+          "description": "The vertical directionality of the air flow.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.airflow",
+            "x-to-ocf": [
+              "direction = verticalDirection"
+            ],
+            "x-from-ocf": [
+              "verticalDirection = direction",
+			        "_comment: Is 1-to-1 mapping possible from string to enum? what if enum doesn't contain the converted string from OCF?"
+            ]
+          }
+        },
+		"supportedVerticalDirection": {
+          "type": "array",
+          "items": {
+			"enum": ["auto", "center", "up", "down"]
+		  },
+		  "description": "List of supported vertical direction.",
+          "readOnly": true,
+		  "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.airflow",
+            "x-to-ocf": [
+              "supporteddirections = supportedVerticalDirection"
+            ],
+            "x-from-ocf": [
+              "supportedVerticalDirection = supporteddirections"
+            ]
+          }
+        },
+		"horizontalDirection": {
+          "enum": ["auto", "center", "left", "right"],
+          "description": "The horizontal directionality of the air flow.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.airflow",
+            "x-to-ocf": [
+              "direction = horizontalDirection"
+            ],
+            "x-from-ocf": [
+              "horizontalDirection = direction"
+            ]
+          }
+        },
+		"supportedhorizontalDirection": {
+          "type": "array",
+          "items": {
+			"enum": ["auto", "center", "left", "right"]
+		  },
+		  "description": "List of supported horizontal direction.",
+          "readOnly": true,
+		  "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.airflow",
+            "x-to-ocf": [
+              "supporteddirections = supportedhorizontalDirection"
+            ],
+            "x-from-ocf": [
+              "supportedhorizontalDirection = supporteddirections"
+            ]
+          }
+        },
+		"autoMode": {
+          "type": "boolean",
+          "description": "Status of the automode feature. If on speed is set by the device.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.airflow",
+            "x-to-ocf": [
+              "if autoMode = true, ocf.automode = On",
+			        "if autoMode = fals, ocf.automode = Off",
+			        "_comment: is is correct way to map boolean to enum?"
+            ],
+            "x-from-ocf": [
+              "if ocf.automode = On, autoMode = true",
+			  "if ocf.automode = Off, autoMode = false"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.airflow"}
+  ],
+  "required": [ "speed" ]
+}

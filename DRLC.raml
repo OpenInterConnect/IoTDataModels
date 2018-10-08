@@ -2,7 +2,7 @@
 title: OICDRLC
 version: v1.1.0-20160519
 documentation:
-  - title: © 2016 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: (c) 2016, 2018 Open Connectivity Foundation, Inc. All rights reserved.
     content: |
         Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
         1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -26,7 +26,10 @@ traits:
     Start is a string containing an ISO8601 encoded start time.
     The duration value is in minutes.
     Override indicates whether the consumer has overridden the request (true) or not (false).
+    drlevel is an integer value which indicates the level/strength of required load shed/DR response from the Device; [0:0%,1:30%,2:50%,3:70%].
+    mandate is a boolean that indicates whether the User can override the DR request
   displayName: Demand Response Load Control (DRLC).
+
   is: [ interface ]
 
   get:
@@ -44,7 +47,9 @@ traits:
                 "DRType":   1,
                 "start":    "2015-01-09T16:45Z",
                 "duration": 10,
-                "override": false
+                "override": false,
+                "drlevel":  1,
+                "mandate":  false
               }
 
   put:
@@ -59,7 +64,9 @@ traits:
             "id":       "unique_example_id",
             "DRType":   1,
             "start":    "2015-01-09T16:45Z",
-            "duration": 10
+            "duration": 10,
+            "drlevel": 1,
+            "mandate": false
           }
 
     responses:
@@ -76,7 +83,9 @@ traits:
                 "id":       "unique_example_id",
                 "start":    "2015-01-09T17:00Z",
                 "duration": 15,
-                "override": false
+                "override": false,
+                "drlevel": 1,
+                "mandate": false
               }
 
       201:

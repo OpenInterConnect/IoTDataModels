@@ -1,0 +1,60 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.printer.3d.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "3D Printer",
+  "definitions": {
+    "oic.r.printer.3d": {
+      "type": "object",
+      "properties": {
+        "3dprinttype" : {
+          "enum": [
+            "Fused Filament Fabrication",
+            "Fused Deposition Modeling",
+            "Digital Light Processing",
+            "Powder Bed & inkjet head 3D Printing",
+            "Photopolymer Jetting Technology",
+            "Laminated Object Manufacturing",
+            "Stereolithography Apparatus",
+            "Selective Laser Sintering",
+            "Unknown"
+          ],
+          "type": "string",
+          "description": "The type of 3D printing technology.",
+          "readOnly": true
+        },
+        "printsizex" : {
+          "type": "number",
+          "description": "This represents the maximum size of printing object in the direction of X-axis. The unit is mm.",
+          "readOnly": true
+        },
+        "printsizey" : {
+          "type": "number",
+          "description": "This represents the maximum size of printing object in the direction of Y-axis. The unit is mm.",
+          "readOnly": true
+        },
+        "printsizez" : {
+          "type": "number",
+          "description": "This represents the maximum size of printing object in the direction of Z-axis. The unit is mm.",
+          "readOnly": true
+        },
+        "wanconnected" : {
+          "type": "boolean",
+          "description": "This value indicates the connectivity capability of the 3D printer. If the value is false, the printer does not have network facility to Wide Area Network such as internet and GSM. If the value is true, the printer has network connectivity",
+          "readOnly": true
+        },
+        "memorysize" : {
+          "type": "number",
+          "description": "This value represents the total memory size of the printer. The unit is MB(Mega Bytes)",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.printer.3d"}
+  ],
+  "required": [ "3dprinttype", "printsizex", "printsizey", "printsizez", "wanconnected", "memorysize" ]
+}

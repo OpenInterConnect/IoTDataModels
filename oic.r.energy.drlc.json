@@ -1,7 +1,7 @@
 {
   "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.energy.drlc.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "description" : "Copyright (c) 2016-2018 Open Connectivity Foundation, Inc. All rights reserved.",
   "definitions": {
     "oic.r.energy.drlc": {
       "type": "object",
@@ -12,6 +12,7 @@
         },
         "start":    {
           "type": "string",
+          "format": "date-time",
           "description": "The start time for the application of DR"
         },
         "duration": {
@@ -21,6 +22,16 @@
         "override": {
           "type": "boolean",
           "description": "Whether the consumer has overriden the application of DR"
+        },
+		"drlevel": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3,
+		  "description": "Indicator of the strength of the DR response that is requested; 0-0%, 1-30%, 2-50%, 3-70%"
+        },
+        "mandate" : {
+          "type": "boolean",
+		  "description": "Whether overriding the DR request by the consumer is allowed"
         }
       }
     }

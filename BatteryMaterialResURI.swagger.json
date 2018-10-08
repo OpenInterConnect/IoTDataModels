@@ -43,197 +43,212 @@
     }
   },
   "definitions": {
-    "BatteryMaterial" : 
-            {
-        "properties": {
-          "id": {
-            "description": "Instance ID of this specific resource",
+    "BatteryMaterial" : {
+      "properties": {
+        "rt" :
+                {
+          "description": "Resource Type",
+          "items": {
             "maxLength": 64,
-            "readOnly": true,
             "type": "string"
           },
-          "if": {
-            "description": "The interface set supported by this resource",
-            "items": {
-              "enum": [
-                "oic.if.baseline",
-                "oic.if.ll",
-                "oic.if.b",
-                "oic.if.lb",
-                "oic.if.rw",
-                "oic.if.r",
-                "oic.if.a",
-                "oic.if.s"
-              ],
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "material": {
-            "description": "Battery construction material (type).",
-            "enum": [
-              "Alkaline",
-              "Aluminium Air",
-              "Aluminium Ion",
-              "Atomic Betavoltaics",
-              "Atomic Optoelectric Nuclear",
-              "Atomic Nuclear",
-              "Bunsen Cell",
-              "Chromic Acid Cell",
-              "Poggendorff Cell",
-              "Clark Cell",
-              "Daniell Cell",
-              "Dry Cell",
-              "Earth",
-              "Flow",
-              "Flow Vanadium Redox",
-              "Flow Zinc Bromine",
-              "Flow Zinc Cerium",
-              "Frog",
-              "Fuel",
-              "Galvanic Cell",
-              "Glass",
-              "Grove Cell",
-              "Lead Acid",
-              "Lead Acid Deep Cycle",
-              "Lead Acid VRLA",
-              "Lead Acid AGM",
-              "Lead Acid Gel",
-              "Leclanche Cell",
-              "Lemon Potato",
-              "Lithium",
-              "Lithium Air",
-              "Lithium Ion",
-              "Lithium Ion Cobalt Oxide (ICR)",
-              "Lithium Ion Manganese Oxide (IMR)",
-              "Lithium Ion Polymer",
-              "Lithium Iron Phosphate",
-              "Lithium Sulfur",
-              "Lithium Titanate",
-              "Lithium Ion Thin Film",
-              "Magnesium",
-              "Magnesium Ion",
-              "Mercury",
-              "Molten Salt",
-              "Nickel Cadmium",
-              "Nickel Cadmium Vented Cell",
-              "Nickel Hydrogen",
-              "Nickel Iron ",
-              "Nickel Metal Hydride",
-              "Nickel Metal Hydride Low Self-Discharge",
-              "Nickel Oxyhydroxide",
-              "Nickel Oxyride",
-              "Nickel Zinc",
-              "Organic Radical",
-              "Paper",
-              "Polymer Based",
-              "Polysulfide Bromide",
-              "Potassium Ion",
-              "Pulvermachers Chain",
-              "Silicon Air",
-              "Silver Calcium",
-              "Silver Oxide",
-              "Silver Zinc",
-              "Sodium Ion",
-              "Sodium Sulfur",
-              "Solid State",
-              "Sugar",
-              "Super Iron",
-              "UltraBattery",
-              "Voltaic Pile",
-              "Voltaic Pile Penny",
-              "Voltaic Pile Trough",
-              "Water Activated",
-              "Weston Cell",
-              "Zinc Air",
-              "Zinc Carbon",
-              "Zinc Chloride",
-              "Zinc Ion",
-              "Unknown"
-            ],
-            "readOnly": true
-          },
-          "n": {
-            "description": "Friendly name of the resource",
-            "maxLength": 64,
-            "readOnly": true,
-            "type": "string"
-          },
-          "precision": {
-            "description": "Accuracy granularity of the exposed value",
-            "readOnly": true,
-            "type": "number"
-          },
-          "range": {
-            "description": "The valid range for the value Property",
-            "items": {
-              "anyOf": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "maxItems": 2,
-            "minItems": 2,
-            "readOnly": true,
-            "type": "array"
-          },
-          "rt": {
-            "description": "Resource Type",
-            "items": {
-              "maxLength": 64,
-              "type": "string"
-            },
-            "minItems": 1,
-            "readOnly": true,
-            "type": "array"
-          },
-          "step": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "number"
-              }
-            ],
-            "description": "Step value across the defined range",
-            "readOnly": true
-          },
-          "value": {
-            "anyOf": [
-              {
-                "type": "array"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "integer"
-              },
-              {
-                "type": "number"
-              },
-              {
-                "type": "object"
-              }
-            ],
-            "description": "The value sensed or actuated by this Resource"
-          }
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
         },
-        "required": [
-          "material"
-        ],
-        "type": "object"
-      }
 
+        "material" :
+                {
+          "description": "Battery construction material (type).",
+          "enum": [
+            "Alkaline",
+            "Aluminium Air",
+            "Aluminium Ion",
+            "Atomic Betavoltaics",
+            "Atomic Optoelectric Nuclear",
+            "Atomic Nuclear",
+            "Bunsen Cell",
+            "Chromic Acid Cell",
+            "Poggendorff Cell",
+            "Clark Cell",
+            "Daniell Cell",
+            "Dry Cell",
+            "Earth",
+            "Flow",
+            "Flow Vanadium Redox",
+            "Flow Zinc Bromine",
+            "Flow Zinc Cerium",
+            "Frog",
+            "Fuel",
+            "Galvanic Cell",
+            "Glass",
+            "Grove Cell",
+            "Lead Acid",
+            "Lead Acid Deep Cycle",
+            "Lead Acid VRLA",
+            "Lead Acid AGM",
+            "Lead Acid Gel",
+            "Leclanche Cell",
+            "Lemon Potato",
+            "Lithium",
+            "Lithium Air",
+            "Lithium Ion",
+            "Lithium Ion Cobalt Oxide (ICR)",
+            "Lithium Ion Manganese Oxide (IMR)",
+            "Lithium Ion Polymer",
+            "Lithium Iron Phosphate",
+            "Lithium Sulfur",
+            "Lithium Titanate",
+            "Lithium Ion Thin Film",
+            "Magnesium",
+            "Magnesium Ion",
+            "Mercury",
+            "Molten Salt",
+            "Nickel Cadmium",
+            "Nickel Cadmium Vented Cell",
+            "Nickel Hydrogen",
+            "Nickel Iron ",
+            "Nickel Metal Hydride",
+            "Nickel Metal Hydride Low Self-Discharge",
+            "Nickel Oxyhydroxide",
+            "Nickel Oxyride",
+            "Nickel Zinc",
+            "Organic Radical",
+            "Paper",
+            "Polymer Based",
+            "Polysulfide Bromide",
+            "Potassium Ion",
+            "Pulvermachers Chain",
+            "Silicon Air",
+            "Silver Calcium",
+            "Silver Oxide",
+            "Silver Zinc",
+            "Sodium Ion",
+            "Sodium Sulfur",
+            "Solid State",
+            "Sugar",
+            "Super Iron",
+            "UltraBattery",
+            "Voltaic Pile",
+            "Voltaic Pile Penny",
+            "Voltaic Pile Trough",
+            "Water Activated",
+            "Weston Cell",
+            "Zinc Air",
+            "Zinc Carbon",
+            "Zinc Chloride",
+            "Zinc Ion",
+            "Unknown"
+          ],
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "precision" :
+                {
+          "description": "Accuracy granularity of the exposed value",
+          "readOnly": true,
+          "type": "number"
+        },
+
+        "value" :
+                {
+          "anyOf": [
+            {
+              "type": "array"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "description": "The value sensed or actuated by this Resource"
+        },
+
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "range" :
+                {
+          "description": "The valid range for the value Property",
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "step" :
+                {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "description": "Step value across the defined range",
+          "readOnly": true
+        },
+
+        "id" :
+                {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        }
+        ,"type" : "object"
+      ,"required": ["material"]
+    }
   }
 }

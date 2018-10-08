@@ -1,0 +1,30 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.brightness.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Brightness",
+  "definitions": {
+    "onem2m.m.brightness": {
+      "type": "object",
+      "properties": {
+        "brightness": {
+          "type": "integer",
+          "description": "The status of brightness level in percentage",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.light.brightness.brightness = brightness"
+            ],
+            "x-from-ocf": [
+              "brightness = oic.r.light.brightness.brightness"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.brightness"}
+  ],
+  "required": [ "brightness" ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.binaryswitch.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Binary Switch",
+  "definitions": {
+    "onem2m.m.binaryswitch": {
+      "type": "object",
+      "properties": {
+        "powerState": {
+          "type": "boolean",
+          "description": "Status of the switch",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.switch.binary.value = powerState"
+            ],
+            "x-from-ocf": [
+              "powerState = oic.r.switch.binary.value"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.binaryswitch"}
+  ],
+  "required": [ "powerState" ]
+}

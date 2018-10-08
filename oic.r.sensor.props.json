@@ -21,7 +21,7 @@
   "type": "object",
   "allOf": [
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
-    {"$ref": "#/definitions/oic.r.sensor.properties"}
+    {"$ref": "#/definitions/oic.r.sensor.props"}
   ],
   "required": ["silenttime", "sensitivity" ]
 }

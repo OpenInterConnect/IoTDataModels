@@ -10,7 +10,7 @@ documentation:
 
         THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 schemas:
-  - 3DPrinter:   !include oic.r.3dprinter.json
+  - 3DPrinter:   !include oic.r.printer.3d.json
 
 traits:
   - interface:
@@ -21,7 +21,7 @@ traits:
 /3DPrinterResURI:
   description: |
     This resource describes the attributes associated with 3D Printer. The type of 3D printing technology is specified by an enumerated string value. The maximum sizes in mm are included for the x, y, and z dimensions. A designation of whether the device is capable of WAN connectivity is represented in a boolean. The memory capacity is captured in MB.
-    
+
     The print
   displayName: 3D Printer
   is: [ interface ] # valid for all methods
@@ -36,7 +36,7 @@ traits:
             schema: 3DPrinter
             example: |
               {
-                "rt"           : ["oic.r.3dprinter"],
+                "rt"           : ["oic.r.printer.3d"],
                 "id"           : "unique_example_id",
                 "3dprinttype"  : "Digital Light Processing",
                 "printsizex"   : 300.00,

@@ -1,7 +1,7 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.r.altimeter#",
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.altimeter.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Copyright (c) 2016, 2017 Open Interconnect Consortium, Inc. All rights reserved.",
+  "description": "Copyright (c) 2016-2018 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "Altimeter",
   "definitions": {
     "oic.r.altimeter": {
@@ -9,9 +9,8 @@
       "properties": {
         "alt": {
           "type": "number",
-          "minimum": 0,
           "readOnly": true,
-          "description": "The current height of the position (metres)"
+          "description": "The current distance (metres) above or below 'local' sea-level."
         }
       }
     }

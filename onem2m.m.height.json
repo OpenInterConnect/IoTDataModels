@@ -1,0 +1,68 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.height.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Height",
+  "definitions": {
+    "onem2m.m.height": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "number",
+          "description": "Measurement of height",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.height.height = height",
+              "oic.r.height.units = cm"
+            ],
+            "x-from-ocf": {
+              "oneOf": [
+                {
+                  "properties": {
+                    "oic.r.height.units": "string",
+                    "enum": ["cm"]
+                  },
+                  "x-from-ocf": [
+                    "height = oic.r.height.height"
+                  ]
+                },
+                {
+                  "properties": {
+                    "oic.r.height.units": "string",
+                    "enum": ["m"]
+                  },
+                  "x-from-ocf": [
+                    "height = oic.r.height.height*100"
+                  ]
+                },
+                {
+                  "properties": {
+                    "voic.r.height.units": "string",
+                    "enum": ["ft"]
+                  },
+                  "x-from-ocf": [
+                    "height = oic.r.height.height*30.48"
+                  ]
+                },
+                {
+                  "properties": {
+                    "oic.r.height.units": "string",
+                    "enum": ["in"]
+                  },
+                  "x-from-ocf": [
+                    "height = oic.r.height.height*2.54"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.height"}
+  ],
+  "required": [ "height" ]
+}

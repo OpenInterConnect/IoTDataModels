@@ -1,0 +1,31 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.lock.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Lock",
+  "definitions": {
+    "onem2m.m.lock": {
+      "type": "object",
+      "properties": {
+        "lock": {
+          "type": "boolean",
+          "description": "'True' indicates the object is locked, while 'False' indicates the object is not locked.",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "if lock oic.r.lock.status.lockState = \"Locked\"",
+              "if !lock oic.r.lock.status.lockState = \"Unlocked\""
+            ],
+            "x-from-ocf": [
+              "lock = (oic.r.lock.status.lockState == \"Locked\")"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [{
+    "$ref": "#/definitions/onem2m.m.lock"
+  }],
+  "required": ["lock"]
+}

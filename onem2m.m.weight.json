@@ -1,0 +1,68 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.weight.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Weight",
+  "definitions": {
+    "onem2m.m.weight": {
+      "type": "object",
+      "properties": {
+        "weight": {
+          "type": "number",
+          "description": "Measurement of weight",
+          "x-ocf-conversion": {
+            "x-to-ocf": [
+              "oic.r.weight.weight = weight",
+              "oic.r.weight.units = kg"
+            ],
+            "x-from-ocf": {
+              "oneOf": [
+                {
+                  "properties": {
+                    "oic.r.weight.units": "string",
+                    "enum": ["kg"]
+                  },
+                  "x-from-ocf": [
+                    "weight = oic.r.weight.weight"
+                  ]
+                },
+                {
+                  "properties": {
+                    "oic.r.weight.units": "string",
+                    "enum": ["g"]
+                  },
+                  "x-from-ocf": [
+                    "weight = oic.r.weight.weight/1000"
+                  ]
+                },
+                {
+                  "properties": {
+                    "oic.r.weight.units": "string",
+                    "enum": ["lb"]
+                  },
+                  "x-from-ocf": [
+                    "weight = oic.r.weight.weight*0.45"
+                  ]
+                },
+                {
+                  "properties": {
+                    "oic.r.weight.units": "string",
+                    "enum": ["oz"]
+                  },
+                  "x-from-ocf": [
+                    "weight = oic.r.weight.weight*0.028"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.weight"}
+  ],
+  "required": [ "weight" ]
+}
