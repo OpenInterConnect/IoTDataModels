@@ -22,7 +22,7 @@
   },
   "type": "object",
   "allOf": [
-    {"$ref": "oic.baseResource.json#/definitions/oic.r.soundpressure"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/oic.r.soundpressure"}
   ],
   "required": ["dba"]
