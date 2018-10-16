@@ -1,0 +1,18 @@
+{
+  "id": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.genre.properties-schema.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Genre for Media and Channel Information",
+  "definitions": {
+    "category": {
+      "type": "string",
+      "description": "Genre Category for Media and Channel Information.",
+      "enum": ["Arts", "Books", "Education", "Hobbies", "Movie", "Music", "News", "Photography", "Show", "Social", "Special", "Sports", "Youth", "Other", "None"]
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "Genre Sub-Category for Media and Channel Information.",
+      "enum": ["Movie", "Action", "Adventure", "Adult", "Animation", "Biography", "Classic", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "Fitness and health", "Foreign", "History", "Horror", "Musical", "Mystery", "Religion", "Romance", "Sci-Fi", "Short", "Super-hero", "Soap", "Thriller", "War", "Western", "Arts", "Broadcasting", "Cinema", "Culture", "Experimental film", "Fashion", "Film", "Fine art", "Literature", "News media", "Performing", "Popular culture", "Press", "Traditional", "Books", "Business", "Fiction", "Food", "Investing", "Memoirs", "Money", "Suspense", "Wine", "Education", "Animals", "Environment", "Expeditions", "Factual topics", "Further education", "Languages", "Magazines", "Medicine", "Nature", "Natural sciences", "Physiology", "Psychology", "Science", "Social sciences", "Spiritual sciences", "Technology", "Hobbies", "Advertisement", "Cooking", "Gardening", "Handicraft", "Motoring", "Shopping", "Tourism", "Travel", "Music", "Alternatives", "Ballet", "Blues", "Broadway", "Children", "Christian", "Classical", "Classic rock", "Country", "Dance", "Folk", "Gospel", "Hard Rock", "Hip-Hop", "Holiday", "Jazz", "Latin", "Metal", "New Age", "Opera", "Pop", "R&B", "Rap", "Rock", "Soundtrack", "Vocal", "World", "News", "Current affairs", "Debate", "Discussion", "Interview", "Weather report", "Photography", "Aerial", "Architectural", "Conceptual", "Candid", "Landscape", "Night-long exposure", "Photojournalism", "Portraiture", "Street", "Wildlife", "Show", "Contest", "Game", "Quiz", "Reality TV", "Talk", "Variety", "Sports", "Athletics", "Equestrian", "Football", "Martial", "Motor", "Soccer", "Special events", "Squash", "Team", "Tennis", "Water", "Winter", "Social issues", "Economics", "Economics advisory", "Political issues", "Remarkable people", "Reports", "Social advisory", "Original language", "Black and white", "Live broadcast", "Local or Regional", "Plano-stereoscopic", "Unpublished", "Youth", "Cartoon", "Children Pre-school", "Children 6 to 14", "Children 10 to 16", "Educational", "Informational", "Puppets", "School", "Other", "None"]
+    }
+  }
+}
