@@ -1,0 +1,44 @@
+#%RAML 0.8
+title: OICBodyMassIndex
+version: v1.1.0-20160519
+documentation:
+  - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - BodyMassIndex: !include oic.r.bmi.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s", "oic.if.baseline"]
+
+/BodyMassIndexResURI:
+  description: |
+    This resource describes the properties associated with BMI (Body mass index).
+    Body Mass Index (bmi) is the BMI of a person in kg/m^2.
+    BMI prime (bmip) is a normalized BMI by 25.
+  displayName: Body mass index
+  is: [ interface ]
+
+  get:
+    description: |
+      Retrieves the current BMI.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: BodyMassIndex
+            example: |
+              {
+                "rt":         ["oic.r.bmi.fitness"],
+                "id":         "unique_example_id",
+                "bmi":        20,
+                "bmip":       0.8,
+                "observedtime": "2016-02-15T09:19Z"
+              }

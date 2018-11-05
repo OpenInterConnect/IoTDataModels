@@ -1,0 +1,85 @@
+#%RAML 0.8
+title: OICCGM
+version: v1.1.0-20160519
+documentation:
+  - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - CGM: !include oic.r.cgm.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a", "oic.if.baseline"]
+
+/CGMResURI:
+  description: |
+    This resource describes the properties associated with CGM(Continuous Glucose Monitor).
+    Blood Glucose Level (bloodsugar, units) inherit oic.r.blood.glucose.
+    Interval is periodical time interval to check blood glucose level.
+  displayName: CGM
+  is: [ interface ]
+
+  get:
+    description: |
+      Retrieves the current CGM data.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: CGM
+            example: |
+              {
+                "rt":         ["oic.r.cgm"],
+                "id":         "unique_example_id",
+                "bloodsugar": 100,
+                "units":      "mg/dL",
+                "interval": 10,
+                "observedtime": "2016-02-15T09:19Z"
+              }
+  post:
+    description: |
+      Sets the desired time interval.
+    body:
+      application/json:
+        schema: CGM
+        example: |
+          {
+            "id":     "unique_example_id",
+            "interval": 5
+          }
+    responses:
+      200:
+        description: |
+          Indicates that the datetime value was successfully changed.
+          The new datetime value is provided in the response.
+        body:
+          application/json:
+            schema: CGM
+            example: |
+              {
+                "id":     "unique_example_id",
+                "bgl": {
+                  "bloodsugar": 100,
+                  "units":      "mg/dL"
+                  },
+                "interval": 5,
+                "observedtime": "2016-02-15T09:19Z"
+              }
+      403:
+        description: |
+          Indicates that OIC client sent an invalid property value to the server.
+          The server responds with the required input representation.
+        body:
+          application/json:
+            schema: CGM
+            example: |
+              {
+              "interval": 10
+              }

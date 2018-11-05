@@ -1,0 +1,599 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Resource directory resource",
+    "version": "v1-20160622",
+    "license": {
+      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
+      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
+    }
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/oic/rd" : {
+      "get": {
+        "description": "Resource to be exposed by any Device that can act as a Resource Directory.\n1) Provides selector criteria (e.g., integer) with GET request\n2) Publish a Link in /oic/res with POST request\nGet the attributes of the Resource Directory for selection purposes.\n",
+        "parameters": [
+          {"$ref": "#/parameters/rdgetinterface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "Respond with the selector criteria - either the set of attributes or the bias factor\n",
+              "x-example":
+                {
+                  "rt": ["oic.wk.rd"],
+                  "if": ["oic.if.baseline"],
+                  "sel": 50
+                }
+                ,
+              "schema": { "$ref": "#/definitions/rdSelection" }
+            }
+        }
+      },
+      "post": {
+        "description": "Publish the resource information for the first time in /oic/res. Updates to existing entries are not allowed.\nAppropriates parts of the information, i.e., Links of the published Resources will be discovered through /oic/res.\n1) When a Device first publishes a Link, the request payload to RD may include the Links without an \"ins\" Parameter.\n2) Upon granting the request, the RD assigns a unique instance value identifying the Link among all the Links it advertises\n   and sends back the instance value in the \"ins\" Parameter in the Link to the publishing Device.\n",
+        "parameters": [
+          {"$ref": "#/parameters/rdpostinterface"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/rdPublish" },
+            "x-example":
+              {
+                "di": "e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                "links": [
+                  {
+                    "anchor": "ocf://e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                    "href":   "/myLightSwitch",
+                    "rt":     ["oic.r.switch.binary"],
+                    "if":     ["oic.if.a", "oic.if.baseline"],
+                    "p":      {"bm": 3},
+                    "eps": [
+                        {"ep": "coaps://[2001:db8:a::b1d6]:1111", "pri": 2},
+                        {"ep": "coaps://[2001:db8:a::b1d6]:1122"},
+                        {"ep": "coaps+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                    ]
+                  },
+                  {
+                    "anchor": "ocf://e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                    "href":   "/myLightBrightness",
+                    "rt":     ["oic.r.brightness"],
+                    "if":     ["oic.if.a", "oic.if.baseline"],
+                    "p":      {"bm": 3},
+                    "eps": [
+                        {"ep": "coaps://[[2001:db8:a::123]:2222"}
+                    ]
+                  }
+                ],
+                "ttl": 600
+              }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "Respond with the same schema as publish with the additional \"ins\" Parameter in the Link.\n",
+              "x-example":
+                {
+                  "di": "e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                  "links": [
+                    {
+                      "anchor": "ocf://e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                      "href":   "/myLightSwitch",
+                      "rt":     ["oic.r.switch.binary"],
+                      "if":     ["oic.if.a", "oic.if.baseline"],
+                      "p":      {"bm": 3},
+                      "eps": [
+                          {"ep": "coaps://[2001:db8:a::b1d6]:1111", "pri": 2},
+                          {"ep": "coaps://[2001:db8:a::b1d6]:1122"},
+                          {"ep": "coaps+tcp://[2001:db8:a::123]:2222", "pri": 3}
+                      ],
+                      "ins":    11235
+                    },
+                    {
+                      "anchor": "ocf://e61c3e6b-9c54-4b81-8ce5-f9039c1d04d9",
+                      "href":   "/myLightBrightness",
+                      "rt":     ["oic.r.brightness"],
+                      "if":     ["oic.if.a", "oic.if.baseline"],
+                      "p":      {"bm": 3},
+                      "eps": [
+                          {"ep": "coaps://[2001:db8:a::123]:2222"}
+                      ],
+                      "ins":    112358
+                    }
+                  ],
+                  "ttl": 600
+                }
+                ,
+              "schema": { "$ref": "#/definitions/rdPublish" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "rdgetinterface" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.baseline"],
+      "description" : "enumdescription"
+    },
+    "rdpostinterface" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.baseline"],
+      "description" : "enumdescription"
+    }
+  },
+  "definitions": {
+    "rdSelection" : {
+      "properties": {
+        "rt" :
+                {
+          "description": "Resource Type of the Resource",
+          "items": {
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "sel" :
+                {
+          "description": "A bias factor calculated by the Resource directory",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": true,
+          "type": "integer"
+        },
+
+        "id" :
+                {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        }
+    }
+    ,
+    "rdPublish" : {
+      "properties": {
+        "rt" :
+                {
+          "description": "Resource Type of the Resource",
+          "items": {
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+
+        "links" :
+                {
+          "description": "A set of simple or individual OIC Links.",
+          "items": {
+            "properties": {
+              "anchor": {
+                "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
+                "format": "uri",
+                "maxLength": 256,
+                "type": "string"
+              },
+              "di": {
+                "description": "Format pattern according to IETF RFC 4122.",
+                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                "type": "string"
+              },
+              "eps": {
+                "description": "the Endpoint information of the target Resource",
+                "items": {
+                  "properties": {
+                    "ep": {
+                      "description": "Transport Protocol Suite + Endpoint Locator",
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "pri": {
+                      "description": "The priority among multiple Endpoints",
+                      "minimum": 1,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "href": {
+                "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
+                "format": "uri",
+                "maxLength": 256,
+                "type": "string"
+              },
+              "if": {
+                "description": "The interface set supported by this resource",
+                "items": {
+                  "enum": [
+                    "oic.if.baseline",
+                    "oic.if.ll",
+                    "oic.if.b",
+                    "oic.if.rw",
+                    "oic.if.r",
+                    "oic.if.a",
+                    "oic.if.s"
+                  ],
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "ins": {
+                "description": "The instance identifier for this web link in an array of web links - used in collections",
+                "type": "integer"
+              },
+              "p": {
+                "description": "Specifies the framework policies on the Resource referenced by the target URI",
+                "properties": {
+                  "bm": {
+                    "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "bm"
+                ],
+                "type": "object"
+              },
+              "rel": {
+                "description": "The relation of the target URI referenced by the link to the context URI",
+                "oneOf": [
+                  {
+                    "default": [
+                      "hosts"
+                    ],
+                    "items": {
+                      "maxLength": 64,
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "type": "array"
+                  },
+                  {
+                    "default": "hosts",
+                    "maxLength": 64,
+                    "type": "string"
+                  }
+                ]
+              },
+              "rt": {
+                "description": "Resource Type of the Resource",
+                "items": {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "title": {
+                "description": "A title for the link relation. Can be used by the UI to provide a context.",
+                "maxLength": 64,
+                "type": "string"
+              },
+              "type": {
+                "default": "application/cbor",
+                "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
+                "items": {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              }
+            },
+            "required": [
+              "href",
+              "rt",
+              "if"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+
+        "di" :
+                {
+          "$ref": "#/definitions/uuid",
+          "description": "A UUID that is the identifier for the publishing Device"
+        },
+
+        "n" :
+                {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "ttl" :
+                {
+          "description": "Time to indicate a RD, i.e. how long to keep this published item.",
+          "type": "integer"
+        },
+
+        "id" :
+                {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "if" :
+                {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+
+        },
+      "required": ["di", "links", "ttl"]
+    }
+    ,"oic.rd.publish" :
+        {
+      "properties": {
+        "di": {
+          "$ref": "#/definitions/uuid",
+          "description": "A UUID that is the identifier for the publishing Device"
+        },
+        "ttl": {
+          "description": "Time to indicate a RD, i.e. how long to keep this published item.",
+          "type": "integer"
+        }
+      }
+    }
+
+    ,"oic.collection.linksexpanded" :
+        {
+      "properties": {
+        "links": {
+          "description": "A set of simple or individual OIC Links.",
+          "items": {
+            "properties": {
+              "anchor": {
+                "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
+                "format": "uri",
+                "maxLength": 256,
+                "type": "string"
+              },
+              "di": {
+                "description": "Format pattern according to IETF RFC 4122.",
+                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                "type": "string"
+              },
+              "eps": {
+                "description": "the Endpoint information of the target Resource",
+                "items": {
+                  "properties": {
+                    "ep": {
+                      "description": "Transport Protocol Suite + Endpoint Locator",
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "pri": {
+                      "description": "The priority among multiple Endpoints",
+                      "minimum": 1,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "href": {
+                "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
+                "format": "uri",
+                "maxLength": 256,
+                "type": "string"
+              },
+              "if": {
+                "description": "The interface set supported by this resource",
+                "items": {
+                  "enum": [
+                    "oic.if.baseline",
+                    "oic.if.ll",
+                    "oic.if.b",
+                    "oic.if.rw",
+                    "oic.if.r",
+                    "oic.if.a",
+                    "oic.if.s"
+                  ],
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "ins": {
+                "description": "The instance identifier for this web link in an array of web links - used in collections",
+                "type": "integer"
+              },
+              "p": {
+                "description": "Specifies the framework policies on the Resource referenced by the target URI",
+                "properties": {
+                  "bm": {
+                    "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "bm"
+                ],
+                "type": "object"
+              },
+              "rel": {
+                "description": "The relation of the target URI referenced by the link to the context URI",
+                "oneOf": [
+                  {
+                    "default": [
+                      "hosts"
+                    ],
+                    "items": {
+                      "maxLength": 64,
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "type": "array"
+                  },
+                  {
+                    "default": "hosts",
+                    "maxLength": 64,
+                    "type": "string"
+                  }
+                ]
+              },
+              "rt": {
+                "description": "Resource Type of the Resource",
+                "items": {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "title": {
+                "description": "A title for the link relation. Can be used by the UI to provide a context.",
+                "maxLength": 64,
+                "type": "string"
+              },
+              "type": {
+                "default": "application/cbor",
+                "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
+                "items": {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              }
+            },
+            "required": [
+              "href",
+              "rt",
+              "if"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+
+    ,"uuid" :
+        {
+      "description": "Format pattern according to IETF RFC 4122.",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "type": "string"
+    }
+
+    ,"oic.core" :
+        {
+      "properties": {
+        "id": {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+        "if": {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+        "n": {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+        "rt": {
+          "description": "Resource Type of the Resource",
+          "items": {
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+
+  }
+}

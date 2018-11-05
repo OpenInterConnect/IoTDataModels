@@ -1,0 +1,178 @@
+#%RAML 0.8
+title: OICCyclingComputer
+version: v1.1.0-20160519
+documentation:
+  - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - CyclingComputer: !include oic.r.cycling.computer.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.a", "oic.if.baseline"]
+
+/CyclingComputerResURI:
+  description: |
+    This resource describes the properties associated with CyclingComputer.
+    biketime is the value of accumulated time using bike.
+    Laptime is freezed elapsed time.
+    The resource is a composite resource being made up as a collection of:
+      Clock
+      Cycling Power
+      Cycling Speed Cadence
+      Altimeter
+      HeartRate
+      Speed
+      Distance
+  displayName: CyclingComputer
+  is: [ interface ]
+
+  get:
+    description: |
+      Retrieves the current datetime data.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: CyclingComputer
+            example: |
+              {
+                "rt":         ["oic.r.cycling.computer"],
+                "id":         "unique_example_id",
+                "biketime":  "00:10",
+                "c-time": {
+                  "datetime": "2016-03-15T14:30Z"
+                  },
+                "laptime": "14:30:10",
+                "c-power": {
+                  "power": 50,
+                  "FTP": 60
+                  },
+                "c-cadence": {
+                  "cadence":  100,
+                  "speed": 50,
+                  "units": "km/h"
+                  },
+                "c-alt": {
+                  "alt": 1500
+                  },
+                "c-hr": {
+                  "heartrate":  81
+                  },
+                "c-distance": {
+                  "distance":  10,
+                  "units": "mile"
+                  }
+              }
+  post:
+    description: |
+      Sets the desired value.
+    body:
+      application/json:
+        schema: CyclingComputer
+        example: |
+          {
+            "id":     "unique_example_id",
+            "biketime":  "00:10",
+            "c-time": {
+              "datetime": "2016-03-15T14:30Z"
+              },
+            "laptime": "14:30:10",
+            "c-power": {
+              "power": 50,
+              "FTP": 60
+              },
+            "c-cadence": {
+              "cadence":  100,
+              "speed": 50,
+              "units": "km/h"
+              },
+            "c-alt": {
+              "alt": 1500
+              },
+            "c-hr": {
+              "heartrate":  81
+              },
+            "c-distance": {
+              "distance":  10,
+              "units": "mile"
+              }
+          }
+    responses:
+      200:
+        description: |
+          Indicates that the value was successfully changed.
+          The new value is provided in the response.
+        body:
+          application/json:
+            schema: CyclingComputer
+            example: |
+              {
+                "id":     "unique_example_id",
+                "biketime":  "00:10",
+                "c-time": {
+                  "datetime": "2016-03-15T14:30Z"
+                  },
+                "laptime": "14:30:10",
+                "c-power": {
+                  "power": 50,
+                  "FTP": 60
+                  },
+                "c-cadence": {
+                  "cadence":  100,
+                  "speed": 50,
+                  "units": "km/h"
+                  },
+                "c-alt": {
+                  "alt": 1500
+                  },
+                "c-hr": {
+                  "heartrate":  81
+                  },
+                "c-distance": {
+                  "distance":  10,
+                  "units": "mile"
+                  }
+              }
+      403:
+        description: |
+          Indicates that OIC client sent an invalid property value to the server.
+          The server responds with the required input representation.
+        body:
+          application/json:
+            schema: CyclingComputer
+            example: |
+              {
+                "id":     "unique_example_id",
+                "biketime":  "00:10",
+                "c-time": {
+                  "datetime": "2016-03-15T14:30Z"
+                  },
+                "laptime": "14:30:10",
+                "c-power": {
+                  "power": 50,
+                  "FTP": 60
+                  },
+                "c-cadence": {
+                  "cadence":  100,
+                  "speed": 50,
+                  "units": "km/h"
+                  },
+                "c-alt": {
+                  "alt": 1500
+                  },
+                "c-hr": {
+                  "heartrate":  81
+                  },
+                "c-distance": {
+                  "distance":  10,
+                  "units": "mile"
+                  }
+              }

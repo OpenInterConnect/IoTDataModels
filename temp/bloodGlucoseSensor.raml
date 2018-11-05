@@ -1,0 +1,52 @@
+#%RAML 0.8
+title: OICBloodGlucoseSensor
+version: v1.1.0-20160519
+documentation:
+  - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - BloodGlucoseSensor: !include oic.r.blood.glucose.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s", "oic.if.baseline"]
+
+/BloodGlucoseResURI:
+  description: |
+    This resource describes the properties associated with blood glucose sensor.
+    Blood Sugar Level (bloodsugar) is the the concentration of glucose in the blood.
+    Units are the blood sugar level units (units) which can either be in “mg/dl” or "mmol/dl".
+    Lot Number (site) is a string to describe the lot number.
+
+  displayName: Blood glucose sensor
+  is: [ interface ]
+
+  get:
+    description: |
+      Retrieves the current blood glucose sensor values.
+      A client can specify the units for the requested blood glucose level by use of a query parameter.
+    queryParameters:
+      units:
+        displayName: Units
+        enum: ["mg/dL", "mmol/L"]
+    responses:
+      200:
+        body:
+          application/json:
+            schema: BloodGlucoseSensor
+            example: |
+              {
+                "rt":           ["oic.r.blood.glucose"],
+                "id":           "unique_example_id",
+                "bloodsugar":   100,
+                "units":        "mg/dL",
+                "site":         "GS48148",
+                "observedtime":  "2016-02-15T09:19Z"
+              }

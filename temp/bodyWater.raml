@@ -1,0 +1,50 @@
+#%RAML 0.8
+title: OICBodyWater
+version: v1.1.0-20160519
+documentation:
+  - title: Copyright (c) 2016 Open Interconnect Consortium, Inc. All rights reserved.
+    content: |
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+        THIS SOFTWARE IS PROVIDED BY THE OPEN INTERCONNECT CONSORTIUM, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE OPEN INTERCONNECT CONSORTIUM, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+schemas:
+  - BodyWater: !include oic.r.body.water.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.s", "oic.if.baseline"]
+
+/BodyWaterResURI:
+  description: |
+    This resource describes the properties associated with body water.
+    Body water describes the current value measured. Refer to the "Body Water" (oic.r.bodywater)
+    Units (units) is a body water measurement units which can either be in "kg", "lb" or "%".
+
+  displayName: Body Water
+  is: [ interface ]
+
+  get:
+    description: |
+      Retrieves the body water.
+      A client can specify the units for the requested body water by use of a query parameter.
+    queryParameters:
+      units:
+        displayName: Units
+        enum: ["kg","lb", "%"]
+    responses:
+      200:
+        body:
+          application/json:
+            schema: BodyWater
+            example: |
+              {
+                "rt":     ["oic.r.body.water"],
+                "id":     "unique_example_id",
+                "bodywater": 70,
+                "units":   "%",
+                "observedtime": "2016-02-15T09:19Z"
+              }

@@ -1,0 +1,29 @@
+{
+  "id": "http://openinterconnect.org/iotdatamodels/schemas/oic.r.body.position.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Body Position",
+  "definitions": {
+    "oic.r.body.position": {
+      "type": "object",
+      "properties": {
+        "bpos": {
+          "type": "string",
+          "enum": ["standing", "sitting", "supine", "prone", "left", "right", "fall"],
+          "description": "ReadOnly, Current body position type"
+        },
+        "observedtime": {
+          "type": "string",
+          "description": "ReadOnly, An ISO8601 format time indicating when the data is observed (ex: 2016-02-15T09:19Z)"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "oic.core.json#/definitions/oic.core"},
+    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "#/definitions/oic.r.body.position"}
+  ],
+  "required": ["bpos"]
+}
