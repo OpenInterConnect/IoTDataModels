@@ -46,7 +46,6 @@
             "schema": { "$ref": "#/definitions/mediaSource" },
             "x-example":
               {
-                "id":           "unique_example_id",
                 "sourceName":   "my new name",
                 "sourceNumber": "1",
                 "status":       true
@@ -92,13 +91,11 @@
           "readOnly": true,
           "type": "array"
         },
-
         "status" :
                 {
           "description": "Specifies if the specific source instance is selected or not",
           "type": "boolean"
         },
-
         "sourceType" :
                 {
           "description": "Specifies the type of the source",
@@ -110,45 +107,17 @@
           "readOnly": true,
           "type": "string"
         },
-
         "sourceName" :
                 {
           "description": "Specifies a pre-defined media input or output",
           "type": "string"
         },
-
         "precision" :
                 {
           "description": "Accuracy granularity of the exposed value",
           "readOnly": true,
           "type": "number"
         },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -156,7 +125,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "range" :
                 {
           "description": "The valid range for the value Property",
@@ -175,7 +143,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "step" :
                 {
           "anyOf": [
@@ -189,7 +156,6 @@
           "description": "Step value across the defined range",
           "readOnly": true
         },
-
         "sourceNumber" :
                 {
           "description": "Numeric identifier to specify the instance",
@@ -199,7 +165,6 @@
             "string"
           ]
         },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -207,7 +172,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -228,7 +192,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"type" : "object"
       ,"required": ["sourceName", "status"]

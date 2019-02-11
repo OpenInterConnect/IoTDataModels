@@ -68,46 +68,18 @@
           "readOnly": true,
           "type": "number"
         },
-
         "memorysize" :
                 {
           "description": "This value represents the total memory size of the printer. The unit is MB(Mega Bytes)",
           "readOnly": true,
           "type": "number"
         },
-
         "precision" :
                 {
           "description": "Accuracy granularity of the exposed value",
           "readOnly": true,
           "type": "number"
         },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -115,7 +87,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "3dprinttype" :
                 {
           "description": "The type of 3D printing technology.",
@@ -133,7 +104,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "range" :
                 {
           "description": "The valid range for the value Property",
@@ -152,7 +122,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "step" :
                 {
           "anyOf": [
@@ -166,21 +135,18 @@
           "description": "Step value across the defined range",
           "readOnly": true
         },
-
         "wanconnected" :
                 {
           "description": "This value indicates the connectivity capability of the 3D printer. If the value is false, the printer does not have network facility to Wide Area Network such as internet and GSM. If the value is true, the printer has network connectivity",
           "readOnly": true,
           "type": "boolean"
         },
-
         "printsizex" :
                 {
           "description": "This represents the maximum size of printing object in the direction of X-axis. The unit is mm.",
           "readOnly": true,
           "type": "number"
         },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -188,14 +154,12 @@
           "readOnly": true,
           "type": "string"
         },
-
         "printsizez" :
                 {
           "description": "This represents the maximum size of printing object in the direction of Z-axis. The unit is mm.",
           "readOnly": true,
           "type": "number"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -216,7 +180,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"type" : "object"
       ,"required": ["3dprinttype", "printsizex", "printsizey", "printsizez", "wanconnected", "memorysize"]

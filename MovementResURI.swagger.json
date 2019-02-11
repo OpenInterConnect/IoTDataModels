@@ -45,7 +45,6 @@
             "schema": { "$ref": "#/definitions/movement" },
             "x-example":
               {
-                "id":       "unique_example_id",
                 "movementSettings": ["stop", "left", "right", "rotate", "forward", "backward"],
                 "movement": "stop"
               }
@@ -89,7 +88,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "movementSettings" :
                 {
           "description": "array of possible movement values",
@@ -99,39 +97,6 @@
           "readOnly": true,
           "type": "array"
         },
-
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
-        },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -139,46 +104,11 @@
           "readOnly": true,
           "type": "string"
         },
-
         "movementModifier" :
                 {
           "description": "Modifier to the movement value (e.g. spin-90, left-20), units are device dependent",
           "type": "string"
         },
-
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
-        },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -199,7 +129,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -207,13 +136,11 @@
           "readOnly": true,
           "type": "string"
         },
-
         "movement" :
                 {
           "description": "Current movement value",
           "type": "string"
         }
-
         }
         ,"type" : "object"
       ,"required": ["movementSettings", "movement"]

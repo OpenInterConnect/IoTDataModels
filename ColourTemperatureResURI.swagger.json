@@ -43,7 +43,6 @@
             "schema": { "$ref": "#/definitions/ColourTemp" },
             "x-example":
               {
-                "id":         "unique_example_id",
                 "ct":         457
               }
           }
@@ -91,39 +90,12 @@
           "readOnly": true,
           "type": "array"
         },
-
         "precision" :
                 {
           "description": "Accuracy granularity of the exposed value",
           "readOnly": true,
           "type": "number"
         },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -131,7 +103,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "range" :
                 {
           "description": "The valid range for the value Property",
@@ -150,7 +121,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "step" :
                 {
           "anyOf": [
@@ -164,14 +134,12 @@
           "description": "Step value across the defined range",
           "readOnly": true
         },
-
         "ct" :
                 {
           "description": "Mired colour temperature",
           "minimum": 0,
           "type": "integer"
         },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -179,7 +147,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -200,7 +167,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"type" : "object"
       ,"required": ["ct"]

@@ -44,7 +44,6 @@
             "schema": { "$ref": "#/definitions/Audio" },
             "x-example":
               {
-                "id":     "unique_example_id",
                 "volume": 75,
                 "mute":   false
               }
@@ -88,45 +87,17 @@
           "readOnly": true,
           "type": "array"
         },
-
         "mute" :
                 {
           "description": "Mute setting of an audio rendering device",
           "type": "boolean"
         },
-
         "precision" :
                 {
           "description": "Accuracy granularity of the exposed value",
           "readOnly": true,
           "type": "number"
         },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -134,7 +105,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "volume" :
                 {
           "description": "Volume setting of an audio rendering device.",
@@ -142,7 +112,6 @@
           "minimum": 0,
           "type": "integer"
         },
-
         "range" :
                 {
           "description": "The valid range for the value Property",
@@ -161,7 +130,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "step" :
                 {
           "anyOf": [
@@ -175,7 +143,6 @@
           "description": "Step value across the defined range",
           "readOnly": true
         },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -183,7 +150,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -204,7 +170,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"type" : "object"
       ,"required": ["volume", "mute"]

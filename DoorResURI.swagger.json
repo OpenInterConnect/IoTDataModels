@@ -45,7 +45,6 @@
             "schema": { "$ref": "#/definitions/DoorUpdate" },
             "x-example":
               {
-                "id":         "unique_example_id",
                 "openAlarm":  false
               }
           }
@@ -93,39 +92,6 @@
           "readOnly": true,
           "type": "array"
         },
-
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
-        },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -133,33 +99,12 @@
           "readOnly": true,
           "type": "string"
         },
-
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-
         "openDuration" :
                 {
           "description": "The time duration the door has been open",
           "readOnly": true,
           "type": "string"
         },
-
         "openState" :
                 {
           "description": "The state of the door (open or closed)",
@@ -170,21 +115,6 @@
           "readOnly": true,
           "type": "string"
         },
-
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
-        },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -192,13 +122,11 @@
           "readOnly": true,
           "type": "string"
         },
-
         "openAlarm" :
                 {
           "description": "The state of the door open alarm",
           "type": "boolean"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -219,7 +147,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"type" : "object"
       ,"required": ["openState"]
@@ -227,126 +154,11 @@
     ,
     "DoorUpdate" : {
       "properties": {
-        "rt" :
-                {
-          "description": "Resource Type",
-          "items": {
-            "maxLength": 64,
-            "type": "string"
-          },
-          "minItems": 1,
-          "readOnly": true,
-          "type": "array"
-        },
-
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
-        },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
-        },
-
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-
         "openAlarm" :
                 {
           "description": "The state of the door open alarm",
           "type": "boolean"
-        },
-
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
-          "items": {
-            "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
-              "oic.if.a",
-              "oic.if.s"
-            ],
-            "type": "string"
-          },
-          "minItems": 1,
-          "readOnly": true,
-          "type": "array"
         }
-
         }
         ,"type" : "object"
     }

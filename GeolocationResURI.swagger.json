@@ -62,7 +62,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "step" :
                 {
           "anyOf": [
@@ -76,21 +75,18 @@
           "description": "Step value across the defined range",
           "readOnly": true
         },
-
         "precision" :
                 {
           "description": "Accuracy granularity of the exposed value",
           "readOnly": true,
           "type": "number"
         },
-
         "longitude" :
                 {
           "description": "Device's Current Longitude coordinate (degrees)",
           "readOnly": true,
           "type": "number"
         },
-
         "heading" :
                 {
           "description": "Direction of travel of device (degree)",
@@ -99,7 +95,6 @@
           "readOnly": true,
           "type": "number"
         },
-
         "range" :
                 {
           "description": "The valid range for the value Property",
@@ -118,7 +113,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -126,39 +120,12 @@
           "readOnly": true,
           "type": "string"
         },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
         "latitude" :
                 {
           "description": "Device's Current Latitude coordinate (degrees)",
           "readOnly": true,
           "type": "number"
         },
-
         "altitudeAccuracy" :
                 {
           "description": "The accuracy level of the altitude coordinates (metres)",
@@ -166,14 +133,12 @@
           "readOnly": true,
           "type": "number"
         },
-
         "alt" :
                 {
           "description": "The current distance (metres) above or below 'local' sea-level.",
           "readOnly": true,
           "type": "number"
         },
-
         "accuracy" :
                 {
           "description": "The accuracy level of the latitude and longitude coordinates (metres)",
@@ -181,7 +146,6 @@
           "readOnly": true,
           "type": "number"
         },
-
         "speed" :
                 {
           "description": "Device's current velocity (metres per second)",
@@ -189,7 +153,6 @@
           "readOnly": true,
           "type": "number"
         },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -197,7 +160,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -218,7 +180,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"type" : "object"
       ,"required": ["latitude", "longitude", "alt"]

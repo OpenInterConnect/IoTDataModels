@@ -43,7 +43,6 @@
             "schema": { "$ref": "#/definitions/Brightness" },
             "x-example":
               {
-                "id":         "unique_example_id",
                 "brightness": 10
               }
           }
@@ -85,7 +84,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "brightness" :
                 {
           "description": "Quantized representation in the range 0-100 of the current sensed or set value for Brightness",
@@ -93,39 +91,12 @@
           "minimum": 0,
           "type": "integer"
         },
-
         "precision" :
                 {
           "description": "Accuracy granularity of the exposed value",
           "readOnly": true,
           "type": "number"
         },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -133,7 +104,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "range" :
                 {
           "description": "The valid range for the value Property",
@@ -152,7 +122,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "step" :
                 {
           "anyOf": [
@@ -166,7 +135,6 @@
           "description": "Step value across the defined range",
           "readOnly": true
         },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -174,7 +142,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -195,7 +162,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"type" : "object"
       ,"required": ["brightness"]

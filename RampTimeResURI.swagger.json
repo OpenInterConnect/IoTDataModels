@@ -44,7 +44,6 @@
             "schema": { "$ref": "#/definitions/RampTime" },
             "x-example":
               {
-                "id":       "unique_example_id",
                 "rampTime": 50
               }
           }
@@ -96,39 +95,12 @@
           "readOnly": true,
           "type": "array"
         },
-
         "precision" :
                 {
           "description": "Accuracy granularity of the exposed value",
           "readOnly": true,
           "type": "number"
         },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -136,7 +108,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "range" :
                 {
           "description": "The valid range for the value Property",
@@ -155,13 +126,11 @@
           "readOnly": true,
           "type": "array"
         },
-
         "rampTime" :
                 {
           "description": "Actual speed of changing between 2 dimming values",
           "type": "integer"
         },
-
         "step" :
                 {
           "anyOf": [
@@ -175,7 +144,6 @@
           "description": "Step value across the defined range",
           "readOnly": true
         },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -183,7 +151,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -204,7 +171,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"type" : "object"
       ,"required": ["rampTime"]

@@ -45,7 +45,6 @@
             "schema": { "$ref": "#/definitions/PanTiltZoom" },
             "x-example":
               {
-                "id":         "unique_example_id",
                 "pan":        10.0,
                 "tilt":       -10.0,
                 "zoomFactor": "4x"
@@ -91,7 +90,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "tilt_range" :
                 {
           "description": "Min and Max values for the tilt setting",
@@ -103,51 +101,22 @@
           "readOnly": true,
           "type": "array"
         },
-
         "zoomFactor" :
                 {
           "description": "The Zoomfactor value",
           "type": "string"
         },
-
         "tilt" :
                 {
           "description": "vertical tilt in degrees",
           "type": "number"
         },
-
         "precision" :
                 {
           "description": "Accuracy granularity of the exposed value",
           "readOnly": true,
           "type": "number"
         },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -155,7 +124,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "range" :
                 {
           "description": "The valid range for the value Property",
@@ -174,7 +142,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "pan_range" :
                 {
           "description": "Min and Max values for the pan setting",
@@ -186,7 +153,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "step" :
                 {
           "anyOf": [
@@ -200,7 +166,6 @@
           "description": "Step value across the defined range",
           "readOnly": true
         },
-
         "zoomFactorRange" :
                 {
           "description": "allowed Zoom Factor values. Linear equates to a 1-100 min/max.",
@@ -216,7 +181,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -224,13 +188,11 @@
           "readOnly": true,
           "type": "string"
         },
-
         "pan" :
                 {
           "description": "horizontal pan in degrees",
           "type": "number"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -251,7 +213,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"type" : "object"
       ,"required": ["pan", "tilt", "zoomFactor"]

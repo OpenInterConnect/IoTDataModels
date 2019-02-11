@@ -62,7 +62,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "powerSources" :
                 {
           "items": {
@@ -82,39 +81,6 @@
           },
           "type": "array"
         },
-
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
-        },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -122,40 +88,6 @@
           "readOnly": true,
           "type": "string"
         },
-
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
-        },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -163,7 +95,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -184,7 +115,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"type" : "object"
       ,"required": ["powerSources"]

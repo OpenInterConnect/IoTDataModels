@@ -76,14 +76,12 @@
           "readOnly": true,
           "type": "array"
         },
-
         "maxnotifyperiod" :
                 {
           "description": "Maximum elapsed time in ms before a notification must be sent.",
           "minimum": 0,
           "type": "integer"
         },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -91,21 +89,18 @@
           "readOnly": true,
           "type": "string"
         },
-
         "minnotifyperiod" :
                 {
           "description": "Minimum elapsed time in ms before a notification is sent.",
           "minimum": 0,
           "type": "integer"
         },
-
         "threshold" :
                 {
           "description": "Amount by which the measured value must change before a notification is sent.",
           "minimum": 0,
           "type": "number"
         },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -113,7 +108,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -134,7 +128,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"anyOf" : 
                 [
@@ -154,7 +147,6 @@
             ]
           }
         ]
-
         ,"type" : "object"
     }
   }

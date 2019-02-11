@@ -45,7 +45,6 @@
             "schema": { "$ref": "#/definitions/EnergyUpdate" },
             "x-example":
               {
-                "id":     "unique_example_id",
                 "desiredvoltage": 130.0,
                 "desiredcurrent": 6.0
               }
@@ -93,52 +92,23 @@
           "readOnly": true,
           "type": "array"
         },
-
         "precision" :
                 {
           "description": "Accuracy granularity of the exposed value",
           "readOnly": true,
           "type": "number"
         },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
         "desiredcurrent" :
                 {
           "description": "The desired electric current in Amps (A).",
           "type": "number"
         },
-
         "current" :
                 {
           "description": "The electric current in Amps (A).",
           "readOnly": true,
           "type": "number"
         },
-
         "range" :
                 {
           "description": "The valid range for the value Property",
@@ -157,21 +127,18 @@
           "readOnly": true,
           "type": "array"
         },
-
         "frequency" :
                 {
           "description": "The electric frequency in Hertz (Hz).",
           "readOnly": true,
           "type": "number"
         },
-
         "voltage" :
                 {
           "description": "The electric voltage in Volts (V).",
           "readOnly": true,
           "type": "number"
         },
-
         "step" :
                 {
           "anyOf": [
@@ -185,7 +152,6 @@
           "description": "Step value across the defined range",
           "readOnly": true
         },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -193,13 +159,11 @@
           "readOnly": true,
           "type": "string"
         },
-
         "desiredfrequency" :
                 {
           "description": "The desired electric frequency in Hertz (Hz).",
           "type": "number"
         },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -207,13 +171,11 @@
           "readOnly": true,
           "type": "string"
         },
-
         "desiredvoltage" :
                 {
           "description": "The desired electric voltage in Volts (V).",
           "type": "number"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -234,7 +196,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"type" : "object"
       ,"required": ["voltage", "current", "frequency"]
@@ -242,117 +203,21 @@
     ,
     "EnergyUpdate" : {
       "properties": {
-        "rt" :
-                {
-          "description": "Resource Type",
-          "items": {
-            "maxLength": 64,
-            "type": "string"
-          },
-          "minItems": 1,
-          "readOnly": true,
-          "type": "array"
-        },
-
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
-        },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
-        },
-
         "desiredcurrent" :
                 {
           "description": "The desired electric current in Amps (A).",
           "type": "number"
         },
-
         "desiredfrequency" :
                 {
           "description": "The desired electric frequency in Hertz (Hz).",
           "type": "number"
         },
-
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-
         "desiredvoltage" :
                 {
           "description": "The desired electric voltage in Volts (V).",
           "type": "number"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -373,7 +238,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"anyOf" : 
                 [
@@ -393,7 +257,6 @@
             ]
           }
         ]
-
         ,"type" : "object"
     }
   }

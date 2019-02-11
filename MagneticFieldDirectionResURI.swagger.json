@@ -56,14 +56,12 @@
           "readOnly": true,
           "type": "array"
         },
-
         "precision" :
                 {
           "description": "Accuracy granularity of the exposed value",
           "readOnly": true,
           "type": "number"
         },
-
         "value" :
                 {
           "description": "Array containing Hx, Hy, Hz.",
@@ -75,7 +73,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -83,7 +80,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "range" :
                 {
           "description": "The valid range for the value Property",
@@ -102,7 +98,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "step" :
                 {
           "anyOf": [
@@ -116,7 +111,6 @@
           "description": "Step value across the defined range",
           "readOnly": true
         },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -124,7 +118,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -145,7 +138,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"type" : "object"
       ,"required": ["value"]

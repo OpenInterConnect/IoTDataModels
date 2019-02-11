@@ -58,7 +58,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "map" :
                 {
           "description": "Mean Arterial Pressure (MAP)",
@@ -66,39 +65,12 @@
           "readOnly": true,
           "type": "number"
         },
-
         "precision" :
                 {
           "description": "Accuracy granularity of the exposed value",
           "readOnly": true,
           "type": "number"
         },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
         "n" :
                 {
           "description": "Friendly name of the resource",
@@ -106,7 +78,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "units" :
                 {
           "description": "Blood pressure unit",
@@ -117,7 +88,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "range" :
                 {
           "description": "The valid range for the value Property",
@@ -136,7 +106,6 @@
           "readOnly": true,
           "type": "array"
         },
-
         "systolic" :
                 {
           "description": "Systolic blood pressure",
@@ -144,7 +113,6 @@
           "readOnly": true,
           "type": "number"
         },
-
         "step" :
                 {
           "anyOf": [
@@ -158,7 +126,6 @@
           "description": "Step value across the defined range",
           "readOnly": true
         },
-
         "diastolic" :
                 {
           "description": "Diastolic blood pressure",
@@ -166,7 +133,6 @@
           "readOnly": true,
           "type": "number"
         },
-
         "id" :
                 {
           "description": "Instance ID of this specific resource",
@@ -174,7 +140,6 @@
           "readOnly": true,
           "type": "string"
         },
-
         "if" :
                 {
           "description": "The interface set supported by this resource",
@@ -195,7 +160,6 @@
           "readOnly": true,
           "type": "array"
         }
-
         }
         ,"type" : "object"
       ,"required": ["systolic", "diastolic"]
