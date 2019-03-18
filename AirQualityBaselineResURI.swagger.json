@@ -2,33 +2,68 @@
   "swagger": "2.0",
   "info": {
     "title": "Air Quality Collection",
-    "version": "v1.1.0-20160519",
+    "version": "20190307",
     "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2016-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/AirQualityResURI?if=oic.if.ll" : {
+    "/AirQualityCollectionResURI?if=oic.if.ll" : {
       "get": {
         "description": "This resource describes a sensor that provides the qualitative or measured Air Quality.\nThe resource is a collection of instances of oic.r.airquality detailing the individual exposed contaminant measures\nThere is one collection entry per contaminant type supported by the device. A device must expose at least one measured or qualitative value.\nRetrieves the current air quality.\n",
         "parameters": [
-          {"$ref": "#/parameters/interface-ll"}
+          {"$ref": "#/parameters/interface-all"}
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
-                [
-                    {"href": "/myCOMeasureResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
-                    {"href": "/myCO2ResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
-                ]
-                ,
-              "schema": { "$ref": "#/definitions/AirQuality-ll" }
-            }
+          "200": {
+            "description" : "",
+            "x-example":
+              [
+                {"href": "/myCOMeasureResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                {"href": "/myCO2ResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
+              ],
+            "schema": { "$ref": "#/definitions/AirQuality-ll" }
+          }
+        }
+      }
+    },
+    "/AirQualityCollectionResURI?if=oic.if.b": {
+      "get": {
+        "description": "This resource describes a sensor that provides the qualitative or measured Air Quality.\nThe resource is a collection of instances of oic.r.airquality detailing the individual exposed contaminant measures\nThere is one collection entry per contaminant type supported by the device. A device must expose at least one measured or qualitative value.\nRetrieves the current air quality.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "",
+            "x-example":  [
+              {
+                "href": "/AirQualityCOResURI",
+                "rep": {
+                  "contaminanttype": "CO",
+                  "valuetype": "Measured",
+                  "contaminantvalue": 10,
+                  "range": [0,500]
+                }
+              },
+              {
+                "href": "/AirQualitySmokeResURI",
+                "rep": {
+                  "contaminanttype": "Smoke",
+                  "valuetype": "Measured",
+                  "contaminantvalue": 100,
+                  "range": [0,5000]
+                }
+              }
+            ],
+            "schema": { "$ref": "#/definitions/AirQualityCollectionBatch-Retrieve" }
+          }
         }
       }
     },
@@ -36,647 +71,196 @@
       "get": {
         "description": "This resource describes a sensor that provides the qualitative or measured Air Quality.\nThe resource is a collection of instances of oic.r.airquality detailing the individual exposed contaminant measures\nThere is one collection entry per contaminant type supported by the device. A device must expose at least one measured or qualitative value.\nRetrieves the current air quality.\n",
         "parameters": [
-          {"$ref": "#/parameters/interface-baseline"}
+          {"$ref": "#/parameters/interface-all"}
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
-                {
-                  "rt":   ["oic.r.airqualitycollection","oic.wk.col"],
-                  "if":   ["oic.if.baseline","oic.if.ll"],
-                  "id":   "unique_example_id",
-                  "links": [
-                    {"href": "/myCOMeasureResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
-                    {"href": "/myCO2ResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
-                  ]
-                }
-                ,
-              "schema": { "$ref": "#/definitions/AirQuality" }
-            }
+          "200": {
+            "description" : "",
+            "x-example":
+              {
+                "rt":   ["oic.r.airqualitycollection","oic.wk.col"],
+                "if":   ["oic.if.baseline","oic.if.ll"],
+                "links": [
+                  {"href": "/myCOMeasureResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myCO2ResURI", "rt": ["oic.r.airquality"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
+                ]
+              },
+            "schema": { "$ref": "#/definitions/AirQuality" }
+          }
         }
       }
     }
   },
   "parameters": {
-    "interface-ll" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.ll"]
-    },
-    "interface-baseline" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.baseline"]
-    },
     "interface-all" : {
       "in" : "query",
       "name" : "if",
       "type" : "string",
-      "enum" : ["oic.if.ll", "oic.if.baseline"]
+      "enum" : ["oic.if.ll", "oic.if.b","oic.if.baseline"]
     }
   },
   "definitions": {
-    "AirQuality-ll" : {
-      "title" : 
-            "Air Quality Collection Link List Schema (auto merged)"
-
-      ,"items" : 
-            {
-        "$ref": "#/definitions/oic.oic-link"
-      }
-
-      ,"type" : 
-            "array"
-    }
-    ,
-    "AirQuality" : {
-      "properties": {
-        "rt" :
-                {
-          "items": {
-            "enum": [
-              "oic.r.airqualitycollection",
-              "oic.wk.col"
-            ],
-            "type": "string"
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "type": "array",
-          "uniqueItems": true
-        },
-
-        "links" :
-                {
-          "description": "A set of simple or individual OIC Links.",
-          "items": {
-            "properties": {
-              "anchor": {
-                "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
-                "format": "uri",
-                "maxLength": 256,
-                "type": "string"
-              },
-              "di": {
-                "description": "The Device ID formatted according to IETF RFC 4122.",
-                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                "type": "string"
-              },
-              "eps": {
-                "description": "the Endpoint information of the target Resource",
-                "items": {
-                  "properties": {
-                    "ep": {
-                      "description": "Transport Protocol Suite + Endpoint Locator",
-                      "format": "uri",
-                      "type": "string"
-                    },
-                    "pri": {
-                      "description": "The priority among multiple Endpoints",
-                      "minimum": 1,
-                      "type": "integer"
-                    }
-                  },
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              "href": {
-                "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
-                "format": "uri",
-                "maxLength": 256,
-                "type": "string"
-              },
-              "if": {
-                "description": "The interface set supported by this resource",
-                "items": {
-                  "enum": [
-                    "oic.if.baseline",
-                    "oic.if.ll",
-                    "oic.if.b",
-                    "oic.if.rw",
-                    "oic.if.r",
-                    "oic.if.a",
-                    "oic.if.s"
-                  ],
-                  "type": "string"
-                },
-                "minItems": 1,
-                "type": "array"
-              },
-              "ins": {
-                "description": "The instance identifier for this web link in an array of web links - used in collections",
-                "type": "integer"
-              },
-              "p": {
-                "description": "Specifies the framework policies on the Resource referenced by the target URI",
-                "properties": {
-                  "bm": {
-                    "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "bm"
-                ],
-                "type": "object"
-              },
-              "rel": {
-                "description": "The relation of the target URI referenced by the link to the context URI",
-                "oneOf": [
-                  {
-                    "default": [
-                      "hosts"
-                    ],
-                    "items": {
-                      "maxLength": 64,
-                      "type": "string"
-                    },
-                    "minItems": 1,
-                    "type": "array"
-                  },
-                  {
-                    "default": "hosts",
-                    "maxLength": 64,
-                    "type": "string"
-                  }
-                ]
-              },
-              "rt": {
-                "description": "Resource Type of the Resource",
-                "items": {
-                  "maxLength": 64,
-                  "type": "string"
-                },
-                "minItems": 1,
-                "type": "array"
-              },
-              "title": {
-                "description": "A title for the link relation. Can be used by the UI to provide a context.",
-                "maxLength": 64,
-                "type": "string"
-              },
-              "type": {
-                "default": "application/cbor",
-                "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
-                "items": {
-                  "maxLength": 64,
-                  "type": "string"
-                },
-                "minItems": 1,
-                "type": "array"
-              }
-            },
-            "required": [
-              "href",
-              "rt",
-              "if"
-            ],
-            "type": "object"
-          },
-          "type": "array"
-        },
-
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-
-        "rts" :
-                {
-          "items": {
-            "anyOf": [
-              {
-                "enum": [
-                  "oic.r.airquality",
-                  "oic.r.value.conditional"
-                ],
-                "type": "string"
-              },
-              {
-                "enum": [
-                  "oic.r.airquality"
-                ],
-                "type": "string"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
-          "items": {
-            "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
-              "oic.if.a",
-              "oic.if.s"
-            ],
-            "type": "string"
-          },
-          "minItems": 1,
-          "readOnly": true,
-          "type": "array"
-        }
-
-        }
-        ,"type" : "object"
-    }
-    ,"airqualitycollection-ll" :
-        {
+    "AirQuality-ll": {
       "items": {
         "$ref": "#/definitions/oic.oic-link"
       },
       "type": "array"
-    }
-
-    ,"oic.collection.links.arrayoflinks" :
-        {
-      "properties": {
-        "links": {
-          "description": "A set of simple or individual OIC Links.",
-          "items": {
-            "properties": {
-              "anchor": {
-                "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
-                "format": "uri",
-                "maxLength": 256,
-                "type": "string"
-              },
-              "di": {
-                "description": "The Device ID formatted according to IETF RFC 4122.",
-                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                "type": "string"
-              },
-              "eps": {
-                "description": "the Endpoint information of the target Resource",
-                "items": {
-                  "properties": {
-                    "ep": {
-                      "description": "Transport Protocol Suite + Endpoint Locator",
-                      "format": "uri",
-                      "type": "string"
-                    },
-                    "pri": {
-                      "description": "The priority among multiple Endpoints",
-                      "minimum": 1,
-                      "type": "integer"
-                    }
-                  },
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              "href": {
-                "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
-                "format": "uri",
-                "maxLength": 256,
-                "type": "string"
-              },
-              "if": {
-                "description": "The interface set supported by this resource",
-                "items": {
-                  "enum": [
-                    "oic.if.baseline",
-                    "oic.if.ll",
-                    "oic.if.b",
-                    "oic.if.rw",
-                    "oic.if.r",
-                    "oic.if.a",
-                    "oic.if.s"
-                  ],
-                  "type": "string"
-                },
-                "minItems": 1,
-                "type": "array"
-              },
-              "ins": {
-                "description": "The instance identifier for this web link in an array of web links - used in collections",
-                "type": "integer"
-              },
-              "p": {
-                "description": "Specifies the framework policies on the Resource referenced by the target URI",
-                "properties": {
-                  "bm": {
-                    "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "bm"
-                ],
-                "type": "object"
-              },
-              "rel": {
-                "description": "The relation of the target URI referenced by the link to the context URI",
-                "oneOf": [
-                  {
-                    "default": [
-                      "hosts"
-                    ],
-                    "items": {
-                      "maxLength": 64,
-                      "type": "string"
-                    },
-                    "minItems": 1,
-                    "type": "array"
-                  },
-                  {
-                    "default": "hosts",
-                    "maxLength": 64,
-                    "type": "string"
-                  }
-                ]
-              },
-              "rt": {
-                "description": "Resource Type of the Resource",
-                "items": {
-                  "maxLength": 64,
-                  "type": "string"
-                },
-                "minItems": 1,
-                "type": "array"
-              },
-              "title": {
-                "description": "A title for the link relation. Can be used by the UI to provide a context.",
-                "maxLength": 64,
-                "type": "string"
-              },
-              "type": {
-                "default": "application/cbor",
-                "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
-                "items": {
-                  "maxLength": 64,
-                  "type": "string"
-                },
-                "minItems": 1,
-                "type": "array"
-              }
-            },
-            "required": [
-              "href",
-              "rt",
-              "if"
-            ],
-            "type": "object"
-          },
-          "type": "array"
-        }
-      }
-    }
-
-    ,"oic.collection.properties" :
-        {
-      "description": "A collection is a set of links along with additional properties to describe the collection itself",
-      "properties": {
-        "rts": {
-          "$ref": "#/definitions/oic.core/properties/rt",
-          "description": "The list of allowable resource types (for Target and anchors) in links included in the collection"
-        }
-      },
-      "type": "object"
-    }
-
-    ,"oic.core" :
-        {
-      "properties": {
-        "id": {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-        "if": {
-          "description": "The interface set supported by this resource",
-          "items": {
-            "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
-              "oic.if.a",
-              "oic.if.s"
-            ],
-            "type": "string"
-          },
-          "minItems": 1,
-          "readOnly": true,
-          "type": "array"
-        },
-        "n": {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-        "rt": {
-          "description": "Resource Type",
-          "items": {
-            "maxLength": 64,
-            "type": "string"
-          },
-          "minItems": 1,
-          "readOnly": true,
-          "type": "array"
-        }
-      },
-      "type": "object"
-    }
-
-    ,"oic.r.airqualitycollection" :
-        {
-      "properties": {
-        "rt": {
-          "items": {
-            "enum": [
-              "oic.r.airqualitycollection",
-              "oic.wk.col"
-            ],
-            "type": "string"
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "rts": {
-          "items": {
-            "anyOf": [
-              {
-                "enum": [
-                  "oic.r.airquality",
-                  "oic.r.value.conditional"
-                ],
-                "type": "string"
-              },
-              {
-                "enum": [
-                  "oic.r.airquality"
-                ],
-                "type": "string"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        }
-      },
-      "type": "object"
-    }
-
-    ,"oic.oic-link" :
-        {
+    },
+    "oic.oic-link": {
+      "type": "object",
       "properties": {
         "anchor": {
-          "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
-          "format": "uri",
-          "maxLength": 256,
-          "type": "string"
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/anchor"
         },
         "di": {
-          "description": "The Device ID formatted according to IETF RFC 4122.",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-          "type": "string"
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/di"
         },
         "eps": {
-          "description": "the Endpoint information of the target Resource",
-          "items": {
-            "properties": {
-              "ep": {
-                "description": "Transport Protocol Suite + Endpoint Locator",
-                "format": "uri",
-                "type": "string"
-              },
-              "pri": {
-                "description": "The priority among multiple Endpoints",
-                "minimum": 1,
-                "type": "integer"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/eps"
         },
         "href": {
-          "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
-          "format": "uri",
-          "maxLength": 256,
-          "type": "string"
-        },
-        "if": {
-          "description": "The interface set supported by this resource",
-          "items": {
-            "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.rw",
-              "oic.if.r",
-              "oic.if.a",
-              "oic.if.s"
-            ],
-            "type": "string"
-          },
-          "minItems": 1,
-          "type": "array"
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
         },
         "ins": {
-          "description": "The instance identifier for this web link in an array of web links - used in collections",
-          "type": "integer"
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/ins"
         },
         "p": {
-          "description": "Specifies the framework policies on the Resource referenced by the target URI",
-          "properties": {
-            "bm": {
-              "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
-              "type": "integer"
-            }
-          },
-          "required": [
-            "bm"
-          ],
-          "type": "object"
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/p"
         },
         "rel": {
-          "description": "The relation of the target URI referenced by the link to the context URI",
-          "oneOf": [
-            {
-              "default": [
-                "hosts"
-              ],
-              "items": {
-                "maxLength": 64,
-                "type": "string"
-              },
-              "minItems": 1,
-              "type": "array"
-            },
-            {
-              "default": "hosts",
-              "maxLength": 64,
-              "type": "string"
-            }
-          ]
-        },
-        "rt": {
-          "description": "Resource Type of the Resource",
-          "items": {
-            "maxLength": 64,
-            "type": "string"
-          },
-          "minItems": 1,
-          "type": "array"
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/rel_array"
         },
         "title": {
-          "description": "A title for the link relation. Can be used by the UI to provide a context.",
-          "maxLength": 64,
-          "type": "string"
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/title"
         },
         "type": {
-          "default": "application/cbor",
-          "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/type"
+        },
+        "if": {
+          "description": "The OCF Interfaces supported by the target Resource",
+          "items": {
+            "enum": [
+              "oic.if.s",
+              "oic.if.baseline"
+            ],
+            "type": "string",
+            "maxLength": 64
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "type": "array",
+          "readOnly": true
+        },
+        "rt": {
+          "description": "Resource Type of the target Resource",
           "items": {
             "maxLength": 64,
-            "type": "string"
+            "type": "string",
+            "enum": ["oic.r.airquality"]
           },
           "minItems": 1,
-          "type": "array"
+          "type": "array",
+          "uniqueItems": true,
+          "readOnly": true
         }
       },
       "required": [
         "href",
         "rt",
         "if"
-      ],
-      "type": "object"
+      ]
+    },
+    "AirQuality": {
+      "type": "object",
+      "properties": {
+        "rt": {
+          "items": {
+            "enum": [
+              "oic.r.airqualitycollection",
+              "oic.wk.col"
+            ],
+            "type": "string",
+            "maxLength": 64
+          },
+          "minItems": 2,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "links": {
+          "description": "A set of simple or individual OCF Links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/oic.oic-link"
+          }
+        },
+        "n": {
+          "$ref" : "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+          "$ref" : "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "rts": {
+          "items": {
+            "anyOf": [
+              {
+                "enum": [
+                  "oic.r.airquality",
+                  "oic.r.value.conditional"
+                ],
+                "type": "string",
+                "maxLength": 64
+              },
+              {
+                "enum": [
+                  "oic.r.airquality"
+                ],
+                "type": "string",
+                "maxLength": 64
+              }
+            ]
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "if": {
+          "description": "The OCF Interfaces supported by this Resource",
+          "items": {
+            "enum": [
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.baseline"
+            ],
+            "type": "string",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "uniqueItems": true,
+          "type": "array"
+        }
+      }
+    },
+    "AirQualityCollectionBatch-Retrieve" : {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "href": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
+          },
+          "rep": {
+            "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/AirQualityResURI.swagger.json#/definitions/AirQuality"
+          }
+        },
+        "required": [
+          "href",
+          "rep"
+        ]
+      }
     }
-
   }
 }

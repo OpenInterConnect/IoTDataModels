@@ -2,11 +2,13 @@
   "swagger": "2.0",
   "info": {
     "title": "3D Printer",
-    "version": "v1.1.0-20180115",
-    "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+    "version": "20190222",
+     "license": {
+        "name": "OCF Data Model License",
+        "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+        "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+      },
+      "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
@@ -14,7 +16,7 @@
   "paths": {
     "/3DPrinterResURI" : {
       "get": {
-        "description": "This resource describes the attributes associated with 3D Printer. The type of 3D printing technology is specified by an enumerated string value. The maximum sizes in mm are included for the x, y, and z dimensions. A designation of whether the device is capable of WAN connectivity is represented in a boolean. The memory capacity is captured in MB.\n\nThe print\nRetrieves the current 3D Printer attributes.\n",
+        "description": "This Resource describes the attributes associated with 3D Printer. The type of 3D printing technology is specified by an enumerated string value. The maximum sizes in mm are included for the x, y, and z dimensions. A designation of whether the device is capable of WAN connectivity is represented in a boolean. The memory capacity is captured in MB.",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -23,16 +25,15 @@
               "description" : "",
               "x-example":
                 {
-                  "rt"           : ["oic.r.printer.3d"],
-                  "id"           : "unique_example_id",
-                  "3dprinttype"  : "Digital Light Processing",
-                  "printsizex"   : 300.00,
-                  "printsizey"   : 200.50,
-                  "printsizez"   : 250.75,
+                  "rt" : ["oic.r.printer.3d"],
+                  "if" : ["oic.if.r", "oic.if.baseline"],
+                  "3dprinttype" : "Digital Light Processing",
+                  "printsizex" : 300.00,
+                  "printsizey" : 200.50,
+                  "printsizez" : 250.75,
                   "wanconnected" : false,
-                  "memorysize"   : 120.5
-                }
-                ,
+                  "memorysize" : 120.5
+                },
               "schema": { "$ref": "#/definitions/3DPrinter" }
             }
         }
@@ -41,54 +42,38 @@
   },
   "parameters": {
     "interface" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.r", "oic.if.baseline"]
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.r", "oic.if.baseline"]
     }
   },
   "definitions": {
-    "3DPrinter" : {
+    "3DPrinter": {
       "properties": {
-        "rt" :
-                {
-          "description": "Resource Type",
+        "rt": {
+          "description": "The Resource Type",
           "items": {
             "maxLength": 64,
-            "type": "string"
+            "type": "string",
+            "enum": ["oic.r.printer.3d"]
           },
           "minItems": 1,
+          "uniqueItems" : true,
           "readOnly": true,
           "type": "array"
         },
-
-        "printsizey" :
-                {
-          "description": "This represents the maximum size of printing object in the direction of Y-axis. The unit is mm.",
+        "printsizey": {
+          "description": "This Property represents the maximum size of printing object in the direction of Y-axis. The unit is mm.",
           "readOnly": true,
           "type": "number"
         },
-        "memorysize" :
-                {
-          "description": "This value represents the total memory size of the printer. The unit is MB(Mega Bytes)",
+        "memorysize": {
+          "description": "This Property represents the total memory size of the printer. The unit is MB(Mega Bytes)",
           "readOnly": true,
           "type": "number"
         },
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
-        },
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-        "3dprinttype" :
-                {
+        "3dprinttype": {
           "description": "The type of 3D printing technology.",
           "enum": [
             "Fused Filament Fabrication",
@@ -104,85 +89,44 @@
           "readOnly": true,
           "type": "string"
         },
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
-        },
-        "wanconnected" :
-                {
-          "description": "This value indicates the connectivity capability of the 3D printer. If the value is false, the printer does not have network facility to Wide Area Network such as internet and GSM. If the value is true, the printer has network connectivity",
+        "wanconnected": {
+          "description": "This Property indicates the connectivity capability of the 3D printer. If the value is false, the printer does not have network facility to Wide Area Network such as internet and GSM. If the value is true, the printer has network connectivity",
           "readOnly": true,
           "type": "boolean"
         },
-        "printsizex" :
-                {
-          "description": "This represents the maximum size of printing object in the direction of X-axis. The unit is mm.",
+        "printsizex": {
+          "description": "This Property represents the maximum size of printing object in the direction of X-axis. The unit is mm.",
           "readOnly": true,
           "type": "number"
         },
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-        "printsizez" :
-                {
-          "description": "This represents the maximum size of printing object in the direction of Z-axis. The unit is mm.",
+        "printsizez": {
+          "description": "This Property represents the maximum size of printing object in the direction of Z-axis. The unit is mm.",
           "readOnly": true,
           "type": "number"
         },
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
           "items": {
             "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
               "oic.if.r",
-              "oic.if.a",
-              "oic.if.s"
+              "oic.if.baseline"
             ],
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 2,
           "readOnly": true,
+          "uniqueItems": true,
           "type": "array"
         }
-        }
-        ,"type" : "object"
-      ,"required": ["3dprinttype", "printsizex", "printsizey", "printsizez", "wanconnected", "memorysize"]
+      },
+      "type": "object",
+      "required": ["3dprinttype", "printsizex", "printsizey", "printsizez", "wanconnected", "memorysize"]
     }
   }
 }

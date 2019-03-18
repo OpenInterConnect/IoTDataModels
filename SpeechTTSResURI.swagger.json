@@ -2,11 +2,13 @@
   "swagger": "2.0",
   "info": {
     "title": "Speech Synthesis-TTS",
-    "version": "v1.1.0-20160519",
+    "version": "20190215",
     "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
@@ -14,7 +16,7 @@
   "paths": {
     "/SpeechTTSResURI" : {
       "get": {
-        "description": "This resource may be created on the OIC Server that is capable of rendering speech by an OIC Client\n  and allows the client to provide an SSML document with text to render\n  or may be created on the OIC Server by some resident application.\nThe audio rendered is at this stage local to the Server (i.e. not streamed).\nThe utterance is an SSML document.\nThe supportedLanguages is an array of the RFC 5646 defined language tags that are supported.\nThe supportedVoices is an SSML document fragment indicating the voices that are supported.\nUtterance in the example shall be a properly escaped (JSON rules) SSML document. An example is given below:\n  \"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n\r\n  <speak version=\"1.1\" xmlns=\"http:\/\/www.w3.org\/2001\/10\/synthesis\"\n\r\n  \txmlns:xsi=\"http:\/\/www.w3.org\/2001\/XMLSchema-instance\"\n\r\n  \txsi:schemaLocation=\"http:\/\/www.w3.org\/2001\/10\/synthesis\n\r\n  \thttp:\/\/www.w3.org\/TR\/speech-synthesis11\/synthesis.xsd\"\n\r\n  \txml:lang=\"en-US\">\n\r\n  \n\r\n  \tThe title of the movie is:\n\r\n  \t\"Monty Pythons The Meaning of Life\"\n\r\n  \twhich is directed by Terry Jones.\n\r\n  <\/speak\"\n",
+        "description": "This Resource may be created on the OCF Server that is capable of rendering speech by an OCF Client and allows the client to provide an SSML document with text to render\n or may be created on the OIC Server by some resident application.\nThe audio rendered is at this stage local to the Server (i.e. not streamed).\nThe utterance is an SSML document.\nThe supportedLanguages is an array of the RFC5646 defined language tags that are supported.\nThe supportedVoices is an SSML document fragment indicating the voices that are supported.\nUtterance in the example shall be a properly escaped (JSON rules) SSML document. An example:\n  \"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n\r\n  <speak version=\"1.1\" xmlns=\"http:\/\/www.w3.org\/2001\/10\/synthesis\"\n\r\n  \txmlns:xsi=\"http:\/\/www.w3.org\/2001\/XMLSchema-instance\"\n\r\n  \txsi:schemaLocation=\"http:\/\/www.w3.org\/2001\/10\/synthesis\n\r\n  \thttp:\/\/www.w3.org\/TR\/speech-synthesis11\/synthesis.xsd\"\n\r\n  \txml:lang=\"en-US\">\n\r\n  \n\r\n  \tThe title of the movie is:\n\r\n  \t\"Monty Pythons The Meaning of Life\"\n\r\n  \twhich is directed by Terry Jones.\n\r\n  <\/speak\"\n",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -23,13 +25,12 @@
               "description" : "",
               "x-example":
                 {
-                  "rt":                 ["oic.r.speech.tts"],
-                  "id":                 "unique_example_id",
-                  "utterance":          "SSML Document",
+                  "rt": ["oic.r.speech.tts"],
+                  "if": ["oic.if.a", "oic.if.baseline"],
+                  "utterance": "Strange women lying in ponds distributing swords is no basis for a system of government.",
                   "supportedLanguages": ["en-US", "en-GB", "fr-CA"],
-                  "supportedVoices":    "<voice gender=\"female\" variant=\"2\"><\/voice>\n\r<voice name=\"Mike\"><\/voice>"
-                }
-                ,
+                  "supportedVoices": "<voice gender=\"female\" variant=\"2\"><\/voice>\n\r<voice name=\"Mike\"><\/voice>"
+                },
               "schema": { "$ref": "#/definitions/Speech" }
             }
         }
@@ -45,9 +46,7 @@
             "schema": { "$ref": "#/definitions/Speech" },
             "x-example":
               {
-                "rt":         ["oic.r.speech.tts"],
-                "id":         "unique_example_id",
-                "utterance":  "SSML Document"
+                "utterance": "Alright, but apart from the sanitation, the medicine, education, wine, public order, irrigation, roads, the fresh-water system, and public health, what have the Romans ever done for us?"
               }
           }
         ],
@@ -56,9 +55,8 @@
               "description" : "",
               "x-example":
                 {
-                  "utterance":  "SSML Document"
-                }
-                ,
+                  "utterance": "Alright, but apart from the sanitation, the medicine, education, wine, public order, irrigation, roads, the fresh-water system, and public health, what have the Romans ever done for us?"
+                },
               "schema": { "$ref": "#/definitions/Speech" }
             }
         }
@@ -66,84 +64,70 @@
     }
   },
   "parameters": {
-    "interface" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.a", "oic.if.baseline"]
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.a", "oic.if.baseline"]
     }
   },
   "definitions": {
     "Speech" : {
       "properties": {
-        "rt" :
-                {
-          "description": "Resource Type",
+        "rt": {
+          "description": "The Resource Type.",
           "items": {
+            "enum": ["oic.r.speech.tts"],
             "maxLength": 64,
             "type": "string"
           },
           "minItems": 1,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         },
-        "supportedLanguages" :
-                {
-          "description": "array of supported language tags",
+        "supportedLanguages": {
+          "description": "The array of supported language tags.",
           "items": {
             "type": "string"
           },
           "readOnly": true,
           "type": "array"
         },
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
+        "supportedVoices": {
+          "description": "The SSML document fragment indicating supported voices.",
           "readOnly": true,
+          "maxLength": 1024,
           "type": "string"
         },
-        "supportedVoices" :
-                {
-          "description": "SSML document fragment indicating supported voices",
-          "readOnly": true,
+        "utterance": {
+          "description": "The SSML document including the speech body.",
+          "maxLength": 1024,
           "type": "string"
         },
-        "utterance" :
-                {
-          "description": "SSML document including the speech body",
-          "type": "string"
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         },
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
         },
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
           "items": {
             "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
               "oic.if.a",
-              "oic.if.s"
+              "oic.if.baseline"
             ],
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 2,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         }
-        }
-        ,"type" : "object"
-      ,"required": ["utterance"]
+      },
+      "type": "object",
+      "required": ["utterance"]
     }
   }
 }

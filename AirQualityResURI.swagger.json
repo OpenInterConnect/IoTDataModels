@@ -2,11 +2,13 @@
   "swagger": "2.0",
   "info": {
     "title": "Air Quality",
-    "version": "v1.1.0-20160519",
+    "version": "20190225",
     "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
@@ -14,7 +16,7 @@
   "paths": {
     "/AirQualityResURI" : {
       "get": {
-        "description": "This resource describes a qualitative or measured contaminant that can be used to infer Air Quality.\nMeasured is the actual sensed value with units per contaminant type as described below.\nQualitative is a representative value within the range provided where the minium value is minimum contamination and maximum value is maximum contamination for the specific contaminant.\nThe valueType indicates a qualitative or measured reading within the contaminantvalue Property.\ncontaminantvalue contains the actual measured or qualitative level.\nrange contains the allowed range for the value that is being reported (from oic.r.baseresource).\nIf valueType is 'Measured' then the units for the contaminant types are as follows:\n Methanal (also known as Formaldehyde): CH2O (ug/m^3),\n Carbon Dioxide: CO2 (ppm),\n Carbon Monoxide: CO (ppm),\n Particulate Matter (less than 2.5 microns in diameter): PM2.5 (ug/m^3),\n Particulate Matter (less than 10 microns in diameter): PM10 (ug/m^3),\n Volatile Organic Compounds: VOC (ug/m^3)\nRetrieves the current air quality.\n",
+        "description": "This Resource describes a qualitative or measured contaminant that can be used to infer Air Quality.\nThe Property \"valueType\" indicates a qualitative or measured reading within the contaminantvalue Property.\nThe Property  \"contaminantvalue\" can contain the actual sensed value with units per contaminant type.\nQualitative is a representative value within the range provided where the minium value is minimum contamination and maximum value is maximum contamination for the specific contaminant.\ncontaminantvalue contains the actual measured or qualitative level.\nThe Property Range contains the allowed range for the value that is being reported.\nIf valueType is 'Measured' then the units for the contaminant types are as follows:\n Methanal (also known as Formaldehyde): CH2O (ug/m^3),\n Carbon Dioxide: CO2 (ppm),\n Carbon Monoxide: CO (ppm),\n Particulate Matter (less than 2.5 microns in diameter): PM2.5 (ug/m^3),\n Particulate Matter (less than 10 microns in diameter): PM10 (ug/m^3),\n Volatile Organic Compounds: VOC (ug/m^3).",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -23,14 +25,13 @@
               "description" : "",
               "x-example":
                 {
-                  "rt":             ["oic.r.airquality"],
-                  "id":             "unique_example_id",
+                  "rt": ["oic.r.airquality"],
+                  "if":  ["oic.if.s", "oic.if.baseline"],
                   "contaminanttype": "CO",
                   "valuetype": "Measured",
                   "contaminantvalue": 10,
                   "range": [0,500]
-                }
-                ,
+                },
               "schema": { "$ref": "#/definitions/AirQuality" }
             }
         }
@@ -48,8 +49,19 @@
   "definitions": {
     "AirQuality" : {
       "properties": {
-        "contaminanttype" :
-                {
+       "rt" : {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": ["oic.r.airquality"],
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "contaminanttype": {
           "description": "The contaminant being measured.",
           "enum": [
             "CH2O",
@@ -65,20 +77,8 @@
           "readOnly": true,
           "type": "string"
         },
-        "rt" :
-                {
-          "description": "Resource Type",
-          "items": {
-            "maxLength": 64,
-            "type": "string"
-          },
-          "minItems": 1,
-          "readOnly": true,
-          "type": "array"
-        },
-        "valuetype" :
-                {
-          "description": "Indicates whether the provided value is qualitative or measured.",
+         "valuetype": {
+          "description": "The property that indicates whether the provided value is qualitative or measured.",
           "enum": [
             "Qualitative",
             "Measured"
@@ -86,87 +86,37 @@
           "readOnly": true,
           "type": "string"
         },
-
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
-        },
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
-        },
-        "contaminantvalue" :
-                {
+        "contaminantvalue": {
           "description": "The measured or qualitative value for the contaminant.",
           "readOnly": true,
           "type": "integer"
         },
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         },
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "range": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_integer"
+        },
+        "if" : {
+          "description": "The OCF Interface set supported by this Resource.",
           "items": {
             "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
-              "oic.if.a",
-              "oic.if.s"
+              "oic.if.s",
+              "oic.if.baseline"
             ],
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 2,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         }
-        }
-        ,"type" : "object"
-      ,"required": ["contaminantvalue", "contaminanttype", "valuetype", "range"]
+      },
+      "type": "object",
+      "required": ["contaminantvalue", "contaminanttype", "valuetype"]
     }
   }
 }

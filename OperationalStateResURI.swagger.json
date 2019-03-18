@@ -2,44 +2,44 @@
   "swagger": "2.0",
   "info": {
     "title": "Operational State",
-    "version": "v1.1.0-20160519",
+    "version": "20190215",
     "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/OperationalStateResURI" : {
+    "/OperationalStateResURI": {
       "get": {
-        "description": "This resource describes the operational and job states on a device.\nThe states can be read or set, setting indicates a desired state.\nA device may reject an attempt to set a state that would result\nin adverse operational characteristics.\nThe machineStates is an array of the possible operational states.\nThe currentMachineState is the current state of operation of the device.\nThe jobStates is an array of the possible job states.\nThe currentJobState is the currently active jobState.\nThe runningTime is the ISO8601 encoded elapsed time in the current operational state.\nThe remainingTime is the ISO8601 encoded time till completion of the current operational state.\nThe progressPercentage is the percentage completeness of the current jobState.\nRetrieves the current operational and job states.\n",
+        "description": "This Resource describes the operational and job states on a device.\nThe states can be read or set, setting indicates a desired state.\nA device may reject an attempt to set a state that would result\nin adverse operational characteristics.\nThe Property \"machineStates\" is an array of the possible operational states.\nThe Property \"currentMachineState\" is the current state of operation of the device.\nThe Property \"jobStates\" is an array of the possible job states.\nThe Property \"currentJobState\" is the currently active jobState.\nThe Property \"runningTime\" is the ISO8601 encoded elapsed time in the current operational state.\nThe Property \"remainingTime\" is the ISO8601 encoded time till completion of the current operational state.\nThe Property \"progressPercentage\" is the percentage completeness of the current jobState.",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
-                {
-                  "rt":                   ["oic.r.operational.state"],
-                  "id":                   "unique_example_id",
-                  "machineStates":        ["pause", "stopped", "idle", "active"],
-                  "currentMachineState":  "active",
-                  "jobStates":            ["preWash", "wash", "rinse", "spin", "dry", "airDry", "wrinklePrevent"],
-                  "currentJobState":      "rinse",
-                  "runningTime":          "PT15M20S",
-                  "remainingTime":        "PT10M40S",
-                  "progressPercentage":    75
-                }
-                ,
-              "schema": { "$ref": "#/definitions/Operation" }
-            }
+          "200": {
+            "description" : "RETRIEVES the current operational and job states.",
+            "x-example": {
+              "rt": ["oic.r.operational.state"],
+              "if": ["oic.if.a", "oic.if.baseline"],
+              "machineStates": ["pause", "stopped", "idle", "active"],
+              "currentMachineState": "active",
+              "jobStates": ["preWash", "wash", "rinse", "spin", "dry", "airDry", "wrinklePrevent"],
+              "currentJobState": "rinse",
+              "runningTime": "PT15M20S",
+              "remainingTime": "PT10M40S",
+              "progressPercentage": 75
+            },
+            "schema": { "$ref": "#/definitions/Operation" }
+          }
         }
       },
       "post": {
-        "description": "Sets the desired operational or job state.\n",
+        "description": "Sets the desired operational or job state.",
         "parameters": [
           {"$ref": "#/parameters/interface"},
           {
@@ -47,205 +47,134 @@
             "in": "body",
             "required": true,
             "schema": { "$ref": "#/definitions/OperationUpdate" },
-            "x-example":
-              {
-                "id":                   "unique_example_id",
-                "currentMachineState":  "pause",
-                "currentJobState":      "wash"
-              }
+            "x-example": {
+              "currentMachineState": "pause",
+              "currentJobState": "wash"
+            }
           }
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
-                {
-                  "currentMachineState":  "pause",
-                  "currentJobState":      "wash"
-                }
-                ,
-              "schema": { "$ref": "#/definitions/OperationUpdate" }
+          "200": {
+            "description" : "",
+            "x-example": {
+              "currentMachineState": "pause",
+              "currentJobState": "wash"
             },
-            "403": {
-              "description" : "This response is generated by the OIC Server when the client sends:\n  An update with an value for currentMachineState that is not found in machineStates.\n  An update with an value for currentJobState that is not found in jobStates.\nThe server responds with the current resource representation.\n",
-              "x-example":
-                {
-                  "id":                   "unique_example_id",
-                  "machineStates":        ["pause", "stopped", "idle", "active"],
-                  "currentMachineState":  "active",
-                  "jobStates":            ["preWash", "wash", "rinse", "spin", "dry", "airDry", "wrinklePrevent"],
-                  "currentJobState":      "rinse",
-                  "runningTime":          "PT15M20S",
-                  "remainingTime":        "PT10M40S",
-                  "progressPercentage":   75
-                }
-                ,
-              "schema": { "$ref": "#/definitions/Operation" }
-            }
+            "schema": { "$ref": "#/definitions/OperationUpdate" }
+          },
+          "403": {
+            "description" : "This response is generated by the OCF Server when the client sends:\n  An UPDATE with an value for \"currentMachineState\" that is not found in\"machineStates\".\n  An UPDATE with an value for \"currentJobState\" that is not found in \"jobStates\".\nThe OCF Server responds with the current resource representation.\n",
+            "x-example": {
+              "machineStates": ["pause", "stopped", "idle", "active"],
+              "currentMachineState": "active",
+              "jobStates": ["preWash", "wash", "rinse", "spin", "dry", "airDry", "wrinklePrevent"],
+              "currentJobState": "rinse",
+              "runningTime": "PT15M20S",
+              "remainingTime": "PT10M40S",
+              "progressPercentage": 75
+            },
+            "schema": { "$ref": "#/definitions/Operation" }
+          }
         }
       }
     }
   },
   "parameters": {
-    "interface" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.a", "oic.if.baseline"]
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.a", "oic.if.baseline"]
     }
   },
   "definitions": {
     "Operation" : {
       "properties": {
-        "rt" :
-                {
-          "description": "Resource Type",
+        "rt": {
+          "description": "The Resource Type.",
           "items": {
+            "enum": ["oic.r.operational.state"],
             "maxLength": 64,
             "type": "string"
           },
           "minItems": 1,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         },
-        "currentMachineState" :
-                {
-          "description": "Current state of operation of the device.",
+        "currentMachineState": {
+          "description": "The current state of operation of the device.",
           "type": "string"
         },
-        "currentJobState" :
-                {
-          "description": "Currently active jobState",
+        "currentJobState": {
+          "description": "The currently active jobState.",
           "type": "string"
         },
-        "machineStates" :
-                {
-          "description": "array of the possible operational states.",
+        "machineStates": {
+          "description": "The array of the possible operational states.",
           "items": {
             "type": "string"
           },
           "readOnly": true,
           "type": "array"
         },
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
+        "runningTime": {
+          "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/duration"
         },
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "remainingTime": {
+          "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/duration"
         },
-        "runningTime" :
-                {
-          "description": "Elapsed time in the current operational state",
-          "readOnly": true,
-          "type": "string"
-        },
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-        "remainingTime" :
-                {
-          "description": "Time till completion of the current operational state",
-          "readOnly": true,
-          "type": "string"
-        },
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
-        },
-        "progressPercentage" :
-                {
-          "description": "Percentage completeness of the current jobState",
+        "progressPercentage": {
+          "description": "The percentage completeness of the current jobState.",
           "maximum": 100,
           "minimum": 0,
           "readOnly": true,
           "type": "integer"
         },
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-        "jobStates" :
-                {
-          "description": "array of the possible job states.",
+        "jobStates": {
+          "description": "The Array of the possible job states.",
           "items": {
             "type": "string"
           },
           "readOnly": true,
           "type": "array"
         },
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
           "items": {
             "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
               "oic.if.a",
-              "oic.if.s"
+              "oic.if.baseline"
             ],
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 2,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         }
-        }
-        ,"type" : "object"
-      ,"required": ["machineStates", "currentMachineState"]
-    }
-    ,
+      },
+      "type": "object",
+      "required": ["machineStates", "currentMachineState"]
+    },
     "OperationUpdate" : {
       "properties": {
-         "currentMachineState" :
-                {
-          "description": "Current state of operation of the device.",
+         "currentMachineState": {
+          "description": "The current state of operation of the device.",
           "type": "string"
         },
-        "currentJobState" :
-                {
-          "description": "Currently active jobState",
+        "currentJobState": {
+          "description": "THe currently active jobState.",
           "type": "string"
         }
-        }
-        ,"type" : "object"
+      },
+      "type": "object"
     }
   }
 }

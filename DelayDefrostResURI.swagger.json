@@ -2,11 +2,13 @@
   "swagger": "2.0",
   "info": {
     "title": "Delay Defrost",
-    "version": "OCF_v1.0.0-2016____",
+    "version": "20190215",
     "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
@@ -14,21 +16,20 @@
   "paths": {
     "/DelayDefrostResURI" : {
       "get": {
-        "description": "This resource describes the delay defrost function as defined by the US Energy Star Specifications.\nSee Energy Star Refrigerator Requirements Version 5 Section 4)G\n(https://www.energystar.gov/sites/default/files/specs//private/ENERGY%20STAR%20Final%20Version%205.0%20Residential%20Refrigerators%20and%20Freezers%20Program%20Requirements.pdf)\nThe status is a boolean indicating whether the function is on, if off then defrost is scheduled as part of normal device operation.\nstartTime, from oir.r.time.period (mandatory) is an ISO8601 encoded start time for the interval in which defrost shall not occur.\nstopTime, from oic.r.time.period is an ISO8601 encoded stop time for the interval in which defrost shall not occur.\ninterval, from oic.r.time.period with additional range restrictions is the time in minutes of the period that starts at starttime (if not present the default is 240).\nstopTime and interval are mutually exclusive; they cannot both be present in a Resource instance\nRetrieves the current Delay Defrost function status\n",
+        "description": "This Resource describes the delay defrost function as defined by the US Energy Star Specifications.\nSee Energy Star Refrigerator Requirements Version 5 Section 4).\n(https://www.energystar.gov/sites/default/files/specs//private/ENERGY%20STAR%20Final%20Version%205.0%20Residential%20Refrigerators%20and%20Freezers%20Program%20Requirements.pdf)\nThe Property \"status\" is a boolean indicating whether the function is on, if off then defrost is scheduled as part of normal device operation.\nThe Property \"startTime\" is an ISO8601 encoded start time for the interval in which defrost shall not occur.\nThe Property \"stopTime\" is an ISO8601 encoded stop time for the interval in which defrost shall not occur.\nThe Property \"interval\" with additional range restrictions is the time in minutes of the period that starts at starttime (if not present the default is 240).\nThe Properties \"stopTime\" and \"interval\" are mutually exclusive; they cannot both be present in a Resource instance.",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
         "responses": {
             "200": {
-              "description" : "",
+              "description": "",
               "x-example":
                 {
-                  "rt":     ["oic.r.delaydefrost"],
-                  "id":     "unique_example_id",
-                  "startTime":  "06:00Z",
+                  "rt": ["oic.r.delaydefrost"],
+                  "if": ["oic.if.a", "oic.if.baseline"],
+                  "startTime": "T06:00:00Z",
                   "status": false
-                }
-                ,
+                },
               "schema": { "$ref": "#/definitions/DelayDefrost" }
             }
         }
@@ -44,9 +45,9 @@
             "schema": { "$ref": "#/definitions/DelayDefrost" },
             "x-example":
               {
-                "status":     true,
-                "startTime":  "06:00Z",
-                "interval":   180
+                "status": true,
+                "startTime": "T06:00:00Z",
+                "interval": 180
               }
           }
         ],
@@ -55,10 +56,9 @@
               "description" : "Indicates that the DelayDefrost function was changed.\nThe new representation may be provided in the response.\n",
               "x-example":
                 {
-                  "id":         "unique_example_id",
-                  "status":     true,
-                  "startTime":  "06:00Z",
-                  "interval":   180
+                  "status": true,
+                  "startTime": "T06:00:00Z",
+                  "interval": 180
                 }
                 ,
               "schema": { "$ref": "#/definitions/DelayDefrost" }
@@ -67,12 +67,10 @@
               "description" : "Indicates the update to the time properties was rejected.\nReasons for rejection:\n  invalid time entry\nThe current unchanged representation may be provided in the response.\n",
               "x-example":
                 {
-                  "id":         "unique_example_id",
-                  "status":     true,
-                  "startTime":  "06:00Z",
-                  "interval":   180
-                }
-                ,
+                  "status": true,
+                  "startTime": "T06:00:00Z",
+                  "interval": 180
+                },
               "schema": { "$ref": "#/definitions/DelayDefrost" }
             }
         }
@@ -80,123 +78,71 @@
     }
   },
   "parameters": {
-    "interface" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.a", "oic.if.baseline"]
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.a", "oic.if.baseline"]
     }
   },
   "definitions": {
     "DelayDefrost" : {
       "properties": {
-        "rt" :
-                {
-          "description": "Resource Type",
+        "rt": {
+          "description": "The Resource Type.",
           "items": {
+            "enum": ["oic.r.delaydefrost"],
             "maxLength": 64,
             "type": "string"
           },
           "minItems": 1,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         },
-        "status" :
-                {
-          "description": "Indicates whether any supported delay defrost function is active",
+        "status": {
+          "description": "Indicates whether any supported delay defrost function is active.",
           "type": "boolean"
         },
-        "interval" :
-                {
-          "default": 240,
-          "description": "Defrost interval as defined by Energy Star",
-          "maximum": 1440,
+        "interval": {
+          "description": "Defrost interval as defined by Energy Star.",
           "minimum": 1,
+          "maximum": 1440,
+          "default": 240,
           "type": "integer"
         },
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
+        "stopTime": {
+          "description": "Stop time for the time period, if present interval cannot be present.  This is the time of day at which the delay interval stops.",
+          "type": "string",
+          "pattern": "^[T]([0-2][0-9]:[0-5][0-9]:[0-5][0-9])([zZ]|([\\+-])([01]\\d|2[0-3]):?([0-5]\\d))$"
         },
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "startTime": {
+          "description": "Start time for the time period. This is the time of day at which the delay interval starts.",
+          "type": "string",
+          "pattern": "^[T]([0-2][0-9]:[0-5][0-9]:[0-5][0-9])([zZ]|([\\+-])([01]\\d|2[0-3]):?([0-5]\\d))$"
         },
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         },
-        "stopTime" :
-                {
-          "description": "Stop time for the time period, if present interval cannot be present",
-          "type": "string"
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
         },
-        "startTime" :
-                {
-          "description": "Start time for the time period",
-          "type": "string"
-        },
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
-        },
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
           "items": {
             "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
               "oic.if.a",
-              "oic.if.s"
+              "oic.if.baseline"
             ],
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 2,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         }
-        }
-        ,"type" : "object"
+      },
+      "type": "object"
     }
   }
 }

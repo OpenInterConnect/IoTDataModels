@@ -2,11 +2,13 @@
   "swagger": "2.0",
   "info": {
     "title": "Colour Chroma",
-    "version": "v1.1.0-20160519",
-    "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+    "version": "20190215",
+     "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
@@ -14,7 +16,7 @@
   "paths": {
     "/example/ColourChromaResURI" : {
       "get": {
-        "description": "This resource describes the colour using chroma conventions.\nProperties are hue, saturation, csc, and ct.\nhue is the hue angle, it is an integer value as defined by the CIECAM02 model definition (see reference [CIE CIE159:2004]).\nsaturation is an integer value as defined by the CIECAM02 model definition (see reference [CIE CIE159:2004]).\nmaximumsaturation is the upper bound on the saturation supported by the Device.\n    If not present the maximum value for saturation is 32767.\ncsc is the colour space coordinates in CIE colour space.\n  The first item in the array is the X coordinate.\n  The second item in the array is the Y coordinate.\nct is the Mired colour temperature.\nProvides the colour using chroma conventions.\n",
+        "description": "This Resource describes the colour using chroma conventions.\nProperties are \"hue\", \"saturation\", \"csc\", and \"ct\".\nThe Property \"hue\" is the hue angle, it is an integer value as defined by the CIECAM02 model definition (see reference [CIE CIE159:2004]).\nThe Property \"saturation\" is an integer value as defined by the CIECAM02 model definition (see reference [CIE CIE159:2004]).\nThe Property \"maximumsaturation\" is the upper bound on the saturation supported by the Device.\nIf not present the maximum value for \"saturation\" is 32767.\nThe Property \"csc\" is the colour space coordinates in CIE colour space.\n  The first item in the array is the X coordinate.\n  The second item in the array is the Y coordinate.\nThe Property \"nct\" is the Mired colour temperature.\nThe Resource provides the colour using chroma conventions.",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -23,15 +25,14 @@
               "description" : "",
               "x-example":
                 {
-                  "rt":         ["oic.r.colour.chroma"],
-                  "id":         "unique_example_id",
-                  "hue":        256.0,
+                  "rt": ["oic.r.colour.chroma"],
+                  "if": [ "oic.if.a", "oic.if.baseline"],
+                  "hue": 256.0,
                   "saturation": 212,
                   "maximumsaturation": 1000,
-                  "csc":        [0.41,0.51],
-                  "ct":         457
-                }
-                ,
+                  "csc": [0.41, 0.51],
+                  "ct": 457
+                },
               "schema": { "$ref": "#/definitions/ColourChroma" }
             }
         }
@@ -47,10 +48,10 @@
             "schema": { "$ref": "#/definitions/ColourChroma" },
             "x-example":
               {
-                "hue":        300.0,
+                "hue": 300.0,
                 "saturation": 212,
-                "csc":        [0.41,0.51],
-                "ct":         457
+                "csc": [0.41, 0.51],
+                "ct": 457
               }
           }
         ],
@@ -59,13 +60,11 @@
               "description" : "",
               "x-example":
                 {
-                  "id":          "unique_example_id",
-                  "hue":         300.0,
-                  "saturation":  212,
-                  "csc":         [0.41,0.51],
-                  "ct":          467
-                }
-                ,
+                  "hue": 300.0,
+                  "saturation": 212,
+                  "csc": [0.41, 0.51],
+                  "ct": 467
+                },
               "schema": { "$ref": "#/definitions/ColourChroma" }
             }
         }
@@ -81,133 +80,79 @@
     }
   },
   "definitions": {
-    "ColourChroma" : {
-      "properties": {
-        "rt" :
-                {
-          "description": "Resource Type",
-          "items": {
-            "maxLength": 64,
-            "type": "string"
-          },
-          "minItems": 1,
-          "readOnly": true,
-          "type": "array"
-        },
-        "hue" :
-                {
-          "description": "Hue angle as defined by the CIECAM02 model definition",
-          "maximum": 360.0,
-          "minimum": 0.0,
-          "type": "number"
-        },
-        "saturation" :
-                {
-          "description": "Saturation as defined by the CIECAM02 model definition",
-          "maximum": 32767,
-          "minimum": 0,
-          "type": "integer"
-        },
-        "maximumsaturation" :
-                {
-          "description": "Maximum supported value of Saturation for this Device",
-          "maximum": 32767,
-          "minimum": 0,
-          "readOnly": true,
-          "type": "integer"
-        },
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
-        },
-        "csc" :
-                {
-          "description": "X and Y coordinates of the colour in CIE colour space",
-          "items": {
-            "maximum": 1,
-            "minimum": 0,
-            "type": "number"
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "type": "array"
-        },
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
-        },
-        "ct" :
-                {
-          "description": "Mired colour temperature",
-          "minimum": 0,
-          "type": "integer"
-        },
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
-          "items": {
-            "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
-              "oic.if.a",
-              "oic.if.s"
-            ],
-            "type": "string"
-          },
-          "minItems": 1,
-          "readOnly": true,
-          "type": "array"
-        }
-        }
-        ,"type" : "object"
-      ,"required": ["hue", "saturation", "csc"]
-    }
-  }
+       "ColourChroma" : {
+          "properties": {
+                "rt" : {
+                  "description": "The Resource Type.",
+                  "items": {
+                    "enum": ["oic.r.colour.chroma"],
+                    "maxLength": 64,
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "readOnly": true,
+                  "type": "array"
+                },
+                "ct" : {
+                  "description": "The Mired colour temperature.",
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "hue" : {
+                  "description": "The hue angle as defined by the CIECAM02 model definition.",
+                  "maximum": 360.0,
+                  "minimum": 0.0,
+                  "type": "number"
+                },
+                "saturation" : {
+                  "description": "The saturation as defined by the CIECAM02 model definition.",
+                  "maximum": 32767,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "maximumsaturation" : {
+                  "description": "The maximum supported value of \"saturation\" for this Device.",
+                  "maximum": 32767,
+                  "minimum": 0,
+                  "readOnly": true,
+                  "type": "integer"
+                },
+                "csc" :  {
+                  "description": "The X and Y coordinates of the colour in CIE colour space",
+                  "items": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "n": {
+                  "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+                },
+                "id": {
+                  "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+                },
+                "if" :  {
+                  "description": "The OCF Interface set supported by this Resource.",
+                  "items": {
+                    "enum": [
+                      "oic.if.a",
+                      "oic.if.baseline"
+                    ],
+                    "maxLength": 64,
+                    "type": "string"
+                  },
+                  "minItems": 2,
+                  "uniqueItems": true,
+                  "readOnly": true,
+                  "type": "array"
+                }
+           },
+           "type" : "object",
+           "required": ["hue", "saturation", "csc"]
+       }
+   }
 }

@@ -2,11 +2,13 @@
   "swagger": "2.0",
   "info": {
     "title": "Media Source",
-    "version": "v1.1.0-20160519",
+    "version": "20190215",
     "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
@@ -14,7 +16,7 @@
   "paths": {
     "/mediaSourceResURI" : {
       "get": {
-        "description": "This resource defines a media source that exists on a device.\nThe source can be an input source or output source, this resource is agnostic of that.\nThe sourceName specifies a pre-defined media input or output (e.g.\"HDMI\", \"DVI\")\nThe sourceNumber is a numeric identifier to specify the instance (e.g. \"PC\", 1)\nThe sourceType is an enumeration defining whether the source is audio, video or both.\nThe status is a boolean that determines if the specific source instance is selected or not.\n    A status of true means that the source instance is selected.\n    A status of false means that the source instance is not selected.\n",
+        "description": "This Resource defines a single media source that exists on a device.\nThe source can be an input source or output source, this resource is agnostic of that.\nThe Property \"sourceName\" specifies a pre-defined media input or output (e.g.\"HDMI\", \"DVI\").\nThe Property \"sourceNumber\" is a numeric identifier to specify the instance (e.g. \"PC\", 1).\nThe Property \"sourceType\" is an enumeration defining whether the source is audio, video or both.\nThe Property \"status\" is a boolean that determines if the specific source instance is selected or not.\n    A status of true means that the source instance is selected.\n    A status of false means that the source instance is not selected.\n",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -23,20 +25,19 @@
               "description" : "",
               "x-example":
                 {
-                  "rt":           ["oic.r.mediasource"],
-                  "id":           "unique_example_id",
-                  "sourceName":   "HDMI-CEC",
+                  "rt": ["oic.r.mediasource"],
+                  "if": ["oic.if.a", "oic.if.baseline"],
+                  "sourceName": "HDMI-CEC",
                   "sourceNumber": "1",
-                  "sourceType":   "audioPlusVideo",
-                  "status":       true
-                }
-                ,
+                  "sourceType": "audioPlusVideo",
+                  "status": true
+                },
               "schema": { "$ref": "#/definitions/mediaSource" }
             }
         }
       },
       "post": {
-        "description": "Changes the status of the source.\nAllows changes of the sourceName and the status.\n",
+        "description": "Changes the status of the source.\nAllows changes of the \"sourceName\" and the \"status\". The sourceNumber is used to identify the object in the array.",
         "parameters": [
           {"$ref": "#/parameters/interface"},
           {
@@ -46,9 +47,9 @@
             "schema": { "$ref": "#/definitions/mediaSource" },
             "x-example":
               {
-                "sourceName":   "my new name",
+                "sourceName": "my new name",
                 "sourceNumber": "1",
-                "status":       true
+                "status": true
               }
           }
         ],
@@ -57,12 +58,10 @@
               "description" : "",
               "x-example":
                 {
-                  "id":           "unique_example_id",
-                  "sourceName":   "my new name",
+                  "sourceName": "my new name",
                   "sourceNumber": "1",
-                  "status":       true
-                }
-                ,
+                  "status": true
+                },
               "schema": { "$ref": "#/definitions/mediaSource" }
             }
         }
@@ -70,35 +69,34 @@
     }
   },
   "parameters": {
-    "interface" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.a", "oic.if.baseline"]
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.a", "oic.if.baseline"]
     }
   },
   "definitions": {
     "mediaSource" : {
       "properties": {
-        "rt" :
-                {
-          "description": "Resource Type",
+        "rt": {
+          "description": "The Resource Type.",
           "items": {
+            "enum": ["oic.r.mediasource"],
             "maxLength": 64,
             "type": "string"
           },
           "minItems": 1,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         },
-        "status" :
-                {
-          "description": "Specifies if the specific source instance is selected or not",
+        "status": {
+          "description": "Specifies if the specific source instance is selected or not.",
           "type": "boolean"
         },
-        "sourceType" :
-                {
-          "description": "Specifies the type of the source",
+        "sourceType": {
+          "description": "Specifies the type of the source.",
           "enum": [
             "audioOnly",
             "videoOnly",
@@ -107,94 +105,40 @@
           "readOnly": true,
           "type": "string"
         },
-        "sourceName" :
-                {
-          "description": "Specifies a pre-defined media input or output",
+        "sourceName": {
+          "description": "Specifies a pre-defined media input or output.",
           "type": "string"
         },
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
-        },
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
-        },
-        "sourceNumber" :
-                {
-          "description": "Numeric identifier to specify the instance",
-          "readOnly": true,
+        "sourceNumber": {
+          "description": "Numeric identifier to specify the instance.",
           "type": [
             "integer",
             "string"
           ]
         },
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         },
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
           "items": {
             "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
               "oic.if.a",
-              "oic.if.s"
+              "oic.if.baseline"
             ],
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 2,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         }
-        }
-        ,"type" : "object"
-      ,"required": ["sourceName", "status"]
+      },
+      "type": "object",
+      "required": ["sourceName", "status"]
     }
   }
 }

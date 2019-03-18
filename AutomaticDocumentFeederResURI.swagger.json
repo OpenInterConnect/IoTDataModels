@@ -1,12 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Automatic Document Feeder",
-    "version": "v1.1.0-20160519",
-    "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+     "title": "Automatic Document Feeder",
+     "version": "20190222",
+     "license": {
+        "name": "OCF Data Model License",
+        "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+        "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+      },
+      "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
@@ -14,7 +16,7 @@
   "paths": {
     "/AutomaticDocumentFeederResURI" : {
       "get": {
-        "description": "This resource describes the state of an automatic document feeder, typically used with a scanner.\nThe states are read only.\nThe adfStates is an array of the possible operational states.\nadfProcessing is the OK state, other states are errors or require 'user attention'.\nThe currentAdfState is the current value of the ADF state on the device.\nRetrieves the current automatic document feeder state.\n",
+        "description": "This Resource describes the state of an automatic document feeder, typically used with a scanner.\nThe Property \"adfstates\" and \"currentAdfState\" are read only.\nThe Property \"adfStates\" is an array of the possible operational states.\nThe Property \"adfProcessing\" is the OK state, other states are errors or require 'user attention'.\nThe currentAdfState is the current value of the ADF state on the device.",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -23,12 +25,11 @@
               "description" : "",
               "x-example":
                 {
-                  "rt":               ["oic.r.automaticdocumentfeeder"],
-                  "id":               "unique_example_id",
-                  "adfStates":        ["adfProcessing", "adfEmpty", "adfJam", "adfLoaded", "adfMispick", "adfHatchOpen", "adfDuplexPageTooShort", "adfDuplexPageTooLong", "adfMultipickDetected", "adfInputTrayFailed", "adfInputTrayOverloaded"],
-                  "currentAdfState":  "adfProcessing"
-                }
-                ,
+                  "rt": ["oic.r.automaticdocumentfeeder"],
+                  "if": ["oic.if.s", "oic.if.baseline"],
+                  "adfStates": ["adfProcessing", "adfEmpty", "adfJam", "adfLoaded", "adfMispick", "adfHatchOpen", "adfDuplexPageTooShort", "adfDuplexPageTooLong", "adfMultipickDetected", "adfInputTrayFailed", "adfInputTrayOverloaded"],
+                  "currentAdfState": "adfProcessing"
+                },
               "schema": { "$ref": "#/definitions/AutomaticDocumentFeeder" }
             }
         }
@@ -37,78 +38,64 @@
   },
   "parameters": {
     "interface" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.s", "oic.if.baseline"]
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.s", "oic.if.baseline"]
     }
   },
   "definitions": {
     "AutomaticDocumentFeeder" : {
       "properties": {
-        "adfStates" :
-                {
-          "description": "array of the possible adf states.",
+         "rt": {
+          "description": "The Resource Type.",
           "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "type": "array"
-        },
-        "rt" :
-                {
-          "description": "Resource Type",
-          "items": {
+            "enum": ["oic.r.automaticdocumentfeeder"],
             "maxLength": 64,
             "type": "string"
           },
           "minItems": 1,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         },
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
+        "adfStates": {
+          "description": "The array of the possible adf states.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "uniqueItems": true,
+          "type": "array"
+        },
+        "currentAdfState": {
+          "description": "The current adf state.",
           "readOnly": true,
           "type": "string"
         },
-        "currentAdfState" :
-                {
-          "description": "Current adf state.",
-          "readOnly": true,
-          "type": "string"
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         },
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
         },
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
           "items": {
             "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
-              "oic.if.a",
-              "oic.if.s"
+              "oic.if.s",
+              "oic.if.baseline"
             ],
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 2,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         }
-        }
-        ,"type" : "object"
-      ,"required": ["adfStates", "currentAdfState"]
+      },
+      "type": "object",
+      "required": ["adfStates", "currentAdfState"]
     }
   }
 }

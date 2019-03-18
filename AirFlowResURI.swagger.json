@@ -2,11 +2,13 @@
   "swagger": "2.0",
   "info": {
     "title": "Air Flow",
-    "version": "v1.1.0-20160519",
+    "version": "20190215",
     "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
@@ -14,7 +16,7 @@
   "paths": {
     "/AirFlowResURI" : {
       "get": {
-        "description": "This resource describes the properties associated with air flow.\nThe supporteddirections is the set of valid values for the direction property for a particular instance of this resource type.\nThe direction is the directionality of the air flow if applicable, if supporteddirections is also present it must be a value from that set.\nDirection values are dependent on the capabilities of the unit.\nThe speed is an integer representing the current speed level for the unit.\nThe range (from oic.r.baseresource) is an array of the min,max values for the speed level. If not present the range defaults to [0,100].\nautomode is the status of the automode feature; Off means automode is not enabled, On means automode is active and the speed is automatically controlled by the device.\nRetrieves the current air flow values.\n",
+        "description": "This Resource describes Properties associated with air flow.\nThe Property \"supporteddirections\" is the set of valid values for the direction property for a particular instance of this Resource Type.\nThe Property \"direction\" is the directionality of the air flow if applicable, if Property \"supporteddirections\" is also present it must be a value from that set.\n The values of Property \"direction\" are dependent on the capabilities of the unit.\nThe Property \"speed\" is an integer representing the current speed level for the unit.\nThe Property \"range\" is an array of the min,max values for the speed level. If not present the \"range\" defaults to [0,100].\n Property \"automode\" is the status of the automode feature; Off means automode is not enabled, On means automode is active and the speed is automatically controlled by the Device.",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -23,21 +25,20 @@
               "description" : "",
               "x-example":
                 {
-                  "rt":         ["oic.r.airflow"],
-                  "id":         "unique_example_id",
-                  "supporteddirections": ["left","right","centre"],
-                  "direction":  "left",
-                  "speed":      5,
-                  "range":      [1,7],
-                  "automode":   "Off"
-                }
-                ,
+                  "rt": ["oic.r.airflow"],
+                  "if": ["oic.if.a", "oic.if.baseline"],
+                  "supporteddirections": ["left", "right", "centre"],
+                  "direction": "left",
+                  "speed": 5,
+                  "range": [1, 7],
+                  "automode": "Off"
+                },
               "schema": { "$ref": "#/definitions/AirFlow" }
             }
         }
       },
       "post": {
-        "description": "Sets the current air flow values.\nOnly direction and speed may be set by an update operation.\n",
+        "description": "Sets the current air flow values.\nOnly \"direction\" and \"speed\" Properties may be set by an UPDATE operation.\n",
         "parameters": [
           {"$ref": "#/parameters/interface"},
           {
@@ -47,8 +48,8 @@
             "schema": { "$ref": "#/definitions/AirFlow" },
             "x-example":
               {
-                "direction":  "right",
-                "speed":      3
+                "direction": "right",
+                "speed": 3
               }
           }
         ],
@@ -57,23 +58,19 @@
               "description" : "",
               "x-example":
                 {
-                  "id":         "unique_example_id",
-                  "direction":  "right",
-                  "speed":      3
-                }
-                ,
-              "schema": { "$ref": "#/definitions/AirFlow" }
+                  "direction": "right",
+                  "speed": 3
+                },
+              "schema": {"$ref": "#/definitions/AirFlow" }
             },
             "403": {
-              "description" : "This response is generated by the OCF Server when the client sends:\n  An update with an invalid property value for direction.\n  An update with an out of range property value for speed.\nThe server may respond with the current resource representation.\n",
+              "description": "This response is generated by the OCF Server when the client sends:\n  An UPDATE with an invalid Property value for direction.\n  An UPDATE with an out of range property value for speed.\nThe server may respond with the current resource representation.\n",
               "x-example":
                 {
-                  "id":         "unique_example_id",
-                  "supporteddirections": ["left","right","centre"],
-                  "direction":  "right",
-                  "speed":      3
-                }
-                ,
+                  "supporteddirections": ["left", "right", "centre"],
+                  "direction": "right",
+                  "speed": 3
+                },
               "schema": { "$ref": "#/definitions/AirFlow" }
             }
         }
@@ -82,87 +79,45 @@
   },
   "parameters": {
     "interface" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.a", "oic.if.baseline"]
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.a", "oic.if.baseline"]
     }
   },
   "definitions": {
     "AirFlow" : {
       "properties": {
-        "rt" :
-                {
-          "description": "Resource Type",
+        "rt" : {
+          "description": "The Resource Type",
           "items": {
-            "maxLength": 64,
-            "type": "string"
+              "enum": ["oic.r.airflow"],
+              "maxLength": 64,
+              "type": "string"
           },
           "minItems": 1,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         },
-        "direction" :
-                {
-          "description": "Directionality of the air flow",
+        "speed" : {
+          "description": "The current speed level.",
+          "type": "integer"
+        },
+        "direction" : {
+          "description": "The directionality of the air flow, a value indicated by \"supporteddirections\".",
           "type": "string"
         },
-        "automode" :
-                {
-          "description": "Status of the automode feature, if on speed is set by the device",
+        "automode" : {
+          "description": "The status of the automode feature, if on speed is set by the Device.",
           "enum": [
             "On",
             "Off"
           ],
           "type": "string"
         },
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
-        },
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
-        },
-        "supporteddirections" :
-                {
-          "description": "Array of possible direction settings for this instance of the Resource Type",
+        "supporteddirections" : {
+          "description": "The array of possible direction settings for this instance of the Resource Type.",
           "items": {
             "minItems": 1,
             "type": "string",
@@ -171,41 +126,35 @@
           "readOnly": true,
           "type": "array"
         },
-        "speed" :
-                {
-          "description": "Current speed level",
-          "type": "integer"
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         },
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
         },
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
+        "range":  {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_integer"
+        },
+        "step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_integer"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
           "items": {
             "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
               "oic.if.a",
-              "oic.if.s"
+              "oic.if.baseline"
             ],
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 2,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         }
-        }
-        ,"type" : "object"
-      ,"required": ["speed"]
+      },
+      "type": "object",
+      "required": ["speed"]
     }
   }
 }

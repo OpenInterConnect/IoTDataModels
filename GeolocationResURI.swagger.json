@@ -2,11 +2,13 @@
   "swagger": "2.0",
   "info": {
     "title": "Geolocation",
-    "version": "v1.1.1-20181004",
+    "version": "20190215",
     "license": {
-      "name": "copyright 2016-2018 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
@@ -14,26 +16,25 @@
   "paths": {
     "/GeolocationResURI" : {
       "get": {
-        "description": "This resource describes the properties associated with the current geolocation coordinate.\nGeolocation is a geolocation coordinate data.\nLatitude is a device's current Latitude coordinate (degrees).\nLongitude is a device's current Longitude coordinate (degrees).\nAlt is a device's current distance (metres) above or below 'local' sea-level.\nAccuracy is the accuracy level of the latitude and longitude coordinates (metres).\naltitudeAccuracy is the accuracy level of the altitude coordinates (metres).\nheading is a direction of travel of device (degree).\nspeed is a device's current velocity (metres per second).\nRetrieves the current geolocation coordinates.\n",
+        "description": "This Resource describes the properties associated with the current geolocation coordinate.\nGeolocation is a geolocation coordinate data.\nThe Property \"latitude\" is a device's current Latitude coordinate (degrees).\nThe Property \"longitude\" is a device's current Longitude coordinate (degrees).\nThe Property \"alt\" is a device's current distance (metres) above or below 'local' sea-level.\nThe Property \"accuracy\" is the accuracy level of the latitude and longitude coordinates (metres).\nThe Property \"altitudeAccuracy\" is the accuracy level of the altitude coordinates (metres).\nThe Property \"heading\" is a direction of travel of device (degree).\nThe Property \"speed\" is a device's current velocity (metres per second).",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
         "responses": {
             "200": {
-              "description" : "",
+              "description" : "RETRIEVES the current geolocation coordinates.",
               "x-example":
                 {
-                  "rt":         ["oic.r.sensor.geolocation"],
-                  "id":         "unique_example_id",
-                  "latitude":  55.070859,
+                  "rt": ["oic.r.sensor.geolocation"],
+                  "if": ["oic.if.s", "oic.if.baseline"],
+                  "latitude": 55.070859,
                   "longitude": -3.60512,
                   "alt": 12.07,
                   "accuracy": 65.0,
                   "altitudeAccuracy": 0.0,
                   "heading": 90.0,
                   "speed": 0.0
-                }
-                ,
+                },
               "schema": { "$ref": "#/definitions/Geolocation" }
             }
         }
@@ -41,148 +42,91 @@
     }
   },
   "parameters": {
-    "interface" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.s", "oic.if.baseline"]
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.s", "oic.if.baseline"]
     }
   },
   "definitions": {
     "Geolocation" : {
       "properties": {
-        "rt" :
-                {
-          "description": "Resource Type",
+        "rt": {
+          "description": "The Resource Type.",
           "items": {
+            "enum": ["oic.r.sensor.geolocation"],
             "maxLength": 64,
             "type": "string"
           },
           "minItems": 1,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         },
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
-        },
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
+        "longitude": {
+          "description": "The Device's Current Longitude coordinate (degrees).",
           "readOnly": true,
           "type": "number"
         },
-        "longitude" :
-                {
-          "description": "Device's Current Longitude coordinate (degrees)",
-          "readOnly": true,
-          "type": "number"
-        },
-        "heading" :
-                {
-          "description": "Direction of travel of device (degree)",
+        "heading": {
+          "description": "The direction of travel of the Device (degree).",
           "maximum": 360,
           "minimum": 0,
           "readOnly": true,
           "type": "number"
         },
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-        "latitude" :
-                {
-          "description": "Device's Current Latitude coordinate (degrees)",
+        "latitude": {
+          "description": "The Device's Current Latitude coordinate (degrees).",
           "readOnly": true,
           "type": "number"
         },
-        "altitudeAccuracy" :
-                {
-          "description": "The accuracy level of the altitude coordinates (metres)",
+        "altitudeAccuracy": {
+          "description": "The accuracy level of the altitude coordinates (metres).",
           "minimum": 0,
           "readOnly": true,
           "type": "number"
         },
-        "alt" :
-                {
+        "alt": {
           "description": "The current distance (metres) above or below 'local' sea-level.",
           "readOnly": true,
           "type": "number"
         },
-        "accuracy" :
-                {
-          "description": "The accuracy level of the latitude and longitude coordinates (metres)",
+        "accuracy": {
+          "description": "The accuracy level of the latitude and longitude coordinates (metres).",
           "minimum": 0,
           "readOnly": true,
           "type": "number"
         },
-        "speed" :
-                {
-          "description": "Device's current velocity (metres per second)",
+        "speed": {
+          "description": "The Device's current velocity (metres per second).",
           "minimum": 0,
           "readOnly": true,
           "type": "number"
         },
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         },
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
           "items": {
             "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
-              "oic.if.a",
-              "oic.if.s"
+              "oic.if.s",
+              "oic.if.baseline"
             ],
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 2,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         }
-        }
-        ,"type" : "object"
-      ,"required": ["latitude", "longitude", "alt"]
+      },
+      "type": "object",
+      "required": ["latitude", "longitude", "alt"]
     }
   }
 }

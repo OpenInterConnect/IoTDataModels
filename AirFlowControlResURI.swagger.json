@@ -2,118 +2,133 @@
   "swagger": "2.0",
   "info": {
     "title": "Air Flow Control",
-    "version": "v1.1.0-20160519",
+    "version": "20190307",
     "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2016-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/AirFlowControlResURI" : {
+    "/AirFlowControlResURI?if=oic.if.ll" : {
       "get": {
-        "description": "This resource describes the attributes associated with control of air flow,\nfor example as modelled by a Thermostat (fan), Room A/C or other device.\nThe resource is a composite resource being made up as a collection of:\n  AirFlow Resource\n  BinarySwitch Resource\nRetrieves the current air flow control values.\n",
+        "description": "This Resource describes the attributes associated with control of air flow,\nfor example as modelled by a Thermostat (fan), Room A/C or other device.\nThe Resource is a Collection of:\n  AirFlow Resource\n  BinarySwitch Resource\n",
         "parameters": [
           {"$ref": "#/parameters/interface-all"}
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
-                {
-                  "rt": ["oic.r.airflowcontrol"],
-                  "id": "unique_example_id",
-                  "airFlowControl": [
-                    {
-                      "href": "/BinarySwitchResURI",
-                      "rel":  "contains",
-                      "rt":   ["oic.r.switch.binary"],
-                      "if":   ["oic.if.a"],
-                      "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]
-                    },
-                    {
-                      "href": "/AirFlowResURI",
-                      "rel":  "contains",
-                      "rt":   ["oic.r.airflow"],
-                      "if":   ["oic.if.a"],
-                      "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]
-                    }
-                  ]
+          "200": {
+            "description" : "",
+            "x-example": [
+              {"href": "/BinarySwitchResURI", "rt":["oic.r.switch.binary"], "if":["oic.if.a","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+              {"href": "/AirFlowResURI", "rt":["oic.r.airflow"], "if":["oic.if.a","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
+            ],
+            "schema": { "$ref": "#/definitions/AirFlowControl-ll" }
+          }
+        }
+      }
+    },
+    "/AirFlowControlResURI?if=oic.if.b": {
+      "get": {
+        "description": "This Resource describes the attributes associated with control of air flow,\nfor example as modelled by a Thermostat (fan), Room A/C or other device.\nThe Resource is a Collection of:\n  AirFlow Resource\n  BinarySwitch Resource\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "",
+            "x-example":  [
+              {
+                "href": "/BinarySwitchResURI",
+                "rep": {
+                  "value": true
                 }
-                ,
-              "schema": { "$ref": "#/definitions/AirFlowControl" }
-            }
+              },
+              {
+                "href": "/AirFlowResURI",
+                "rep": {
+                  "supporteddirections": ["left","right","centre"],
+                  "direction":  "right",
+                  "speed":      3,
+                  "range":      [1,7],
+                  "automode":   "Off"
+                }
+              }
+            ],
+            "schema": { "$ref": "#/definitions/AirFlowControlBatch-Retrieve" }
+          }
         }
       },
       "post": {
-        "description": "Sets the current air flow control values using the batch interface\n",
+        "description": "Sets the current air flow control values using the batch OCF Interface\n",
         "parameters": [
           {"$ref": "#/parameters/interface-b"},
           {
             "name": "body",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/AirFlowControlBatch" },
-            "x-example":
+            "schema": { "$ref": "#/definitions/AirFlowControlBatch-Update" },
+            "x-example": [
               {
-                "id":     "unique_example_id",
-                "airFlowControl": [
-                  {
-                    "id":    "unique_example_id",
-                    "value": true
-                  },
-                  {
-                    "id":         "unique_example_id",
-                    "direction":  "right",
-                    "speed":      3
-                  }
-                ]
+                "href": "/AirFlowResURI",
+                "rep": {
+                  "direction": "left",
+                  "speed":     4
+                }
               }
+            ]
           }
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
-                {
-                  "id":     "unique_example_id",
-                  "airFlowControl": [
-                    {
-                      "id":    "unique_example_id",
-                      "value": true
-                    },
-                    {
-                      "id":        "unique_example_id",
-                      "direction": "right",
-                      "speed":     3
-                    }
-                  ]
+          "200": {
+            "description" : "",
+            "x-example": [
+              {
+                "href": "/BinarySwitchResURI",
+                "rep": {
+                  "value": true
                 }
-                ,
-              "schema": { "$ref": "#/definitions/AirFlowControlBatch" }
+              },
+              {
+                "href": "/AirFlowResURI",
+                "rep": {
+                  "supporteddirections": ["left","right","centre"],
+                  "direction":  "left",
+                  "speed":      4,
+                  "range":      [1,7],
+                  "automode":   "Off"
+                }
+              }
+            ],
+            "schema": { "$ref": "#/definitions/AirFlowControlBatch-Retrieve" }
+          }
+        }
+      }
+    },
+    "/AirFlowControlResURI?if=oic.if.baseline" : {
+      "get": {
+        "description": "This Resource describes the attributes associated with control of air flow,\nfor example as modelled by a Thermostat (fan), Room A/C or other device.\nThe Resource is a Collection of:\n  AirFlow Resource\n  BinarySwitch Resource\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "",
+            "x-example":  {
+              "rt":   ["oic.r.airflowcontrol"],
+              "rts":  ["oic.r.airflow","oic.r.switch.binary"],
+              "if":   ["oic.if.ll","oic.if.b","oic.if.baseline"],
+              "links":[
+                {"href": "/BinarySwitchResURI", "rt":["oic.r.switch.binary"], "if":["oic.if.a","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                {"href": "/AirFlowResURI", "rt":["oic.r.airflow"], "if":["oic.if.a","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
+              ]
             },
-            "403": {
-              "description" : "This response is generated by the OIC Server when the client sends:\n  An update with an invalid property value for direction.\n  An update with an out of range property value for speed.\nThe server responds with the current resource representation.\n",
-              "x-example":
-                {
-                  "id":     "unique_example_id",
-                  "airFlowControl": [
-                    {
-                      "id":    "unique_example_id",
-                      "value": true
-                    },
-                    {
-                      "id":         "unique_example_id",
-                      "direction":  "right",
-                      "speed":      3
-                    }
-                  ]
-                }
-                ,
-              "schema": { "$ref": "#/definitions/AirFlowControlBatch" }
-            }
+            "schema": { "$ref": "#/definitions/AirFlowControl-baseline" }
+          }
         }
       }
     }
@@ -133,443 +148,187 @@
     }
   },
   "definitions": {
-    "AirFlowControl" : {
+    "AirFlowControl-ll" : {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "readOnly": true,
+      "items": {
+        "$ref": "#/definitions/oic.oic-link"
+      }
+    },
+    "oic.oic-link": {
+      "type": "object",
       "properties": {
-        "rt" :
-                {
-          "description": "Resource Type",
-          "items": {
-            "maxLength": 64,
-            "type": "string"
-          },
-          "minItems": 1,
-          "readOnly": true,
-          "type": "array"
+        "anchor": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/anchor"
         },
-
-        "airFlowControl" :
-                {
-          "items": {
-            "properties": {
-              "anchor": {
-                "description": "This is used to override the context URI e.g. override the URI of the containing collection",
-                "format": "uri",
-                "maxLength": 256,
-                "type": "string"
-              },
-              "di": {
-                "description": "An identifier formatted according to IETF RFC 4122.",
-                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                "type": "string"
-              },
-              "eps": {
-                "description": "the Endpoint information of the target Resource",
-                "items": {
-                  "properties": {
-                    "ep": {
-                      "description": "URI with Transport Protocol Suites + Endpoint Locator as specified in 10.2.1",
-                      "format": "uri",
-                      "type": "string"
-                    },
-                    "pri": {
-                      "description": "The priority among multiple Endpoints as specified in 10.2.3",
-                      "minimum": 1,
-                      "type": "integer"
-                    }
-                  },
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              "href": {
-                "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
-                "format": "uri",
-                "maxLength": 256,
-                "type": "string"
-              },
-              "if": {
-                "description": "The interface set supported by this resource",
-                "items": {
-                  "enum": [
-                    "oic.if.baseline",
-                    "oic.if.ll",
-                    "oic.if.b",
-                    "oic.if.rw",
-                    "oic.if.r",
-                    "oic.if.a",
-                    "oic.if.s"
-                  ],
-                  "type": "string"
-                },
-                "minItems": 1,
-                "type": "array"
-              },
-              "ins": {
-                "description": "The instance identifier for this web link in an array of web links - used in collections",
-                "oneOf": [
-                  {
-                    "description": "An ordinal number that is not repeated - must be unique in the collection context",
-                    "type": "integer"
-                  },
-                  {
-                    "description": "Any unique string including a URI",
-                    "format": "uri",
-                    "maxLength": 256,
-                    "type": "string"
-                  },
-                  {
-                    "description": "An identifier formatted according to IETF RFC 4122.",
-                    "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                    "type": "string"
-                  }
-                ]
-              },
-              "p": {
-                "description": "Specifies the framework policies on the Resource referenced by the target URI",
-                "properties": {
-                  "bm": {
-                    "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "bm"
-                ],
-                "type": "object"
-              },
-              "rel": {
-                "description": "The relation of the target URI referenced by the link to the context URI",
-                "oneOf": [
-                  {
-                    "default": [
-                      "hosts"
-                    ],
-                    "items": {
-                      "maxLength": 64,
-                      "type": "string"
-                    },
-                    "minItems": 1,
-                    "type": "array"
-                  },
-                  {
-                    "default": "hosts",
-                    "maxLength": 64,
-                    "type": "string"
-                  }
-                ]
-              },
-              "rt": {
-                "description": "Resource Type",
-                "items": {
-                  "maxLength": 64,
-                  "type": "string"
-                },
-                "minItems": 1,
-                "type": "array"
-              },
-              "title": {
-                "description": "A title for the link relation. Can be used by the UI to provide a context",
-                "maxLength": 64,
-                "type": "string"
-              },
-              "type": {
-                "default": "application/cbor",
-                "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting",
-                "items": {
-                  "maxLength": 64,
-                  "type": "string"
-                },
-                "minItems": 1,
-                "type": "array"
-              }
-            },
-            "required": [
-              "href",
-              "rt",
-              "if"
-            ],
-            "type": "object"
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "type": "array"
+        "di": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/di"
         },
-
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
+        "eps": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/eps"
         },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
+        "href": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
         },
-
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "ins": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/ins"
         },
-
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
+        "p": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/p"
         },
-
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
+        "rel": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/rel_array"
         },
-
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "title": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/title"
         },
-
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
+        "type": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/type"
+        },
+        "if": {
+          "description": "The OCF Interfaces supported by the target Resource",
           "items": {
             "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
               "oic.if.a",
-              "oic.if.s"
+              "oic.if.baseline"
             ],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
-          "minItems": 1,
-          "readOnly": true,
-          "type": "array"
-        }
-
-        }
-        ,"type" : "object"
-      ,"required": ["airFlowControl"]
-    }
-    ,
-    "AirFlowControlBatch" : {
-      "properties": {
-        "rt" :
-                {
-          "description": "Resource Type",
-          "items": {
-            "maxLength": 64,
-            "type": "string"
-          },
-          "minItems": 1,
-          "readOnly": true,
-          "type": "array"
-        },
-
-        "airFlowControl" :
-                {
-          "items": {
-            "anyOf": [
-              {
-                "properties": {
-                  "value": {
-                    "description": "Status of the switch",
-                    "type": "boolean"
-                  }
-                },
-                "type": "object"
-              },
-              {
-                "properties": {
-                  "automode": {
-                    "description": "Status of the automode feature, if on speed is set by the device",
-                    "enum": [
-                      "On",
-                      "Off"
-                    ],
-                    "type": "string"
-                  },
-                  "direction": {
-                    "description": "Directionality of the air flow",
-                    "type": "string"
-                  },
-                  "speed": {
-                    "description": "Current speed level",
-                    "type": "integer"
-                  },
-                  "supporteddirections": {
-                    "description": "Array of possible direction settings for this instance of the Resource Type",
-                    "items": {
-                      "minItems": 1,
-                      "type": "string",
-                      "uniqueItems": true
-                    },
-                    "readOnly": true,
-                    "type": "array"
-                  }
-                },
-                "type": "object"
-              }
-            ]
-          },
-          "type": "array"
-        },
-
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
-        },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
           "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
+          "uniqueItems": true,
+          "type": "array",
           "readOnly": true
         },
-
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "rt": {
+          "description": "Resource Type of the target Resource",
+          "items": {
+            "maxLength": 64,
+            "type": "string",
+            "enum": ["oic.r.switch.binary","oic.r.airflow"]
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "href",
+        "rt",
+        "if"
+      ]
+    },
+    "AirFlowControl-baseline" : {
+      "properties": {
+        "n": {
+          "$ref" : "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         },
-
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
+        "id": {
+          "$ref" : "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "rt": {
+          "description": "Resource Type of this Resource",
+          "items": {
+            "maxLength": 64,
+            "type": "string",
+            "enum": ["oic.r.airflowcontrol"]
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "rts": {
+          "items": {
+            "type": "string",
+            "enum": ["oic.r.airflow","oic.r.switch.binary"],
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true,
+          "readOnly": true
+        },
+        "if": {
+          "description": "The OCF Interfaces supported by this Resource",
           "items": {
             "enum": [
-              "oic.if.baseline",
               "oic.if.ll",
               "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
-              "oic.if.a",
-              "oic.if.s"
+              "oic.if.baseline"
             ],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
           "readOnly": true,
+          "uniqueItems": true,
           "type": "array"
+        },
+        "links": {
+          "description": "A set of simple or individual OCF Links.",
+          "items": {
+            "$ref": "#/definitions/oic.oic-link"
+          },
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true
         }
-
-        }
-        ,"type" : "object"
-      ,"required": ["airFlowControl"]
+      },
+      "type" : "object",
+      "required": ["rt","rts","if","links"]
+    },
+    "AirFlowControlBatch-Retrieve" : {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "href": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
+          },
+          "rep": {
+            "anyOf": [
+              {"$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/AirFlowResURI.swagger.json#/definitions/AirFlow"},
+              {"$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/BinarySwitchResURI.swagger.json#/definitions/BinarySwitch"}
+            ]
+          }
+        },
+        "required": [
+          "href",
+          "rep"
+        ]
+      }
+    },
+    "AirFlowControlBatch-Update" : {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "href": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
+          },
+          "rep": {
+            "anyOf": [
+              {"$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/AirFlowResURI.swagger.json#/definitions/AirFlow"},
+              {"$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/BinarySwitchResURI.swagger.json#/definitions/BinarySwitch"}
+            ]
+          }
+        },
+        "required": [
+          "href",
+          "rep"
+        ]
+      }
     }
   }
 }

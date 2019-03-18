@@ -2,11 +2,13 @@
   "swagger": "2.0",
   "info": {
     "title": "Atmospheric Pressure Sensor",
-    "version": "v1.1.0-20160519",
+    "version": "20190225",
     "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
@@ -14,7 +16,7 @@
   "paths": {
     "/AtmosphericPressureResURI" : {
       "get": {
-        "description": "This resource provides a measurement of Mean Sea Level Pressure experienced at the measuring point expressed in millibars.\nThe value is float which describes the atmospheric pressure in hPa (hectoPascals).\nNote that hPa and the also commonly used unit of millibars (mbar) are numerically equivalent.\n",
+        "description": "This Resource provides a measurement of Mean Sea Level Pressure experienced at the measuring point expressed in millibars.\nThe Property \"atmosphericPressure\" is a float which describes the atmospheric pressure in hPa (hectoPascals).\nNote that hPa and the also commonly used unit of millibars (mbar) are numerically equivalent.",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -23,11 +25,10 @@
               "description" : "",
               "x-example":
                 {
-                  "rt":                   ["oic.r.sensor.atmosphericpressure"],
-                  "id":                   "unique_example_id",
-                  "atmosphericPressure":  1000.4
-                }
-                ,
+                  "rt": ["oic.r.sensor.atmosphericpressure"],
+                  "if": ["oic.if.s", "oic.if.baseline"],
+                  "atmosphericPressure": 1000.4
+                },
               "schema": { "$ref": "#/definitions/atmosphericPressure" }
             }
         }
@@ -36,106 +37,64 @@
   },
   "parameters": {
     "interface" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.s", "oic.if.baseline"]
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.s", "oic.if.baseline"]
     }
   },
   "definitions": {
     "atmosphericPressure" : {
       "properties": {
-        "rt" :
-                {
-          "description": "Resource Type",
+        "rt" : {
+          "description": "The Resource Type.",
           "items": {
+            "enum": ["oic.r.sensor.atmosphericpressure"],
             "maxLength": 64,
             "type": "string"
           },
           "minItems": 1,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         },
-        "atmosphericPressure" :
-                {
-          "description": "Current atmospheric pressure in hPa.",
+        "atmosphericPressure": {
+          "description": "The current atmospheric pressure in hPa.",
           "readOnly": true,
           "type": "number"
         },
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         },
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
         },
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
+        "precision": {
+            "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/precision"
         },
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
+        "range": {
+            "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
         },
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "step": {
+            "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
         },
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
           "items": {
             "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
-              "oic.if.r",
-              "oic.if.a",
-              "oic.if.s"
+              "oic.if.s",
+              "oic.if.baseline"
             ],
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 2,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         }
-        }
-        ,"type" : "object"
-      ,"required": ["atmosphericPressure"]
+      },
+      "type": "object",
+      "required": ["atmosphericPressure"]
     }
   }
 }
