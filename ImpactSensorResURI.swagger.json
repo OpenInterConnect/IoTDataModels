@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Impact Sensor",
+    "version": "12122018",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/ImpactSensorResURI" : {
+      "get": {
+        "description": "This Resource provides a status and properties of an impact sensor. Included is the current status (boolean), horizontal and vertical direction (in degrees) and impact level (g force).",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "The success path response for the Resource.",
+              "x-example":
+                {
+                  "rt": ["oic.r.impactsensor"],
+                  "if": ["oic.if.s", "oic.r.baseline"],
+                  "impactstatus": true,
+                  "impactlevel": 2.25,
+                  "impactdirectionhorizontal": 120.0,
+                  "impactdirectionvertical": 240.0
+                },
+              "schema": { "$ref": "#/definitions/ImpactSensor" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.s", "oic.r.baseline"]
+    }
+  },
+  "definitions": {
+    "ImpactSensor": {
+      "properties": {
+        "rt":  {
+          "description": "The Resource Type.",
+          "items": {
+            "maxLength": 64,
+            "type": "string",
+            "enum": ["oic.r.impactsensor"]
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "impactstatus": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "The \"impactstatus\" Property indicates the impact as: \"true\" A physical impact is detected, \"false\" Normal status, an impact is not detected."
+        },
+        "impactlevel": {
+          "type": "number",
+          "readOnly": true,
+          "description": "The \"impactlevel\" Property provides the level of impact. THe unit is in \"G\" (G-force)."
+        },
+        "impactdirectionhorizontal": {
+          "type": "number",
+          "readOnly": true,
+          "description": "The \"impactdirectionhorizontal\" Property shows a horizontal direction where the impact comes from. The value is 0° to 360°. 0 is the front of the sensor and clockwise increment.",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "impactdirectionvertical": {
+          "type": "number",
+          "readOnly": true,
+          "description": "The \"impactdirectionvertical\" Property shows a vertical direction where the impact comes from. The value is 0° to 360°. 0 is the front of the sensor and upward increment.",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if":  {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.s",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [ "impactstatus" ]
+    }
+  }
+}
