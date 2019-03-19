@@ -1,0 +1,51 @@
+{
+  "id": "http://openinterconnect.org/onem2mmapping/schemas/onem2m.m.keypad.json#",
+  "$schsema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Keypad",
+  "definitions": {
+    "onem2m.m.keypad": {
+      "type": "object",
+      "properties": {
+        "keyNumber": {
+          "tydpe": "integer",
+          "description": "The number of key.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.keypadchar",
+            "x-to-ocf": [
+              "Need to translate between the oneM2M integer value and the OCF enumerated string",
+              "if ( keyNumber == 0 ) { oic.r.keypadchar.keyvalue == \"0\"; }",
+              "if ( keyNumber == 1 ) { oic.r.keypadchar.keyvalue == \"1\"; }",
+              "if ( keyNumber == 2 ) { oic.r.keypadchar.keyvalue == \"2\"; }",
+              "if ( keyNumber == 3 ) { oic.r.keypadchar.keyvalue == \"3\"; }",
+              "if ( keyNumber == 4 ) { oic.r.keypadchar.keyvalue == \"4\"; }",
+              "if ( keyNumber == 5 ) { oic.r.keypadchar.keyvalue == \"5\"; }",
+              "if ( keyNumber == 6 ) { oic.r.keypadchar.keyvalue == \"6\"; }",
+              "if ( keyNumber == 7 ) { oic.r.keypadchar.keyvalue == \"7\"; }",
+              "if ( keyNumber == 8 ) { oic.r.keypadchar.keyvalue == \"8\"; }",
+              "if ( keyNumber == 9 ) { oic.r.keypadchar.keyvalue == \"9\"; }"
+            ],
+            "x-from-ocf": [
+              "Need to translate between the OCF enumerated string and the oneM2M integer value",
+              "if (oic.r.keypadchar.keyvalue == \"0\" ) { keyNumber = 0; }",
+              "if (oic.r.keypadchar.keyvalue == \"1\" ) { keyNumber = 1; }",
+              "if (oic.r.keypadchar.keyvalue == \"2\" ) { keyNumber = 2; }",
+              "if (oic.r.keypadchar.keyvalue == \"3\" ) { keyNumber = 3; }",
+              "if (oic.r.keypadchar.keyvalue == \"4\" ) { keyNumber = 4; }",
+              "if (oic.r.keypadchar.keyvalue == \"5\" ) { keyNumber = 5; }",
+              "if (oic.r.keypadchar.keyvalue == \"6\" ) { keyNumber = 6; }",
+              "if (oic.r.keypadchar.keyvalue == \"7\" ) { keyNumber = 7; }",
+              "if (oic.r.keypadchar.keyvalue == \"8\" ) { keyNumber = 8; }",
+              "if (oic.r.keypadchar.keyvalue == \"9\" ) { keyNumber = 9; }"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/onem2m.m.keypad"}
+  ],
+  "required": [ "keyNumber" ]
+}
