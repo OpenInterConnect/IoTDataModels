@@ -1,0 +1,144 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Opaque Data",
+   "version": "12122018",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/OpaqueDataResURI" : {
+      "get": {
+        "description": "This Resource defines opaque data that can be transfered between endpoints where the data itself is not interpretable by the OCF endpoints.\nThe stringdata is a string of ASCII characters.",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "rt": ["oic.r.opaquedata"],
+                  "if": ["oic.if.rw", "oic.if.baseline"],
+                  "payload": "asdf0123",
+                  "payloadtype": "switch-get",
+                  "encoding":  "base64",
+                  "size": 8,
+                  "hash": "A1A1",
+                  "system": "foreign system"
+               },
+              "schema": { "$ref": "#/definitions/OpaqueData" }
+            }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {"$ref": "#/parameters/interface"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/OpaqueData" },
+            "x-example":
+              {
+                "payload": "asdf0123",
+                "payloadtype": "switch-get",
+                "encoding": "base64",
+                "size": 8,
+                "hash": "A1A1",
+                "system": "foreign system"
+              }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "payload": "asdf0123",
+                  "payloadtype": "switch-get",
+                  "encoding": "base64",
+                  "size": 8,
+                  "hash": "A1A1",
+                  "system": "foreign system"
+                },
+              "schema": { "$ref": "#/definitions/OpaqueData" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "OpaqueData" : {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "payload": {
+          "type": "string",
+          "description": "This Property contains the opaque data."
+        },
+        "encoding": {
+          "type": "string",
+          "description": "This Property describes the encoding of the payload, e.g. binary as base64, json, xml, utf-8."
+        },
+        "payloadtype": {
+          "type": "string",
+          "description": "This Property describes the identification of the payload, e.g. what the payload is representing ."
+        },
+        "size": {
+          "type": "integer",
+          "description": "The size in bytes of the decoded binary object."
+        },
+        "hash": {
+          "type": "string",
+          "description": "The hash code of the blob. If present, it is used to check the decoded content of the object data point for integrity. The algorithm used for generating the hash value is SHA-2 [15]. The data point contains the hash as a hex encoded value."
+        },
+        "system": {
+          "type": "string",
+          "description": "The eco system that is using the payload."
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.rw"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+     },
+     "type": "object",
+     "required": [ "payload", "encoding", "system" ] 
+    }
+  }
+}
