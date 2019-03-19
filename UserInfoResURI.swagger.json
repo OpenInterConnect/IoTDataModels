@@ -1,0 +1,133 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "User Info for Application Layer",
+    "version": "12122018",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/UserInfoResURI" : {
+      "get": {
+        "description": "This Resource defines credentials for user to application layer login. This does not relate to OCF Device to Device or Device to Cloud authentication. The username, password and token are strings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "Success path response for the Resource, note that the info supplied is NOT returned on RETRIEVE",
+              "x-example":
+                {
+                  "rt": ["oic.r.userinfo"],
+                  "if": ["oic.if.rw", "oic.if.baseline"]
+                },
+              "schema": { "$ref": "#/definitions/UserInfo-retrieve" }
+            }
+        }
+      },
+      "post": {
+        "description": "This Resource defines credentials for user to application layer login. This does not relate to OCF Device to Device or Device to Cloud authentication. The username, password and token are strings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/UserInfo-update" },
+            "x-example":
+              {
+                "username": "username",
+                "password": "password",
+                "token": "A1A1"
+              }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "The success path response for the Resource.",
+              "x-example":
+                {
+                  "username": "username",
+                  "password": "password",
+                  "token": "A1A1"
+                },
+              "schema": { "$ref": "#/definitions/UserInfo-update" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface" : {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "UserInfo-retrieve": {
+      "properties": {
+        "rt":  {
+          "description": "The Resource Type.",
+          "items": {
+            "maxLength": 64,
+            "type": "string",
+            "enum": ["oic.r.userinfo"]
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if":  {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.rw",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [ ]
+    },
+    "UserInfo-update": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Login name."
+        },
+        "password": {
+          "type": "string",
+          "description": "Login password."
+        },
+        "token": {
+          "type": "string",
+          "description": "Authentication token."
+        }
+       },
+      "type": "object",
+      "required": [ ]
+    }
+  }
+}
