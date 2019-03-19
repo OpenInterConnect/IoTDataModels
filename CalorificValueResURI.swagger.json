@@ -1,0 +1,94 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Calorific Value",
+    "version": "2019-03-18",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://openconnectivityfoundation.github.io/core/LICENSE.md",
+      "x-copyright": "Copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/CalorificValueResURI" : {
+      "get": {
+        "description": "This Resource describes Properties associated with the energy associated with the consumption of different fuels (including natural gas)\nThe calorific value is a number\nthe calorific value is a measure of the available heat energy, used as part of the calculation to convert a volume of a fuel (e.g. m3) to an energy value (e.g. KWh).\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "Success path response for the Resource",
+            "x-example": {
+              "rt":     ["oic.r.calorificvalue"],
+              "calorific":  39.2
+            },
+            "schema": { "$ref": "#/definitions/Calorific" }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.r", "oic.r.baseline"]
+    }
+  },
+  "definitions": {
+    "Calorific" : {
+      "properties": {
+        "rt" : {
+          "description": "Resource Type",
+          "items": {
+            "maxLength": 64,
+            "type": "string",
+            "enum": ["oic.r.calorificvalue"]
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "uniqueItems": true,
+          "type": "array"
+        },
+        "if" :  {
+          "description": "The OCF Interfaces supported by this Resource",
+          "items": {
+            "enum": ["oic.if.baseline", "oic.if.r"],
+            "type": "string",
+            "maxLength": 64
+          },
+          "minItems": 2,
+          "readOnly": true,
+          "uniqueItems": true,
+          "type": "array"
+        },
+        "n": {
+          "$ref" : "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+          "$ref" : "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "precision" : {
+          "description": "Accuracy granularity of the exposed value",
+          "readOnly": true,
+          "type": "number"
+        },
+        "calorific" :  {
+          "description": "Calorific value of fuel",
+          "readOnly": true,
+          "type": "number",
+		      "minimum": 0,
+          "exclusiveMinimum": true
+        }
+      },
+      "type" : "object",
+      "required": ["calorific"]
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Conversion Factor",
+    "version": "2019-03-18",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://openconnectivityfoundation.github.io/core/LICENSE.md",
+      "x-copyright": "Copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/ConversionFactorResURI" : {
+      "get": {
+        "description": "This Resource describes Properties associated with the energy associated with the consumption of different fuels (including natural gas)\nThe conversion factor is a number used as part of the calculation to convert gas volume to gas energy. The value used for this calculation is generally defined by local regulations and the conversion factor resource is therefore configurable.\nProvides the conversion factor used/required as part of the calculation to convert from fuel volume (m3) to fuel energy (kWh).\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "Success path response for the Resource",
+            "x-example":  {
+              "rt":     ["oic.r.conversionfactor"],
+              "conversion": 1.02264
+            },
+            "schema": { "$ref": "#/definitions/Conversion" }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.r", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "Conversion" : {
+      "properties": {
+        "rt" :  {
+          "description": "Resource Type",
+          "items": {
+            "maxLength": 64,
+            "type": "string",
+            "enum": ["oic.r.conversionfactor"]
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "uniqueItems": true,
+          "type": "array"
+        },
+        "if" :  {
+          "description": "The OCF Interfaces supported by this Resource",
+          "items": {
+            "enum": [
+              "oic.if.r",
+              "oic.if.baseline"
+            ],
+            "type": "string",
+            "maxLength": 64
+          },
+          "minItems": 2,
+          "readOnly": true,
+          "uniqueItems": true,
+          "type": "array"
+        },
+        "n": {
+          "$ref" : "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+          "$ref" : "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "conversion" : {
+          "description": "Conversion factor to convert a volume of a fuel to energy consumption",
+          "readOnly": true,
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMinimum": true
+        },
+        "precision" :  {
+          "description": "Accuracy granularity of the exposed value",
+          "readOnly": true,
+          "type": "number"
+        }
+      },
+      "type" : "object",
+      "required": ["conversion"]
+    }
+  }
+}
