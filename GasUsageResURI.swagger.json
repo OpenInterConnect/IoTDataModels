@@ -1,0 +1,348 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Gas Usage",
+    "version": "2019-03-18",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://openconnectivityfoundation.github.io/core/LICENSE.md",
+      "x-copyright": "Copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/GasUsageResURI?if=oic.if.ll" : {
+      "get": {
+        "description": "This Resource describes a cumulative time-based gas usage query.\nThe Resource is a Collection of:\n  TimePeriod Resource\n  Gas Consumption Resource\nThe Collection has a single instance of a Link per Resource Type.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "Success path response for the Resource",
+            "x-example":
+            [
+              {
+                "href": "/TimeIntervalResURI",
+                "rt":   ["oic.r.time.period"],
+                "if":   ["oic.if.a","oic.if.baseline"],
+                "eps":  [{"ep": "coaps://[fe80::b1d6]:1122"}]
+              },
+              {
+                "href": "/GasConsumptionResURI",
+                "rt":   ["oic.r.gas.consumption"],
+                "if":   ["oic.if.s","oic.if.baseline"],
+                "eps":  [{"ep": "coaps://[fe80::b1d6]:1122"}]
+              }
+            ],
+            "schema": { "$ref": "#/definitions/links" }
+          }
+        }
+      }
+    },
+    "/GasUsageResURI?if=oic.if.baseline" : {
+      "get": {
+        "description": "This Resource describes a cumulative time-based gas usage query.\nThe Resource is a Collection of:\n  TimePeriod Resource\n  Gas Consumption Resource\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "Success path response for the Resource",
+            "x-example":
+            {
+              "rt": ["oic.r.gas.usage"],
+              "if": ["oic.if.ll","oic.if.b","oic.if.baseline"],
+              "resources": [
+                {
+                  "href": "/TimeIntervalResURI",
+                  "rt":   ["oic.r.time.period"],
+                  "if":   ["oic.if.a","oic.if.baseline"],
+                  "eps":  [{"ep": "coaps://[fe80::b1d6]:1122"}]
+                },
+                {
+                  "href": "/GasConsumptionResURI",
+                  "rt":   ["oic.r.gas.consumption"],
+                  "if":   ["oic.if.s","oic.if.baseline"],
+                  "eps":  [{"ep": "coaps://[fe80::b1d6]:1122"}]
+                }
+              ]
+            },
+            "schema": { "$ref": "#/definitions/Usage" }
+          }
+        }
+      }
+    },
+    "/GasUsageResURI?if=oic.if.b" : {
+      "get": {
+        "description": "This Resource describes a cumulative time-based gas usage query.\nThe Resource is a Collection of:\n  TimePeriod Resource\n  Gas Consumption Resource\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "Success path response for the Resource",
+            "x-example":
+            [
+              {
+                "href": "/TimeIntervalResURI",
+                "rep": {
+                  "startTime":"2018-01-09T14:30Z",
+                  "stopTime": "2018-01-09T14:45Z"
+                }
+              },
+              {
+                "href": "/GasConsumptionResURI",
+                "rep": {
+                  "gas":  11135.41,
+                  "volume": 1000.0
+                }
+              }
+            ],
+            "schema": { "$ref": "#/definitions/batch" }
+          }
+        }
+      },
+      "post": {
+        "description": "Sets the current time period. A Client may also post directly to the exposed URL for the Time Period Resource.\n",
+        "x-method": ["optional"],
+        "parameters": [
+          {"$ref": "#/parameters/interface-b"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/batchupdate" },
+            "x-example":
+            [
+              {
+                "href": "/TimePeriodResURI",
+                "rep": {
+                  "startTime":"2018-01-15T16:30Z",
+                  "stopTime": "2018-01-16T16:30Z"
+                }
+              }
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "Success path response code\n"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-all" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.ll", "oic.if.b", "oic.if.baseline"]
+    },
+    "interface-b" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.b"]
+    }
+  },
+  "definitions": {
+    "links": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/oic.oic-link"
+      },
+      "minItems": 2,
+      "maxItems": 4
+    },
+    "oic.oic-link": {
+      "properties": {
+        "if": {
+          "description": "The interface set supported by the Linked Resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "rt": {
+          "description": "Resource Type of the linked Resource",
+          "items": {
+            "enum": [
+              "oic.r.time.period",
+              "oic.r.gas.consumption",
+              "oic.r.conversionfactor",
+              "oic.r.calorificvalue"
+            ],
+            "type": "string",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "anchor": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/anchor"
+        },
+        "di": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/di"
+        },
+        "eps": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/eps"
+        },
+        "href": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
+        },
+        "ins": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/ins"
+        },
+        "p": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/p"
+        },
+        "rel": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/rel_array"
+        },
+        "title": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/title"
+        },
+        "type": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/type"
+        }
+      },
+      "required": [
+        "href",
+        "rt",
+        "if"
+      ],
+      "type": "object"
+    },
+    "batch": {
+      "title": "Collection Batch Retrieve Format",
+      "minItems": 2,
+      "maxItems": 4,
+      "type": "array",
+      "items": {
+        "additionalProperties": true,
+        "type": "object",
+        "properties": {
+          "href": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
+          },
+          "rep": {
+            "anyOf": [
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/TimePeriodResURI.swagger.json#/definitions/TimePeriod"
+              },
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/GasConsumptionResURI.swagger.json#/definitions/Consumption"
+              },
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/CalorificValueResURI.swagger.json#/definitions/Calorific"
+              },
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/ConversionFactorResURI.swagger.json#/definitions/Conversion"
+              }
+            ]
+          }
+        },
+        "required": ["href","rep"]
+      }
+    },
+    "batchupdate" : {
+      "title": "Collection Batch Update Format",
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "additionalProperties": true,
+        "type": "object",
+        "properties": {
+          "href": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
+          },
+          "rep": {
+            "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/TimePeriodResURI.swagger.json#/definitions/TimePeriod"
+          }
+        }
+      }
+    },
+    "Usage" : {
+      "properties": {
+        "rt" :  {
+          "description": "Resource Type",
+          "items": {
+            "type": "string",
+            "enum": ["oic.r.gas.usage"],
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "uniqueItems": true,
+          "type": "array"
+        },
+        "rts" :  {
+          "description": "Allowed Resource Type",
+          "items": {
+            "type": "string",
+            "enum": ["oic.r.gas.consumption","oic.r.time.period","oic.r.calorificvalue","oic.r.conversionfactor"],
+            "maxLength": 64
+          },
+          "minItems": 2,
+          "readOnly": true,
+          "uniqueItems": true,
+          "type": "array"
+        },
+        "rts-m" :  {
+          "description": "Mandatory Resource Type",
+          "items": {
+            "type": "string",
+            "enum": ["oic.r.gas.consumption","oic.r.time.period"],
+            "maxLength": 64
+          },
+          "minItems": 2,
+          "readOnly": true,
+          "uniqueItems": true,
+          "type": "array"
+        },
+        "n": {
+          "$ref" : "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+          "$ref" : "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "resources" :  {
+          "$ref": "#/definitions/links"
+        },
+        "if" : {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.baseline"
+            ],
+            "type": "string",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "uniqueItems": true,
+          "type": "array"
+        }
+      },
+      "type" : "object",
+      "required": ["resources"]
+    }
+  }
+}
