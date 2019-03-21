@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Impact Sensor",
-    "version": "12122018",
+    "version": "2019-03-21",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -69,19 +69,19 @@
         "impactlevel": {
           "type": "number",
           "readOnly": true,
-          "description": "The \"impactlevel\" Property provides the level of impact. THe unit is in \"G\" (G-force)."
+          "description": "The \"impactlevel\" Property provides the level of impact. The unit is in \"G\" (G-force)."
         },
         "impactdirectionhorizontal": {
           "type": "number",
           "readOnly": true,
-          "description": "The \"impactdirectionhorizontal\" Property shows a horizontal direction where the impact comes from. The value is 0° to 360°. 0 is the front of the sensor and clockwise increment.",
+          "description": "The \"impactdirectionhorizontal\" Property shows a horizontal direction where the impact comes from. The value is 0 to 360 degrees. 0 is the front of the sensor and clockwise increment.",
           "minimum": 0,
           "maximum": 360
         },
         "impactdirectionvertical": {
           "type": "number",
           "readOnly": true,
-          "description": "The \"impactdirectionvertical\" Property shows a vertical direction where the impact comes from. The value is 0° to 360°. 0 is the front of the sensor and upward increment.",
+          "description": "The \"impactdirectionvertical\" Property shows a vertical direction where the impact comes from. The value is 0 to 360 degrees. 0 is the front of the sensor and upward increment.",
           "minimum": 0,
           "maximum": 360
         },
