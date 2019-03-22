@@ -2,37 +2,92 @@
   "swagger": "2.0",
   "info": {
     "title": "Weight",
-    "version": "20190215",
+    "version": "2019-03-22",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
-      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+      "x-copyright": "Copyright 2016-2019 Open Connectivity Foundation, Inc. All rights reserved."
     },
     "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
-  "schemes": ["http"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
-    "/WeightResURI" : {
+    "/WeightResURI": {
       "get": {
-        "description": "This Resource describes the properties associated with weight of an object.\nThe Property \"unit\" is a single value that is one of kg, g, lb or oz.\nIf the Property \"unit\" is omitted the default is kilograms [kg].\nThe Property \"unit\" is a read-only value that is provided by the server.\nWhen Property \"range\" is omitted the default is 0 to +MAXFLOAT.",
+        "description": "This Resource describes the Properties associated with weight of an object.\nThe unit is a single value that is one of kg, g, lb or oz.\nIf the unit Property is missing the default is kilograms [kg].\nThe unit Property is a read-only value that is provided by the server.\nWhen range is omitted the default is 0 to +MAXFLOAT.",
         "parameters": [
-          {"$ref": "#/parameters/interface"}
+          {
+            "$ref": "#/parameters/interface"
+          }
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
-                {
-                  "rt": ["oic.r.weight"],
-                  "if": ["oic.if.s", "oic.if.baseline"],
-                  "weight": 80.0,
-                  "units": "kg"
-                }
-                ,
-              "schema": { "$ref": "#/definitions/Weight" }
+          "200": {
+            "description": "",
+            "x-example": {
+              "rt": [
+                "oic.r.weight"
+              ],
+              "id": "unique_example_id",
+              "weight": 80.0,
+              "units": "kg"
+            },
+            "schema": {
+              "$ref": "#/definitions/Weight"
             }
+          }
+        }
+      },
+      "post": {
+        "description": "Sets the Weight.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Weight"
+            },
+            "x-example": {
+              "id": "unique_example_id",
+              "weight": 75.0,
+              "units": "kg"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Indicates that the weight was successfully changed.\nThe new weight is provided in the response.",
+            "x-example": {
+              "id": "unique_example_id",
+              "weight": 75.0,
+              "units": "kg"
+            },
+            "schema": {
+              "$ref": "#/definitions/Weight"
+            }
+          },
+          "403": {
+            "description": "Indicates that OCF client sent an invalid Property value to the Server.\nThe Server responds with the current resource representation.",
+            "x-example": {
+              "id": "unique_example_id",
+              "weight": 80.0,
+              "units": "kg"
+            },
+            "schema": {
+              "$ref": "#/definitions/Weight"
+            }
+          }
         }
       }
     }
@@ -42,18 +97,24 @@
       "in": "query",
       "name": "if",
       "type": "string",
-      "enum": ["oic.if.s", "oic.if.baseline"]
+      "enum": [
+        "oic.if.s",
+        "oic.if.a",
+        "oic.if.baseline"
+      ]
     }
   },
   "definitions": {
-    "Weight" : {
+    "Weight": {
       "properties": {
         "rt": {
-          "description": "The Resource Type.",
+          "description": "Resource Type",
           "items": {
-            "enum": ["oic.r.weight"],
-            "maxLength": 64,
-            "type": "string"
+            "enum": [
+              "oic.r.weight"
+            ],
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
           "uniqueItems": true,
@@ -61,13 +122,12 @@
           "type": "array"
         },
         "weight": {
-          "description": "The weight of an object.",
-          "minimum": 0,
-          "readOnly": true,
+          "description": "Weight of an object",
+          "minimum": 0.0,
           "type": "number"
         },
         "units": {
-          "description": "The weight unit.",
+          "description": "Weight unit",
           "enum": [
             "kg",
             "g",
@@ -75,34 +135,46 @@
             "oz"
           ],
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "default": "kg"
         },
-        "n": {
-            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
-        },
-        "id": {
-            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
-        },
-        "range" : {
+        "range": {
           "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
         },
+        "step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
+        },
+        "precision": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/precision"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
         "if": {
-          "description": "The OCF Interface set supported by this Resource.",
+          "description": "The OCF Interface set supported by this Resource",
           "items": {
             "enum": [
-              "oic.if.s", 
+              "oic.if.s",
+              "oic.if.a",
               "oic.if.baseline"
             ],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
-          "minItems": 2,
-          "uniqueItems": true,
+          "minItems": 1,
           "readOnly": true,
+          "uniqueItems": true,
           "type": "array"
         }
       },
       "type": "object",
-      "required": ["weight", "units"]
+      "required": [
+        "weight",
+        "units"
+      ]
     }
   }
 }

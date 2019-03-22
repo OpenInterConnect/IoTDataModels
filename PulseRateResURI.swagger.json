@@ -2,35 +2,47 @@
   "swagger": "2.0",
   "info": {
     "title": "Pulse Rate",
-    "version": "20190215",
+    "version": "2019-03-22",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
-      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+      "x-copyright": "Copyright 2016-2019 Open Connectivity Foundation, Inc. All rights reserved."
     },
     "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
-  "schemes": ["http"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
-    "/PulseRateResURI" : {
+    "/PulseRateResURI": {
       "get": {
-        "description": "This Resource describes the properties associated with a person's pulse rate.\nThe unit of Property \"pulsrate\" is in beats per minute [bpm].\nThe \"pulsrate\" Property is read-only values that are provided by the OCF Server.\n The range is 0 to +MAXFLOAT.",
+        "description": "This Resource describes the Properties associated with a person's pulse rate.\nThe unit, which is the default unit, is bpm.\nThe pulserate and unit Properties are read-only values that are provided by the Server.\nWhen range is omitted the default is 0 to +MAXFLOAT.",
         "parameters": [
-          {"$ref": "#/parameters/interface"}
+          {
+            "$ref": "#/parameters/interface"
+          }
         ],
         "responses": {
-            "200": {
-              "description" : "RETRIEVES pulse rate of an object.",
-              "x-example":
-                {
-                  "rt": ["oic.r.pulserate"],
-                  "if": ["oic.if.s", "oic.if.baseline"],
-                  "pulserate": 80
-                },
-              "schema": { "$ref": "#/definitions/PulseRate" }
+          "200": {
+            "description": "",
+            "x-example": {
+              "rt": [
+                "oic.r.pulserate"
+              ],
+              "pulserate": 80,
+              "range": [20, 220],
+              "step": 1
+            },
+            "schema": {
+              "$ref": "#/definitions/PulseRate"
             }
+          }
         }
       }
     }
@@ -40,18 +52,23 @@
       "in": "query",
       "name": "if",
       "type": "string",
-      "enum": ["oic.if.s", "oic.if.baseline"]
+      "enum": [
+        "oic.if.s",
+        "oic.if.baseline"
+      ]
     }
   },
   "definitions": {
-    "PulseRate" : {
+    "PulseRate": {
       "properties": {
         "rt": {
-          "description": "The Resource Type.",
+          "description": "Resource Type",
           "items": {
-            "enum": ["oic.r.pulserate"],
-            "maxLength": 64,
-            "type": "string"
+            "enum": [
+              "oic.r.pulserate"
+            ],
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
           "uniqueItems": true,
@@ -59,34 +76,40 @@
           "type": "array"
         },
         "pulserate": {
-          "description": "The pulse rate in bpm.",
+          "description": "Pulse rate in bpm.",
           "minimum": 0,
           "readOnly": true,
           "type": "integer"
         },
-        "n": {
-            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
-        },
-        "id": {
-            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
-        },
         "if": {
-          "description": "The OCF Interface set supported by this Resource.",
+          "description": "The OCF Interface set supported by this Resource",
           "items": {
             "enum": [
               "oic.if.s",
               "oic.if.baseline"
             ],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
-          "minItems": 2,
-          "uniqueItems": true,
+          "minItems": 1,
           "readOnly": true,
+          "uniqueItems": true,
           "type": "array"
+        },
+        "range": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_integer"
+        },
+        "step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_integer"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         }
       },
       "type": "object",
-      "required": ["pulserate"]
+      "required": [
+        "pulserate"
+      ]
     }
   }
 }

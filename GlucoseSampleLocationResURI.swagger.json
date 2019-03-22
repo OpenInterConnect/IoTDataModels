@@ -2,122 +2,78 @@
   "swagger": "2.0",
   "info": {
     "title": "Context Sample Location for Glucose Meter",
-    "version": "v1.1.0-20160519",
+    "version": "2019-03-22",
     "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2016-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
-  "schemes": ["http"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
-    "/GlucoseSampleLocationResURI" : {
+    "/GlucoseSampleLocationResURI": {
       "get": {
-        "description": "This resource describes the properties associated with context Sample Location.\nAST means Alternative Site Test specifying that the location of test performed was from an alternative site on the body.\nThe samplelocation Property is a read-only value that is provided by the server.\nRetrieves Context Sample Location for Glucose Meter.\n",
+        "description": "This Resource describes the Properties associated with context sample Location.\nAST means Alternative Site Test specifying that the location of test performed was from an alternative site on the body.\nThe samplelocation Property is a read-only value that is provided by the Server.",
         "parameters": [
-          {"$ref": "#/parameters/interface"}
+          {
+            "$ref": "#/parameters/interface"
+          }
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
-                {
-                  "rt":               ["oic.r.glucose.samplelocation"],
-                  "id":               "unique_example_id",
-                  "samplelocation":   "finger"
-                }
-                ,
-              "schema": { "$ref": "#/definitions/GlucoseSampleLocation" }
+          "200": {
+            "description": "",
+            "x-example": {
+              "rt": [
+                "oic.r.glucose.samplelocation"
+              ],
+              "samplelocation": "finger"
+            },
+            "schema": {
+              "$ref": "#/definitions/GlucoseSampleLocation"
             }
+          }
         }
       }
     }
   },
   "parameters": {
-    "interface" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.s", "oic.if.baseline"]
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": [
+        "oic.if.r",
+        "oic.if.baseline"
+      ]
     }
   },
   "definitions": {
-    "GlucoseSampleLocation" : {
+    "GlucoseSampleLocation": {
       "properties": {
-        "rt" :
-                {
+        "rt": {
           "description": "Resource Type",
           "items": {
-            "maxLength": 64,
-            "type": "string"
+            "enum": [
+              "oic.r.glucose.samplelocation"
+            ],
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         },
-
-        "precision" :
-                {
-          "description": "Accuracy granularity of the exposed value",
-          "readOnly": true,
-          "type": "number"
-        },
-
-        "value" :
-                {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            }
-          ],
-          "description": "The value sensed or actuated by this Resource"
-        },
-
-        "n" :
-                {
-          "description": "Friendly name of the resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
-        },
-
-        "range" :
-                {
-          "description": "The valid range for the value Property",
-          "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "readOnly": true,
-          "type": "array"
-        },
-
-        "samplelocation" :
-                {
+        "samplelocation": {
           "description": "The possible blood locations where the blood sample may be taken.",
           "enum": [
             "finger",
@@ -128,53 +84,32 @@
           "readOnly": true,
           "type": "string"
         },
-
-        "step" :
-                {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "description": "Step value across the defined range",
-          "readOnly": true
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         },
-
-        "id" :
-                {
-          "description": "Instance ID of this specific resource",
-          "maxLength": 64,
-          "readOnly": true,
-          "type": "string"
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
         },
-
-        "if" :
-                {
-          "description": "The interface set supported by this resource",
+        "if": {
+          "description": "The OCF Interface set supported by this Resource",
           "items": {
             "enum": [
-              "oic.if.baseline",
-              "oic.if.ll",
-              "oic.if.b",
-              "oic.if.lb",
-              "oic.if.rw",
               "oic.if.r",
-              "oic.if.a",
-              "oic.if.s"
+              "oic.if.baseline"
             ],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
           "readOnly": true,
+          "uniqueItems": true,
           "type": "array"
         }
-
-        }
-        ,"type" : "object"
-      ,"required": ["samplelocation"]
+      },
+      "type": "object",
+      "required": [
+        "samplelocation"
+      ]
     }
   }
 }
