@@ -1,0 +1,43 @@
+{
+  "id": "http://openconnectivityfoundation.github.io/IoTDataModels/oic.baseresource.properties-schema.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018-2019 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Base Resource properties (resource specification)",
+  "definitions": {
+      "precision":  {
+        "type": "number",
+        "readOnly": true,
+        "description": "When exposed the value in 'precision' provides a +/- tolerance against the Properties in the Resource. Thus if a Property is UPDATED to a value and that Property then RETRIEVED, the RETRIEVED value is valid if in the range of the set value +/- precision"
+      },
+      "range_integer": {
+        "type": "array",
+        "description": "The valid range for the Property in the Resource as an integer. The first value in the array is the minimum value, the second value in the array is the maximum value.",
+        "readOnly": true,
+        "minItems": 2,
+        "maxItems": 2,
+        "items": {
+            "type": "integer"
+        }
+      },
+      "range_number": {
+        "type": "array",
+        "description": "The valid range for the Property in the Resource as a number. The first value in the array is the minimum value, the second value in the array is the maximum value.",
+        "readOnly": true,
+        "minItems": 2,
+        "maxItems": 2,
+        "items": {
+            "type": "number"
+        }
+      },
+      "step_integer": {
+        "description": "Step value across the defined range when the range is an integer.  This is the increment for valid values across the range; so if range is 0..10 and step is 2 then valid values are 0,2,4,6,8,10.",
+        "readOnly": true,
+        "type": "integer"
+      },
+      "step_number": {
+        "description": "Step value across the defined range an integer when the range is a number.  This is the increment for valid values across the range; so if range is 0.0..10.0 and step is 2.5 then valid values are 0.0,2.5,5.0,7.5,10.0.",
+        "readOnly": true,
+        "type": "number"
+    }
+  }
+}
