@@ -80,7 +80,8 @@
           "description": "The Resource Type.",
           "items": {
             "maxLength": 64,
-            "type": "string"
+            "type": "string",
+            "enum": ["oic.r.value.conditional"]
           },
           "minItems": 1,
           "uniqueItems": true,
@@ -115,7 +116,8 @@
               "oic.if.rw",
               "oic.if.baseline"
             ],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 2,
           "uniqueItems": true,

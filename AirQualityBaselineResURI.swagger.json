@@ -67,7 +67,7 @@
         }
       }
     },
-    "/AirQualityResURI?if=oic.if.baseline" : {
+    "/AirQualityCollectionResURI?if=oic.if.baseline" : {
       "get": {
         "description": "This resource describes a sensor that provides the qualitative or measured Air Quality.\nThe resource is a collection of instances of oic.r.airquality detailing the individual exposed contaminant measures\nThere is one collection entry per contaminant type supported by the device. A device must expose at least one measured or qualitative value.\nRetrieves the current air quality.\n",
         "parameters": [
@@ -106,7 +106,7 @@
       },
       "type": "array"
     },
-    "oic.oic-link": {
+    "oic.oic-link": { 
       "type": "object",
       "properties": {
         "anchor": {

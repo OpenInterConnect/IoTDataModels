@@ -26,7 +26,7 @@
               "x-example":
                 {
                   "rt": ["oic.r.impactsensor"],
-                  "if": ["oic.if.s", "oic.r.baseline"],
+                  "if": ["oic.if.s", "oic.if.baseline"],
                   "impactstatus": true,
                   "impactlevel": 2.25,
                   "impactdirectionhorizontal": 120.0,
@@ -43,7 +43,7 @@
       "in": "query",
       "name": "if",
       "type": "string",
-      "enum": ["oic.if.s", "oic.r.baseline"]
+      "enum": ["oic.if.s", "oic.if.baseline"]
     }
   },
   "definitions": {

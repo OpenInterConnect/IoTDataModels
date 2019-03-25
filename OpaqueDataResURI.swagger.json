@@ -91,7 +91,8 @@
           "description": "The Resource Type.",
           "items": {
             "maxLength": 64,
-            "type": "string"
+            "type": "string",
+            "enum": ["oic.r.opaquedata"]
           },
           "minItems": 1,
           "uniqueItems": true,
@@ -138,7 +139,7 @@
         }
      },
      "type": "object",
-     "required": [ "payload", "encoding", "system" ] 
+     "required": [ "payload", "encoding", "system" ]
     }
   }
 }

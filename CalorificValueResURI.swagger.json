@@ -38,7 +38,7 @@
       "in" : "query",
       "name" : "if",
       "type" : "string",
-      "enum" : ["oic.if.r", "oic.r.baseline"]
+      "enum" : ["oic.if.r", "oic.if.baseline"]
     }
   },
   "definitions": {
