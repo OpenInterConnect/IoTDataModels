@@ -35,7 +35,6 @@
               "rt": [
                 "oic.r.height"
               ],
-              "id": "unique_example_id",
               "height": 1.8,
               "units": "m"
             },
@@ -59,7 +58,6 @@
               "$ref": "#/definitions/Height"
             },
             "x-example": {
-              "id": "unique_example_id",
               "height": 1.75,
               "units": "m"
             }
@@ -69,7 +67,6 @@
           "200": {
             "description": "Indicates that the height was successfully changed.\nThe new height is provided in the response.",
             "x-example": {
-              "id": "unique_example_id",
               "height": 1.75,
               "units": "m"
             },
@@ -80,7 +77,6 @@
           "403": {
             "description": "Indicates that OCF Client sent an invalid Property value to the Server.\nThe Server responds with the current Resource representation.",
             "x-example": {
-              "id": "unique_example_id",
               "height": 1.8,
               "units": "m"
             },

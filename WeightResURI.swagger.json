@@ -35,7 +35,6 @@
               "rt": [
                 "oic.r.weight"
               ],
-              "id": "unique_example_id",
               "weight": 80.0,
               "units": "kg"
             },
@@ -59,7 +58,6 @@
               "$ref": "#/definitions/Weight"
             },
             "x-example": {
-              "id": "unique_example_id",
               "weight": 75.0,
               "units": "kg"
             }
@@ -69,7 +67,6 @@
           "200": {
             "description": "Indicates that the weight was successfully changed.\nThe new weight is provided in the response.",
             "x-example": {
-              "id": "unique_example_id",
               "weight": 75.0,
               "units": "kg"
             },
@@ -80,7 +77,6 @@
           "403": {
             "description": "Indicates that OCF client sent an invalid Property value to the Server.\nThe Server responds with the current resource representation.",
             "x-example": {
-              "id": "unique_example_id",
               "weight": 80.0,
               "units": "kg"
             },

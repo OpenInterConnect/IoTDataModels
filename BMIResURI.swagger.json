@@ -35,7 +35,6 @@
               "rt": [
                 "oic.r.bmi"
               ],
-              "id": "unique_example_id",
               "bmi": 20.0
             },
             "schema": {

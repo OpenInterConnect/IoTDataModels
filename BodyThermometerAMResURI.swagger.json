@@ -222,7 +222,6 @@
     "batch-retrieve": {
       "minItems": 1,
       "items": {
-        "additionalProperties": true,
         "properties": {
           "href": {
             "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"

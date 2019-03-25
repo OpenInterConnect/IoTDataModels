@@ -35,7 +35,6 @@
               "rt": [
                 "oic.r.body.slm"
               ],
-              "id": "unique_example_id",
               "slm": 20.0,
               "units": "kg"
             },
