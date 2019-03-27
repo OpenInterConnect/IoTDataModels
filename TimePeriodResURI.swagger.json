@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Time Period",
-    "version": "20190215",
+    "version": "20190327",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -27,8 +27,8 @@
                 {
                   "rt": ["oic.r.time.period"],
                   "if": ["oic.if.a", "oic.if.baseline"],
-                  "startTime":"2015-01-09T14:30Z",
-                  "stopTime": "2015-01-09T14:45Z"
+                  "startTime":"2015-01-09T14:30:00Z",
+                  "stopTime": "2015-01-09T14:45:00Z"
                 },
               "schema": { "$ref": "#/definitions/TimePeriod" }
             }
@@ -45,8 +45,8 @@
             "schema": { "$ref": "#/definitions/TimePeriod" },
             "x-example":
               {
-                "startTime":"2015-01-09T14:30Z",
-                "stopTime": "2015-01-09T14:45Z"
+                "startTime":"2015-01-09T14:30:00Z",
+                "stopTime": "2015-01-09T14:45:00Z"
               }
           }
         ],
@@ -55,8 +55,8 @@
               "description" : "",
               "x-example":
                 {
-                  "startTime":"2015-01-09T14:30Z",
-                  "stopTime": "2015-01-09T14:45Z"
+                  "startTime":"2015-01-09T14:30:00Z",
+                  "stopTime": "2015-01-09T14:45:00Z"
                 },
               "schema": { "$ref": "#/definitions/TimePeriod" }
             }

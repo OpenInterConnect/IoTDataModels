@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Clock",
-    "version": "20190215",
+    "version": "20190327",
      "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -27,7 +27,7 @@
                 {
                   "rt": ["oic.r.clock"],
                   "if": ["oic.if.a", "oic.if.baseline"],
-                  "datetime": "2015-11-05T14:30Z",
+                  "datetime": "2015-11-05T14:30:00Z",
                   "countdown": 0.0
                 },
               "schema": { "$ref": "#/definitions/Clock" }

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Heating Zone Collection",
-    "version": "20190307",
+    "version": "20190327",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -25,10 +25,10 @@
             "description" : "",
             "x-example":
               [
-                {"href": "/myZone1ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
-                {"href": "/myZone2ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
-                {"href": "/myZone3ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
-                {"href": "/myZone4ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
+                {"href": "/myZone1ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                {"href": "/myZone2ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                {"href": "/myZone3ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                {"href": "/myZone4ResURI", "rt": ["oic.r.heatingzone"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
              ],
             "schema": { "$ref": "#/definitions/HeatingZone-ll" }
           }
