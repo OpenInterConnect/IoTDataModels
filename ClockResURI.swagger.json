@@ -45,7 +45,7 @@
             "schema": { "$ref": "#/definitions/Clock" },
             "x-example":
               {
-                "datetime": "2015-11-05T14:30Z",
+                "datetime": "2015-11-05T14:30:00Z",
                 "countdown": 0.0
               }
           }
@@ -55,7 +55,7 @@
               "description" : "Indicates that the datetime value was successfully changed.\nThe new datetime value is provided in the response.\n",
               "x-example":
                 {
-                  "datetime": "2015-11-05T14:30Z",
+                  "datetime": "2015-11-05T14:30:00Z",
                   "countdown": 0.0
                 }
                 ,
@@ -65,7 +65,7 @@
               "description" : "Indicates that OIC client sent an invalid property value to the server.\nThe server responds with the required input representation.\n",
               "x-example":
                 {
-                  "datetime": "2015-11-05T14:30Z",
+                  "datetime": "2015-11-05T14:30:00Z",
                   "countdown": 0.0
                 }
                 ,
@@ -103,7 +103,7 @@
           "type": "number"
         },
         "datetime": {
-          "description": "Rhe date time using RFC3339 datetime format (e.g: 2007-04-05T14:30Z, 2007-04-05T14:30+09:00).",
+          "description": "Rhe date time using RFC3339 datetime format (e.g: 2007-04-05T14:30:00Z, 2007-04-05T14:30:00+09:00).",
           "type": "string",
           "format" : "date-time"
         },
