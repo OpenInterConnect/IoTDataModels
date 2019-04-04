@@ -28,9 +28,11 @@
                   "rt": ["oic.r.energy.drlc"],
                   "if": ["oic.if.a", "oic.if.baseline"],
                   "DRType": 1,
-                  "start": "2015-01-09T16:45Z",
+                  "start": "2015-01-09T16:45:00Z",
                   "duration": 10,
-                  "override": false
+                  "override": false,
+                  "drlevel": 2,
+                  "mandate": true
                 },
               "schema": { "$ref": "#/definitions/DRLC" }
             }
@@ -48,7 +50,7 @@
             "x-example":
               {
                 "DRType": 1,
-                "start": "2015-01-09T16:45Z",
+                "start": "2015-01-09T17:00:00Z",
                 "duration": 10
               }
           }
@@ -59,7 +61,7 @@
               "x-example":
                 {
                   "DRType": 1,
-                  "start": "2015-01-09T17:00Z",
+                  "start": "2015-01-09T17:00:00Z",
                   "duration": 15,
                   "override": false
                 }
@@ -67,7 +69,7 @@
               "schema": {"$ref": "#/definitions/DRLC"}
             },
             "201": {
-              "description" : "Indicates successful creation of the DRLC resource with the attributes provided.\nThe response includes the URI of the created Resource.",
+              "description" : "Indicates successful creation of the DRLC Resource with the attributes provided.\nThe response includes the URI of the created Resource.",
               "x-example":
                 {
                   "ResURI": "/MyDevice/MyDRLCURI"
@@ -116,6 +118,16 @@
         "DRType": {
           "description": "The to be applied demand-response type.",
           "type": "integer"
+        },
+        "drlevel": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3,
+          "description": "Indicator of the strength of the DR response that is requested; 0-0%, 1-30%, 2-50%, 3-70%"
+        },
+        "mandate" : {
+          "type": "boolean",
+          "description": "Whether overriding the DR request by the consumer is allowed"
         },
         "n": {
             "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
