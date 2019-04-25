@@ -104,8 +104,9 @@
           "type": "array"
         },
         "start": {
-          "description": "The start time for the application of DR.",
-          "type": "string"
+          "description": "The start time for the application of DR using RFC3339 datetime format (e.g. 2007-04-05T14:30:00Z, 2007-04-05T14:30:00+09:00).",
+          "type": "string",
+          "format": "date-time"
         },
         "duration": {
           "description": "The duration of the to be applied DR type.",
