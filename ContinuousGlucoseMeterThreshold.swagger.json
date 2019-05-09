@@ -1,0 +1,195 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Threshold for Continuous Glucose Meter (CGM)",
+    "version": "2019-03-04",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/ContinuousGlucoseMeterThresholdResURI": {
+      "get": {
+        "description": "This Resource describes the Properties associated with Threshold for Continuous Glucose Meter (CGM).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": {
+              "rt": [
+                "oic.r.cgm.threshold"
+              ],
+              "plow": 100.0,
+              "phigh": 180.0,
+              "dhypo": 80.0,
+              "dhyper": 125.0,
+              "gir": 5.0,
+              "gdr": 5.0
+            },
+            "schema": {
+              "$ref": "#/definitions/ContinuousGlucoseMeterThreshold"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "This Resource describes the Properties associated with Threshold for Continuous Glucose Meter (CGM).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ContinuousGlucoseMeterThreshold" },
+            "x-example": {
+              "plow": 70.0,
+              "phigh": 150.0,
+              "dhypo": 60.0,
+              "dhyper": 90.0,
+              "gir": 3.0,
+              "gdr": 3.0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": {
+              "rt": [
+                "oic.r.cgm.threshold"
+              ],
+              "plow": 70.0,
+              "phigh": 150.0,
+              "dhypo": 60.0,
+              "dhyper": 90.0,
+              "gir": 3.0,
+              "gdr": 3.0
+            },
+            "schema": {
+              "$ref": "#/definitions/ContinuousGlucoseMeterThreshold"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": [
+        "oic.if.rw",
+        "oic.if.baseline"
+      ]
+    }
+  },
+  "definitions": {
+    "ContinuousGlucoseMeterThreshold": {
+      "properties": {
+        "plow": {
+          "description": "This Property describes the Patient low threshold (mg/dL)",
+          "type": "number",
+          "minimum": 0.0,
+          "readOnly": false
+        },
+        "phigh": {
+          "description": "This Property describes the Patient high threshold (mg/dL)",
+          "type": "number",
+          "minimum": 0.0,
+          "readOnly": false
+        },
+        "dhypo": {
+          "description": "This Property describes the Device hypoglycemia threshold (mg/dL)",
+          "type": "number",
+          "minimum": 0.0,
+          "readOnly": false
+        },
+        "dhyper": {
+          "description": "This Property describes the Device hyperglycemia threshold (mg/dL)",
+          "type": "number",
+          "minimum": 0.0,
+          "readOnly": false
+        },
+        "gir": {
+          "description": "This Property describes the Glucose Increase rate of change threshold (%)",
+          "type": "number",
+          "minimum": 0.0,
+          "readOnly": false
+        },
+        "gdr": {
+          "description": "This Property describes the Glucose Decrease rate of change threshold (%)",
+          "type": "number",
+          "minimum": 0.0,
+          "readOnly": false
+        },
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": [
+              "oic.r.cgm.threshold"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.rw",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "range": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
+        },
+        "step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
+        },
+        "precision": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/precision"
+        }
+      },
+      "type": "object",
+      "required": [
+        "plow",
+        "phigh",
+        "dhypo",
+        "dhyper",
+        "gir",
+        "gdr"
+      ]
+    }
+  }
+}
