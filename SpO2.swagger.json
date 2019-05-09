@@ -1,0 +1,131 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SpO2 for Pulse Oximeter",
+    "version": "2019-03-04",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/SpO2ResURI": {
+      "get": {
+        "description": "This Resource describes the Properties associated with a person's blood oxygen saturation level.\n The spo2 and perfusion Properties are read-only value that is provided by the server.\n When range (from \"oic.r.baseresource\") is omitted the default is 0 to +MAXFLOAT.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": {
+              "rt": [
+                "oic.r.spo2"
+              ],
+              "spo2": 99.0,
+              "perfusion": 20.0
+            },
+            "schema": {
+              "$ref": "#/definitions/SpO2"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": [
+        "oic.if.s",
+        "oic.if.baseline"
+      ]
+    }
+  },
+  "definitions": {
+    "SpO2": {
+      "properties": {
+        "spo2": {
+          "description": "This Property describes the estimation of the oxygen saturation level in percentage.",
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0,
+          "readOnly": true
+        },
+        "perfusion": {
+          "description": "This Property describes the ratio of AC over DC of PPG.",
+          "type": "number",
+          "minimum": 0.0,
+          "readOnly": true
+        },
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": [
+              "oic.r.spo2"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.s",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "spo2_range": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
+        },
+        "perfusion_range": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
+        },
+        "spo2_step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
+        },
+        "perfusion_step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
+        },
+        "spo2_precision": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/precision"
+        },
+        "perfusion_precision": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/precision"
+        }
+      },
+      "type": "object",
+      "required": [
+        "spo2"
+      ]
+    }
+  }
+}
