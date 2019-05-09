@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Media",
-    "version": "20190215",
+    "version": "20190508",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -26,7 +26,7 @@
               "x-example":
                 {
                   "rt": ["oic.r.media"],
-                  "if": ["oic.if.s", "oic.if.baseline"],
+                  "if": ["oic.if.a", "oic.if.baseline"],
                   "media": [
                     {
                       "url": "some example url",
@@ -56,6 +56,52 @@
               "schema": { "$ref": "#/definitions/Media" }
             }
         }
+      },
+      "post": {
+        "description": "This is to change the URL that can be played back by the device. Note that some devices do not have the capability to set the URL to be played back",
+        "parameters": [
+          {"$ref": "#/parameters/interface"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Media" },
+            "x-example": 
+              {
+                "media": [
+                    {
+                      "url": "new example url for playback",
+                      "sdp": [
+                        "m=video 1 RTP/AVP 100",
+                        "a=rtpmap:100 H264/9000",
+                        "a=fmtp:100 profile-level-id=42A028;packetization-mode=1"
+                      ]
+                    }
+                  ]
+                }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "The current media resource.",
+              "x-example":
+                {
+                  "rt": ["oic.r.media"],
+                  "if": ["oic.if.a", "oic.if.baseline"],
+                  "media": [
+                    {
+                      "url": "new example url for playback",
+                      "sdp": [
+                        "m=video 1 RTP/AVP 100",
+                        "a=rtpmap:100 H264/9000",
+                        "a=fmtp:100 profile-level-id=42A028;packetization-mode=1"
+                      ]
+                    }
+                  ]
+                },
+              "schema": { "$ref": "#/definitions/Media" }
+            }
+        }
       }
     }
   },
@@ -64,7 +110,7 @@
       "in": "query",
       "name": "if",
       "type": "string",
-      "enum": ["oic.if.s", "oic.if.baseline"]
+      "enum": ["oic.if.a", "oic.if.baseline"]
     }
   },
   "definitions": {
@@ -112,6 +158,7 @@
           "description": "The OCF Interface set supported by this Resource.",
           "items": {
             "enum": [
+              "oic.if.a",
               "oic.if.s",
               "oic.if.baseline"
             ],
