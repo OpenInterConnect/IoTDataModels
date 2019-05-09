@@ -1,0 +1,178 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Alarm",
+    "version": "2019-03-04",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/AlarmResURI": {
+      "get": {
+        "description": "This Resource describes the Properties associated with alarm status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": {
+              "rt": [ "oic.r.alarm" ],
+              "if": [ "oic.if.rw", "oic.if.baseline"],
+              "status":   false,
+              "duration": 0.0,
+              "time":     "2018-06-20T14:30Z",
+              "alarmtype": "General"
+            },
+            "schema": {
+              "$ref": "#/definitions/Alarm"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "This Resource describes the Properties associated with alarm status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Alarm" },
+            "x-example": {
+              "status":   true,
+              "duration": 30.0,
+              "time":     "2019-01-31T14:30Z"
+            }
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": {
+              "rt": [
+                "oic.r.alarm"
+              ],
+              "status":     true,
+              "duration":   30.0,
+              "time":       "2019-01-31T14:30Z",
+              "alarmtype":  "General"
+            },
+            "schema": {
+              "$ref": "#/definitions/Alarm"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": [
+        "oic.if.rw",
+        "oic.if.baseline"
+      ]
+    }
+  },
+  "definitions": {
+    "Alarm": {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": [
+              "oic.r.alarm"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "status": {
+          "description": "This Property describes the status of the alarm: true - on, false - off.",
+          "type": "boolean",
+          "readOnly": false
+        },
+        "duration": {
+          "description": "This Property describes the alarm duration (seconds).",
+          "type": "number",
+          "minimum": 0.0,
+          "readOnly": false
+        },
+        "time": {
+          "description": "This Property describes the alarm time using ISO 8601 datetime format (e.g: 2007-04-05T14:30Z, 2007-04-05T14:30+09:00).",
+          "type": "string",
+          "readOnly": false
+        },
+        "alarmtype": {
+          "description": "The Alarm Type.",
+          "type": "string",
+          "enum": [
+            "General",
+            "Fire",
+            "Flood",
+            "Weather",
+            "Security"
+          ],
+          "readOnly": true
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.rw"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "range": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
+        },
+        "step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
+        },
+        "precision": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/precision"
+        }
+      },
+      "type": "object",
+      "required": [
+        "status"
+      ]
+    }
+  }
+}
