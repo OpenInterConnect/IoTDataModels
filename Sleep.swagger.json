@@ -1,0 +1,184 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Sleep",
+    "version": "2018-07-12",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/SleepResURI": {
+      "get": {
+        "description": "This Resource describes the Properties associated with Sleep.\nSleep shows the time spent in each of the sleep stages (awake, nrem1, nrem2, nrem3, nrem4, rem, light sleep, deep sleep), along with a sleep score indicating the quality of sleep.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the sleep information.",
+            "x-example": {
+              "rt": [
+                "oic.r.sleep"
+              ],
+              "if": [
+                "oic.if.s",
+                "oic.if.baseline"
+              ],
+              "awake": 1440,
+              "nrem1": 1440,
+              "nrem2": 14400,
+              "nrem3": 1440,
+              "nrem4": 4320,
+              "rem": 5760,
+              "lightsleep": 15840,
+              "deepsleep": 5760,
+              "sleepscore": 70.0
+            },
+            "schema": {
+              "$ref": "#/definitions/Sleep"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": [
+        "oic.if.s",
+        "oic.if.baseline"
+      ]
+    }
+  },
+  "definitions": {
+    "Sleep": {
+      "properties": {
+        "awake": {
+          "type": "integer",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Time spent in Awake stage (in seconds)"
+        },
+        "nrem1": {
+          "type": "integer",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Time spent in Non Rapid Eye Movement stage 1 (in seconds)"
+        },
+        "nrem2": {
+          "type": "integer",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Time spent in Non Rapid Eye Movement stage 2 (in seconds)"
+        },
+        "nrem3": {
+          "type": "integer",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Time spent in Non Rapid Eye Movement stage 3 (in seconds)"
+        },
+        "nrem4": {
+          "type": "integer",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Time spent in Non Rapid Eye Movement stage 4 (in seconds)"
+        },
+        "rem": {
+          "type": "integer",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Time spent in Rapid Eye Movement (in seconds)"
+        },
+        "lightsleep": {
+          "type": "integer",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Time spent in Light Sleep stage, consisting in NREM stages 1 and 2 (in seconds)"
+        },
+        "deepsleep": {
+          "type": "integer",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Time spent in Deep Sleep stage, consisting in NREM stages 3 and 4 (in seconds)"
+        },
+        "sleepscore": {
+          "type": "number",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "Score computed from the time spent in each sleep stage, indicative of the quality of sleep"
+        },
+        "if": {
+          "description": "The Interface set supported by this Resource",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "oic.if.s",
+              "oic.if.baseline"
+            ]
+          }
+        },
+        "rt": {
+          "description": "Resource Type",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "oic.r.sleep"
+            ]
+          }
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "range_phases": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_integer"
+        },
+        "step_phases": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_integer"
+        },
+        "range_score": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
+        },
+        "step_score": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
+        },
+        "precision": {
+            "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/precision"
+        }
+      },
+      "type": "object",
+      "required": [
+        "awake",
+        "nrem1",
+        "nrem2",
+        "nrem3",
+        "rem"
+      ]
+    }
+  }
+}
