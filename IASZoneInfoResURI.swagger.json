@@ -1,0 +1,200 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "IAS Zone Info",
+    "version": "20190513",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/IASZoneInfoResURI" : {
+      "get": {
+        "description": "This Resource describes information associated with an Intruder Alert System (IAS) Zone.\nZone Type provides the information about the type of device/alarm.\nZone Status provides an array which has 10 items representing various status information(e.g., battery status, mode, alarm (Up to two), supervision of IAS network, etc.\nA Device implementing this Resource can be enrolled to IAS Control and Indicator Equipment (CIE). IAS CIE can allocate an ID for the Device and update this Resource on the Device.\nThis Resource may provide multiple sensitivity levels (>2). NumberofZoneSensitivityLevelSupported provides the number of the levels. A specific level can be selected as currentzonesensitivityLevel.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "",
+            "x-example":
+            {
+              "rt": ["oic.r.iaszoneinfo"],
+              "zonetype": "motionsensor",
+              "zonestatus": {
+                "alarms": ["presence"],
+                "tamper": false,
+                "zonestatusreports": "statuschangeonly",
+                "fault": false,
+                "test": false
+              },
+              "iascieaddress": "ACDE9F56A3FE6B98",
+              "zonestate": true,
+              "zoneid": 64,
+              "numzonesensitivitylevel": 3,
+              "currentzonesensitivitylevel": 2
+            },
+            "schema": { "$ref": "#/definitions/IASZoneInfo" }
+          }
+        }
+      },
+      "post": {
+        "description": "Sets the current sensitivity level of the IASZone.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-rw"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/IASZoneInfo-Update" },
+            "x-example":
+              {
+                "currentzonesensitivitylevel": 3
+              }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "Success path response code\n"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-all" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw", "oic.if.baseline"]
+    },
+    "interface-rw" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw"]
+    }
+  },
+  "definitions": {
+    "IASZoneInfo" : {
+      "properties": {
+        "rt" : {
+          "description": "Resource Type",
+          "items": {
+            "type": "string",
+            "enum": ["oic.r.iaszoneinfo"]
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+        "zonestate" : {
+          "description": "The IAS zone state. True = enrolled, False = not enrolled.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "zonestatus" : {
+          "description": "Set of alarm indicators.",
+          "properties": {
+            "alarms": {
+              "type": "array",
+              "description": "Array of alarms. The alarms exposed are dependent on the zonetype.",
+              "readOnly": true,
+              "minItems": 1,
+              "maxItems": 2,
+              "items": {
+                "type": "string",
+                "enum": ["system","intrusion","presence","1stportalopenclose","2ndportalopenclose","fire","wateroverflow","CO","cooking","fall","emergencybutton","movement","vibration","panic","emergency","glassbreak"]
+              }
+            },
+            "zonestatusreports": {
+              "description": "Controls the generation of status indications",
+              "type": "string",
+              "enum": ["none","statuschangeonly","alarmclearonly","statuschangeandalarmclear"]
+            },
+            "tamper": {
+              "description": "Tamper status. True = tampered, False = not tampered.",
+              "readOnly": true,
+              "type": "boolean"
+            },
+            "test": {
+              "description": "Test mode indicator. True = sensor is in test mode, False = sensor is in operational mode",
+              "readOnly": true,
+              "type": "boolean"
+            },
+            "fault": {
+              "description": "Fault indicator. True = fault detected, False = no fault detected",
+              "readOnly": true,
+              "type": "boolean"
+            }
+          },
+          "readOnly": true,
+          "type": "object"
+        },
+        "numzonesensitivitylevel" : {
+          "description": "Number of supported zone sensitivity levels",
+          "minimum": 2,
+          "readOnly": true,
+          "type": "integer"
+        },
+        "zoneid" : {
+          "description": "ID allocated by the IAS CIE",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "iascieaddress" : {
+          "description": "EUI-64 Address of the enrolled IAS Control and Indicating Equipment (CIE)",
+          "readOnly": true,
+          "type": "string"
+        },
+        "zonetype" :  {
+          "description": "IAS zone type. See OCF enumeration map for set of valid values.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "currentzonesensitivitylevel" : {
+          "description": "Current zone sensitivity level",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if" : {
+          "description": "The OCF Interface set supported by this Resource",
+          "items": {
+            "enum": [
+              "oic.if.rw",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+		      "maxItems": 2,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+	  "required": ["zonetype", "zonestate", "zonestatus", "zoneid", "iascieaddress"]
+    },
+    "IASZoneInfo-Update" : {
+      "properties": {
+        "currentzonesensitivitylevel" : {
+          "description": "Current zone sensitivity level, Client can only set 1 or higher.",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+	  "required": ["currentzonesensitivitylevel"]
+    }
+  }
+}

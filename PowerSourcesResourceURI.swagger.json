@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PowerSource",
-    "version": "20190215",
+    "version": "20190513",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -16,28 +16,30 @@
   "paths": {
     "/PowerSourceResURI" : {
       "get": {
-        "description": "This Resource list the available power sources for the Device.\nThe Property \"powerSources\" is a list that is read only and is informative only.\nIf there is more than 1 power sources active, use multiple resources to indicate the active power sources.\nIf the power source is unknown use the value \"unknown\".",
+        "description": "This Resource list the available power sources for the Device. The Property \"powersources\" is a list that is read only and is informative only.\nIf there is more than 1 power source active, use multiple Resources to indicate the active power sources. If the power source is unknown use the value \"unknown\".",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
         "responses": {
-            "200": {
-              "description" : "Retrieves the list of available power sources.",
-              "x-example":
-                {
-                  "rt": ["oic.r.powersource"],
-                  "if": ["oic.if.r", "oic.if.baseline"],
-                  "powerSources": [
-                      "DC power", 
-                      "Internal Battery", 
-                      "External Battery", 
-                      "Power over Ethernet",
-                      "USB",
-                      "AC (Mains) Power",
-                      "Solar"]
-                },
-              "schema": { "$ref": "#/definitions/powerSourceSchema" }
-            }
+          "200": {
+            "description" : "Retrieves the list of available power sources.",
+            "x-example":
+            {
+              "rt": ["oic.r.powersource"],
+              "if": ["oic.if.r", "oic.if.baseline"],
+              "powersources": [
+                "DC power",
+                "Internal Battery",
+                "External Battery",
+                "Power over Ethernet",
+                "USB",
+                "AC (Mains) Power",
+                "Solar"
+              ],
+              "sourcefault": false
+            },
+            "schema": { "$ref": "#/definitions/powerSourceSchema" }
+          }
         }
       }
     }
@@ -65,7 +67,7 @@
           "readOnly": true,
           "type": "array"
         },
-        "powerSources": {
+        "powersources": {
           "items": {
             "enum": [
               "unknown",
@@ -83,14 +85,18 @@
           },
           "type": "array"
         },
+        "sourcefault": {
+          "description": "Fault detected in currently active power source. True = fault detected",
+          "readOnly": true,
+          "type": "boolean"
+        },
         "n": {
             "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         },
         "id": {
             "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
         },
-        "if" :
-                {
+        "if": {
           "description": "The OCF Interface set supported by this Resource.",
           "items": {
             "enum": [
@@ -106,7 +112,7 @@
         }
       },
       "type": "object",
-      "required": ["powerSources"]
+      "required": ["powersources"]
     }
   }
 }

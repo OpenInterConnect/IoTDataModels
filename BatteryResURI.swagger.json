@@ -2,11 +2,11 @@
   "swagger": "2.0",
   "info": {
     "title": "Battery",
-    "version": "20190222",
+    "version": "20190513",
     "license": {
-        "name": "OCF Data Model License",
-        "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
-        "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
     },
     "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
@@ -21,21 +21,22 @@
           {"$ref": "#/parameters/interface"}
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
-                {
-                  "rt": ["oic.r.energy.battery"],
-                  "if": ["oic.if.rw", "oic.if.baseline"],
-                  "charge": 50,
-                  "capacity": 3000,
-                  "charging": true,
-                  "discharging": false,
-                  "lowbattery": false,
-                  "batterythreshold": 20
-                },
-              "schema": { "$ref": "#/definitions/Battery" }
-            }
+          "200": {
+            "description" : "",
+            "x-example":
+            {
+              "rt": ["oic.r.energy.battery"],
+              "if": ["oic.if.rw", "oic.if.baseline"],
+              "charge": 50,
+              "capacity": 3000,
+              "charging": true,
+              "discharging": false,
+              "lowbattery": false,
+              "batterythreshold": 20,
+              "defect": false
+            },
+            "schema": { "$ref": "#/definitions/Battery" }
+          }
         }
       },
       "post": {
@@ -48,20 +49,20 @@
             "required": true,
             "schema": { "$ref": "#/definitions/BatteryUpdate" },
             "x-example":
-              {
-                "batterythreshold": 20
-              }
+            {
+              "batterythreshold": 20
+            }
           }
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
-                {
-                  "batterythreshold": 20
-                },
-              "schema": { "$ref": "#/definitions/BatteryUpdate" }
-            }
+          "200": {
+            "description" : "",
+            "x-example":
+            {
+              "batterythreshold": 20
+            },
+            "schema": { "$ref": "#/definitions/BatteryUpdate" }
+          }
         }
       }
     }
@@ -119,6 +120,11 @@
         },
         "charging": {
           "description": "The status of charging.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "defect": {
+          "description": "Battery defect detected. True = defect, False = no defect",
           "readOnly": true,
           "type": "boolean"
         },

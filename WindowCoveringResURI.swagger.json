@@ -1,0 +1,255 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Window Covering",
+    "version": "20190513",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/WindowCoveringResURI" : {
+      "get": {
+        "description": "This Resource describes the information of a window covering, i.e., type, configuration status, and mode.\nVelocity associated with lifting the window covering can be changed by updating Lift_Velocity(cm/sec).\nRamp up/down times to reaching the velocity setting can be changed by updating Lift_Acceleration Time/Lift_Deceleration Time (0.1sec).",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "",
+            "x-example":
+            {
+              "rt": ["oic.r.windowcovering"],
+              "windowcoveringtype": "shutter",
+              "configstatus": {
+                "operational": true,
+                "online": true,
+                "rotationdirection": "normal",
+                "controllift": "closedloop",
+                "controltilt": "closedloop",
+                "closedloopliftcontrol": "encoder",
+                "closedlooptiltcontrol": "encoder"
+              },
+              "mode": {
+                "motordirection": false,
+                "calibration": false,
+                "maintenance": false,
+                "ledfeedback": true
+              },
+              "liftvelocity": 5,
+              "liftaccelerationtime": 200,
+              "liftdecelerationtime": 200
+            },
+            "schema": { "$ref": "#/definitions/WindowCovering" }
+          }
+        }
+      },
+      "post": {
+        "description": "Update window covering settings.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/WindowCovering-Update" },
+            "x-example":
+            {
+              "mode": {
+                "motordirection": true,
+                "calibration": false,
+                "maintenance": false,
+                "ledfeedback": true
+              },
+              "liftvelocity": 10,
+              "liftaccelerationtime": 500,
+              "liftdecelerationtime": 500
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "Success path response code\n"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-all" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "WindowCovering" : {
+      "properties": {
+        "rt" : {
+          "description": "Resource Type",
+          "items": {
+            "maxLength": 64,
+            "type": "string",
+            "enum": ["oic.r.windowcovering"]
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+        "windowcoveringtype" : {
+          "description": "Window covering type. See OCF enumeration map for set of valid values.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "liftvelocity" : {
+          "description": "Velocity in cm/sec associated with lifting the covering",
+          "type": "integer"
+        },
+        "configstatus" : {
+          "description": "Set of config status indicators.",
+          "properties": {
+            "controllift": {
+              "description": "Closed loop control allows for intermediate settings, open loop supports only up or down",
+              "readOnly": true,
+              "type": "string",
+              "enum": ["closedloop","openloop"]
+            },
+            "controltilt": {
+              "description": "Closed loop control allows for intermediate settings, open loop supports only tilted or not tilted",
+              "readOnly": true,
+              "type": "string",
+              "enum": ["closedloop","openloop"]
+            },
+            "closedloopliftcontrol": {
+              "description": "Encoder or timer controlled",
+              "readOnly": true,
+              "type": "string",
+              "enum": ["encoder","timer"]
+            },
+            "closedlooptiltcontrol": {
+              "description": "Encoder or timer controlled",
+              "readOnly": true,
+              "type": "string",
+              "enum": ["encoder","timer"]
+            },
+            "online": {
+              "description": "True = online, False = not online",
+              "readOnly": true,
+              "type": "boolean"
+            },
+            "operational": {
+              "description": "True = operational, False = not operational",
+              "readOnly": true,
+              "type": "boolean"
+            },
+            "rotationdirection": {
+              "description": "Identifies if the direction of rotation has been reversed to match physical installation.",
+              "readOnly": true,
+              "type": "string",
+              "enum": ["normal","reversed"]
+            }
+          },
+          "readOnly": true,
+          "type": "object"
+        },
+        "liftaccelerationtime" : {
+          "description": "Ramp up time to reach lift velocity (ms)",
+          "type": "integer"
+        },
+        "liftdecelerationtime" : {
+          "description": "Ramp down time from the velocity setting (ms)",
+          "type": "integer"
+        },
+        "mode" : {
+          "description": "Set of operational modes.",
+          "properties": {
+            "calibration": {
+              "description": "True = calibration mode, False = normal mode",
+              "type": "boolean"
+            },
+            "ledfeedback": {
+              "description": "True = feedback enabled, False = LEDs are off",
+              "type": "boolean"
+            },
+            "maintenance": {
+              "description": "True = maintenance mode, False = normal mode",
+              "type": "boolean"
+            },
+            "motordirection": {
+              "description": "True = direction reversed, False = direction normal",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if" : {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.rw",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+		      "maxItems": 2,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "required": ["windowcoveringtype", "configstatus", "mode"]
+    },
+    "WindowCovering-Update" : {
+      "properties": {
+        "liftaccelerationtime" : {
+          "description": "Ramp up time to reach lift velocity (ms)",
+          "type": "integer"
+        },
+        "liftdecelerationtime" : {
+          "description": "Ramp down time from the velocity setting (ms)",
+          "type": "integer"
+        },
+        "liftvelocity" : {
+          "description": "Velocity in cm/sec associated with lifting the covering",
+          "type": "integer"
+        },
+        "mode" : {
+          "description": "Set of operational modes.",
+          "properties": {
+            "calibration": {
+              "description": "True = calibration mode, False = normal mode",
+              "type": "boolean"
+            },
+            "ledfeedback": {
+              "description": "True = feedback enabled, False = LEDs are off",
+              "type": "boolean"
+            },
+            "maintenance": {
+              "description": "True = maintenance mode, False = normal mode",
+              "type": "boolean"
+            },
+            "motordirection": {
+              "description": "True = direction reversed, False = direction normal",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": ["mode"]
+    }
+  }
+}
