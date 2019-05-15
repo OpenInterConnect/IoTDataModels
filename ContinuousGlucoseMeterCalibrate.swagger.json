@@ -1,0 +1,153 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Calibrate for Continuous Glucose Meter (CGM)",
+    "version": "2019-03-04",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/ContinuousGlucoseMeterCalibrateResURI": {
+      "get": {
+        "description": "This Resource describes the Properties associated with Calibrate for Continuous Glucose Meter (CGM).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": {
+              "rt": [
+                "oic.r.cgm.calibrate"
+              ],
+              "Cvalue": 128.0,
+              "Cstatus": true
+            },
+            "schema": {
+              "$ref": "#/definitions/ContinuousGlucoseMeterCalibrate"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "This Resource describes the Properties associated with Calibrate for Continuous Glucose Meter (CGM).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ContinuousGlucoseMeterCalibrate" },
+            "x-example": {
+              "Cvalue": 130.0,
+              "Cstatus": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": {
+              "rt": [
+                "oic.r.cgm.calibrate"
+              ],
+              "Cvalue": 130.0,
+              "Cstatus": true
+            },
+            "schema": {
+              "$ref": "#/definitions/ContinuousGlucoseMeterCalibrate"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": [
+        "oic.if.rw",
+        "oic.if.baseline"
+      ]
+    }
+  },
+  "definitions": {
+    "ContinuousGlucoseMeterCalibrate": {
+      "properties": {
+        "Cvalue": {
+          "description": "This Property describes the Sensor Calibration Value in mg/dL units. This blood glucose measurement using other external glucose meter.",
+          "type": "number",
+          "minimum": 0,
+          "readOnly": false
+        },
+        "Cstatus": {
+          "description": "Sensor calibration required flag",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": [
+              "oic.r.cgm.calibrate"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.rw",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "range": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
+        },
+        "step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
+        },
+        "precision": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/precision"
+        }
+      },
+      "type": "object",
+      "required": [
+        "Cvalue", "Cstatus"
+      ]
+    }
+  }
+}
