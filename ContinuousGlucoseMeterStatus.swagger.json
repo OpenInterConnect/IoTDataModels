@@ -1,0 +1,145 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Status for Continuous Glucose Meter (CGM)",
+    "version": "2019-03-04",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/ContinuousGlucoseMeterStatusResURI": {
+      "get": {
+        "description": "This Resource describes the Properties associated with Status for Continuous Glucose Meter (CGM).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": {
+              "rt": [
+                "oic.r.cgm.status"
+              ],
+              "cgmtype": "Interstitial Fluid",
+              "cgmstatus": "working",
+              "gtrend": 100.0,
+              "malfunction": false
+            },
+            "schema": {
+              "$ref": "#/definitions/ContinuousGlucoseMeterStatus"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": [
+        "oic.if.s",
+        "oic.if.baseline"
+      ]
+    }
+  },
+  "definitions": {
+    "ContinuousGlucoseMeterStatus": {
+      "properties": {
+        "cgmtype": {
+          "description": "This Property describes the CGM measurement type.",
+          "type": "string",
+          "enum": [
+            "Capillary Whole blood",
+            "Capillary Plasma",
+            "Venous Plasma",
+            "Arterial Whole blood",
+            "Arterial Plasma",
+            "Undetermined Whole blood",
+            "Undetermined Plasma",
+            "Interstitial Fluid"
+          ],
+          "readOnly": true
+        },
+        "cgmstatus": {
+          "description": "This Property describes the specific notifications given by the CGM device including, but not limited to, warnings, errors, and handling events.",
+          "type": "string",
+          "readOnly": true
+        },
+        "gtrend": {
+          "description": "This Property describes the rate of change in glucose measurements at a time instant.",
+          "type": "number",
+          "minimum": 0.0,
+          "readOnly": true
+        },
+        "malfunction": {
+          "description": "This Property describes the sensor malfunction detection check.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": [
+              "oic.r.cgm.status"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.s",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "range": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
+        },
+        "step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
+        },
+        "precision": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/precision"
+        }
+      },
+      "type": "object",
+      "required": [
+        "cgmtype",
+        "cgmstatus",
+        "gtrend",
+        "malfunction"
+      ]
+    }
+  }
+}
