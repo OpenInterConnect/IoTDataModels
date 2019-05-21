@@ -1,0 +1,377 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "IAS Zone Collection",
+    "version": "20190513",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/IASZoneResURI?if=oic.if.baseline" : {
+      "get": {
+        "description": "This Resource is Collection that fully describes an Intruder Alert System (IAS) Zone. It is made up of an instance of IAS Zone Info, Battery, and Power Source.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-baseline"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "",
+            "schema": { "$ref": "#/definitions/baseline"},
+            "x-example":
+            {
+              "rt": ["oic.r.iaszone"],
+              "if": ["oic.if.ll","oic.if.b","oic.if.baseline"],
+              "links": [
+                {
+                 "href": "/myIASZoneInfoResURI",
+                 "rt":   ["oic.r.iaszoneinfo"],
+                 "if":   ["oic.if.rw", "oic.if.baseline"]
+                },
+                {
+                  "href": "/myBatteryResURI",
+                  "rt":   ["oic.r.energy.battery"],
+                  "if":   ["oic.if.rw", "oic.if.baseline"]
+                },
+                {
+                  "href": "/myPowersourceResURI",
+                  "rt":   ["oic.r.powersource"],
+                  "if":   ["oic.if.r", "oic.if.baseline"]
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/IASZoneResURI?if=oic.if.ll" : {
+      "get": {
+        "description": "This Resource is Collection that fully describes an Intruder Alert System (IAS) Zone. It is made up of an instance of IAS Zone Info, Battery, and Power Source.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-ll"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "",
+            "schema": { "$ref": "#/definitions/links"},
+            "x-example":
+            [
+              {
+                "href": "/myIASZoneInfoResURI",
+                "rt":   ["oic.r.iaszoneinfo"],
+                "if":   ["oic.if.rw", "oic.if.baseline"]
+              },
+              {
+                "href": "/myBatteryResURI",
+                "rt":   ["oic.r.energy.battery"],
+                "if":   ["oic.if.rw", "oic.if.baseline"]
+              },
+              {
+                "href": "/myPowersourceResURI",
+                "rt":   ["oic.r.powersource"],
+                "if":   ["oic.if.r", "oic.if.baseline"]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "/IASZoneResURI?if=oic.if.b" : {
+      "get": {
+        "description": "This Resource is Collection that fully describes an Intruder Alert System (IAS) Zone. It is made up of an instance of IAS Zone Info, Battery, and Power Source.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-b"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "",
+            "schema": { "$ref": "#/definitions/IASZoneCollectionBatch-Retrieve" },
+            "x-example":
+            [
+              {
+                "href": "/myIASZoneInfoResURI",
+                "rep": {
+                  "zonetype": "motionsensor",
+                  "zonestatus": {
+                    "alarms": ["presence"],
+                    "tamper": false,
+                    "zonestatusreports": "statuschangeonly",
+                    "fault": false,
+                    "test": false
+                  },
+                  "iascieaddress": "ACDE9F56A3FE6B98",
+                  "zonestate": true,
+                  "zoneid": 64,
+                  "numzonesensitivitylevel": 3,
+                  "currentzonesensitivitylevel": 2
+                }
+              },
+              {
+                "href": "/myBatteryResURI",
+                "rep": {
+                  "charge": 70,
+                  "defect": false
+                }
+              },
+              {
+                "href": "/myPowersourceResURI",
+                "rep": {
+                  "powerSources": ["AC (Mains) Power"],
+                  "sourcefault": false
+                }
+              }
+            ]
+          }
+        }
+      },
+      "post": {
+        "description": "Sets the current sensitivity level of the IASZone.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-b"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/IASZoneCollectionBatch-Update" },
+            "x-example":
+            [
+              {
+                "href": "/myIASZoneInfoResURI",
+                "rep": {
+                  "currentzonesensitivitylevel": 3
+                }
+              }
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "Success path response code\n"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-all" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.ll", "oic.if.b", "oic.if.baseline"]
+    },
+    "interface-ll" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.ll"]
+    },
+    "interface-b" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.b"]
+    },
+    "interface-baseline" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "baseline": {
+      "properties": {
+        "rt" :  {
+          "description": "Resource Type",
+          "items": {
+            "type": "string",
+            "enum": ["oic.r.iaszone"]
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+        "rts" : {
+          "description": "Allowed Resources",
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "string",
+            "enum": ["oic.r.iaszoneinfo","oic.r.energy.battery","oic.r.powersource"]
+          }
+        },
+        "rts-m" : {
+          "description": "Mandatory Resources",
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "string",
+            "enum": ["oic.r.iaszoneinfo","oic.r.energy.battery","oic.r.powersource"]
+          }
+        },
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "links" :  {
+          "$ref": "#/definitions/links"
+        },
+        "if" : {
+          "description": "The OCF Interface set supported by this Resource",
+          "items": {
+            "enum": [
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type" : "object",
+      "required": ["links"]
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/oic.oic-link"
+      }
+    },
+    "oic.oic-link": {
+      "properties": {
+        "if": {
+          "description": "The OCF Interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.rw",
+              "oic.if.r"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "rt": {
+          "description": "Resource Type of the Resource",
+          "items": {
+            "enum": [
+              "oic.r.iaszoneinfo",
+              "oic.r.energy.battery",
+              "oic.r.powersource"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "anchor": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/anchor"
+        },
+        "di": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/di"
+        },
+        "eps": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/eps"
+        },
+        "href": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
+        },
+        "ins": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/ins"
+        },
+        "p": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/p"
+        },
+        "rel": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/rel_array"
+        },
+        "title": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/title"
+        },
+        "type": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/type"
+        }
+      },
+      "required": [
+        "href",
+        "rt",
+        "if"
+      ],
+      "type": "object"
+    },
+    "IASZoneCollectionBatch-Retrieve": {
+      "title": "Collection Batch Retrieve Format",
+      "minItems": 3,
+      "maxItems": 3,
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "additionalProperties": true,
+        "type": "object",
+        "properties": {
+          "href": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
+          },
+          "rep": {
+            "anyOf": [
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/IASZoneInfoResURI.swagger.json#/definitions/IASZoneInfo"
+              },
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/BatteryResURI.swagger.json#/definitions/Battery"
+              },
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/PowerSourcesResourceURI.swagger.json#/definitions/powerSourceSchema"
+              }
+            ]
+          }
+        },
+        "required": ["href","rep"]
+      }
+    },
+    "IASZoneCollectionBatch-Update" : {
+      "title": "Collection Batch Update Format",
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "additionalProperties": true,
+        "type": "object",
+        "properties": {
+          "href": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
+          },
+          "rep": {
+            "type": "object",
+            "anyOf": [
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/IASZoneInfoResURI.swagger.json#/definitions/IASZoneInfo-Update"
+              },
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/BatteryResURI.swagger.json#/definitions/BatteryUpdate"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
