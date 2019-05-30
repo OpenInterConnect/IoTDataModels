@@ -84,7 +84,7 @@
           "type": "array"
         },
         "openDuration": {
-          "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/duration"
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/duration"
         },
         "openState": {
           "description": "The state of the door (open or closed).",
