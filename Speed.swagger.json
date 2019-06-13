@@ -1,0 +1,111 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Speed",
+    "version": "2019-05-13",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/SpeedResURI": {
+      "get": {
+        "description": "This Resource describes the speed of an object, which is the magnitude of its velocity.\n The unit, which is the default SI unit, is metre per second.\n The speed Property is a read-only value that is provided by the server.\n When range (from \"oic.r.baseresource\") is omitted the default is 0 to +MAXFLOAT.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": {
+              "rt": [
+                "oic.r.speed"
+              ],
+              "speed": 10.0
+            },
+            "schema": {
+              "$ref": "#/definitions/Speed"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": [
+        "oic.if.s",
+        "oic.if.baseline"
+      ]
+    }
+  },
+  "definitions": {
+    "Speed": {
+      "properties": {
+        "speed": {
+          "description": "This Property describes the speed of an object in metre per second (SI Unit). It should be noted, however, that the most common unit of speed everyday usage is the kilometre per hour or, in the US and the UK, miles per hour.",
+          "type": "number",
+          "minimum": 0.0,
+          "readOnly": true
+        },
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": [
+              "oic.r.speed"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.s",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "range": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
+        },
+        "step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
+        }
+      },
+      "type": "object",
+      "required": [
+        "speed"
+      ]
+    }
+  }
+}

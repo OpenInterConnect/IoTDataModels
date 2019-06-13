@@ -1,0 +1,125 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cycling Power",
+    "version": "2019-06-11",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/CyclingPowerResURI": {
+      "get": {
+        "description": "This Resource describes the cycling power, which is the amount of energy transferred or converted per unit time.\n The unit, which is the default SI unit, is W (which is equal to one joule per second).\n The power Property is a read-only value that is provided by the server.\n When range (from \"oic.r.baseresource\") is omitted the default is 0 to +MAXFLOAT.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": {
+              "rt": [
+                "oic.r.cyclingpower"
+              ],
+              "power": 200.0,
+              "power-left": 100.0,
+              "power-right": 100.0
+            },
+            "schema": {
+              "$ref": "#/definitions/CyclingPower"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": [
+        "oic.if.s",
+        "oic.if.baseline"
+      ]
+    }
+  },
+  "definitions": {
+    "CyclingPower": {
+      "properties": {
+        "power": {
+          "description": "The current overall power output in watts.",
+          "$ref": "#/definitions/power"
+        },
+        "power-left": {
+          "description": "The current power output in watts from the left pedal.",
+          "$ref": "#/definitions/power"
+        },
+        "power-right": {
+          "description": "The current power output in watts from the right pedal.",
+          "$ref": "#/definitions/power"
+        },
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": [
+              "oic.r.cyclingpower"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.s",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "range": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
+        },
+        "step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
+        }
+      },
+      "type": "object",
+      "required": [
+        "power"
+      ]
+    },
+    "power": {
+      "description": "This Resource describes the power, which is the amount of energy transferred or converted per unit time, in W (which is equal to one joule per second).",
+      "type": "number",
+      "minimum": 0.0,
+      "readOnly": true
+    }
+  }
+}
