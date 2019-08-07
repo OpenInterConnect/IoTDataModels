@@ -1,0 +1,96 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "KeyCard Switch",
+		"version": "20190807",
+		"license": {
+			"name": "OCF Data Model License",
+			"url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+			"x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+		},
+		"termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+	},
+	"schemes": ["http"],
+	"consumes": ["application/json"],
+	"produces": ["application/json"],
+	"paths": {
+		"/KeyCardSwitchResURI" : {
+			"get": {
+				"description": "This Resource describes the operation of a KeyCard style switch. It has one mandatory Property,\"stateofcard\", which is a string enum type. It has two enum values: \"validCardInserted\", \"validCardNotInserted\". \"validCardInserted\" means that a keycard was inserted and passed validation check. \"validCardNotInserted\" means that a keycard is not inserted or it was inserted but failed to pass validation check.",
+				"parameters": [
+					{"$ref": "#/parameters/interface"}
+				],
+				"responses": {
+					"200": {
+						"description" : "",
+						"x-example":
+						{
+							"rt": ["oic.r.keycardswitch"],
+							"if": ["oic.if.s", "oic.if.baseline"],
+							"stateofcard": "validCardInserted"
+						}
+						,
+						"schema": { "$ref": "#/definitions/KeyCardSwitch" }
+					}
+				}
+			}
+		}
+	},
+	"parameters": {
+		"interface" : {
+			"in": "query",
+			"name": "if",
+			"type": "string",
+			"enum": ["oic.if.s", "oic.if.baseline"]
+		}
+	},
+	"definitions": {
+		"KeyCardSwitch" : {
+			"properties": {
+				"rt": {
+					"description": "The Resource Type of KeyCardSwitch",
+					"items": {
+						"enum": ["oic.r.keycardswitch"],
+						"maxLength": 64,
+						"type": "string"
+					},
+					"minItems": 1,
+					"uniqueItems": true,
+					"readOnly": true,
+					"type": "array"
+				},
+				"stateofcard": {
+					"description": "The status of the keycardswitch. \"validCardInserted\" means that a keycard was inserted and passed validation check. \"validCardNotInserted\" means that a keycard is not inserted or it was inserted but failed to pass validation check.",
+					"readOnly": true,
+					"type": "string",
+					"enum": [
+						"validCardInserted",
+						"validCardNotInserted"
+					]
+				},
+				"n": {
+					"$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+				},
+				"id": {
+					"$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+				},
+				"if": {
+					"description": "The OCF Interface set supported by this Resource.",
+					"items": {
+						"enum": [
+							"oic.if.s", 
+							"oic.if.baseline"
+						],
+						"type": "string"
+					},
+					"minItems": 2,
+					"uniqueItems": true,
+					"readOnly": true,
+					"type": "array"
+				}
+			},
+			"type": "object",
+			"required": ["stateofcard"]
+		}
+	}
+}
