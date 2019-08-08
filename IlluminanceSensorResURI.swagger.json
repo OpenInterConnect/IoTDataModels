@@ -1,91 +1,94 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "Illuminance Sensor",
-    "version": "20190215",
-    "license": {
-      "name": "OCF Data Model License",
-      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
-      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
-    },
-    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
-  },
-  "schemes": ["http"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "paths": {
-    "/IlluminanceSensorResURI" : {
-      "get": {
-        "description": "This Resource describes an illuminance sensor.\nThe Property \"illuminance\" is a float and represents the sensed luminous flux per unit area in lux.",
-        "parameters": [
-          {"$ref": "#/parameters/interface"}
-        ],
-        "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
-                {
-                  "rt": ["oic.r.sensor.illuminance"],
-                  "if": ["oic.if.s", "oic.if.baseline"],
-                  "illuminance": 450.0
-                },
-              "schema": { "$ref": "#/definitions/Illuminance" }
-            }
-        }
-      }
-    }
-  },
-  "parameters": {
-    "interface" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.s", "oic.if.baseline"]
-    }
-  },
-  "definitions": {
-    "Illuminance" : {
-      "properties": {
-        "rt": {
-          "description": "The Resource Type.",
-          "items": {
-            "enum": ["oic.r.sensor.illuminance"],
-            "maxLength": 64,
-            "type": "string"
-          },
-          "minItems": 1,
-          "uniqueItems": true,
-          "readOnly": true,
-          "type": "array"
-        },
-        "illuminance": {
-          "description": "The sensed luminous flux per unit area in lux.",
-          "readOnly": true,
-          "type": "number"
-        },
-        "n": {
-            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
-        },
-        "id": {
-            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
-        },
-        "if": {
-          "description": "The OCF Interface set supported by this Resource.",
-          "items": {
-            "enum": [
-              "oic.if.s",
-              "oic.if.baseline"
-            ],
-            "type": "string"
-          },
-          "minItems": 2,
-          "uniqueItems": true,
-          "readOnly": true,
-          "type": "array"
-        }
-      },
-      "type": "object",
-      "required": ["illuminance"]
-    }
-  }
+	"swagger": "2.0",
+	"info": {
+		"title": "Illuminance Sensor",
+		"version": "20190808",
+		"license": {
+			"name": "OCF Data Model License",
+			"url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+			"x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+		},
+		"termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+	},
+	"schemes": ["http"],
+	"consumes": ["application/json"],
+	"produces": ["application/json"],
+	"paths": {
+		"/IlluminanceSensorResURI": {
+			"get": {
+				"description": "This Resource describes an illuminance sensor.\nThe Property \"illuminance\" is a float and represents the sensed luminous flux per unit area in lux.",
+				"parameters": [
+					{"$ref": "#/parameters/interface"}
+				],
+				"responses": {
+					"200": {
+						"description": "",
+						"x-example": {
+							"rt": ["oic.r.sensor.illuminance"],
+							"if": ["oic.if.s", "oic.if.baseline"],
+							"illuminance": 450.0,
+							"range": [100.0, 500.0]
+						},
+						"schema": {"$ref": "#/definitions/Illuminance"}
+					}
+				}
+			}
+		}
+	},
+	"parameters": {
+		"interface": {
+			"in": "query",
+			"name": "if",
+			"type": "string",
+			"enum": ["oic.if.s", "oic.if.baseline"]
+		}
+	},
+	"definitions": {
+		"Illuminance": {
+			"properties": {
+				"rt": {
+					"description": "The Resource Type.",
+					"items": {
+						"enum": ["oic.r.sensor.illuminance"],
+						"maxLength": 64,
+						"type": "string"
+					},
+					"minItems": 1,
+					"uniqueItems": true,
+					"readOnly": true,
+					"type": "array"
+				},
+				"illuminance": {
+					"description": "The sensed luminous flux per unit area in lux.",
+					"readOnly": true,
+					"type": "number"
+				},
+				"n": {
+					"$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+				},
+				"id": {
+					"$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+				},
+				"range": {
+					"$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
+				},
+				"if": {
+					"description": "The OCF Interface set supported by this Resource.",
+					"items": {
+						"enum": [
+							"oic.if.s",
+							"oic.if.baseline"
+						],
+						"type": "string"
+					},
+					"minItems": 2,
+					"uniqueItems": true,
+					"readOnly": true,
+					"type": "array"
+				}
+			},
+			"type": "object",
+			"required": ["illuminance"]
+		}
+	}
 }
