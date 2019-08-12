@@ -1,0 +1,369 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Heart Rate Monitor Atomic Measurement Representation",
+    "version": "2019-03-04",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/HeartRateMonitorAMResURI?if=oic.if.b": {
+      "get": {
+        "description": "This Resource describes the Properties associated with Heart Rate Monitor.\n The Resource is an Atomic Measurement of heart rate (\"oic.r.heartrate\"), observed time (\"oic.r.time.stamp\"), and user ID (\"oic.r.userid\").",
+        "parameters": [
+          {
+              "$ref": "#/parameters/interface-all"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": [
+              {
+                "href": "/myHeartrate",
+                "rep": {
+                  "heartrate": 80
+                }
+              },
+              {
+                "href": "/myUserId",
+                "rep": {
+                  "userid": "USER1"
+                }
+              },
+              {
+                "href": "/myTimeStamp",
+                "rep": {
+                  "timestamp": "2018-11-09T12:15:00+08:00"
+                }
+              }
+            ],
+            "schema": {
+              "$ref": "#/definitions/batch-retrieve"
+            }
+          }
+        }
+      }
+    },
+    "/HeartRateMonitorAMResURI?if=oic.if.ll": {
+      "get": {
+        "description": "This Resource describes the Properties associated with Heart Rate Monitor.\n The Resource is an Atomic Measurement of heart rate (\"oic.r.heartrate\"), observed time (\"oic.r.time.stamp\"), and user ID (\"oic.r.userid\").",
+        "parameters": [
+          {
+              "$ref": "#/parameters/interface-all"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": [
+              {
+                "href": "/myHeartrate",
+                "rt": [
+                  "oic.r.heartrate"
+                ],
+                "if": [
+                  "oic.if.s",
+                  "oic.if.baseline"
+                ]
+              },
+              {
+                "href": "/myUserId",
+                "rt": [
+                  "oic.r.userid"
+                ],
+                "if": [
+                  "oic.if.r",
+                  "oic.if.baseline"
+                ]
+              },
+              {
+                "href": "/myTimeStamp",
+                "rt": [
+                  "oic.r.time.stamp"
+                ],
+                "if": [
+                  "oic.if.r",
+                  "oic.if.baseline"
+                ]
+              }
+            ],
+            "schema": {
+              "$ref": "#/definitions/links"
+            }
+          }
+        }
+      }
+    },
+    "/HeartRateMonitorAMResURI?if=oic.if.baseline": {
+      "get": {
+        "description": "This Resource describes the Properties associated with Heart Rate Monitor.\n The Resource is an Atomic Measurement of heart rate (\"oic.r.heartrate\"), observed time (\"oic.r.time.stamp\"), and user ID (\"oic.r.userid\").",
+        "parameters": [
+          {
+              "$ref": "#/parameters/interface-all"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": 
+              {
+                "rt": [
+                  "oic.r.heartratemonitor-am",
+                  "oic.wk.atomicmeasurement"
+                ],
+                "if": [
+                  "oic.if.b",
+                  "oic.if.ll",
+                  "oic.if.baseline"
+                ],
+                "rts-m": [
+                  "oic.r.heartrate"
+                ],
+                "rts": [
+                  "oic.r.heartrate",
+                  "oic.r.userid",
+                  "oic.r.time.stamp"
+                ],
+                "links": [
+                  {
+                    "href": "/myHeartRateMonitor",
+                    "rt": [
+                      "oic.r.heartrate"
+                    ],
+                    "if": [
+                      "oic.if.s",
+                      "oic.if.baseline"
+                    ]
+                  },
+                  {
+                    "href": "/myUserId",
+                    "rt": [
+                      "oic.r.userid"
+                    ],
+                    "if": [
+                      "oic.if.r",
+                      "oic.if.baseline"
+                    ]
+                  },
+                  {
+                    "href": "/myTimeStamp",
+                    "rt": [
+                      "oic.r.time.stamp"
+                    ],
+                    "if": [
+                      "oic.if.r",
+                      "oic.if.baseline"
+                    ]
+                  }
+                ]
+              }
+            ,
+            "schema": {
+              "$ref": "#/definitions/baseline"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-all": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": [
+        "oic.if.b",
+        "oic.if.ll",
+        "oic.if.baseline"
+      ]
+    }
+  },
+  "definitions": {
+    "batch-retrieve": {
+      "title": "Collection Batch Retrieve Format",
+      "minItems": 1,
+      "items": {
+        "properties": {
+          "href": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
+          },
+          "rep": {
+            "type": "object",
+            "anyOf": [
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/HeartRate.swagger.json#/definitions/HeartRate"
+              },
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/UserIDResURI.swagger.json#/definitions/UserID"
+              },
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/TimeStampResURI.swagger.json#/definitions/TimeStamp"
+              }
+            ]
+          }
+        },
+        "required": [
+          "href",
+          "rep"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/oic.oic-link"
+      }
+    },
+    "baseline": {
+      "properties": {
+        "rt": {
+          "items": {
+            "enum": [
+              "oic.r.heartratemonitor-am",
+              "oic.wk.atomicmeasurement"
+            ]
+          },
+          "minItems": 2,
+          "type": "array",
+          "uniqueItems": true,
+          "readOnly": true
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "rts": {
+          "description": "This Property contains all possible Resource Types for this Atomic Measurement.",
+          "items": {
+            "enum": [
+              "oic.r.heartrate",
+              "oic.r.userid",
+              "oic.r.time.stamp"
+            ]
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true,
+          "readOnly": true
+        },
+        "rts-m": {
+          "description": "This Property contains all mandatory Resource Types for this Atomic Measurement.",
+          "items": {
+            "enum": [
+              "oic.r.heartrate"
+            ]
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "type": "array",
+          "readOnly": true,
+          "uniqueItems": true
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.b",
+              "oic.if.ll",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "rts-m"
+      ]
+    },
+    "oic.oic-link": {
+      "properties": {
+        "anchor": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/anchor"
+        },
+        "di": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/di"
+        },
+        "eps": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/eps"
+        },
+        "href": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.s",
+              "oic.if.r"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "ins": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/ins"
+        },
+        "p": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/p"
+        },
+        "rel": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/rel_array"
+        },
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": [
+              "oic.r.heartrate",
+              "oic.r.time.stamp",
+              "oic.r.userid"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "title": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/title"
+        },
+        "type": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/type"
+        }
+      },
+      "required": [
+        "href",
+        "rt",
+        "if"
+      ],
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,465 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Pulse Oximeter Atomic Measurement Representation",
+    "version": "2019-03-04",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2018-2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/PulseOximeterAMResURI?if=oic.if.b": {
+      "get": {
+        "description": "This Resource describes the Properties associated with Pulse Oximeter.\n The Resource is an Atomic Measurement of SpO2 (\"oic.r.spo2\"), pulse rate (\"oic.r.pulserate\"), pulsatile characteristic (\"oic.r.pulsatilecharacteristic\"), pulsatileoccurrence (\"oic.r.pulsatileoccurrence\"), observed time (\"oic.r.time.stamp\"), and user ID (\"oic.r.userid\").",
+        "parameters": [
+          {
+              "$ref": "#/parameters/interface-all"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": [
+              {
+                "href": "/mySpO2",
+                "rep": {
+                  "spo2": 99.0,
+                  "perfusion": 20.0
+                }
+              },
+              {
+                "href": "/myPulseRate",
+                "rep": {
+                  "pulserate": 80
+                }
+              },
+              {
+                "href": "/myPulsatileOccurrence",
+                "rep": {
+                  "occurrence": "BEAT"
+                }
+              },
+              {
+                "href": "/myPulsatileCharacteristic",
+                "rep": {
+                  "characteristic": 1
+                }
+              },
+              {
+                "href": "/myUserId",
+                "rep": {
+                  "userid": "USER1"
+                }
+              },
+              {
+                "href": "/myTimeStamp",
+                "rep": {
+                  "timestamp": "2018-11-09T12:15:00+08:00"
+                }
+              }
+            ],
+            "schema": {
+              "$ref": "#/definitions/batch-retrieve"
+            }
+          }
+        }
+      }
+    },
+    "/PulseOximeterAMResURI?if=oic.if.ll": {
+      "get": {
+        "description": "This Resource describes the Properties associated with Pulse Oximeter.\n The Resource is an Atomic Measurement of SpO2 (\"oic.r.spo2\"), pulse rate (\"oic.r.pulserate\"), pulsatile characteristic (\"oic.r.pulsatilecharacteristic\"), pulsatileoccurrence (\"oic.r.pulsatileoccurrence\"), observed time (\"oic.r.time.stamp\"), and user ID (\"oic.r.userid\").",
+        "parameters": [
+          {
+              "$ref": "#/parameters/interface-all"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": [
+              {
+                "href": "/mySpO2",
+                "rt": [
+                  "oic.r.spo2"
+                ],
+                "if": [
+                  "oic.if.s",
+                  "oic.if.baseline"
+                ]
+              },
+              {
+                "href": "/myPulseRate",
+                "rt": [
+                  "oic.r.pulserate"
+                ],
+                "if": [
+                  "oic.if.s",
+                  "oic.if.baseline"
+                ]
+              },
+              {
+                "href": "/myPulsatileOccurrence",
+                "rt": [
+                  "oic.r.pulsatileoccurrence"
+                ],
+                "if": [
+                  "oic.if.s",
+                  "oic.if.baseline"
+                ]
+              },
+              {
+                "href": "/myPulsatileCharacteristic",
+                "rt": [
+                  "oic.r.pulsatilecharacteristic"
+                ],
+                "if": [
+                  "oic.if.s",
+                  "oic.if.baseline"
+                ]
+              },
+              {
+                "href": "/myUserId",
+                "rt": [
+                  "oic.r.userid"
+                ],
+                "if": [
+                  "oic.if.r",
+                  "oic.if.baseline"
+                ]
+              },
+              {
+                "href": "/myTimeStamp",
+                "rt": [
+                  "oic.r.time.stamp"
+                ],
+                "if": [
+                  "oic.if.r",
+                  "oic.if.baseline"
+                ]
+              }
+            ],
+            "schema": {
+              "$ref": "#/definitions/links"
+            }
+          }
+        }
+      }
+    },
+    "/PulseOximeterAMResURI?if=oic.if.baseline": {
+      "get": {
+        "description": "This Resource describes the Properties associated with Pulse Oximeter.\n The Resource is an Atomic Measurement of SpO2 (\"oic.r.spo2\"), pulse rate (\"oic.r.pulserate\"), pulsatile characteristic (\"oic.r.pulsatilecharacteristic\"), pulsatileoccurrence (\"oic.r.pulsatileoccurrence\"), observed time (\"oic.r.time.stamp\"), and user ID (\"oic.r.userid\").",
+        "parameters": [
+          {
+              "$ref": "#/parameters/interface-all"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example": 
+              {
+                "rt": [
+                  "oic.r.pulseoximeter-am",
+                  "oic.wk.atomicmeasurement"
+                ],
+                "if": [
+                  "oic.if.b",
+                  "oic.if.ll",
+                  "oic.if.baseline"
+                ],
+                "rts-m": [
+                  "oic.r.spo2",
+                  "oic.r.pulserate"
+                ],
+                "rts": [
+                  "oic.r.spo2",
+                  "oic.r.pulserate",
+                  "oic.r.pulsatileoccurrence",
+                  "oic.r.pulsatilecharacteristic",
+                  "oic.r.userid",
+                  "oic.r.time.stamp"
+                ],
+                "links": [
+                  {
+                    "href": "/mySpO2",
+                    "rt": [
+                      "oic.r.spo2"
+                    ],
+                    "if": [
+                      "oic.if.s",
+                      "oic.if.baseline"
+                    ]
+                  },
+                  {
+                    "href": "/myPulseRate",
+                    "rt": [
+                      "oic.r.pulserate"
+                    ],
+                    "if": [
+                      "oic.if.s",
+                      "oic.if.baseline"
+                    ]
+                  },
+                  {
+                    "href": "/myPulsatileOccurrence",
+                    "rt": [
+                      "oic.r.pulsatileoccurrence"
+                    ],
+                    "if": [
+                      "oic.if.s",
+                      "oic.if.baseline"
+                    ]
+                  },
+                  {
+                    "href": "/myPulsatileCharacteristic",
+                    "rt": [
+                      "oic.r.pulsatilecharacteristic"
+                    ],
+                    "if": [
+                      "oic.if.s",
+                      "oic.if.baseline"
+                    ]
+                  },
+                  {
+                    "href": "/myUserId",
+                    "rt": [
+                      "oic.r.userid"
+                    ],
+                    "if": [
+                      "oic.if.r",
+                      "oic.if.baseline"
+                    ]
+                  },
+                  {
+                    "href": "/myTimeStamp",
+                    "rt": [
+                      "oic.r.time.stamp"
+                    ],
+                    "if": [
+                      "oic.if.r",
+                      "oic.if.baseline"
+                    ]
+                  }
+                ]
+              },
+            "schema": {
+              "$ref": "#/definitions/baseline"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-all": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": [
+        "oic.if.b",
+        "oic.if.ll",
+        "oic.if.baseline"
+      ]
+    }
+  },
+  "definitions": {
+    "batch-retrieve": {
+      "title": "Collection Batch Retrieve Format",
+      "minItems": 1,
+      "items": {
+        "additionalProperties": true,
+        "properties": {
+          "href": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
+          },
+          "rep": {
+            "type": "object",
+            "anyOf": [
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/SpO2.swagger.json#/definitions/SpO2"
+              },
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/PulseRateResURI.swagger.json#/definitions/PulseRate"
+              },
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/PulsatileCharacteristic.swagger.json#/definitions/pulsatilecharacteristic"
+              },
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/PulsatileOccurrence.swagger.json#/definitions/pulsatileoccurrence"
+              },
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/UserIDResURI.swagger.json#/definitions/UserID"
+              },
+              {
+                "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/TimeStampResURI.swagger.json#/definitions/TimeStamp"
+              }
+            ]
+          }
+        },
+        "required": [
+          "href",
+          "rep"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/oic.oic-link"
+      }
+    },
+    "baseline": {
+      "properties": {
+        "rt": {
+          "items": {
+            "enum": [
+              "oic.r.pulseoximeter-am",
+              "oic.wk.atomicmeasurement"
+            ]
+          },
+          "minItems": 2,
+          "type": "array",
+          "uniqueItems": true,
+          "readOnly": true
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "rts": {
+          "description": "This Property contains all possible Resource Types for this Atomic Measurement.",
+          "items": {
+            "enum": [
+              "oic.r.spo2",
+              "oic.r.pulserate",
+              "oic.r.pulsatilecharacteristic",
+              "oic.r.pulsatileoccurrence",
+              "oic.r.time.stamp",
+              "oic.r.userid"
+            ]
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "rts-m": {
+          "description": "This Property contains all mandatory Resource Types for this Atomic Measurement.",
+          "items": {
+            "enum": [
+              "oic.r.spo2",
+              "oic.r.pulserate"
+            ]
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array",
+          "readOnly": true,
+          "uniqueItems": true
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.b",
+              "oic.if.ll",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "rts-m"
+      ]
+    },
+    "oic.oic-link": {
+      "properties": {
+        "anchor": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/anchor"
+        },
+        "di": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/di"
+        },
+        "eps": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/eps"
+        },
+        "href": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/href"
+        },
+        "if": {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.s",
+              "oic.if.r"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "ins": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/ins"
+        },
+        "p": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/p"
+        },
+        "rel": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/rel_array"
+        },
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": [
+              "oic.r.spo2",
+              "oic.r.pulserate",
+              "oic.r.pulsatilecharacteristic",
+              "oic.r.pulsatileoccurrence",
+              "oic.r.time.stamp",
+              "oic.r.userid"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "title": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/title"
+        },
+        "type": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.links.properties.core-schema.json#/definitions/type"
+        }
+      },
+      "required": [
+        "href",
+        "rt",
+        "if"
+      ],
+      "type": "object"
+    }
+  }
+}
