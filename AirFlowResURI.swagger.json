@@ -38,7 +38,7 @@
         }
       },
       "post": {
-        "description": "Sets the current air flow values.\nOnly \"direction\" and \"speed\" Properties may be set by an UPDATE operation.\n",
+        "description": "When \"automode\" is set to true, \"direction\" and \"speed\" are not utilized by the device.",
         "parameters": [
           {"$ref": "#/parameters/interface"},
           {
