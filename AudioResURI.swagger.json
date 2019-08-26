@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Audio Controls",
-    "version": "20190225",
+    "version": "20190620",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -42,11 +42,10 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/Audio" },
+            "schema": { "$ref": "#/definitions/Audio-update" },
             "x-example":
               {
-                "volume": 75,
-                "mute": false
+                "volume": 75
               }
           }
         ],
@@ -126,6 +125,20 @@
       },
       "type" : "object",
       "required": ["volume", "mute"]
+    },
+    "Audio-update" : {
+      "properties": {
+        "mute": {
+          "description": "The mute setting of an audio rendering device.",
+          "type": "boolean"
+        },
+        "volume": {
+          "description": "The volume setting of an audio rendering device.",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        }
+      }
     }
   }
 }
