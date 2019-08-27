@@ -1,0 +1,135 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Inverter (IEC 61850)",
+    "version": "20190613",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/InverterResURI" : {
+      "get": {
+        "description": "This Resource describes functions for the control and monitoring of IEC 61850 based circuit breaker.",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "rt": ["oic.r.inverter"],
+                  "if": ["oic.if.s", "oic.if.baseline"],
+                  "status": "on",
+                  "ratedpower": 36.0,
+                  "minvoltmppt": 200.0,
+                  "maxvoltmppt": 1000.0,
+                  "inputvoltage": 980.0,
+                  "inputcurrent": 22.0,
+                  "outputpower": 61.0,
+                  "timestamp": "2015-11-05T14:30:00.13Z"
+                },
+              "schema": { "$ref": "#/definitions/Inverter" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface" : {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.s", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "Inverter" : {
+      "properties": {
+        "rt" : {
+          "description": "The Resource Type",
+          "items": {
+              "enum": ["oic.r.inverter"],
+              "maxLength": 64,
+              "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "status" : {
+          "description": "The inverter status. The status can only be reset out of bounds.",
+          "readOnly": true,
+          "type": "string",
+          "enum" : [ "on", "off", "trip"]
+        },
+        "ratedpower" : {
+          "description": "The rated power in kW, defined at manufacturing time.",
+          "readOnly": true,
+          "type": "number"
+        },
+        "minvoltmppt" : {
+          "description": "Minimum voltage for MPPT (Maximum power point tracking) control method (V), defined at manufacturing time.",
+          "readOnly": true,
+          "type": "number"
+        },
+        "maxvoltmppt" : {
+          "description": "Maximum voltage for MPPT (Maximum power point tracking) control method (V), defined at manufacturing time.",
+          "readOnly": true,
+          "type": "number"
+        },        
+        "inputvoltage" : {
+          "description": "input voltage in Volts.",
+          "readOnly": true,
+          "type": "number"
+        },
+        "inputcurrent" : {
+          "description": "input current in Amperes.",
+          "readOnly": true,
+          "type": "number"
+        },
+        "outputpower" : {
+          "description": "output power in kW.",
+          "readOnly": true,
+          "type": "number"
+        },
+        "timestamp": {
+          "description": "An RFC3339 formatted time indicating when the data was observed (e.g.: 2016-02-15T09:19Z, 1996-12-19T16:39:57-08:00). Resolution in 1/100 second.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.s",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": ["status", "ratedpower", "minvoltmppt", "maxvoltmppt", "inputvoltage","inputcurrent","outputpower","timestamp"]
+    }
+  }
+}
