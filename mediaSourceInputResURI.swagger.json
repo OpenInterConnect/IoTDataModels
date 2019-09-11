@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Media Source Input",
-    "version": "20190215",
+    "version": "20190729",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -16,38 +16,37 @@
   "paths": {
     "/mediaSourceInputResURI" : {
       "get": {
-        "description": "This resource provides the list of input media sources available on the device.\nThe sources are an array of mediaSource(s) see Resource Type \"oic.r.mediasource\"\n",
+        "description": "This Resource provides the list of input media sources available on the device.\nThe sources are an array of Media Source(s) see Resource Type \"oic.r.mediasource\"\n",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
+          "200": {
+            "description" : "",
+            "x-example": {
+              "rt": ["oic.r.media.input"],
+              "if": ["oic.if.a", "oic.if.baseline"],
+              "sources": [
                 {
-                  "rt": ["oic.r.media.input"],
-                  "if": ["oic.if.a", "oic.if.baseline"],
-                  "sources": [
-                    {
-                      "sourceName": "HDMI-CEC",
-                      "sourceNumber": "1",
-                      "sourceType": "audioPlusVideo",
-                      "status": true
-                    },
-                    {
-                      "sourceName": "dualRCA",
-                      "sourceNumber": "1",
-                      "sourceType": "audioOnly",
-                      "status": false
-                    }
-                  ]
+                  "sourceName": "HDMI-CEC",
+                  "sourceNumber": "1",
+                  "sourceType": "audioPlusVideo",
+                  "status": true
                 },
-              "schema": { "$ref": "#/definitions/mediaSourceList" }
-            }
+                {
+                  "sourceName": "dualRCA",
+                  "sourceNumber": "1",
+                  "sourceType": "audioOnly",
+                  "status": false
+                }
+              ]
+            },
+            "schema": { "$ref": "#/definitions/mediaSourceList" }
+          }
         }
       },
       "post": {
-        "description": "Changes the status of the source(s).\nAllows changes of the sourceName and the status.The array index at sourceNumber will be changed.",
+        "description": "Changes the status of the source(s).\nAllows changes of the sourceName and the status.",
         "parameters": [
           {"$ref": "#/parameters/interface"},
           {
@@ -55,34 +54,40 @@
             "in": "body",
             "required": true,
             "schema": { "$ref": "#/definitions/mediaSourceList" },
-            "x-example":
-              {
-                "sources": [
-                  {
-                   "sourceName": "my new name",
-                   "sourceNumber": "1",
-                   "status": true
-                  }
-                ]
-              }
+            "x-example": {
+              "sources": [
+                {
+                  "sourceName": "my new name",
+                  "status": true
+                },
+                {
+                 "sourceName": "dualRCA"
+                }
+              ]
+            }
           }
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
+          "200": {
+            "description" : "",
+            "x-example": {
+              "sources": [
                 {
-                  "sources": [
-                    {
-                      "sourceName": "my new name",
-                      "sourceNumber": "1",
-                      "status": true
-                    }
-                  ]
+                  "sourceName": "my new name",
+                  "sourceNumber": "1",
+                  "sourceType": "audioPlusVideo",
+                  "status": true
+                },
+                {
+                  "sourceName": "dualRCA",
+                  "sourceNumber": "1",
+                  "sourceType": "audioOnly",
+                  "status": false
                 }
-                ,
-              "schema": { "$ref": "#/definitions/mediaSourceList" }
-            }
+              ]
+            },
+            "schema": { "$ref": "#/definitions/mediaSourceList" }
+          }
         }
       }
     }
@@ -118,12 +123,9 @@
                 "type": "string"
               },
               "sourceNumber": {
-                "description": "Numeric identifier to specify the instance",
+                "description": "Label to specify the instance",
                 "readOnly": true,
-                "type": [
-                  "integer",
-                  "string"
-                ]
+                "type": "string"
               },
               "sourceType": {
                 "description": "Specifies the type of the source",
@@ -151,7 +153,7 @@
             "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
         },
         "if": {
-          "description": "The interface set supported by this resource",
+          "description": "The OCF Interface set supported by this Resource",
           "items": {
             "enum": [
               "oic.if.a",

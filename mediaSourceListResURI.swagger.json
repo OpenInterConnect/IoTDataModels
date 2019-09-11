@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Media Source List",
-    "version": "20190215",
+    "version": "20190729",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -16,7 +16,7 @@
   "paths": {
     "/mediaSourceListResURI" : {
       "get": {
-        "description": "This Resource provides the list of media sources available on the Device.\nThe sources are an array of mediaSource(s) as separately defined see Resource Type \"oic.r.mediasource\".\nThe basic Resource Type \"oic.r.mediasourcelist\" does not provide any indications whether the source is input or output.\nHence, two specializations of this resource exist.\nWhen a device exposes input sources then an instance of this resource with a Resource Type of \"oic.r.media.input\" is exposed.\nWhen a Device exposes output sources then an instance of this resource with a Resource Type of \"oic.r.media.output\" is exposed.\nA device that exposes both input and output media sources then exposes two instances of this resource,\none with a Resource Type of \"oic.r.media.input\" and one with a resource type of \"oic.r.media.output\"\n",
+        "description": "This Resource provides the list of all media sources available on the Device (input and/or output).\nThe sources are an array of mediaSource(s) as separately defined see Resource Type \"oic.r.mediasource\"",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -47,7 +47,7 @@
         }
       },
       "post": {
-        "description": "Changes the status of the source(s).\nAllows changes of the sourceName and the status. The array index at sourceNumber will be changed.",
+        "description": "Changes the status of the source(s).\nAllows changes of the sourceName and the status.",
         "parameters": [
           {"$ref": "#/parameters/interface"},
           {
@@ -60,8 +60,10 @@
                 "sources": [
                   {
                    "sourceName": "my new name",
-                   "sourceNumber": "1",
                    "status": true
+                  },
+                  {
+                    "sourceName": "dualRCA"
                   }
                 ]
               }
@@ -76,7 +78,14 @@
                     {
                       "sourceName": "my new name",
                       "sourceNumber": "1",
+                      "sourceType": "audioPlusVideo",
                       "status": true
+                    },
+                    {
+                      "sourceName": "dualRCA",
+                      "sourceNumber": "1",
+                      "sourceType": "audioOnly",
+                      "status": false
                     }
                   ]
                 },
@@ -117,12 +126,9 @@
                 "type": "string"
               },
               "sourceNumber": {
-                "description": "Numeric identifier to specify the instance.",
+                "description": "Label to specify the instance.",
                 "readOnly": true,
-                "type": [
-                  "integer",
-                  "string"
-                ]
+                "type": "string"
               },
               "sourceType": {
                 "description": "Specifies the type of the source.",

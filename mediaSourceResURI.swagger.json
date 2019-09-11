@@ -16,7 +16,7 @@
   "paths": {
     "/mediaSourceResURI" : {
       "get": {
-        "description": "This Resource defines a single media source that exists on a device.\nThe source can be an input source or output source, this resource is agnostic of that.\nThe Property \"sourceName\" specifies a pre-defined media input or output (e.g.\"HDMI\", \"DVI\").\nThe Property \"sourceNumber\" is a numeric identifier to specify the instance (e.g. \"PC\", 1).\nThe Property \"sourceType\" is an enumeration defining whether the source is audio, video or both.\nThe Property \"status\" is a boolean that determines if the specific source instance is selected or not.\n    A status of true means that the source instance is selected.\n    A status of false means that the source instance is not selected.\n",
+        "description": "This Resource defines a single media source that exists on a device.\nThe source can be an input source or output source, this resource is agnostic of that.\nThe Property \"sourceName\" specifies a pre-defined media input or output (e.g.\"HDMI\", \"DVI\").\nThe Property \"sourceNumber\" is a label to specify the instance (e.g. \"PC\", \"1\").\nThe Property \"sourceType\" is an enumeration defining whether the source is audio, video or both.\nThe Property \"status\" is a boolean that determines if the specific source instance is selected or not.\n A status of true means that the source instance is selected.\n A status of false means that the source instance is not selected.",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -37,7 +37,7 @@
         }
       },
       "post": {
-        "description": "Changes the status of the source.\nAllows changes of the \"sourceName\" and the \"status\". The sourceNumber is used to identify the object in the array.",
+        "description": "Changes the status of the source.\nAllows changes of the \"sourceName\" and the \"status\".",
         "parameters": [
           {"$ref": "#/parameters/interface"},
           {
@@ -48,7 +48,6 @@
             "x-example":
               {
                 "sourceName": "my new name",
-                "sourceNumber": "1",
                 "status": true
               }
           }
@@ -60,6 +59,7 @@
                 {
                   "sourceName": "my new name",
                   "sourceNumber": "1",
+                  "sourceType": "audioPlusVideo",
                   "status": true
                 },
               "schema": { "$ref": "#/definitions/mediaSource" }
@@ -110,11 +110,8 @@
           "type": "string"
         },
         "sourceNumber": {
-          "description": "Numeric identifier to specify the instance.",
-          "type": [
-            "integer",
-            "string"
-          ]
+          "description": "Label to specify the instance.",
+          "type": "string"
         },
         "n": {
             "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
