@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Demand Response Load Control (DRLC).",
-    "version": "20190215",
+    "version": "20190709",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -16,7 +16,7 @@
   "paths": {
     "/DRLCResURI" : {
       "get": {
-        "description": "This Resource describes any to be applied or currently being applied DRLC signal.\nThe Property \"DRType\" is the ApplianceLoadReductionType defined in Zigbee/HA Smart Energy Profile 2.0.\nThe Property \"Start\" is a string containing an RFC3339 encoded start time.\nThe Property \"duration\" value is in minutes.\nThe Property \"Override\" indicates whether the consumer has overridden the request (true) or not (false).\nThe Resource provides the current DRLC action that is being applied.",
+        "description": "This Resource describes any to be applied or currently being applied DRLC signal.\nThe Property \"DRType\" is the ApplianceLoadReductionType defined in Zigbee/HA Smart Energy Profile 2.0.\nThe Property \"start\" is a string containing an RFC3339 encoded start time.\nThe Property \"duration\" value is in minutes.\nThe Property \"Override\" indicates whether the consumer has overridden the request (true) or not (false).\nThe Resource provides the current DRLC action that is being applied.\nA duration of 0 (zero) means that no DRLC is currently active.",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -47,35 +47,24 @@
             "in": "body",
             "required": true,
             "schema": {"$ref": "#/definitions/DRLC"},
-            "x-example":
-              {
-                "DRType": 1,
-                "start": "2015-01-09T17:00:00Z",
-                "duration": 10
-              }
+            "x-example": {
+              "DRType": 1,
+              "start": "2015-01-09T17:00:00Z",
+              "duration": 10
+            }
           }
         ],
         "responses": {
-            "200": {
-              "description" : "Indicates that the target DRLC resource was changed.\nThe new resource attributes are provided in the response.",
-              "x-example":
-                {
-                  "DRType": 1,
-                  "start": "2015-01-09T17:00:00Z",
-                  "duration": 15,
-                  "override": false
-                }
-                ,
-              "schema": {"$ref": "#/definitions/DRLC"}
+          "200": {
+            "description" : "Indicates that the target DRLC resource was changed.\nThe new resource attributes are provided in the response.",
+            "x-example": {
+              "DRType": 1,
+              "start": "2015-01-09T17:00:00Z",
+              "duration": 15,
+              "override": false
             },
-            "201": {
-              "description" : "Indicates successful creation of the DRLC Resource with the attributes provided.\nThe response includes the URI of the created Resource.",
-              "x-example":
-                {
-                  "ResURI": "/MyDevice/MyDRLCURI"
-                },
-              "schema": {"$ref": "#/definitions/CreateResponse"}
-            }
+            "schema": {"$ref": "#/definitions/DRLC"}
+          }
         }
       }
     }
@@ -104,13 +93,14 @@
           "type": "array"
         },
         "start": {
-          "description": "The start time for the application of DR using RFC3339 datetime format (e.g. 2007-04-05T14:30:00Z, 2007-04-05T14:30:00+09:00).",
+          "description": "The start time for the application of DR.",
           "type": "string",
           "format": "date-time"
         },
         "duration": {
-          "description": "The duration of the to be applied DR type.",
-          "type": "integer"
+          "description": "The duration of the to be applied DR type in minutes. A value of 0 means no applied DR.",
+          "type": "integer",
+          "minimum": 0
         },
         "override": {
           "description": "Whether the consumer has overriden the application of DR.",
@@ -153,17 +143,6 @@
       },
       "type": "object",
       "required": ["DRType"]
-    },
-    "CreateResponse" : {
-      "properties": {
-        "ResURI": {
-          "description": "The url of the created Resource.",
-          "type": "string",
-          "format" : "uri"
-        }
-      },
-      "type": "object",
-      "required": ["ResURI"]
     }
   }
 }
