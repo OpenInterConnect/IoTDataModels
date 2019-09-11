@@ -201,23 +201,9 @@
         },
         "rts": {
           "items": {
-            "anyOf": [
-              {
-                "enum": [
-                  "oic.r.airquality",
-                  "oic.r.value.conditional"
-                ],
-                "type": "string",
-                "maxLength": 64
-              },
-              {
-                "enum": [
-                  "oic.r.airquality"
-                ],
-                "type": "string",
-                "maxLength": 64
-              }
-            ]
+            "enum": ["oic.r.airquality"],
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
           "type": "array",

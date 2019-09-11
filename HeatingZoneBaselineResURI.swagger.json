@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Heating Zone Collection",
-    "version": "20190327",
+    "version": "20190613",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -206,23 +206,9 @@
         },
         "rts": {
           "items": {
-            "anyOf": [
-              {
-                "enum": [
-                  "oic.r.heatingzone",
-                  "oic.r.value.conditional"
-                ],
-                "type": "string",
-                "maxLength": 64
-              },
-              {
-                "enum": [
-                  "oic.r.heatingzone"
-                ],
-                "type": "string",
-                "maxLength": 64
-              }
-            ]
+            "enum": ["oic.r.heatingzone"],
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
           "type": "array",

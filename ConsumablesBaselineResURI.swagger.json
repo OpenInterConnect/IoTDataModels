@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Consumables",
-    "version": "20190307",
+    "version": "20190613",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -81,7 +81,7 @@
             "x-example": {
               "rt":               ["oic.r.consumablecollection","oic.wk.col"],
               "if":               ["oic.if.ll","oic.if.b","oic.if.baseline"],
-              "rts":              ["oic.r.consumable","oic.r.value.conditional"],
+              "rts":              ["oic.r.consumable"],
               "supportedconsumables": ["tonerBlack","tonerCyan","tonerMagenta","tonerYellow"],
               "links": [
                 {"href": "/myTonerBlackResURI", "rt": ["oic.r.consumable"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
@@ -150,23 +150,9 @@
         },
         "rts": {
           "items": {
-            "anyOf": [
-              {
-                "enum": [
-                  "oic.r.consumable",
-                  "oic.r.value.conditional"
-                ],
-                "type": "string",
-                "maxLength": 64
-              },
-              {
-                "enum": [
-                  "oic.r.consumable"
-                ],
-                "type": "string",
-                "maxLength": 64
-              }
-            ]
+            "enum": ["oic.r.consumable"],
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
           "type": "array",
