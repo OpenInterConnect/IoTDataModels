@@ -1,0 +1,93 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HVAC Capacity",
+    "version": "20190724",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/HVACCapacityResURI" : {
+      "get": {
+        "description": "This Resource describes the capacity (heating or cooling) of a HVAC system.\n \"capacity\" is a number in units of kW (kilowatts).\n To convert from kW to other units that may be commonly used in certain geographic locales the following conversions should be applied:\n - to convert to BTU/hr: BTU/hr = 3412.142 * kW\n - to convert to ton: ton = kW/3.5168525",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "RETRIEVES the current capacity.",
+              "x-example":
+                {
+                  "rt": ["oic.r.hvac.capacity"],
+                  "if": ["oic.if.r", "oic.if.baseline"],
+                  "capacity": 2.5
+                },
+              "schema": { "$ref": "#/definitions/capacity" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.r", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "capacity" : {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": ["oic.r.hvac.capacity"],
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "capacity": {
+          "description": "The rated capacity for the Device.",
+          "minimum": 0,
+          "exclusiveMinimum": true,
+          "readOnly": true,
+          "type": "number"
+        },
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.r",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": ["capacity"]
+    }
+  }
+}
