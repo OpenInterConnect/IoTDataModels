@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Torque",
-    "version": "2019-05-13",
+    "version": "2019-09-25",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -22,7 +22,7 @@
   "paths": {
     "/TorqueResURI": {
       "get": {
-        "description": "This Resource describes the torque, which is the rotational equivalent of linear force.\n The unit, which is the default SI unit, is N⋅m (Newton metre).\n The torque Property is a read-only value that is provided by the server.\n When range (from \"oic.r.baseresource\") is omitted the default is 0 to +MAXFLOAT.",
+        "description": "This Resource describes the torque, which is the rotational equivalent of linear force.\n The unit, which is the default SI unit, is N*m (Newton metre).\n The torque Property is a read-only value that is provided by the server.\n When range (from \"oic.r.baseresource\") is omitted the default is 0 to +MAXFLOAT.",
         "parameters": [
           {
             "$ref": "#/parameters/interface"
@@ -60,7 +60,7 @@
     "Torque": {
       "properties": {
         "torque": {
-          "description": "This Resource describes the torque, which is the rotational equivalent of linear force, in N⋅m (Newton metre).",
+          "description": "This Resource describes the torque, which is the rotational equivalent of linear force, in N*m (Newton metre).",
           "type": "number",
           "minimum": 0.0,
           "readOnly": true
