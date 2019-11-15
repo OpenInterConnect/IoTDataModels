@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Sleep Monitor Atomic Measurement Batch Representation",
-    "version": "2018-07-12",
+    "version": "2018-08-29",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -143,8 +143,7 @@
         "responses": {
           "200": {
             "description": "Retrieves the sleep monitor's information.",
-            "x-example": [
-              {
+            "x-example": {
                 "rt": [
                   "oic.r.sleepmonitor-am",
                   "oic.wk.atomicmeasurement"
@@ -205,8 +204,7 @@
                     ]
                   }
                 ]
-              }
-            ],
+              },
             "schema": {
               "$ref": "#/definitions/baseline"
             }
@@ -271,7 +269,7 @@
                   "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/Sleep.swagger.json#/definitions/Sleep"
                 },
                 {
-                  "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/HeartRate.swagger.json#/definitions/Heartrate"
+                  "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/HeartRate.swagger.json#/definitions/HeartRate"
                 },
                 {
                   "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/UserIDResURI.swagger.json#/definitions/UserID"
