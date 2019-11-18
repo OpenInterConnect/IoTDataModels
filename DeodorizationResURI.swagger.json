@@ -1,0 +1,147 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Deodorization",
+    "version": "20190820",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/DeodorizationResURI" : {
+      "get": {
+        "description": "This Resource describes a deodorization function, which can be supported by controlling on air filter. \n The Property \"mode\" is a mode of the deodorization function. The supported modes are defined by the enumeration [\"off\", \"on\", \"auto\"]. \n\"off\" means that the deodorization function is not enabled.\n\"on\" means that the deodorization function is active.\n\"auto\" means that the deodorization function is automatically controlled depending on sensed air condition in the device inside. \nThe Property \"currentstate\" is the current state of the deodorization function. In the case of \"auto\" mode, if the sensed air condition is determined to be bad, the function will be \"on\". Then, \"mode\" value is \"auto\" and \"currentstate\" value is \"on\". If not, the function is remaining \"off\" state. Then, \"currentstate\" value is \"off\".",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "RETRIEVES the current deodorization function state.",
+              "x-example":
+                {
+                  "rt": ["oic.r.deodorization"],
+                  "if": ["oic.if.a", "oic.if.baseline"],
+                  "mode": "auto",
+                  "currentstate": "off"
+                },
+              "schema": { "$ref": "#/definitions/Deodorization" }
+            }
+        }
+      },
+      "post": {
+        "description": "Sets the desired deodorization function state.",
+        "parameters": [
+          {"$ref": "#/parameters/interface"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/DeodorizationUpdate" },
+            "x-example":
+              {
+                "mode": "on"
+              }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "Indicates that the Deodorization function state was changed.\nThe new state is provided in the response.\n",
+              "x-example":
+                {
+                  "mode": "on",
+                  "currentstate": "on"
+                },
+              "schema": { "$ref": "#/definitions/Deodorization" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.a", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "Deodorization" : {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": ["oic.r.deodorization"],
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "mode": {
+          "description": "The modes of the Deodorization function.",
+          "enum": [
+            "off",
+            "on",
+            "auto"
+          ],
+          "type": "string"
+        },
+        "currentstate": {
+          "description": "The current state of the Deodorization function.",
+          "enum": [
+            "off",
+            "on"
+          ],
+          "readOnly": true,
+          "type": "string"
+        },
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.a",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": ["mode", "currentstate"]
+    },
+    "DeodorizationUpdate" : {
+    	"properties": {
+	        "mode": {
+	          "description": "The modes of the Deodorization function.",
+	          "enum": [
+	            "off",
+	            "on",
+	            "auto"
+	          ],
+	          "type": "string"
+	        }
+	  },
+      "type": "object",
+      "required": ["mode"]
+    }
+  }
+}
