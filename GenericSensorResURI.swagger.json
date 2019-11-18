@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Generic Sensor",
-    "version": "20190215",
+    "version": "20191118",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -24,8 +24,8 @@
           "200": {
             "description" : "",
             "x-example": {
-              "rt": ["oic.r.sensor"],
-              "if": ["oic.if.s", "oic.if.baseline"],
+              "rt":    ["oic.r.sensor"],
+              "id":    "unique_example_id",
               "value": true
             },
             "schema": { "$ref": "#/definitions/Sensor" }
@@ -35,20 +35,60 @@
     }
   },
   "parameters": {
-    "interface": {
-      "in": "query",
-      "name": "if",
-      "type": "string",
-      "enum": ["oic.if.s", "oic.if.baseline"]
+    "interface" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.s", "oic.if.baseline"]
     }
   },
   "definitions": {
-    "Sensor" : {
+    "Sensor": {
       "properties": {
-        "rt": {
-          "description": "The Resource Type.",
+        "rt":  {
+          "description": "The Resource Type",
           "items": {
-            "enum": ["oic.r.sensor"],
+            "maxLength": 64,
+            "type": "string",
+            "enum": ["oic.r.sensor"]
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "value":   {
+          "description": "true = sensed, false = not sensed.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "measurement":  {
+          "type": "number",
+          "description": "Measured value for this sensor, units depend on the specific type of sensor",
+          "readOnly": true
+        },
+        "precision":  {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/precision"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "range":  {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
+        },
+        "step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
+        },
+        "id":  {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if" :  {
+          "description": "The OCF Interface set supported by this Resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.s"
+            ],
             "maxLength": 64,
             "type": "string"
           },
@@ -56,34 +96,9 @@
           "uniqueItems": true,
           "readOnly": true,
           "type": "array"
-        },
-        "value": {
-          "description": "true = sensed, false = not sensed.",
-          "readOnly": true,
-          "type": "boolean"
-        },
-        "n": {
-            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
-        },
-        "id": {
-            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
-        },
-        "if": {
-          "description": "The OCF Interface set supported by this Resource.",
-          "items": {
-            "enum": [
-              "oic.if.s",
-              "oic.if.baseline"
-            ],
-            "type": "string"
-          },
-          "minItems": 2,
-          "uniqueItems": true,
-          "readOnly": true,
-          "type": "array"
         }
       },
-      "type": "object",
+      "type" : "object",
       "required": ["value"]
     }
   }

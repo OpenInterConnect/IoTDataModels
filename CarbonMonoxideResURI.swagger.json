@@ -2,13 +2,13 @@
   "swagger": "2.0",
   "info": {
     "title": "Carbon Monoxide Sensor",
-    "version": "20190215",
-     "license": {
-      "name": "OCF Data Model License",
-      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
-      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
-    },
-    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+    "version": "20191118",
+    "license": {
+     "name": "OCF Data Model License",
+     "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+     "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+   },
+   "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
   "schemes": ["http"],
   "consumes": ["application/json"],
@@ -25,9 +25,9 @@
               "description" : "",
               "x-example":
                 {
-                  "rt": ["oic.r.sensor.carbonmonoxide"],
-                  "if": ["oic.if.s","oic.if.baseline"],
-                  "value": true
+                  "rt":     ["oic.r.sensor.carbonmonoxide"],
+                  "id":     "unique_example_id",
+                  "value":  true
                 },
               "schema": { "$ref": "#/definitions/CO" }
             }
@@ -44,48 +44,62 @@
     }
   },
   "definitions": {
-    "CO" : {
+    "CO": {
       "properties": {
-        "rt" : {
-          "description": "The Resource Type.",
+        "rt":  {
+          "description": "Resource Type",
           "items": {
-              "enum": ["oic.r.sensor.carbonmonoxide"],
-              "maxLength": 64,
-              "type": "string"
+            "maxLength": 64,
+            "type": "string",
+            "enum": ["oic.r.sensor.carbonmonoxide"]
           },
           "minItems": 1,
           "readOnly": true,
           "uniqueItems": true,
           "type": "array"
         },
-        "value" : {
+        "value":  {
           "description": "The carbon monoxide indicator, true = sensed, false = not sensed.",
           "readOnly": true,
           "type": "boolean"
         },
-         "n": {
+        "measurement":  {
+          "type": "number",
+          "description": "Measured value for this sensor, units are in ppm",
+          "readOnly": true
+        },
+        "precision":  {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/precision"
+        },
+        "n": {
           "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         },
-        "id": {
+        "range":  {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
+        },
+        "step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
+        },
+        "id":  {
           "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
         },
-        "if" : {
-          "description": "The OCF Interface set supported by this Resource.",
+        "if":  {
+          "description": "The OCF Interface set supported by this Resource",
           "items": {
             "enum": [
-              "oic.if.s",
-              "oic.if.baseline"
+              "oic.if.baseline",
+              "oic.if.s"
             ],
             "maxLength": 64,
             "type": "string"
           },
-          "minItems": 2,
+          "minItems": 1,
           "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         }
       },
-      "type": "object",
+      "type" : "object",
       "required": ["value"]
     }
   }

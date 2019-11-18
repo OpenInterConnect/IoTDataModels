@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Smoke Sensor",
-    "version": "20190215",
+    "version": "20191118",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -21,71 +21,84 @@
           {"$ref": "#/parameters/interface"}
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
-                {
-                  "rt": ["oic.r.sensor.smoke"],
-                  "if": ["oic.if.s", "oic.if.baseline"],
-                  "value": true
-                }
-                ,
-              "schema": { "$ref": "#/definitions/smoke" }
-            }
+          "200": {
+            "description" : "",
+            "x-example": {
+              "rt":     ["oic.r.sensor.smoke"],
+              "id":     "unique_example_id",
+              "value":  true
+            },
+            "schema": { "$ref": "#/definitions/smoke" }
+          }
         }
       }
     }
   },
   "parameters": {
-    "interface": {
-      "in": "query",
-      "name": "if",
-      "type": "string",
-      "enum": ["oic.if.s", "oic.if.baseline"]
+    "interface" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.s", "oic.if.baseline"]
     }
   },
   "definitions": {
-    "smoke" : {
+    "smoke": {
       "properties": {
-        "rt": {
-          "description": "The Resource Type.",
+        "rt":  {
+          "description": "The Resource Type",
           "items": {
-            "enum": ["oic.r.sensor.smoke"],
             "maxLength": 64,
-            "type": "string"
+            "type": "string",
+            "enum": ["oic.r.sensor.smoke"]
           },
           "minItems": 1,
           "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         },
-        "value": {
+        "value":  {
           "description": "The smoke indicator, true = sensed, false = not sensed.",
           "readOnly": true,
           "type": "boolean"
         },
+        "measurement":  {
+          "type": "number",
+          "description": "Measured value for this sensor, this is a percentage",
+          "readOnly": true
+        },
+        "precision":  {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/precision"
+        },
         "n": {
-            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         },
-        "id": {
-            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        "range":  {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/range_number"
         },
-        "if": {
-          "description": "The OCF Interface set supported by this Resource.",
+        "step": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.baseresource.properties-schema.json#/definitions/step_number"
+        },
+        "id":  {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if":  {
+          "description": "The OCF Interface set supported by this Resource",
           "items": {
             "enum": [
-              "oic.if.s",
-              "oic.if.baseline"
+              "oic.if.baseline",
+              "oic.if.s"
             ],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
-          "minItems": 2,
-          "uniqueItems": true,
+          "minItems": 1,
           "readOnly": true,
+          "uniqueItems": true,
           "type": "array"
         }
       },
-      "type": "object",
+      "type" : "object",
       "required": ["value"]
     }
   }
