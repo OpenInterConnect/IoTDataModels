@@ -16,7 +16,7 @@
   "paths": {
     "/SensorPropsResURI" : {
       "get": {
-        "description": "This Ressource describes the properties which guide the reporting of a state change of a Sensor.\nThe Property \"silenttime\" represents the period after which a state change report was sent where the Sensor state change is not reported.\nThe Property \"sensitivity\" represents the level at which the sensor detects a state change.\nThese values are completely dependend on the type of Sensor and the manufacturer capability, so no range restrictions are used.\nThe Properties \"range\", \"step\" and \"precision\" are only applied to the \"sensitivity\" Property.",
+        "description": "This Resource describes the properties which guide the reporting of a state change of a Sensor.\nThe Property \"silenttime\" represents the period after which a state change report was sent where the Sensor state change is not reported.\nThe Property \"sensitivity\" represents the level at which the sensor detects a state change.\nThese values are completely dependent on the type of Sensor and the manufacturer capability, so no range restrictions are used.\nThe Properties \"range\", \"step\" and \"precision\" are only applied to the \"sensitivity\" Property.",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -92,7 +92,7 @@
           "type": "integer"
         },
         "sensitivity": {
-          "description": "The level of the detection accuracy of the Sensor. This is used to control the level at which the Senor detects a state change. The \"range\" Property should be specified per manufacturer device capabilities.",
+          "description": "The level of the detection accuracy of the Sensor. This is used to control the level at which the Sensor detects a state change. The \"range\" Property should be specified per manufacturer device capabilities.",
           "type": "number"
         },
         "n": {
