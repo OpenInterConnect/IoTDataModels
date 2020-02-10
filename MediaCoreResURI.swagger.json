@@ -1,0 +1,317 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Media Core Resource Type",
+    "version": "2019-11-27",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/MediaCoreResURI" : {
+      "get": {
+        "description": "This OCF Resource specifies the core media types that an OCF Device supports.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-r"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "Retrieves the core information for the specified or the current media.",
+            "x-example": {
+              "rt": ["oic.r.media.core"],
+              "id": "unique_example_id",
+              "title": "PDF File 1",
+              "description": "Long user-friendly synopsis of PDF File 1",
+              "mimetype": "application/pdf",
+              "mediafile": "file://example/url/PDF_File1.pdf",
+              "genres": [{"category": "Music", "subcategory": "Rock"}, {"category": "Music", "subcategory": "Pop"}],
+              "ratinginfo": [{"ratingorganization": "none", "rating": "Parental Advisory - Explicit Content"}],
+              "identificationnumber": "ISSN:1234-5678",
+              "datetime": "2018-06-23T20:22:59-08:00",
+              "mediaartwork": [
+                {
+                  "rt": ["oic.r.icon"],
+                  "mimetype": "image/png",
+                  "width": 256,
+                  "height": 256,
+                  "media": "file://example/url/media1.png"
+                }
+              ],
+              "copyright": "Copyright notice by the copyright holder for PDF File 1"
+            },
+            "schema": {"$ref": "#/definitions/MediaCore"}
+          }
+        }
+      },
+      "post": {
+        "description": "Sets the Media Core properties.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-rw"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-example": {
+              "title": "New PDF File 1",
+              "description": "Long user-friendly synopsis of PDF File 1",
+              "mimetype": "application/pdf",
+              "mediafile": "file://example/url/PDF_File1.pdf",
+              "genres": [{"category": "Music", "subcategory": "Rock"}, {"category": "Music", "subcategory": "Pop"}],
+              "ratinginfo": [{"ratingorganization": "none", "rating": "Parental Advisory - Explicit Content"}],
+              "identificationnumber": "ISSN:1234-5678",
+              "datetime": "2018-06-23T20:22:59-08:00",
+              "mediaartwork": [
+                {
+                  "mimetype": "image/png",
+                  "width": 256,
+                  "height": 256,
+                  "media": "file://example/url/media1.png"
+                }
+              ],
+              "copyright": "Copyright notice by the copyright holder for PDF File 1"
+            },
+            "schema": {"$ref": "#/definitions/MediaCoreUpdate"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "Sets the core information for the specified or the current media.",
+            "x-example": {
+              "title": "PDF File 1",
+              "description": "Long user-friendly synopsis of PDF File 1",
+              "mimetype": "application/pdf",
+              "mediafile": "file://example/url/PDF_File1.pdf",
+              "genres": [{"category": "Music", "subcategory": "Rock"}, {"category": "Music", "subcategory": "Pop"}],
+              "ratinginfo": [{"ratingorganization": "none", "rating": "Parental Advisory - Explicit Content"}],
+              "identificationnumber": "ISSN:1234-5678",
+              "datetime": "2018-06-23T20:22:59-08:00",
+              "mediaartwork": [
+                {
+                  "rt": ["oic.r.icon"],
+                  "mimetype": "image/png",
+                  "width": 256,
+                  "height": 256,
+                  "media": "file://example/url/media1.png"
+                }
+              ],
+              "copyright": "Copyright notice by the copyright holder for PDF File 1"
+            },
+            "schema": {"$ref": "#/definitions/MediaCoreUpdate"}
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-r" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw", "oic.if.baseline"]
+    },
+    "interface-rw" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw"]
+    }
+  },
+  "definitions": {
+    "MediaCore" : {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type of Media Core",
+          "items": {
+            "enum": ["oic.r.media.core"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "title" : {
+          "description": "Specifies the Short user-friendly name of the media.",
+          "type": "string"
+        },
+        "description" : {
+          "description": "Specifies the Long user-friendly synopsis of the media content.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "mimetype" : {
+          "description": "Specifies the Mime Type for the media content.",
+          "type": "string"
+        },
+        "mediafile" : {
+          "description": "uri of the Media File for media content. It can be specified as a Relative Reference or fully-qualified URI.",
+          "format": "uri",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "genres" : {
+          "description": "Genres for media content.",
+          "items": {
+            "$ref": "#/definitions/MediaGenre"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "ratinginfo" : {
+          "description": "The rating information which includes the rating organization and rating.",
+          "items": {
+            "properties": {
+              "rating": {
+                "description": "A category of artistic composition, as in music or literature, characterized by similarities in form, style, or subject matter. (For instance, the type of song, e.g. speech, rock, pop)",
+                "type": "string"
+              },
+              "ratingorganization": {
+                "description": "These are media content rating organization.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "identificationnumber" : {
+          "description": "Unique identification number for media content (ISSN: International_Standard_Serial_Number)",
+          "type": "string"
+        },
+        "datetime" : {
+          "description": "This is date, time, and timezone of the media content was created using RFC3339 date-time format.\n\r (e.g: '2018-06-23T20:22:59Z' - Date+Time+Timezone'UTC' or '2018-06-23T20:22:59-08:00' - Date+Time+Timezone'PST')",
+          "format": "date-time",
+          "type": "string"
+        },
+        "mediaartwork" : {
+          "description": "The array of icons that are used as the media artwork.",
+          "items": {
+            "$ref": "https://openconnectivityfoundation.github.io/core-extensions/swagger2.0/oic.r.icon.swagger.json#/definitions/Icon"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "copyright" : {
+          "description": "Copyright notice by the copyright holder.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource",
+          "items": {
+            "enum": ["oic.if.rw","oic.if.baseline"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": ["title", "mimetype", "mediafile"]
+    },
+    "MediaCoreUpdate" : {
+      "properties": {
+        "title" : {
+          "description": "Specifies the Short user-friendly name of the media.",
+          "type": "string"
+        },
+        "description" : {
+          "description": "Specifies the Long user-friendly synopsis of the media content.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "mimetype" : {
+          "description": "Specifies the Mime Type for the media content.",
+          "type": "string"
+        },
+        "mediafile" : {
+          "description": "uri of the Media File for media content. It can be specified as a Relative Reference or fully-qualified URI.",
+          "format": "uri",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "genres" : {
+          "description": "Genres for media content.",
+          "items": {
+            "$ref": "#/definitions/MediaGenre"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "ratinginfo" : {
+          "description": "The rating information which includes the rating organization and rating.",
+          "items": {
+            "properties": {
+              "rating": {
+                "description": "A category of artistic composition, as in music or literature, characterized by similarities in form, style, or subject matter. (For instance, the type of song, e.g. speech, rock, pop)",
+                "type": "string"
+              },
+              "ratingorganization": {
+                "description": "These are media content rating organization.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "identificationnumber" : {
+          "description": "Unique identification number for media content (ISSN: International_Standard_Serial_Number)",
+          "type": "string"
+        },
+        "datetime" : {
+          "description": "This is date, time, and timezone of the media content was created using RFC3339 date-time format.\n\r (e.g: '2018-06-23T20:22:59Z' - Date+Time+Timezone'UTC' or '2018-06-23T20:22:59-08:00' - Date+Time+Timezone'PST')",
+          "format": "date-time",
+          "type": "string"
+        },
+        "mediaartwork" : {
+          "description": "The array of icons that are used as the media artwork.",
+          "items": {
+            "$ref": "https://openconnectivityfoundation.github.io/core-extensions/swagger2.0/oic.r.icon.swagger.json#/definitions/Icon"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "copyright" : {
+          "description": "Copyright notice by the copyright holder.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        }
+      },
+      "type": "object"
+    },
+    "MediaGenre": {
+      "properties": {
+        "category": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.genre.properties-schema.json#/definitions/category",
+          "description": "Genre Category for Media Information.",
+          "readOnly": true
+        },
+        "subcategory": {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.genre.properties-schema.json#/definitions/subcategory",
+          "description": "Genre Sub-Category for Media Information.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "required": ["category"]
+    }
+  }
+}
