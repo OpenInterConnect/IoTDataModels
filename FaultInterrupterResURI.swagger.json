@@ -1,0 +1,128 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Fault Interrupter Switch",
+    "version": "20191114",
+    "license": {
+        "name": "OCF Data Model License",
+        "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+        "x-copyright": "Copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/FaultSwitchResURI" : {
+      "get": {
+        "description": "This Resource describes a fault interrupter switch (on/off/faulted).\nThe Property \"state\" is an enum.\nA state of \"on\" means that the switch is on.\nA state of \"off\" means that the switch is off.\nA state of \"faulted\" means the switch is faulted, in such a state an UPDATE is not possible.",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "rt": ["oic.r.switch.fault"],
+                  "if": ["oic.if.a", "oic.if.baseline"],
+                  "state": "off"
+                },
+              "schema": { "$ref": "#/definitions/FaultSwitch" }
+            }
+        }
+      },
+      "post": {
+        "description": "Setting a fault interrupter to a faulted state requires a manual human intervention, thus it is not allowed in an UPDATE. When in a faulted state it is not possible to reset to a non-faulted state without also manual human intervention.",
+        "parameters": [
+          {"$ref": "#/parameters/interface"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/FaultSwitchUpdate" },
+            "x-example":
+              {
+                "state": "on"
+              }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "Success path response as would be provided for an UPDATE as shown in the example for \"post\".",
+            "x-example":
+              {
+                "state": "on"
+              },
+            "schema": { "$ref": "#/definitions/FaultSwitch" }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface" : {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.a", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "FaultSwitch" : {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": ["oic.r.switch.fault"],
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "state": {
+          "description": "The status of the switch.",
+          "enum": ["on", "off", "faulted"],
+          "type":"string"
+        },
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.a",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": ["state"]
+    },
+    "FaultSwitchUpdate" : {
+      "properties": {
+        "state": {
+          "description": "The status of the switch.",
+          "enum": ["on", "off"],
+          "type":"string"
+        }
+      },
+      "type": "object",
+      "required": ["state"]
+    }
+  }
+}
