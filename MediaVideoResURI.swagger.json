@@ -1,0 +1,545 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Media Video Resource Type",
+    "version": "2019-11-27",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/MediaVideoResURI" : {
+      "get": {
+        "description": "This OCF Resource specifies the video media types that an OCF Device supports.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-r"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "Retrieves the video information for the specified or the current media.",
+            "x-example": {
+              "rt": ["oic.r.media.video"],
+              "id": "unique_example_id",
+              "mediacore": {
+                "title": "Video 1",
+                "description": "Long user-friendly synopsis of Video 1",
+                "mimetype": "video/mp4",
+                "mediafile": "file://example/url/Video1.mp4",
+                "genres": [{"category": "Movie", "subcategory": "Action"}, {"category": "Movie", "subcategory": "Western"}],
+                "ratinginfo": [{"ratingorganization": "MPAA", "rating": "PG-13"}],
+                "identificationnumber": "EDID:1234-5678",
+                "datetime": "2018-06-23T20:22:59-08:00",
+                "mediaartwork": [
+                  {
+                    "rt": ["oic.r.icon"],
+                    "mimetype": "image/png",
+                    "width": 256,
+                    "height": 256,
+                    "media": "file://example/url/video1.png"
+                  }
+                ],
+                "copyright": "Copyright notice by the copyright holder for Video 1"
+              },
+              "series": [
+                "Series 1",
+                "Series 2"
+              ],
+              "studio": [
+                "Studio 1",
+                "Studio 2"
+              ],
+              "cast": [
+                "Actor 1",
+                "Actress 2"
+              ],
+              "directors": [
+                "Dircector 1",
+                "Director 2"
+              ],
+              "producers": [
+                "Producer 1",
+                "Producer 2"
+              ],
+              "writers": [
+                "Writer 1",
+                "Writer 2"
+              ],
+              "composers": [
+                "Composer 1",
+                "Composer 2"
+              ],
+              "sdp": [
+                "m=video 51372 RTP/AVP 99",
+                "a=rtpmap:99 h263-1998/90000"
+              ],
+              "width": 1920,
+              "height": 1080,
+              "resolution": 200,
+              "format": "progressive",
+              "framerate": 30,
+              "bitdepth": 8,
+              "size": 44.064,
+              "duration": "P0Y0M0DT1H22M59S",
+              "location": "Death Valley National Park, Furnace Creek, CA 92328, USA",
+              "geolocation": {"latitude": 36.4643308,"longitude": -116.86906640000001, "alt": -62.1},
+              "language": "en"
+            },
+            "schema": {"$ref": "#/definitions/MediaVideo"}
+          }
+        }
+      },
+      "post": {
+        "description": "Sets the Media Video properties.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-rw"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-example": {
+              "mediacore": {
+                "title": "Video 1",
+                "description": "Long user-friendly synopsis of Video 1",
+                "mimetype": "video/mp4",
+                "mediafile": "file://example/url/Video1.mp4",
+                "genres": [{"category": "Movie", "subcategory": "Action"}, {"category": "Movie", "subcategory": "Western"}],
+                "ratinginfo": [{"ratingorganization": "MPAA", "rating": "PG-13"}],
+                "identificationnumber": "EDID:1234-5678",
+                "datetime": "2018-06-23T20:22:59-08:00",
+                "mediaartwork": [
+                  {
+                    "mimetype": "image/png",
+                    "width": 256,
+                    "height": 256,
+                    "media": "file://example/url/video1.png"
+                  }
+                ],
+                "copyright": "Copyright notice by the copyright holder for Video 1"
+              },
+              "series": [
+                "Series 1",
+                "Series 2"
+              ],
+              "studio": [
+                "Studio 1",
+                "Studio 2"
+              ],
+              "cast": [
+                "Actor 1",
+                "Actress 2"
+              ],
+              "directors": [
+                "Dircector 1",
+                "Director 2"
+              ],
+              "producers": [
+                "Producer 1",
+                "Producer 2"
+              ],
+              "writers": [
+                "Writer 1",
+                "Writer 2"
+              ],
+              "composers": [
+                "Composer 1",
+                "Composer 2"
+              ],
+              "sdp": [
+                "m=video 51372 RTP/AVP 99",
+                "a=rtpmap:99 h263-1998/90000"
+              ],
+              "width": 1920,
+              "height": 1080,
+              "resolution": 2073600,
+              "format": "progressive",
+              "framerate": 30,
+              "bitdepth": 8,
+              "size": 44.064,
+              "duration": "P0Y0M0DT1H22M59S",
+              "location": "Death Valley National Park, Furnace Creek, CA 92328, USA",
+              "geolocation": {"latitude": 36.4643308,"longitude": -116.86906640000001, "alt": -62.1},
+              "language": "en"
+            },
+            "schema": {"$ref": "#/definitions/MediaVideoUpdate"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "Sets the video information for the specified or the current media.",
+            "x-example": {
+              "mediacore": {
+                "title": "Video 1",
+                "description": "Long user-friendly synopsis of Video 1",
+                "mimetype": "video/mp4",
+                "mediafile": "file://example/url/Video1.mp4",
+                "genres": [{"category": "Movie", "subcategory": "Action"}, {"category": "Movie", "subcategory": "Western"}],
+                "ratinginfo": [{"ratingorganization": "MPAA", "rating": "PG-13"}],
+                "identificationnumber": "EDID:1234-5678",
+                "datetime": "2018-06-23T20:22:59-08:00",
+                "mediaartwork": [
+                  {
+                    "rt": ["oic.r.icon"],
+                    "mimetype": "image/png",
+                    "width": 256,
+                    "height": 256,
+                    "media": "file://example/url/video1.png"
+                  }
+                ],
+                "copyright": "Copyright notice by the copyright holder for Video 1"
+              },
+              "series": [
+                "Series 1",
+                "Series 2"
+              ],
+              "studio": [
+                "Studio 1",
+                "Studio 2"
+              ],
+              "cast": [
+                "Actor 1",
+                "Actress 2"
+              ],
+              "directors": [
+                "Dircector 1",
+                "Director 2"
+              ],
+              "producers": [
+                "Producer 1",
+                "Producer 2"
+              ],
+              "writers": [
+                "Writer 1",
+                "Writer 2"
+              ],
+              "composers": [
+                "Composer 1",
+                "Composer 2"
+              ],
+              "sdp": [
+                "m=video 51372 RTP/AVP 99",
+                "a=rtpmap:99 h263-1998/90000"
+              ],
+              "width": 1920,
+              "height": 1080,
+              "resolution": 200,
+              "format": "progressive",
+              "framerate": 30,
+              "bitdepth": 8,
+              "size": 44.064,
+              "duration": "P0Y0M0DT1H22M59S",
+              "location": "Death Valley National Park, Furnace Creek, CA 92328, USA",
+              "geolocation": {"latitude": 36.4643308,"longitude": -116.86906640000001, "alt": -62.1},
+              "language": "en"
+            },
+            "schema": {"$ref": "#/definitions/MediaVideoUpdate"}
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-r" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw", "oic.if.baseline"]
+    },
+    "interface-rw" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw"]
+    }
+  },
+  "definitions": {
+    "MediaVideo" : {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type of Media Video",
+          "items": {
+            "enum": ["oic.r.media.video"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "mediacore": {
+          "description": "The Media Core Properties common on all Media Resource Types,",
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/MediaCoreResURI.swagger.json#/definitions/MediaCore"
+        },
+        "series" : {
+          "description": "List of TV Series and episode",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "studio" : {
+          "description": "List of studios that produced the movie",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "cast" : {
+          "description": "List of casts that acted in the movie",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "directors" : {
+          "description": "List of directors that directed the movie",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "producers" : {
+          "description": "List of producers that produced the movie",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "writers" : {
+          "description": "List of writers that wrote the movie",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "composers" : {
+          "description": "List of composers that wrote the music",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "sdp" : {
+          "description": "Array of strings, a string for each Session Description Protocol syntax.",
+          "items": {
+            "description": "Session Description Protocol is a format for describing streaming media communications parameters using the media and attribute lines defined in RFC4566.",
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "width" : {
+          "description": "The resolution width of the video",
+          "type": "integer"
+        },
+        "height" : {
+          "description": "The resolution height of the video",
+          "type": "integer"
+        },
+        "resolution" : {
+          "description": "The resolution of the video in pixels",
+          "type": "integer"
+        },
+        "format": {
+          "type": "string",
+          "description": "The available video formats.",
+          "enum": [
+            "progressive",
+            "interlaced",
+            "HDR",
+            "HDR10",
+            "HDR10+",
+            "Dolby Vision"
+          ]
+        },
+        "framerate" : {
+          "description": "The frame rate of the video in frames per second.",
+          "type": "integer"
+        },
+        "bitdepth" : {
+          "description": "Bit (Colour) depth is either the number of bits used to indicate the colour of a single pixel, in a bitmapped image or video framebuffer, or the number of bits used for each colour component of a single pixel.",
+          "type": "integer"
+        },
+        "size" : {
+          "description": "The size of the video in KB - Kilo-Bytes",
+          "type": "number"
+        },
+        "duration": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/duration",
+          "description": "Duration is the total length of the media audio with format pattern according to ISO 8601 (duration). For example, P0Y0M0DT1H22M59S represents a duration of 1 hour, 22 minutes, and 59 seconds."
+        },
+        "location" : {
+          "description": "Location is the user-friendly string of the geographic location of the video.",
+          "type": "string"
+        },
+        "geolocation" : {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/GeolocationResURI.swagger.json#/definitions/Geolocation"
+        },
+        "language": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/language-tag",
+          "description": "Current language of the video media content with format pattern according to RFC 5646 language tag"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource",
+          "items": {
+            "enum": ["oic.if.rw","oic.if.baseline"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type" : "object",
+      "required": ["mediacore"]
+    },
+    "MediaVideoUpdate" : {
+      "properties": {
+        "mediacore": {
+          "description": "The Media Core Properties common on all Media Resource Types,",
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/MediaCoreResURI.swagger.json#/definitions/MediaCore"
+        },
+        "series" : {
+          "description": "List of TV Series and episode",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "studio" : {
+          "description": "List of studios that produced the movie",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "cast" : {
+          "description": "List of casts that acted in the movie",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "directors" : {
+          "description": "List of directors that directed the movie",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "producers" : {
+          "description": "List of producers that produced the movie",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "writers" : {
+          "description": "List of writers that wrote the movie",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "composers" : {
+          "description": "List of composers that wrote the music",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "sdp" : {
+          "description": "Array of strings, a string for each Session Description Protocol syntax.",
+          "items": {
+            "description": "Session Description Protocol is a format for describing streaming media communications parameters using the media and attribute lines defined in RFC4566.",
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "width" : {
+          "description": "The width of the video",
+          "type": "integer"
+        },
+        "height" : {
+          "description": "The height of the video",
+          "type": "integer"
+        },
+        "resolution" : {
+          "description": "The resolution of the video in pixels",
+          "type": "integer"
+        },
+        "format": {
+          "type": "string",
+          "description": "The available video formats.",
+          "enum": [
+            "progressive",
+            "interlaced",
+            "HDR",
+            "HDR10",
+            "HDR10+",
+            "Dolby Vision"
+          ]
+        },
+        "framerate" : {
+          "description": "The frame rate of the video in frames per second.",
+          "type": "integer"
+        },
+        "bitdepth" : {
+          "description": "Bit (Colour) depth is either the number of bits used to indicate the colour of a single pixel, in a bitmapped image or video framebuffer, or the number of bits used for each colour component of a single pixel.",
+          "type": "integer"
+        },
+        "size" : {
+          "description": "The size of the video in KB - Kilo-Bytes",
+          "type": "number"
+        },
+        "duration": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/duration",
+          "description": "Duration is the total length of the media audio with format pattern according to ISO 8601 (duration). For example, P0Y0M0DT1H22M59S represents a duration of 1 hour, 22 minutes, and 59 seconds."
+        },
+        "location" : {
+          "description": "Location is the user-friendly string of the geographic location of the video.",
+          "type": "string"
+        },
+        "geolocation" : {
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/GeolocationResURI.swagger.json#/definitions/Geolocation"
+        },
+        "language": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/language-tag",
+          "description": "Current language of the video media content with format pattern according to RFC 5646 language tag"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        }
+      },
+      "type" : "object",
+      "required": ["mediacore"]
+    }
+  }
+}

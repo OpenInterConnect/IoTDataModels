@@ -1,0 +1,337 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Media Text Resource Type",
+    "version": "2019-11-27",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/MediaTextResURI" : {
+      "get": {
+        "description": "This OCF Resource specifies the text media types that an OCF Device supports.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-r"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "Retrieves the text information for the specified or the current media.",
+            "x-example": {
+              "rt": ["oic.r.media.text"],
+              "id": "unique_example_id",
+              "mediacore": {
+                "title": "Book 1",
+                "description": "Long user-friendly synopsis of Book 1",
+                "mimetype": "text",
+                "mediafile": "file://example/url/Book1.pdf",
+                "genres": [{"category": "Sports", "subcategory": "Other"}, {"category": "Youth", "subcategory": "Other"}],
+                "ratinginfo": [{"ratingorganization": "none", "rating": "adult-content"}],
+                "identificationnumber": "ISBN: 978-3-16-148410-0",
+                "datetime": "2018-06-23T20:22:59-08:00",
+                "mediaartwork": [
+                  {
+                    "rt": ["oic.r.icon"],
+                    "mimetype": "image/png",
+                    "width": 256,
+                    "height": 256,
+                    "media": "file://example/url/book1.png"
+                  }
+                ],
+                "copyright": "Copyright notice by the copyright holder for Book 1"
+              },
+              "sdp": [
+                "m=text 49156 RTP/AVP 100 101",
+                "a=rtpmap:100 1140/1000",
+                "a=rtpmap:101 red/1000",
+                "a=fmtp:101 100/100/100"
+              ],
+              "authors": [
+                "Author 1",
+                "Author 2"
+              ],
+              "publishers": [
+                "Publisher 1",
+                "Publisher 2"
+              ],
+              "series": [
+                "Series 1",
+                "Series 2"
+              ],
+              "totalchapters": 28,
+              "totalpages": 499,
+              "language": "en"
+            },
+            "schema": {"$ref": "#/definitions/MediaText"}
+          }
+        }
+      },
+      "post": {
+        "description": "Sets the Media Text properties.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-rw"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-example": {
+              "mediacore": {
+                "title": "Book 1",
+                "description": "Long user-friendly synopsis of Book 1",
+                "mimetype": "text",
+                "mediafile": "file://example/url/Book1.pdf",
+                "genres": [{"category": "Sports", "subcategory": "Other"}, {"category": "Youth", "subcategory": "Other"}],
+                "ratinginfo": [{"ratingorganization": "none", "rating": "adult-content"}],
+                "identificationnumber": "ISBN: 978-3-16-148410-0",
+                "datetime": "2018-06-23T20:22:59-08:00",
+                "mediaartwork": [
+                  {
+                    "mimetype": "image/png",
+                    "width": 256,
+                    "height": 256,
+                    "media": "file://example/url/book1.png"
+                  }
+                ],
+                "copyright": "Copyright notice by the copyright holder for Book 1"
+              },
+              "sdp": [
+                "m=text 49156 RTP/AVP 100 101",
+                "a=rtpmap:100 1140/1000",
+                "a=rtpmap:101 red/1000",
+                "a=fmtp:101 100/100/100"
+              ],
+              "authors": [
+                "Author 1",
+                "Author 2"
+              ],
+              "publishers": [
+                "Publisher 1",
+                "Publisher 2"
+              ],
+              "series": [
+                "Series 1",
+                "Series 2"
+              ],
+              "totalchapters": 28,
+              "totalpages": 499,
+              "language": "en"
+            },
+            "schema": {"$ref": "#/definitions/MediaTextUpdate"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "Sets the text information for the specified or the current media.",
+            "x-example": {
+              "mediacore": {
+                "title": "Book 1",
+                "description": "Long user-friendly synopsis of Book 1",
+                "mimetype": "text",
+                "mediafile": "file://example/url/Book1.pdf",
+                "genres": [{"category": "Sports", "subcategory": "Other"}, {"category": "Youth", "subcategory": "Other"}],
+                "ratinginfo": [{"ratingorganization": "none", "rating": "adult-content"}],
+                "identificationnumber": "ISBN: 978-3-16-148410-0",
+                "datetime": "2018-06-23T20:22:59-08:00",
+                "mediaartwork": [
+                  {
+                    "rt": ["oic.r.icon"],
+                    "mimetype": "image/png",
+                    "width": 256,
+                    "height": 256,
+                    "media": "file://example/url/book1.png"
+                  }
+                ],
+                "copyright": "Copyright notice by the copyright holder for Book 1"
+              },
+              "sdp": [
+                "m=text 49156 RTP/AVP 100 101",
+                "a=rtpmap:100 1140/1000",
+                "a=rtpmap:101 red/1000",
+                "a=fmtp:101 100/100/100"
+              ],
+              "authors": [
+                "Author 1",
+                "Author 2"
+              ],
+              "publishers": [
+                "Publisher 1",
+                "Publisher 2"
+              ],
+              "series": [
+                "Series 1",
+                "Series 2"
+              ],
+              "totalchapters": 28,
+              "totalpages": 499,
+              "language": "en"
+            },
+            "schema": {"$ref": "#/definitions/MediaTextUpdate"}
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-r" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw", "oic.if.baseline"]
+    },
+    "interface-rw" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw"]
+    }
+  },
+  "definitions": {
+    "MediaText" : {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type of Media Text",
+          "items": {
+            "enum": ["oic.r.media.text"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "mediacore": {
+          "description": "The Media Core Properties common on all Media Resource Types,",
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/MediaCoreResURI.swagger.json#/definitions/MediaCore"
+        },
+        "sdp" : {
+          "description": "Array of strings, a string for each Session Description Protocol syntax.",
+          "items": {
+            "description": "Session Description Protocol is a format for describing streaming media communications parameters using the media and attribute lines defined in RFC4566.",
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "authors" : {
+          "description": "List of authors that wrote the text",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "publishers" : {
+          "description": "List of publishers that released the text",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "series" : {
+          "description": "List of series for the text",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "totalchapters" : {
+          "description": "The total number of chapters in the text",
+          "type": "integer"
+        },
+        "totalpages" : {
+          "description": "The total number of pages in the text",
+          "type": "integer"
+        },
+        "language": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/language-tag",
+          "description": "Current language of the text media content with format pattern according to RFC 5646 language tag"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource",
+          "items": {
+            "enum": ["oic.if.rw", "oic.if.baseline"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type" : "object",
+      "required": ["mediacore"]
+    },
+    "MediaTextUpdate" : {
+      "properties": {
+        "mediacore": {
+          "description": "The Media Core Properties common on all Media Resource Types,",
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/MediaCoreResURI.swagger.json#/definitions/MediaCore"
+        },
+        "sdp" : {
+          "description": "Array of strings, a string for each Session Description Protocol syntax.",
+          "items": {
+            "description": "Session Description Protocol is a format for describing streaming media communications parameters using the media and attribute lines defined in RFC4566.",
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "authors" : {
+          "description": "List of authors that wrote the text",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "publishers" : {
+          "description": "List of publishers that released the text",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "series" : {
+          "description": "List of series for the text",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "totalchapters" : {
+          "description": "The total number of chapters in the text",
+          "type": "integer"
+        },
+        "totalpages" : {
+          "description": "The total number of pages in the text",
+          "type": "integer"
+        },
+        "language": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/language-tag",
+          "description": "Current language of the text media content with format pattern according to RFC 5646 language tag"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        }
+      },
+      "type" : "object",
+      "required": ["mediacore"]
+    }
+  }
+}

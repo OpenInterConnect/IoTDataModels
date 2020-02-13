@@ -1,0 +1,384 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Media Audio Resource Type",
+    "version": "2019-11-27",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/MediaAudioResURI" : {
+      "get": {
+        "description": "This OCF Resource specifies the audio media types that an OCF Device supports.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-r"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "Retrieves the audio information for the specified or the current media.",
+            "x-example": {
+              "rt": ["oic.r.media.audio"],
+              "id": "unique_example_id",
+              "mediacore": {
+                "title": "Song 1",
+                "description": "Long user-friendly synopsis of Song 1",
+                "mimetype": "audio/mpeg3",
+                "mediafile": "file://example/url/Song1.mp3",
+                "genres": [{"category": "Music", "subcategory": "Rock"}, {"category": "Music", "subcategory": "Pop"}],
+                "ratinginfo": [{"ratingorganization": "none", "rating": "Parental Advisory - Explicit Content"}],
+                "identificationnumber": "ISSN:1234-5678",
+                "datetime": "2018-06-23T20:22:59-08:00",
+                "mediaartwork": [
+                  {
+                    "rt": ["oic.r.icon"],
+                    "mimetype": "image/png",
+                    "width": 256,
+                    "height": 256,
+                    "media": "file://example/url/song1.png"
+                  }
+                ],
+                "copyright": "Copyright notice by the copyright holder for Song 1"
+              },
+              "artists": [
+                "Artist 1",
+                "Artist 2"
+              ],
+              "album": "Album Title 1",
+              "albumartwork": [
+                {
+                  "rt": ["oic.r.icon"],
+                  "mimetype": "image/png",
+                  "width": 256,
+                  "height": 256,
+                  "media": "file://example/url/album1.png"
+                }
+              ],
+              "sdp": [
+                "m=audio 2 RTP/AVP 97",
+                "a=rtpmap:97 MP4A-LATM/90000"
+              ],
+              "duration": "P0Y0M0DT0H4M27S",
+              "tracknumber": 2,
+              "producers": [
+                "Producer 1",
+                "Producer 2"
+              ],
+              "composers": [
+                "Composer 1",
+                "Composer 2"
+              ],
+              "language": "en"
+            },
+            "schema": {"$ref": "#/definitions/MediaAudio"}
+          }
+        }
+      },
+      "post": {
+        "description": "Sets the Media Audio properties.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-rw"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-example": {
+              "mediacore": {
+                "title": "Song 1",
+                "description": "Long user-friendly synopsis of Song 1",
+                "mimetype": "audio/mpeg3",
+                "mediafile": "file://example/url/Song1.mp3",
+                "genres": [{"category": "Music", "subcategory": "Rock"}, {"category": "Music", "subcategory": "Pop"}],
+                "ratinginfo": [{"ratingorganization": "none", "rating": "Parental Advisory - Explicit Content"}],
+                "identificationnumber": "ISSN:1234-5678",
+                "datetime": "2018-06-23T20:22:59-08:00",
+                "mediaartwork": [
+                  {
+                    "mimetype": "image/png",
+                    "width": 256,
+                    "height": 256,
+                    "media": "file://example/url/song1.png"
+                  }
+                ],
+                "copyright": "Copyright notice by the copyright holder for Song 1"
+              },
+              "artists": [
+                "Artist 1",
+                "Artist 2"
+              ],
+              "album": "Album Title 1",
+              "albumartwork": [
+                {
+                  "mimetype": "image/png",
+                  "width": 256,
+                  "height": 256,
+                  "media": "file://example/url/album1.png"
+                }
+              ],
+              "sdp": [
+                "m=audio 2 RTP/AVP 97",
+                "a=rtpmap:97 MP4A-LATM/90000"
+              ],
+              "duration": "P0Y0M0DT0H4M27S",
+              "tracknumber": 2,
+              "producers": [
+                "Producer 1",
+                "Producer 2"
+              ],
+              "composers": [
+                "Composer 1",
+                "Composer 2"
+              ],
+              "language": "en"
+            },
+            "schema": {"$ref": "#/definitions/MediaAudioUpdate"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "Sets the audio information for the specified or the current media.",
+            "x-example": {
+              "mediacore": {
+                "title": "Song 1",
+                "description": "Long user-friendly synopsis of Song 1",
+                "mimetype": "audio/mpeg3",
+                "mediafile": "file://example/url/Song1.mp3",
+                "genres": [{"category": "Music", "subcategory": "Rock"}, {"category": "Music", "subcategory": "Pop"}],
+                "ratinginfo": [{"ratingorganization": "none", "rating": "Parental Advisory - Explicit Content"}],
+                "identificationnumber": "ISSN:1234-5678",
+                "datetime": "2018-06-23T20:22:59-08:00",
+                "mediaartwork": [
+                  {
+                    "rt": ["oic.r.icon"],
+                    "mimetype": "image/png",
+                    "width": 256,
+                    "height": 256,
+                    "media": "file://example/url/song1.png"
+                  }
+                ],
+                "copyright": "Copyright notice by the copyright holder for Song 1"
+              },
+              "artists": [
+                "Artist 1",
+                "Artist 2"
+              ],
+              "album": "Album Title 1",
+              "albumartwork": [
+                {
+                  "rt": ["oic.r.icon"],
+                  "mimetype": "image/png",
+                  "width": 256,
+                  "height": 256,
+                  "media": "file://example/url/album1.png"
+                }
+              ],
+              "sdp": [
+                "m=audio 2 RTP/AVP 97",
+                "a=rtpmap:97 MP4A-LATM/90000"
+              ],
+              "duration": "P0Y0M0DT0H4M27S",
+              "tracknumber": 2,
+              "producers": [
+                "Producer 1",
+                "Producer 2"
+              ],
+              "composers": [
+                "Composer 1",
+                "Composer 2"
+              ],
+              "language": "en"
+            },
+            "schema": {"$ref": "#/definitions/MediaAudioUpdate"}
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-r" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw", "oic.if.baseline"]
+    },
+    "interface-rw" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw"]
+    }
+  },
+  "definitions": {
+    "MediaAudio" : {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type of Media Audio",
+          "items": {
+            "enum": ["oic.r.media.audio"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "mediacore": {
+          "description": "The Media Core Properties common on all Media Resource Types",
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/MediaCoreResURI.swagger.json#/definitions/MediaCore"
+        },
+        "artists" : {
+          "description": "List of artists that recorded the song",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "album" : {
+          "description": "Which album the song and picture belong to (if applicable)",
+          "type": "string"
+        },
+        "albumartwork" : {
+          "description": "The array of icons that are used as the album artwork.",
+          "items": {
+            "$ref": "https://openconnectivityfoundation.github.io/core-extensions/swagger2.0/oic.r.icon.swagger.json#/definitions/Icon"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "tracknumber" : {
+          "description": "The track number from the album",
+          "type": "integer"
+        },
+        "sdp" : {
+          "description": "Array of strings, a string for each Session Description Protocol syntax.",
+          "items": {
+            "description": "Session Description Protocol is a format for describing streaming media communications parameters using the media and attribute lines defined in RFC4566.",
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "duration": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/duration",
+          "description": "Duration is the total length of the media audio with format pattern according to ISO 8601 duration. For example, P0Y0M0DT0H4M27S represents a duration of 4 minutes, and 27 seconds."
+        },
+        "producers" : {
+          "description": "List of producers that produced the song",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "composers" : {
+          "description": "List of composers that wrote the song",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "language": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/language-tag",
+          "description": "Current language of the audio media content with format pattern according to RFC 5646 language tag"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource",
+          "items": {
+            "enum": ["oic.if.rw","oic.if.baseline"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type" : "object",
+      "required": ["mediacore"]
+    },
+    "MediaAudioUpdate" : {
+      "properties": {
+        "mediacore": {
+          "description": "The Media Core Properties common on all Media Resource Types,",
+          "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/MediaCoreResURI.swagger.json#/definitions/MediaCore"
+        },
+        "artists" : {
+          "description": "List of artists that recorded the song",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "album" : {
+          "description": "Which album the song and picture belong to (if applicable)",
+          "type": "string"
+        },
+        "albumartwork" : {
+          "description": "The array of icons that are used as the album artwork.",
+          "items": {
+            "$ref": "https://openconnectivityfoundation.github.io/core-extensions/swagger2.0/oic.r.icon.swagger.json#/definitions/Icon"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "tracknumber" : {
+          "description": "The track number from the album",
+          "type": "integer"
+        },
+        "sdp" : {
+          "description": "Array of strings, a string for each Session Description Protocol syntax.",
+          "items": {
+            "description": "Session Description Protocol is a format for describing streaming media communications parameters using the media and attribute lines defined in RFC4566.",
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "duration": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/duration",
+          "description": "Duration is the total length of the media audio with format pattern according to ISO 8601 duration. For example, P0Y0M0DT0H4M27S represents a duration of 4 minutes, and 27 seconds."
+        },
+        "producers" : {
+          "description": "List of producers that produced the song",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "composers" : {
+          "description": "List of composers that wrote the song",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "language": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/language-tag",
+          "description": "Current language of the audio media content with format pattern according to RFC 5646 language tag"
+        },
+        "n": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        }
+      },
+      "type" : "object",
+      "required": ["mediacore"]
+    }
+  }
+}
