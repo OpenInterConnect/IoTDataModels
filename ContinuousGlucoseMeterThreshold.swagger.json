@@ -136,7 +136,7 @@
           "readOnly": false
         },
         "gdr": {
-          "description": "This Property describes the Glucose Decrease rate of change threshold (%)",
+          "description": "This Property describes the Glucose Decrease rate of change threshold (%)",
           "type": "number",
           "minimum": 0.0,
           "readOnly": false
