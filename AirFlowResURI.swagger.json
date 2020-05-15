@@ -119,10 +119,10 @@
         "supporteddirections" : {
           "description": "The array of possible direction settings for this instance of the Resource Type.",
           "items": {
-            "minItems": 1,
-            "type": "string",
-            "uniqueItems": true
+            "type": "string"
           },
+          "minItems": 1,
+          "uniqueItems": true,
           "readOnly": true,
           "type": "array"
         },
