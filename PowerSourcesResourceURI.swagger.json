@@ -79,10 +79,10 @@
               "AC (Mains) Power",
               "Solar"
             ],
-            "minItems": 1,
-            "type": "string",
-            "uniqueItems": true
+            "type": "string"
           },
+          "minItems": 1,
+          "uniqueItems": true,
           "type": "array"
         },
         "sourcefault": {
