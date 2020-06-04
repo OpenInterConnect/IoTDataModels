@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Water Sensor",
-    "version": "20191118",
+    "version": "2019-11-18",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "HVAC Capacity",
-    "version": "20190724",
+    "version": "2019-07-24",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
