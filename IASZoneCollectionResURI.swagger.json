@@ -122,7 +122,7 @@
               {
                 "href": "/myPowersourceResURI",
                 "rep": {
-                  "powerSources": ["AC (Mains) Power"],
+                  "powersources": ["AC (Mains) Power"],
                   "sourcefault": false
                 }
               }
