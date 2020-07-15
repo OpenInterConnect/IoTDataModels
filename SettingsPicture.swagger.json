@@ -1,0 +1,280 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Device Settings Picture Resource Type",
+    "version": "2020-07-15",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2020 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/SettingsPictureResURI": {
+      "get": {
+        "description": "Gets current device picture settings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Gives the information for the device picture settings.",
+            "x-example": {
+              "rt": ["oic.r.settings.picture"],
+              "id": "unique_example_id",
+              "picture-mode": "standard",
+              "supported-picture-modes": ["dynamic","movie","natural","standard"],
+              "backlight": 5,
+              "contrast": 95,
+              "brightness": 45,
+              "sharpness": 50,
+              "colour": 50,
+              "colour-temperature": 0,
+              "tint": 0,
+              "picture-reset": false,
+              "picture-off": false,
+              "aspect-ratio": "16:9",
+              "supported-aspect-ratio": ["16:9", "4:3", "Set by Program", "Zoom", "Just Scan", "Cinema Zoom"]
+            },
+            "schema": {"$ref": "#/definitions/settings-picture"}
+          }
+        }
+      },
+      "post": {
+        "description": "Changes the device picture settings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-rw"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-example": {
+              "picture-mode": "standard",
+              "backlight": 5,
+              "contrast": 95,
+              "brightness": 45,
+              "sharpness": 50,
+              "colour": 50,
+              "colour-temperature": 0,
+              "tint": 0,
+              "picture-reset": false,
+              "picture-off": false,
+              "aspect-ratio": "16:9"
+            },
+            "schema": {"$ref": "#/definitions/settings-picture-update"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gives the information for the new device picture settings.",
+            "x-example": {
+              "picture-mode": "standard",
+              "backlight": 5,
+              "contrast": 95,
+              "brightness": 45,
+              "sharpness": 50,
+              "colour": 50,
+              "colour-temperature": 0,
+              "tint": 0,
+              "picture-reset": false,
+              "picture-off": false,
+              "aspect-ratio": "16:9"
+            },
+            "schema": {"$ref": "#/definitions/settings-picture"}
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-all": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw","oic.if.baseline"]
+    },
+    "interface-rw": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw"]
+    }
+  },
+  "definitions": {
+    "settings-picture": {
+      "title": "Retrieve device settings for picture",
+      "type": "object",
+      "properties": {
+        "rt": {
+          "description": "The Resource Type of Device Settings for picture",
+          "items": {
+            "enum": ["oic.r.settings.picture"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "if": {
+          "items": {
+            "enum": ["oic.if.rw", "oic.if.baseline"],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "picture-mode": {
+          "description": "Device Settings Picture Mode. Client can change picture-mode using supported-picture-modes property.",
+          "type": "string"
+        },
+        "supported-picture-modes": {
+          "description": "An array of possible picture modes the device supports. This property should be added if picture-mode property is supported.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "minItems": 1,
+          "type": "array"
+        },
+        "backlight": {
+          "description": "Quantized representation in the range -10 to 10 of the current sensed or set value for Device Settings Picture Backlight.",
+          "maximum": 10,
+          "minimum": -10,
+          "type": "integer"
+        },
+        "contrast": {
+          "description": "Quantized representation in the range 0-100 of the current sensed or set value for Device Settings Picture Contrast.",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "brightness": {
+          "description": "Quantized representation in the range 0-100 of the current sensed or set value for Device Settings Picture Brightness.",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "sharpness": {
+          "description": "Quantized representation in the range 0-100 of the current sensed or set value for Device Settings Picture Sharpness.",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "colour": {
+          "description": "Quantized representation in the range 0-100 of the current sensed or set value for Device Settings Picture Colour.",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "colour-temperature": {
+          "description": "Colour temperature range of -50 (Cool) to 50 (Warm).",
+          "maximum": 50,
+          "minimum": -50,
+          "type": "integer"
+        },
+        "tint": {
+          "description": "Quantized representation in the range 0-100 of the current sensed or set value for Device Settings Picture Tint. The closer to 100, the more saturated the red colour becomes. The closer to 0, the more saturated the green colour becomes.",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "picture-reset": {
+          "description": "Resets all picture settings to the default values.",
+          "type": "boolean"
+        },
+        "picture-off": {
+          "description": "This turns picture on and off.",
+          "type": "boolean"
+        },
+        "aspect-ratio": {
+          "description": "Device Settings Aspect Ratio. Client can change aspect-ratio using supported-aspect-ratio property.",
+          "type": "string"
+        },
+        "supported-aspect-ratio": {
+          "description": "An array of possible aspect ratio the device supports. This property should be added if aspect-ratio property is supported.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": ["brightness", "contrast"]
+    },
+    "settings-picture-update": {
+      "title": "Update device settings for picture",
+      "type": "object",
+      "properties": {
+        "picture-mode": {
+          "description": "Device Settings Picture Mode. Client can change picture-mode using supported-picture-modes property.",
+          "type": "string"
+        },
+        "backlight": {
+          "description": "Quantized representation in the range 0-10 of the current sensed or set value for Device Settings Picture Backlight.",
+          "maximum": 10,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "contrast": {
+          "description": "Quantized representation in the range 0-100 of the current sensed or set value for Device Settings Picture Contrast.",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "brightness": {
+          "description": "Quantized representation in the range 0-100 of the current sensed or set value for Device Settings Picture Brightness.",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "sharpness": {
+          "description": "Quantized representation in the range 0-100 of the current sensed or set value for Device Settings Picture Sharpness.",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "colour": {
+          "description": "Quantized representation in the range 0-100 of the current sensed or set value for Device Settings Picture Colour.",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "colour-temperature": {
+          "description": "Colour temperature range of -50 (Cool) to 50 (Warm).",
+          "maximum": 50,
+          "minimum": -50,
+          "type": "integer"
+        },
+        "tint": {
+          "description": "Quantized representation in the range 0-100 of the current sensed or set value for Device Settings Picture Tint. The closer to 100, the more saturated the red colour becomes. The closer to 0, the more saturated the green colour becomes.",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "picture-reset": {
+          "description": "Resets all picture settings to the default values.",
+          "type": "boolean"
+        },
+        "picture-off": {
+          "description": "This turns picture on and off.",
+          "type": "boolean"
+        },
+        "aspect-ratio": {
+          "description": "Device Settings Aspect Ratio. Client can change aspect-ratio using supported-aspect-ratio property.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

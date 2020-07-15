@@ -1,0 +1,126 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Device Settings System Resource Type",
+    "version": "2020-07-15",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2020 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/SettingsSystemResURI": {
+      "get": {
+        "description": "Gets current device system settings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Gives the information for the device system settings.",
+            "x-example": {
+              "rt": ["oic.r.settings.system"],
+              "id": "unique_example_id",
+              "n": "Living Room TV",
+              "language": "en"
+            },
+            "schema": {"$ref": "#/definitions/settings-system"}
+          }
+        }
+      },
+      "post": {
+        "description": "Changes the device system settings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-rw"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-example": {
+              "language": "en"
+            },
+            "schema": {"$ref": "#/definitions/settings-system-update"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gives the information for the new device system settings.",
+            "x-example": {
+              "language": "en"
+            },
+            "schema": {"$ref": "#/definitions/settings-system"}
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-all": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw","oic.if.baseline"]
+    },
+    "interface-rw": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw"]
+    }
+  },
+  "definitions": {
+    "settings-system": {
+      "title": "Retrieve device settings for system",
+      "type": "object",
+      "properties": {
+        "rt": {
+          "description": "The Resource Type of Device Settings for system",
+          "items": {
+            "enum": ["oic.r.settings.system"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "if": {
+          "items": {
+            "enum": ["oic.if.rw", "oic.if.baseline"],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "n": {
+          "description": "Friendly name of the Device.",
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "language": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/language-tag",
+          "description": "Current language of the device settings with format pattern according to RFC 5646 language tag"
+        }
+      }
+    },
+    "settings-system-update": {
+      "title": "Update device settings for system",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/language-tag",
+          "description": "Current language of the device settings with format pattern according to RFC 5646 language tag"
+        }
+      }
+    }
+  }
+}

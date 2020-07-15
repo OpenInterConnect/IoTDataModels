@@ -1,0 +1,165 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Device Settings Broadcasting Resource Type",
+    "version": "2020-07-15",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2020 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/SettingsBroadcastingResURI": {
+      "get": {
+        "description": "Gets current device broadcasting settings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Gives the information for the device broadcasting settings.",
+            "x-example": {
+              "rt": ["oic.r.settings.broadcasting"],
+              "id": "unique_example_id",
+              "antenna": "tv",
+              "supported-antennas": ["composite", "hdtv", "tv"],
+              "location-info": "location1",
+              "carrier-info": "carrier1",
+              "auto-program": false
+            },
+            "schema": {"$ref": "#/definitions/settings-broadcasting"}
+          }
+        }
+      },
+      "post": {
+        "description": "Changes the device broadcasting settings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-rw"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-example": {
+              "antenna": "tv",
+              "location-info": "location1",
+              "carrier-info": "carrier1",
+              "auto-program": false
+            },
+            "schema": {"$ref": "#/definitions/settings-broadcasting-update"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gives the information for the new device broadcasting settings.",
+            "x-example": {
+              "antenna": "tv",
+              "location-info": "location1",
+              "carrier-info": "carrier1",
+              "auto-program": false
+            },
+            "schema": {"$ref": "#/definitions/settings-broadcasting"}
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-all": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw","oic.if.baseline"]
+    },
+    "interface-rw": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw"]
+    }
+  },
+  "definitions": {
+    "settings-broadcasting": {
+      "title": "Retrieve device settings for broadcasting",
+      "type": "object",
+      "properties": {
+        "rt": {
+          "description": "The Resource Type of Device Settings for broadcasting",
+          "items": {
+            "enum": ["oic.r.settings.broadcasting"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "if": {
+          "items": {
+            "enum": ["oic.if.rw", "oic.if.baseline"],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "antenna": {
+          "description": "Type of antenna",
+          "type": "string"
+        },
+        "supported-antennas": {
+          "description": "The array of possible antennas the device supports. This property should be added if antenna is supported.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "minItems": 1,
+          "type": "array"
+        },
+        "location-info": {
+          "description": "Location information of the broadcast system.",
+          "type": "string"
+        },
+        "carrier-info": {
+          "description": "Carrier information of the broadcast system.",
+          "type": "string"
+        },
+        "auto-program": {
+          "description": "Scan for channels using Auto Program.",
+          "type": "boolean"
+        }
+      },
+      "required": ["antenna"]
+    },
+    "settings-broadcasting-update": {
+      "title": "Update device settings for broadcasting",
+      "type": "object",
+      "properties": {
+        "antenna": {
+          "description": "Type of antenna. Client can change antenna using supported-antennas property.",
+          "type": "string"
+        },
+        "location-info": {
+          "description": "Location information of the broadcast system.",
+          "type": "string"
+        },
+        "carrier-info": {
+          "description": "Carrier information of the broadcast system.",
+          "type": "string"
+        },
+        "auto-program": {
+          "description": "Scan for channels using Auto Program.",
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

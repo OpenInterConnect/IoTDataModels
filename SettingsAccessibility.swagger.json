@@ -1,0 +1,187 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Device Settings Accessibility Resource Type",
+    "version": "2020-07-15",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2020 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/SettingsAccessibilityResURI": {
+      "get": {
+        "description": "Gets current device accessibility settings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Gives the information for the device accessibility settings.",
+            "x-example": {
+              "rt": ["oic.r.settings.accessibility"],
+              "id": "unique_example_id",
+              "voice-guide": false,
+              "video-description": false,
+              "caption": false,
+              "caption-mode": "default",
+              "supported-caption-modes": ["cc1", "cc2", "cc3", "cc4", "text1", "text2", "text3", "text4", "default"],
+              "high-contrast": false,
+              "enlarge": false
+            },
+            "schema": {"$ref": "#/definitions/settings-accessibility"}
+          }
+        }
+      },
+      "post": {
+        "description": "Changes the device accessibility settings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-rw"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-example": {
+              "voice-guide": false,
+              "video-description": false,
+              "caption": false,
+              "caption-mode": "default",
+              "high-contrast": false,
+              "enlarge": false
+            },
+            "schema": {"$ref": "#/definitions/settings-accessibility-update"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gives the information for the new device accessibility settings.",
+            "x-example": {
+            "voice-guide": false,
+            "video-description": false,
+            "caption": false,
+            "caption-mode": "default",
+            "high-contrast": false,
+            "enlarge": false
+            },
+            "schema": {"$ref": "#/definitions/settings-accessibility"}
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-all": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw","oic.if.baseline"]
+    },
+    "interface-rw": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw"]
+    }
+  },
+  "definitions": {
+    "settings-accessibility": {
+      "title": "Retrieve device settings for accessibility",
+      "type": "object",
+      "properties": {
+        "rt": {
+          "description": "The Resource Type of Device Settings for accessibility",
+          "items": {
+            "enum": ["oic.r.settings.accessibility"],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "if": {
+          "items": {
+            "enum": ["oic.if.rw", "oic.if.baseline"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "voice-guide": {
+          "description": "Turns on or off voice guide.",
+          "type": "boolean"
+        },
+        "video-description": {
+          "description": "Turns on or off video description.",
+          "type": "boolean"
+        },
+        "caption": {
+          "description": "Turns on or off accessibility caption.",
+          "type": "boolean"
+        },
+        "caption-mode": {
+          "description": "Accessibility Caption Mode. Client can change caption-mode using supported-caption-modes property.",
+          "type": "string"
+        },
+        "supported-caption-modes": {
+          "description": "The array of possible caption modes the device supports. This property should be added if caption-mode is supported.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "minItems": 1,
+          "type": "array"
+        },
+        "high-contrast": {
+          "description": "Turns on or off high contrast.",
+          "type": "boolean"
+        },
+        "enlarge": {
+          "description": "Turns on or off print enlargement.",
+          "type": "boolean"
+        }
+      },
+      "required": ["caption"]
+    },
+    "settings-accessibility-update": {
+      "title": "Update device settings for accessibility",
+      "type": "object",
+      "properties": {
+        "voice-guide": {
+          "description": "Turns on or off voice guide.",
+          "type": "boolean"
+        },
+        "video-description": {
+          "description": "Turns on or off video description.",
+          "type": "boolean"
+        },
+        "caption": {
+          "description": "Turns on or off accessibility caption.",
+          "type": "boolean"
+        },
+        "caption-mode": {
+          "description": "Accessibility Caption Mode. Client can change caption-mode using supported-caption-modes property.",
+          "type": "string"
+        },
+        "high-contrast": {
+          "description": "Turns on or off high contrast.",
+          "type": "boolean"
+        },
+        "enlarge": {
+          "description": "Turns on or off print enlargement.",
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Device Settings Sound Resource Type",
+    "version": "2020-07-15",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2020 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/SettingsSoundResURI": {
+      "get": {
+        "description": "Gets current device sound settings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Gives the information for the device sound settings.",
+            "x-example": {
+              "rt": ["oic.r.settings.sound"],
+              "id": "unique_example_id",
+              "speaker": "internal",
+              "supported-speakers": ["hdmi", "headphone", "internal", "optical", "soundbar", "wireless"],
+              "sound-mode": "standard",
+              "supported-sound-modes": ["clearVoice","custom","music","standard"],
+              "auto-volume": true,
+              "dolby-atmos-compatibility": false
+            },
+            "schema": {"$ref": "#/definitions/settings-sound"}
+          }
+        }
+      },
+      "post": {
+        "description": "Changes the device sound settings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-rw"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-example": {
+              "speaker": "internal",
+              "sound-mode": "standard",
+              "auto-volume": true,
+              "dolby-atmos-compatibility": false
+            },
+            "schema": {"$ref": "#/definitions/settings-sound-update"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gives the information for the new device sound settings.",
+            "x-example": {
+              "speaker": "internal",
+              "sound-mode": "standard",
+              "auto-volume": true,
+              "dolby-atmos-compatibility": false
+            },
+            "schema": {"$ref": "#/definitions/settings-sound"}
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-all": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw","oic.if.baseline"]
+    },
+    "interface-rw": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw"]
+    }
+  },
+  "definitions": {
+    "settings-sound": {
+      "title": "Retrieve device settings for sound",
+      "type": "object",
+      "properties": {
+        "rt": {
+          "description": "The Resource Type of Device Settings for sound",
+          "items": {
+            "enum": ["oic.r.settings.sound"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "if": {
+          "items": {
+            "enum": ["oic.if.rw", "oic.if.baseline"],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "speaker": {
+          "description": "Device Settings Sound - Speaker. Client can change speaker using supported-speakers property.",
+          "type": "string"
+        },
+        "supported-speakers": {
+          "description": "The array of possible speakers the device supports. This property should be added if speaker is supported.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "minItems": 1,
+          "type": "array"
+        },
+        "sound-mode": {
+          "description": "Device Settings Sound - Sound Mode. Client can change sound-mode using supported-sound-modes property.",
+          "type": "string"
+        },
+        "supported-sound-modes": {
+          "description": "The array of possible sound modes the device supports. This property should be added if sound-mode is supported.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "minItems": 1,
+          "type": "array"
+        },
+        "auto-volume": {
+          "description": "Automatically equalizes the volume level when switching to antother channel.",
+          "type": "boolean"
+        },
+        "dolby-atmos-compatibility": {
+          "description": "Supports dolby-atmos mode.",
+          "type": "boolean"
+        }
+      },
+      "required": ["speaker"]
+    },
+    "settings-sound-update": {
+      "title": "Update device settings for sound",
+      "type": "object",
+      "properties": {
+        "speaker": {
+          "description": "Device Settings Sound - Speaker. Client can change speaker using supported-speakers property.",
+          "type": "string"
+        },
+        "sound-mode": {
+          "description": "Device Settings Sound - Sound Mode. Client can change sound-mode using supported-sound-modes property.",
+          "type": "string"
+        },
+        "auto-volume": {
+          "description": "Automatically equalizes the volume level when switching to antother channel.",
+          "type": "boolean"
+        },
+        "dolby-atmos-compatibility": {
+          "description": "Recent devices support dolby-atmos mode.",
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

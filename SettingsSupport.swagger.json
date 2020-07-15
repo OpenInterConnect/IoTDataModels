@@ -1,0 +1,132 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Device Settings Support Resource Type",
+    "version": "2020-07-15",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2020 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/SettingsSupportResURI": {
+      "get": {
+        "description": "Gets current device support settings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Gives the information for the device support settings.",
+            "x-example": {
+              "rt": ["oic.r.settings.support"],
+              "id": "unique_example_id",
+              "remote-management": false,
+              "software-auto-update": false
+            },
+            "schema": {"$ref": "#/definitions/settings-support"}
+          }
+        }
+      },
+      "post": {
+        "description": "Changes the device support settings.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-rw"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-example": {
+              "remote-management": false,
+              "software-auto-update": false
+            },
+            "schema": {"$ref": "#/definitions/settings-support-update"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gives the information for the new device support settings.",
+            "x-example": {
+              "remote-management": false,
+              "software-auto-update": false
+            },
+            "schema": {"$ref": "#/definitions/settings-support"}
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-all": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw","oic.if.baseline"]
+    },
+    "interface-rw": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw"]
+    }
+  },
+  "definitions": {
+    "settings-support": {
+      "title": "Retrieve device settings for support",
+      "type": "object",
+      "properties": {
+        "rt": {
+          "description": "The Resource Type of Device Settings for support",
+          "items": {
+            "enum": ["oic.r.settings.support"],
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "if": {
+          "items": {
+            "enum": ["oic.if.rw", "oic.if.baseline"],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "id": {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "remote-management": {
+          "description": "Allows support remote access so support can control user setting and troubleshoot problem.",
+          "type": "boolean"
+        },
+        "software-auto-update": {
+          "description": "Software - Auto Update.",
+          "type": "boolean"
+        }
+      }
+    },
+    "settings-support-update": {
+      "title": "Update device settings for support",
+      "type": "object",
+      "properties": {
+        "remote-management": {
+          "description": "Allows support remote access so support can control user setting and troubleshoot problem.",
+          "type": "boolean"
+        },
+        "software-auto-update": {
+          "description": "Software - Auto Update.",
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
