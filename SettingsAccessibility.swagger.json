@@ -18,7 +18,7 @@
       "get": {
         "description": "Gets current device accessibility settings.",
         "parameters": [
-          {"$ref": "#/parameters/interface-all"}
+          {"$ref": "#/parameters/interface-r"}
         ],
         "responses": {
           "200": {
@@ -68,14 +68,14 @@
             "high-contrast": false,
             "enlarge": false
             },
-            "schema": {"$ref": "#/definitions/settings-accessibility"}
+            "schema": {"$ref": "#/definitions/settings-accessibility-update"}
           }
         }
       }
     }
   },
   "parameters": {
-    "interface-all": {
+    "interface-r": {
       "in": "query",
       "name": "if",
       "type": "string",
@@ -99,7 +99,7 @@
             "enum": ["oic.r.settings.accessibility"],
             "type": "string"
           },
-          "minItems": 2,
+          "minItems": 1,
           "uniqueItems": true,
           "readOnly": true,
           "type": "array"
