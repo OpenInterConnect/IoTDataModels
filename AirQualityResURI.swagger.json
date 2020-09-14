@@ -2,11 +2,11 @@
   "swagger": "2.0",
   "info": {
     "title": "Air Quality",
-    "version": "2019-06-13",
+    "version": "2020-08-13",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
-      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+      "x-copyright": "copyright 2016-2017, 2019, 2020 Open Connectivity Foundation, Inc. All rights reserved."
     },
     "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
@@ -16,7 +16,7 @@
   "paths": {
     "/AirQualityResURI" : {
       "get": {
-        "description": "This Resource describes a qualitative or measured contaminant that can be used to infer Air Quality.\nThe Property \"valueType\" indicates a qualitative or measured reading within the contaminantvalue Property.\nThe Property \"contaminantvalue\" can contain the actual sensed value with units per contaminant type.\nQualitative is a representative value within the range provided where the minimum value is minimum contamination and maximum value is maximum contamination for the specific contaminant.\nThe Property \"contaminantvalue\" contains the actual measured or qualitative level.\nThe Property \"range\" contains the allowed range for the value that is being reported.\nIf valueType is 'Measured' then the units for the contaminant types are as follows:\n Methanol (also known as Formaldehyde): CH2O (ug/m^3),\n Carbon Dioxide: CO2 (ppm),\n Carbon Monoxide: CO (ppm),\n Particulate Matter (less than 1 micron in diameter): PM1 (ug/m^3),\n Particulate Matter (less than 2.5 microns in diameter): PM2.5 (ug/m^3),\n Particulate Matter (less than 10 microns in diameter): PM10 (ug/m^3),\n Volatile Organic Compounds: VOC (ug/m^3).",
+        "description": "This Resource describes a qualitative or measured contaminant that can be used to infer Air Quality.\nThe Property \"valueType\" indicates a qualitative or measured reading within the contaminantvalue Property.\nThe Property \"contaminantvalue\" can contain the actual sensed value with units per contaminant type.\nQualitative is a representative value within the range provided where the minimum value is minimum contamination and maximum value is maximum contamination for the specific contaminant.\nThe Property \"contaminantvalue\" contains the actual measured or qualitative level.\nThe Property \"range\" contains the allowed range for the value that is being reported.\nIf valueType is 'Measured' then the units for the contaminant types are as follows:\n Methanol (also known as Formaldehyde): CH2O (ug/m^3),\n Carbon Dioxide: CO2 (ppm),\n Carbon Monoxide: CO (ppm),\n Particulate Matter (less than 1 micron in diameter): PM1 (ug/m^3),\n Particulate Matter (less than 2.5 microns in diameter): PM2.5 (ug/m^3),\n Particulate Matter (less than 10 microns in diameter): PM10 (ug/m^3),\n Volatile Organic Compounds: VOC (ug/m^3),\n Ozone: 03 (ppm), Nitrogen dioxide: NO2 (ppm), Sulphur dioxide: SO2 (ppm) ",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -73,7 +73,10 @@
             "VOC",
             "Smoke",
             "Odor",
-            "AirPollution"
+            "AirPollution",
+            "NO2", 
+            "SO2", 
+            "O3"
           ],
           "readOnly": true,
           "type": "string"
