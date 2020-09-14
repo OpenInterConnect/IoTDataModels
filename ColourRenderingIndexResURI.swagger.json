@@ -1,0 +1,91 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Colour Rendering Index",
+    "version": "2020-08-14",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2020 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/ColourSaturationResURI" : {
+      "get": {
+        "description": "This Resource describes a Colour Rendering Index (CRI).\nThe Property \"cri\" is an number.\nA color rendering index (CRI) is a quantitative measure of the ability of a light source to reveal the colors of various objects faithfully in comparison with an ideal or natural light source.\n Light sources with a high CRI are desirable in color-critical applications such as neonatal care and art restoration.\n It is defined by the International Commission on Illumination (CIE) as follows:[1] \nColor rendering: Effect of an illuminant on the color appearance of objects by conscious or subconscious comparison with their color appearance under a reference illuminant.The value often quoted as 'CRI' on commercially available lighting products is properly called the CIE Ra value, 'CRI' being a general term and CIE Ra being the international standard color rendering index",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "",
+            "x-example": {
+                  "rt": ["oic.r.colour.renderingindex"],
+                  "if": ["oic.if.s", "oic.if.baseline"],
+                  "cri": 80.1
+                },
+              "schema": { "$ref": "#/definitions/RenderingIndex" }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface" : {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.s", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "RenderingIndex" : {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": ["oic.r.colour.renderingindex"],
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "cri": {
+          "description": "The colour rendering index.",
+          "maximum": 100,
+          "type": "number",
+          "readOnly": true
+        },
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.s",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": ["cri"]
+    }
+  }
+}
