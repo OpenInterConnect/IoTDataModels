@@ -1,0 +1,288 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Civic Location",
+    "version": "2020-09-09",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2020 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/CivicLocationResURI" : {
+      "get": {
+        "description": "This Resource describes the properties associated with the current civic location.\nThe Properties modelled follow the definition of the Location Object provided by RFC 4119 and clarified by RFC 5774.\nIf a Device supports this Resource but has no defined content for it (yet) the response to a RETRIEVE contains just the \"name\" Property containing an empty string",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+          "200": {
+            "description" : "RETRIEVES the current civic location. ",
+            "x-example": {
+              "rt": ["oic.r.location.civic"],
+              "if": ["oic.if.rw", "oic.if.baseline"],
+              "country": "US",
+              "national-a1": "New York",
+              "region-a2": "King's County",
+              "city-a3": "New York",
+              "citydivision-a4": "Manhattan",
+              "block-a5": "Midtown",
+              "street-a6": "5th",
+              "prd": "N",
+              "pod": "SW",
+              "sts": "Avenue",
+              "buildingnumber": 455,
+              "buildingnumbersuffix": "A",
+              "landmark": "Public Library",
+              "loc": "Basement Stacks",
+              "flr": -1,
+              "name": "I ain't afraid",
+              "postalcode": "10016"
+            },
+            "schema": { "$ref": "#/definitions/Civiclocation" }
+          }
+        }
+      },
+      "post": {
+        "description": "Update or set Civic Location information.",
+        "parameters": [
+          {"$ref": "#/parameters/interface-rw"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Civiclocation-Update" },
+            "x-example": {
+              "country": "GB",
+              "national-a1": "Scotland",
+              "region-a2": "Perthshire",
+              "city-a3": "Doune",
+              "street-a6": "Castle Hill",
+              "landmark": "Doune Castle",
+              "postalcode": "FK16 6EA"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "",
+            "x-example": {
+              "country": "GB",
+              "national-a1": "Scotland",
+              "region-a2": "Perthshire",
+              "city-a3": "Doune",
+              "street-a6": "Castle Hill",
+              "landmark": "Doune Castle",
+              "postalcode": "FK16 6EA"
+            },
+            "schema": { "$ref": "#/definitions/Civiclocation-Update" }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw", "oic.if.baseline"]
+    },
+    "interface-rw": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.rw"]
+    }
+  },
+  "definitions": {
+    "Civiclocation" : {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": ["oic.r.location.civic"],
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "country": {
+          "description": "The Country using the ISO 3166 two letter code.",
+          "type": "string"
+        },
+        "national-a1": {
+          "description": "The National subdivision (state, province etc).",
+          "type": "string"
+        },
+        "region-a2": {
+          "description": "The Regional subdivision (county, parish, district etc).",
+          "type": "string"
+        },
+        "city-a3": {
+          "description": "The City, Township, or similar.",
+          "type": "string"
+        },
+        "citydivision-a4": {
+          "description": "The division within a City or Town.",
+          "type": "string"
+        },
+        "block-a5": {
+          "description": "The block or neighbourhood.",
+          "type": "string"
+        },
+        "street-a6": {
+          "description": "The Street name.",
+          "type": "string"
+        },
+        "prd": {
+          "description": "Leading Street Direction.",
+          "type": "string",
+          "enum": ["N","S","E","W","NE","NW","SE","SW"]
+        },
+        "pod": {
+          "description": "Trailing Street Suffix.",
+          "type": "string",
+          "enum": ["N","S","E","W","NE","NW","SE","SW"]
+        },
+        "sts": {
+          "description": "Street Suffix.",
+          "type": "string"
+        },
+        "buildingnumber": {
+          "description": "House or Building Number.",
+          "type": "integer"
+        },
+        "buildingnumbersuffix": {
+          "description": "Building Number Suffix.",
+          "type": "string"
+        },
+        "landmark": {
+          "description": "Landmark or vanity address.",
+          "type": "string"
+        },
+        "loc": {
+          "description": "Additional location information.",
+          "type": "string"
+        },
+        "flr": {
+          "description": "Floor of the building. Zero (0) represents the floor that is at street (ground) level.",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Resident, Business etc.",
+          "type": "string"
+        },
+        "postalcode": {
+          "description": "Postal or Zip code.",
+          "type": "string"
+        },
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.rw",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": ["name"]
+    },
+    "Civiclocation-Update" : {
+      "properties": {
+        "country": {
+          "description": "The Country using the ISO 3166 two letter code.",
+          "type": "string"
+        },
+        "national-a1": {
+          "description": "The National subdivision (state, province etc).",
+          "type": "string"
+        },
+        "region-a2": {
+          "description": "The Regional subdivision (county, parish, district etc).",
+          "type": "string"
+        },
+        "city-a3": {
+          "description": "The City, Township, or similar.",
+          "type": "string"
+        },
+        "citydivision-a4": {
+          "description": "The division within a City or Town.",
+          "type": "string"
+        },
+        "block-a5": {
+          "description": "The block or neighbourhood.",
+          "type": "string"
+        },
+        "street-a6": {
+          "description": "The Street name.",
+          "type": "string"
+        },
+        "prd": {
+          "description": "Leading Street Direction.",
+          "type": "string",
+          "enum": ["N","S","E","W","NE","NW","SE","SW"]
+        },
+        "pod": {
+          "description": "Trailing Street Suffix.",
+          "type": "string",
+          "enum": ["N","S","E","W","NE","NW","SE","SW"]
+        },
+        "sts": {
+          "description": "Street Suffix.",
+          "type": "string"
+        },
+        "buildingnumber": {
+          "description": "House or Building Number.",
+          "type": "integer"
+        },
+        "buildingnumbersuffix": {
+          "description": "Building Number Suffix.",
+          "type": "string"
+        },
+        "landmark": {
+          "description": "Landmark or vanity address.",
+          "type": "string"
+        },
+        "loc": {
+          "description": "Additional location information.",
+          "type": "string"
+        },
+        "flr": {
+          "description": "Floor of the building. Zero (0) represents the floor that is at street (ground) level.",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Resident, Business etc.",
+          "type": "string"
+        },
+        "postalcode": {
+          "description": "Postal or Zip code.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}
