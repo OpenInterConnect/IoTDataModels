@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Colour Rendering Index",
-    "version": "2020-08-14",
+    "version": "2020-10-16",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -14,9 +14,9 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/ColourSaturationResURI" : {
+    "/ColourRenderingIndexResURI" : {
       "get": {
-        "description": "This Resource describes a Colour Rendering Index (CRI).\nThe Property \"cri\" is an number.\nA color rendering index (CRI) is a quantitative measure of the ability of a light source to reveal the colors of various objects faithfully in comparison with an ideal or natural light source.\n Light sources with a high CRI are desirable in color-critical applications such as neonatal care and art restoration.\n It is defined by the International Commission on Illumination (CIE) as follows:[1] \nColor rendering: Effect of an illuminant on the color appearance of objects by conscious or subconscious comparison with their color appearance under a reference illuminant.The value often quoted as 'CRI' on commercially available lighting products is properly called the CIE Ra value, 'CRI' being a general term and CIE Ra being the international standard color rendering index",
+        "description": "This Resource describes a Colour Rendering Index (CRI).\nThe Property \"cri\" is an number.\nA colour rendering index (CRI) is a quantitative measure of the ability of a light source to reveal the colours of various objects faithfully in comparison with an ideal or natural light source.\nLight sources with a high CRI are desirable in colour-critical applications such as neonatal care and art restoration.\nIt is defined by the International Commission on Illumination (CIE) as follows:[1] \nColour rendering: Effect of an illuminant on the colour appearance of objects by conscious or subconscious comparison with their colour appearance under a reference illuminant. The value often quoted as 'CRI' on commercially available lighting products is properly called the CIE Ra value, 'CRI' being a general term and CIE Ra being the international standard colour rendering index",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
