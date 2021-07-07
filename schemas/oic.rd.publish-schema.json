@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016,2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.rd.publish-schema.json#",
+  "title": "RD Publish & Update",
+  "definitions": {
+    "oic.rd.publish": {
+      "description": "Publishes resources as OIC Links into the resource directory",
+      "properties": {
+        "linkSet": {
+          "$ref": "oic.collection-schema.json#/definitions/oic.collection.setoflinks"
+        },
+        "ttl": {
+          "type": "integer",
+          "description": "Time to indicate a RD, how long to keep this published item. After this time (in seconds) elapses, the RD invalidates the links. To keep link alive the publishing device updates the ttl using the update schema"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [{ "$ref": "#/definitions/oic.rd.publish" }],
+  "required": [ "links" ],
+  "dependencies": {
+    "links": [ "ttl" ]
+  }
+}

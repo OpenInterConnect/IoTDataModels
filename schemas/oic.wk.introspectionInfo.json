@@ -1,0 +1,53 @@
+{
+  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.introspectionInfo.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Interconnect Consortium, Inc. All rights reserved.",
+  "title": "introspection resource",
+  "definitions": {
+    "oic.wk.introspectionInfo": {
+      "type": "object",
+      "properties": {
+        "urlInfo": {
+          "type": "array",
+          "description": "The valid range for the value Property",
+          "readOnly": true,
+          "minItems": 1,
+          "items": {
+            "type" : "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "description" : "url to download the description"
+              },
+              "protocol": {
+                "type": "string",
+                "enum": [ "coap", "coaps", "http", "https", "coap+tcp", "coaps+tcp" ],
+                "description" : "protocol to be used to download the introspection"
+              },
+              "content-type": {
+                "type": "string",
+                "enum": [ "application/json", "application/cbor" ],
+                "default" : "application/cbor",
+                  "description" : "content-type of the introspection data"
+              },
+              "version": {
+                "type": "integer",
+                "enum": [ 1 ],
+                "default" : 1,
+                "description" : "version the introspection data that can be downloaded"
+              }
+            },
+            "required" : [ "url","protocol"]
+          }
+        }
+      },
+      "required" : ["urlInfo"]
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/oic.wk.introspectionInfo"},
+    {"$ref": "oic.core-schema.json#/definitions/oic.core"}
+  ]
+}

@@ -1,0 +1,44 @@
+#%RAML 0.8
+title: OIC Root Device
+version: v1-20160622
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+
+schemas:
+  - Device: !include schemas/oic.wk.d-schema.json
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.r", "oic.if.baseline"]
+
+/oic/d:
+  displayName: Device
+  is: [ interface ]
+  description: |
+    Known resource that is hosted by every Server.
+    Allows for logical device specific information to be discovered.
+  get:
+    description: |
+      Retrieve the information about the Device
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Device
+            example: |
+              {
+                "n":    "Device 1",
+                "rt":   ["oic.wk.d"],
+                "di":   "54919CA5-4101-4AE4-595B-353C51AA983C",
+                "icv":  "ocf.1.0.0",
+                "dmv":  "ocf.res.1.0.0, ocf.sh.1.0.0",
+                "piid": "6F0AAC04-2BB0-468D-B57C-16570A26AE48"
+              }
