@@ -2,11 +2,11 @@
   "swagger": "2.0",
   "info": {
     "title": "Delay Defrost",
-    "version": "2019-02-15",
+    "version": "2021-01-26",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
-      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+      "x-copyright": "copyright 2016-2021 Open Connectivity Foundation, Inc. All rights reserved."
     },
     "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
@@ -16,7 +16,7 @@
   "paths": {
     "/DelayDefrostResURI" : {
       "get": {
-        "description": "This Resource describes the delay defrost function as defined by the US Energy Star Specifications.\nSee Energy Star Refrigerator Requirements Version 5 Section 4).\n(https://www.energystar.gov/sites/default/files/specs//private/ENERGY%20STAR%20Final%20Version%205.0%20Residential%20Refrigerators%20and%20Freezers%20Program%20Requirements.pdf)\nThe Property \"status\" is a boolean indicating whether the function is on, if off then defrost is scheduled as part of normal device operation.\nThe Property \"startTime\" is an ISO8601 encoded start time for the interval in which defrost shall not occur.\nThe Property \"stopTime\" is an ISO8601 encoded stop time for the interval in which defrost shall not occur.\nThe Property \"interval\" with additional range restrictions is the time in minutes of the period that starts at starttime (if not present the default is 240).\nThe Properties \"stopTime\" and \"interval\" are mutually exclusive; they cannot both be present in a Resource instance.",
+        "description": "This Resource describes the delay defrost function as defined by the US Energy Star Specifications.\nSee Energy Star Refrigerator Requirements Version 5 Section 4).\n(https://www.energystar.gov/sites/default/files/specs//private/ENERGY%20STAR%20Final%20Version%205.0%20Residential%20Refrigerators%20and%20Freezers%20Program%20Requirements.pdf)\nThe Property \"status\" is a boolean indicating whether the function is on, if off then defrost is scheduled as part of normal device operation.\nThe Property \"startTime\" is an RFC3339 full-time encoded start time for the interval in which defrost shall not occur.\nThe Property \"stopTime\" is an RFC3339 full-time encoded stop time for the interval in which defrost shall not occur.\nThe Property \"interval\" with additional range restrictions is the time in minutes of the period that starts at starttime (if not present the default is 240).\nThe Properties \"stopTime\" and \"interval\" are mutually exclusive; they cannot both be present in a Resource instance.",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -27,7 +27,7 @@
                 {
                   "rt": ["oic.r.delaydefrost"],
                   "if": ["oic.if.a", "oic.if.baseline"],
-                  "startTime": "T06:00:00Z",
+                  "startTime": "06:00:00Z",
                   "status": false
                 },
               "schema": { "$ref": "#/definitions/DelayDefrost" }
@@ -42,11 +42,11 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/DelayDefrost" },
+            "schema": { "$ref": "#/definitions/DelayDefrost-Update" },
             "x-example":
               {
                 "status": true,
-                "startTime": "T06:00:00Z",
+                "startTime": "06:00:00Z",
                 "interval": 180
               }
           }
@@ -57,7 +57,7 @@
               "x-example":
                 {
                   "status": true,
-                  "startTime": "T06:00:00Z",
+                  "startTime": "06:00:00Z",
                   "interval": 180
                 }
                 ,
@@ -68,7 +68,7 @@
               "x-example":
                 {
                   "status": true,
-                  "startTime": "T06:00:00Z",
+                  "startTime": "06:00:00Z",
                   "interval": 180
                 },
               "schema": { "$ref": "#/definitions/DelayDefrost" }
@@ -114,12 +114,12 @@
         "stopTime": {
           "description": "Stop time for the time period, if present interval cannot be present.  This is the time of day at which the delay interval stops.",
           "type": "string",
-          "pattern": "^[T]([0-2][0-9]:[0-5][0-9]:[0-5][0-9])([zZ]|([\\+-])([01]\\d|2[0-3]):?([0-5]\\d))$"
+          "format": "time"
         },
         "startTime": {
           "description": "Start time for the time period. This is the time of day at which the delay interval starts.",
           "type": "string",
-          "pattern": "^[T]([0-2][0-9]:[0-5][0-9]:[0-5][0-9])([zZ]|([\\+-])([01]\\d|2[0-3]):?([0-5]\\d))$"
+          "format": "time"
         },
         "n": {
             "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
@@ -142,7 +142,35 @@
           "type": "array"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": ["status"]
+    },
+    "DelayDefrost-Update" : {
+      "properties": {
+        "status": {
+          "description": "Indicates whether any supported delay defrost function is active.",
+          "type": "boolean"
+        },
+        "interval": {
+          "description": "Defrost interval as defined by Energy Star.",
+          "minimum": 1,
+          "maximum": 1440,
+          "default": 240,
+          "type": "integer"
+        },
+        "stopTime": {
+          "description": "Stop time for the time period, if present interval cannot be present.  This is the time of day at which the delay interval stops.",
+          "type": "string",
+          "format": "time"
+        },
+        "startTime": {
+          "description": "Start time for the time period. This is the time of day at which the delay interval starts.",
+          "type": "string",
+          "format": "time"
+        }
+      },
+      "type": "object",
+      "required": ["status"]
     }
   }
 }
