@@ -2,11 +2,11 @@
   "swagger": "2.0",
   "info": {
     "title": "Media Core Resource Type",
-    "version": "2019-11-27",
+    "version": "2021-02-01",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
-      "x-copyright": "Copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+      "x-copyright": "Copyright 2020-21 Open Connectivity Foundation, Inc. All rights reserved."
     },
     "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
@@ -16,7 +16,7 @@
   "paths": {
     "/MediaCoreResURI" : {
       "get": {
-        "description": "This OCF Resource specifies the core media types that an OCF Device supports.",
+        "description": "This Resource specifies the Properties associated with all media types that a Device may support.",
         "parameters": [
           {"$ref": "#/parameters/interface-r"}
         ],
@@ -27,6 +27,7 @@
               "rt": ["oic.r.media.core"],
               "id": "unique_example_id",
               "title": "PDF File 1",
+              "shortdescription": "Short description for PDF File 1",
               "description": "Long user-friendly synopsis of PDF File 1",
               "mimetype": "application/pdf",
               "mediafile": "file://example/url/PDF_File1.pdf",
@@ -59,6 +60,7 @@
             "required": true,
             "x-example": {
               "title": "New PDF File 1",
+              "shortdescription": "New short description for PDF File 1",
               "description": "Long user-friendly synopsis of PDF File 1",
               "mimetype": "application/pdf",
               "mediafile": "file://example/url/PDF_File1.pdf",
@@ -73,8 +75,7 @@
                   "height": 256,
                   "media": "file://example/url/media1.png"
                 }
-              ],
-              "copyright": "Copyright notice by the copyright holder for PDF File 1"
+              ]
             },
             "schema": {"$ref": "#/definitions/MediaCoreUpdate"}
           }
@@ -84,6 +85,7 @@
             "description" : "Sets the core information for the specified or the current media.",
             "x-example": {
               "title": "PDF File 1",
+              "shortdescription": "New short description for PDF File 1",
               "description": "Long user-friendly synopsis of PDF File 1",
               "mimetype": "application/pdf",
               "mediafile": "file://example/url/PDF_File1.pdf",
@@ -99,8 +101,7 @@
                   "height": 256,
                   "media": "file://example/url/media1.png"
                 }
-              ],
-              "copyright": "Copyright notice by the copyright holder for PDF File 1"
+              ]
             },
             "schema": {"$ref": "#/definitions/MediaCoreUpdate"}
           }
@@ -140,9 +141,12 @@
           "description": "Specifies the Short user-friendly name of the media.",
           "type": "string"
         },
+        "shortdescription" : {
+          "description": "Specifies a short description that is associated with the media (e.g. a tag line).",
+          "type": "string"
+        },
         "description" : {
           "description": "Specifies the Long user-friendly synopsis of the media content.",
-          "readOnly": true,
           "type": "string"
         },
         "mimetype" : {
@@ -229,9 +233,12 @@
           "description": "Specifies the Short user-friendly name of the media.",
           "type": "string"
         },
+        "shortdescription" : {
+          "description": "Specifies a short description that is associated with the media (e.g. a tag line).",
+          "type": "string"
+        },
         "description" : {
           "description": "Specifies the Long user-friendly synopsis of the media content.",
-          "readOnly": true,
           "type": "string"
         },
         "mimetype" : {
@@ -286,11 +293,6 @@
           "minItems": 1,
           "type": "array"
         },
-        "copyright" : {
-          "description": "Copyright notice by the copyright holder.",
-          "readOnly": true,
-          "type": "string"
-        },
         "n": {
           "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
         }
@@ -301,13 +303,11 @@
       "properties": {
         "category": {
           "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.genre.properties-schema.json#/definitions/category",
-          "description": "Genre Category for Media Information.",
-          "readOnly": true
+          "description": "Genre Category for Media Information."
         },
         "subcategory": {
           "$ref": "https://openconnectivityfoundation.github.io/IoTDataModels/schemas/oic.genre.properties-schema.json#/definitions/subcategory",
-          "description": "Genre Sub-Category for Media Information.",
-          "readOnly": true
+          "description": "Genre Sub-Category for Media Information."
         }
       },
       "type": "object",
