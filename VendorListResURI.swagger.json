@@ -107,8 +107,8 @@
           "type": "array"
         },
         "status": {
-        "description": "Current operation status based on the selected current Vendor.\n novendor:this is the state when the selected vendor is none. \n processing:this is the state when a vendor is selected and the device automatically moves to this state.\n vendorset:this is the state when the vendor has been set and the processing that took place has been successful.\n failed:this is the state when the vendor has been set and the processing that took place was failed. The only way to come out of this state is to UPDATE \"currentvendor\" with a new vendor. The \"status\" is only writable when the \"status\" is processing and from that state can be set to either \"failed\" if the user determines previous processing failed, or to \"vendorset\" if the user determines that previous processing was successful. ",
-        "enum": ["novendor","processing","vendorset","failed"],
+        "description": "Current operation status based on the selected current Vendor.\n novendor:this is the state when the selected vendor is none. \n processing:this is the state when a vendor is selected and the device automatically moves to this state.\n venderset:this is the state when the vendor has been set and the processing that took place has been successful.\n failed:this is the state when the vendor has been set and the processing that took place was failed. The only way to come out of this state is to UPDATE \"currentvendor\" with a new vendor. The \"status\" is only writable when the \"status\" is processing and from that state can be set to either \"failed\" if the user determines previous processing failed, or to \"vendorset\" if the user determines that previous processing was successful. ",
+        "enum": ["novendor","processing","venderset","failed"],
         "type": "string"
         },
         "n": {
@@ -144,7 +144,7 @@
           "type": "string"
         },
          "status": {
-          "description": "The current operation status. Only when the \"status\" is \"processing\", it is writable and it only can be set to \"failed\" or \"vendorset\". The device should reject an attempt to set the \"status\" to values other than \"failed\" and \"vendorset\".And the device should reject any attempt to update the \"status\" when the \"status\" is not \"processing\".",
+          "description": "The current operation status. Only when the \"status\" is \"processing\", it is writable and it only can be set to \"failed\" or \"venderset\". The device should reject an attempt to set the \"status\" to values other than \"failed\" and \"venderset\".And the device should reject any attempt to update the \"status\" when the \"status\" is not \"processing\".",
           "type": "string"
         }
       }
