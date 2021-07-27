@@ -2,11 +2,11 @@
   "swagger": "2.0",
   "info": {
     "title": "PowerSource",
-    "version": "2019-05-13",
+    "version": "2021-02-01",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
-      "x-copyright": "copyright 2016-2017, 2019 Open Connectivity Foundation, Inc. All rights reserved."
+      "x-copyright": "copyright 2016-2017, 2019, 2021 Open Connectivity Foundation, Inc. All rights reserved."
     },
     "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
@@ -16,7 +16,7 @@
   "paths": {
     "/PowerSourceResURI" : {
       "get": {
-        "description": "This Resource list the available power sources for the Device. The Property \"powersources\" is a list that is read only and is informative only.\nIf there is more than 1 power source active, use multiple Resources to indicate the active power sources. If the power source is unknown use the value \"unknown\".",
+        "description": "This Resource list the available power sources for the Device. The Property \"powersources\" is a list that is read only and is informative only. The Property \"active\" indicates the currently active power source from the provided list. \nIf there is more than 1 power source active, use multiple Resources to indicate the active power sources. If the active power source is unknown use the value \"unknown\".",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -36,7 +36,8 @@
                 "AC (Mains) Power",
                 "Solar"
               ],
-              "sourcefault": false
+              "sourcefault": false,
+              "active": "AC (Mains) Power"
             },
             "schema": { "$ref": "#/definitions/powerSourceSchema" }
           }
@@ -53,6 +54,20 @@
     }
   },
   "definitions": {
+    "powersourcesenum": {
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "unknown",
+        "DC power",
+        "Internal Battery",
+        "External Battery",
+        "Power over Ethernet",
+        "USB",
+        "AC (Mains) Power",
+        "Solar"
+      ]
+    },
     "powerSourceSchema" : {
       "properties": {
         "rt": {
@@ -69,17 +84,7 @@
         },
         "powersources": {
           "items": {
-            "enum": [
-              "unknown",
-              "DC power",
-              "Internal Battery",
-              "External Battery",
-              "Power over Ethernet",
-              "USB",
-              "AC (Mains) Power",
-              "Solar"
-            ],
-            "type": "string"
+            "$ref": "#/definitions/powersourcesenum"
           },
           "minItems": 1,
           "uniqueItems": true,
@@ -89,6 +94,10 @@
           "description": "Fault detected in currently active power source. True = fault detected",
           "readOnly": true,
           "type": "boolean"
+        },
+        "active": {
+          "$ref": "#/definitions/powersourcesenum",
+          "description": "The currently active power source. One of the powersources"
         },
         "n": {
             "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
@@ -112,7 +121,7 @@
         }
       },
       "type": "object",
-      "required": ["powersources"]
+      "required": ["powersources","active"]
     }
   }
 }
