@@ -1,0 +1,150 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "TV Apps",
+    "version": "2021-03-02",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2021 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/TVappsResURI" : {
+      "get": {
+        "description": "This Resource describes an app launch function, which can show an app list and the launched app. \nThe Property \"applist\" is a list of applications already installed. \nThe Property \"app\" is the name of the application which the user wants to launch. \nThe property \"status\" is current operation status of application or set operation. running : App is running or launch app, stopped : App is stopped or stop app. \nWhen an app is launched any currently running app is automatically stopped.",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "RETRIEVES the current TVapps function state.",
+              "x-example":
+                {
+                  "rt": ["oic.r.tv.apps"],
+                  "if": ["oic.if.a", "oic.if.baseline"],
+                  "applist": ["none", "youtube", "netflix", "hulu", "spotify"],
+                  "app": "youtube",
+                  "status" : "running"
+                },
+              "schema": { "$ref": "#/definitions/TVapps" }
+            }
+        }
+      },
+      "post": {
+        "description": "Launch or stop tv application that the user wants.",
+        "parameters": [
+          {"$ref": "#/parameters/interface"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/TVappsUpdate" },
+            "x-example":
+              {
+                "app": "hulu",
+                "status": "running"
+              }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "Show result",
+              "x-example":
+                {
+                  "app": "hulu",
+                  "status": "running"
+                },
+              "schema": { "$ref": "#/definitions/TVappsUpdate" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.a", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "TVapps" : {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": ["oic.r.tv.apps"],
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "applist": {
+          "description": "The list of the applications already installed. The list shall include \"none\" as meaning no app launched",
+          "items": {
+              "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "app": {
+            "description": "The name of application which is active or the user wants to launch. Has to be from the applist.",
+            "type": "string"
+        },
+        "status": {
+            "description": "Current operational status of the application. running : App is running, stopped : App is stopped.",
+            "enum": ["running","stopped"],
+            "type": "string"
+        },
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.a",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": ["applist", "app", "status"]
+    },
+    "TVappsUpdate" : {
+    	"properties": {
+        "app": {
+          "description": "The name of application which the user wants to control.",
+          "type": "string"
+	      },
+        "status": {
+          "description": "Desired operational status of the application. running : App is running, stopped : App is stopped.",
+          "enum": ["running","stopped"],
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": ["app", "status"]
+    }
+  }
+}
