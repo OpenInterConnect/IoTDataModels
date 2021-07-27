@@ -1,0 +1,161 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Dali",
+    "version": "2021-02-19",
+    "license": {
+        "name": "OCF Data Model License",
+        "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+        "x-copyright": "Copyright 2021 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/dali" : {
+      "get": {
+        "description": "This Resource describes the DALI write resource, able to convey FF and BF according  IEC 62386-104, Digital  addressable lighting interface - Part 104: General requirements - Wireless and alternative wired system.\nRetrieve on this Resource only returns common Properties.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-baseline"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "rt": ["oic.r.dali"],
+                  "if": ["oic.if.w", "oic.if.baseline"]
+                },
+              "schema": { "$ref": "#/definitions/Dali" }
+            }
+        }
+      },
+      "post": {
+        "description": "The POST can be used to issue an DALI FF frame. The command can be issued as Multicast (SSM) or as unicast. The Multicast command will have no response. The unicast command can have a BF response.",
+        "parameters": [
+          {"$ref": "#/parameters/interface"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Dali_command" },
+            "x-example":
+              {
+                "prio" : 1,
+                "tbus": [2, 3],
+                "pld": [3, 5, 6],
+                "pld_s": 3
+              }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "The BF response of a unicast command, not required",
+              "x-example":
+                {
+                  "prio" : 1,
+                  "tbus": [2, 3],
+                  "pld": [3, 5, 6],
+                  "pld_s": 3
+                },
+              "schema": { "$ref": "#/definitions/Dali_command" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface" : {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.w", "oic.if.baseline"]
+    },
+     "interface-baseline" : {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "Dali": {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": ["oic.r.dali"],
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.w",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "Dali_command": {
+      "properties": {
+        "prio": {
+          "description": "The priority of the command.",
+          "type": "integer",
+          "default": 0
+        },
+        "st": {
+          "description": "The command has to be send twice.",
+          "type": "boolean",
+          "default" : false
+        },
+        "pld_s": {
+          "description": "The amount of integers in the Dali payload.",
+          "type": "integer"
+        },
+        "pld": {
+          "description": "Each DALI byte is conveyed as an byte",
+          "items": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/uint8"
+          },
+          "type": "array"
+        },
+        "tbus": {
+          "description": "The set of  bus identifiers to which the command should be applied.",
+          "items": {
+            "type": "integer"
+          },
+          "type": "array",
+          "default" : [ 0 ]
+        },
+        "src": {
+          "description": "assigned source address. -1 means not yet assigned by the Application controller.",
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "required": ["pld", "pld_s"]
+    }
+  }
+}
