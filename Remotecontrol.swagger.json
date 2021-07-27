@@ -1,0 +1,144 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Remote Control",
+    "version": "2021-02-25",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "copyright 2021 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/RemoteControlResURI" : {
+      "get": {
+        "description": "This Resource describes a remote control function, which helps users to control a device without the actual remote controller provided by the manufacturer.",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "RETRIEVES the supported Remote Control actions.",
+              "x-example":
+                {
+                  "rt": ["oic.r.remotecontrol"],
+                  "supportedactions": ["arrowup","arrowdown","arrowleft","arrowright","enter","return",
+                    "exit","home","1","2","3","4","5","6","7","8","9","0", "-"]
+                },
+              "schema": { "$ref": "#/definitions/RemoteControl" }
+            }
+        }
+      },
+      "post": {
+        "description": "Click the remote controller button to perform the actions desired by the user. If the key remains pressed, the POST will be repeated at 100ms intervals.",
+        "parameters": [
+          {"$ref": "#/parameters/interface"},
+          {"$ref": "#/parameters/keypress"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "Show pressed key(s)",
+              "x-example":
+                {
+                  "selectedactions": ["arrowup"]
+                },
+              "schema": { "$ref": "#/definitions/UpdateResponse" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface": {
+      "in": "query",
+      "name": "if",
+      "type": "string",
+      "enum": ["oic.if.a", "oic.if.baseline"]
+    },
+    "keypress": {
+    "name": "action",
+    "in": "query",
+    "type": "string",
+    "required": true,
+    "enum": ["arrowup","arrowdown","arrowleft","arrowright","enter","return","exit","home",
+      "1","2","3","4","5","6","7","8","9","0","-"],
+    "x-example":
+      {
+        "action": "arrowup"
+      }
+    }
+  },
+  "definitions": {
+    "RemoteControl" : {
+      "properties": {
+        "rt": {
+          "description": "The Resource Type.",
+          "items": {
+            "enum": ["oic.r.remotecontrol"],
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "supportedactions": {
+            "type": "array",
+            "minItems": 1,
+            "readOnly": true,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": ["arrowup","arrowdown","arrowleft","arrowright","enter","return","exit","home",
+                "1","2","3","4","5","6","7","8","9","0","-"]
+            },
+            "description": "The list of of supported remote control key values."
+        },
+        "n": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+            "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "if": {
+          "description": "The OCF Interface set supported by this Resource.",
+          "items": {
+            "enum": [
+              "oic.if.a",
+              "oic.if.baseline"
+            ],
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": ["supportedactions"]
+    },
+    "UpdateResponse": {
+      "properties": {
+        "selectedactions": {
+          "type": "array",
+          "minItems": 1,
+          "readOnly": true,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["arrowup","arrowdown","arrowleft","arrowright","enter","return","exit","home",
+              "1","2","3","4","5","6","7","8","9","0","-"]
+          },
+          "description": "The list of of actions selected by a Client in the UPDATE."
+        }
+      },
+      "type": "object"
+    }
+  }
+}
