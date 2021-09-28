@@ -122,8 +122,9 @@
               {
                 "href": "/myPowersourceResURI",
                 "rep": {
-                  "powersources": ["AC (Mains) Power"],
-                  "sourcefault": false
+                  "powersources": ["Internal Battery","AC (Mains) Power"],
+                  "sourcefault": false,
+                  "active": "Internal Battery"
                 }
               }
             ]
