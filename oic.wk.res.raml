@@ -1,0 +1,58 @@
+#%RAML 0.8
+title: Discoverable Resources
+version: v1-20160622
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+
+schemas:
+  - Resources: !include schemas/oic.wk.res-schema.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.ll", "oic.if.baseline"]
+
+/oic/res:
+  displayName: Discoverable Resources
+  is: [ interface ]
+  description: |
+    The resource through which the corresponding Server is discovered and introspected for available resources.
+  get:
+    description: |
+      Retrieve the discoverable resource set
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: Resources
+            example: |
+              [
+                {
+                "rt": ["oic.wk.res"],
+                "di": "0685B960-736F-46F7-BEC0-9E6CBD61ADC1",
+                "links":
+                  [
+                    {
+                      "href": "/res",
+                      "rel":  "self",
+                      "rt":   ["oic.r.collection"],
+                      "if":   ["oic.if.ll"]
+                    },
+                    {
+                      "href": "/smartDevice",
+                      "rel":  "contained",
+                      "rt":   ["oic.d.smartDevice"],
+                      "if":   ["oic.if.a"]
+                    }
+                  ]
+                }
+              ]

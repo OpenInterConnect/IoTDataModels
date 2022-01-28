@@ -1,0 +1,251 @@
+#%RAML 0.8
+#RAML for OIC Collections.
+# This is an initial version; has to be converted to a RAML resource type so that it can be used when defining resource that
+# are collections. Also needs to use traits to have the same query parameters recognized for all the methods.
+title: Collections
+version: 1.0
+documentation:
+
+  - title: OIC Collections
+    content: |
+      Collection is an extensions of OIC Resource concept.
+      In addition to properties, collections also have an
+      array of OIC web links.
+
+  - title: Introduction
+    content: |
+      Collections can be used to group sets of resources,
+      build structures like topologies, to define a
+      dependency relationship etc
+
+  - title: Resource Design
+    content: |
+      The collection resource is specified as three Base URIs, one
+      for each interface which is supported by the collection, in addition
+      to the resource interfaces e.g. oic.if.s, oic.if.rw
+
+      THese three URIs are typically the same URI path, only distinguished
+      by the different query parameter traits
+
+schemas:
+  - sbaseline: !include schemas/oic.collection-schema.json
+  - sbatch-retrieve: !include schemas/oic.collection.batch-retrieve-schema.json
+  - sbatch-update: !include schemas/oic.collection.batch-update-schema.json
+  - slinks: !include schemas/oic.collection.linkslist-schema.json
+
+traits:
+  - interface-baseline:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline"]
+
+  - interface-b:
+      queryParameters:
+        if:
+          enum: ["oic.if.b"]
+
+  - interface-ll:
+      queryParameters:
+        if:
+          enum: ["oic.if.ll"]
+
+
+/CollectionBaselineInterfaceURI:
+  description: |
+    OCF Collection Resource Type contains properties and links.
+    The oic.if.baseline interface exposes a representation of
+    the links and the properties of the collection resource itself
+
+
+  displayName: OCF Collection
+  is: [ interface-baseline ]
+
+  get:
+    description: |
+      Retrieve on Baseline Interface
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: sbaseline
+            example: |
+              {
+                "rt": ["oic.wk.col"],
+                "id": "unique_example_id",
+                "rts": [ "oic.r.switch.binary", "oic.r.airflow" ],
+                "links": [
+                  {
+                    "href": "switch",
+                    "rt":   ["oic.r.switch.binary"],
+                    "if":   ["oic.if.a", "oic.if.baseline"]
+                  },
+                  {
+                    "href": "airFlow",
+                    "rt":   ["oic.r.airflow"],
+                    "if":   ["oic.if.a", "oic.if.baseline"]
+                  }
+                ]
+              }
+
+
+  post:
+    description: |
+      Update on Baseline Interface
+
+    body:
+      application/json:
+        schema: sbaseline
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: sbaseline
+
+
+/CollectionBatchInterfaceURI:
+    description: |
+      OCF Collection Resource Type contains properties and links.
+      The oic.if.b interfacce exposes a composite representation of the
+      resources pointed to by the links
+
+    displayName: Batch Representation of an OCF COllection
+    is: [ interface-b ]
+
+    get:
+      description: |
+        Retrieve on Batch Interface
+
+      responses:
+        200:
+          description: "All targets returned OK status (HTTP 200 or CoAP 2.05 Content)"
+          body:
+            application/json:
+              schema: sbatch-retrieve
+              example: |
+                [
+                  {
+                    "href": "switch",
+                    "rep":
+                      {
+                        "value": true
+                      }
+                  },
+                  {
+                    "href": "airFlow",
+                    "rep":
+                      {
+                        "direction": "floor",
+                        "speed":      3
+                      }
+                  }
+                ]
+        404:
+          description: "One or more targets did not return an OK status, return a representation containing returned properties from the targets that returned OK"
+          body:
+            application/json:
+              schema: sbatch-retrieve
+              example: |
+                [
+                  {
+                    "href": "switch",
+                    "rep":
+                      {
+                        "value": true
+                      }
+                  }
+                ]
+
+    post:
+      description: |
+        Update on Batch Interface
+
+      body:
+        application/json:
+          schema: sbatch-update
+          example: |
+            {
+              "direction": "demist",
+              "speed": 5
+            }
+
+      responses:
+        200:
+          description: "all targets returned OK status (HTTP 200 or CoAP 2.04 Changed) return a representation of the current state of all targets"
+          body:
+            application/json:
+              schema: sbatch-retrieve
+              example: |
+                [
+                  {
+                    "href": "switch",
+                    "rep":
+                      {
+                        "value": true
+                      }
+                  },
+                  {
+                    "href": "airFlow",
+                    "rep":
+                      {
+                        "direction": "demist",
+                        "speed": 5
+                      }
+                  }
+                ]
+
+        403:
+          description: "one or more targets did not return OK status; return a retrieve representation of the current state of all targets in the batch"
+          body:
+            application/json:
+              schema: sbatch-retrieve
+              example: |
+                [
+                  {
+                    "href": "switch",
+                    "rep":
+                      {
+                        "value": true
+                      }
+                  },
+                  {
+                    "href": "airFlow",
+                    "rep":
+                      {
+                        "direction": "floor",
+                        "speed": 3
+                      }
+                  }
+                ]
+
+/CollectionLinkListInterfaceURI:
+    description: |
+      OCF Collection Resource Type contains properties and links.
+      The oic.if.ll interface exposes a representation of the links
+
+    displayName: Batch Representation of an OCF Collection
+    is: [ interface-ll ]
+
+    get:
+      description: |
+        Retrieve on Link List Interface
+
+      responses:
+        200:
+          body:
+            application/json:
+              schema: slinks
+              example: |
+                [
+                  {
+                    "href": "switch",
+                    "rt":   ["oic.r.switch.binary"],
+                    "if":   ["oic.if.a", "oic.if.baseline"]
+                  },
+                  {
+                    "href": "airFlow",
+                    "rt":   ["oic.r.airflow"],
+                    "if":   ["oic.if.a", "oic.if.baseline"]
+                  }
+                ]

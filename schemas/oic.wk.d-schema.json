@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.d-schema.json#",
+  "definitions": {
+    "oic.wk.d": {
+      "type": "object",
+      "properties": {
+        "n": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Human friendly name"
+        },
+        "di": {
+          "$ref": "oic.types-schema.json#/definitions/uuid",
+          "readOnly": true,
+          "description": "Unique identifier for device (UUID)"
+        },
+        "icv": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "The version of the OIC Server"
+        },
+        "dmv": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "The spec version of the vertical and/or resource specification"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.wk.d" }
+  ],
+  "required": [ "n", "di", "icv", "dmv" ]
+}

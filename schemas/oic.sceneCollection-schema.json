@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.sceneCollection-schema.json#",
+  "title" : "Scene Collection",
+  "definitions": {
+    "oic.sceneCollection": {
+      "type": "object",
+      "properties": {
+        "lastScene": {
+          "type": "string",
+          "description": "Last selected Scene, shall be part of sceneValues",
+          "format": "UTF8"
+        },
+        "sceneValues": {
+          "type": "string",
+          "readOnly": true,
+          "description": "All available scene values",
+          "format": "CSV"
+        },
+        "n": {
+          "type": "string",
+          "description": "Used to name the Scene collection",
+          "format": "UTF8"
+        },
+        "id": {
+            "type": "string",
+                        "description" : "A unique string that could be a hash or similarly unique"
+        },
+        "rts": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Defines the list of allowable resource types in links included in the collection; new links being created can only be from this list",
+          "format": "UTF8"
+        },
+        "links": {
+          "type": "array",
+          "description": "Array of OIC web links that are reference from this collection",
+          "items" : {
+            "allOf": [
+              { "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link" },
+              { "required" : [ "ins" ] }
+            ]
+          }
+        }
+      },
+      "required": [ "lastScene","sceneValues","rts","id" ]
+    }
+  },
+
+  "type": "object",
+  "allOf" : [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core" },
+    { "$ref": "#/definitions/oic.sceneCollection" }
+  ]
+}

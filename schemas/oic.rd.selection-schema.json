@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.rd.selection-schema.json#",
+  "title" : "RD Selection",
+  "definitions": {
+    "oic.rd.attributes": {
+      "type": "object",
+      "properties": {
+        "n": {
+          "type": "string",
+          "description": "A human friendly name for the Resource Directory",
+          "format": "UTF8"
+        },
+        "di": {
+          "$ref": "oic.types-schema.json#/definitions/uuid",
+          "description": "A unique identifier for the Resource Directory - the same as the device ID of the RD"
+
+        },
+        "sel": {
+          "description": "Selection criteria that a device wanting to publish to any RD can use to choose this Resource Directory over others that are discovered",
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "pwr": {
+                  "type": "string",
+                  "enum": [ "ac", "batt", "safe" ],
+                  "description": "A hint about how the RD is powered. If AC then this is stronger than battery powered. If source is reliable (safe) then appropriate mechanism for managing power failure exists"
+                },
+                "conn": {
+                  "type": "string",
+                  "enum": [ "wrd", "wrls" ],
+                  "description": "A hint about the networking connectivity of the RD. *wrd* if wired connected and *wrls* if wireless connected."
+                },
+                "bw": {
+                  "type": "string",
+                  "description": "Qualitative bandwidth of the connection",
+                  "enum": [ "high", "low", "lossy" ]
+                },
+                "mf": {
+                  "type": "integer",
+                  "description": "Memory factor - Ratio of available memory to total memory expressed as a percentage"
+                },
+                "load": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minitems": 3,
+                  "maxitems": 3,
+                  "description": "Current load capacity of the RD. Expressed as a load factor 3-tuple (upto two decimal points each). Load factor is based on request processed in a 1 minute, 5 minute window and 15 minute window"
+                }
+              }
+            },
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "A bias factor calculated by the Resource directory - the value is in the range of 0 to 100 - 0 implies that RD is not to be selected. Client chooses RD with highest bias factor or randomly between RDs that have same bias factor"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [ {"$ref": "#/definitions/oic.rd.attributes"}],
+  "required": ["sel"]
+}

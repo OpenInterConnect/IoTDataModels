@@ -1,0 +1,138 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.oic-link-schema.json#",
+  "definitions": {
+    "oic.oic-link": {
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI. Relative Reference should be used along with the di parameter to make it unique.",
+          "format": "uri"
+        },
+        "rel": {
+          "oneOf":[
+            {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string",
+                  "maxLength": 64
+                }
+              ],
+              "minItems": 1,
+              "default": ["hosts"]
+            },
+            {
+              "type": "string",
+              "maxLength": 64,
+              "default": "hosts"
+            }
+          ],
+        "description": "The relation of the target URI referenced by the link to the context URI"
+        },
+        "rt": {
+          "type": "array",
+          "items" : [
+            {
+              "type" : "string",
+              "maxLength": 64
+            }
+          ],
+          "minItems" : 1,
+          "description": "Resource Type"
+        },
+        "if": {
+          "type": "array",
+          "items": [
+            {
+              "type" : "string",
+              "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s" ]
+            }
+          ],
+          "minItems": 1,
+          "description": "The interface set supported by this resource"
+        },
+        "di": {
+           "$ref": "oic.types-schema.json#/definitions/uuid",
+           "description": "Unique identifier for device (UUID)"
+        },
+        "buri": {
+    	    "type": "string",
+          "description": "The base URI used to fully qualify a Relative Reference in the href parameter. Use the OCF Schema for URI",
+          "maxLength": 256,
+          "format": "uri"
+        },
+        "p": {
+          "description": "Specifies the framework policies on the Resource referenced by the target URI",
+          "type": "object",
+          "properties": {
+            "bm": {
+              "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
+              "type": "integer"
+            },
+            "sec": {
+              "description": "Specifies if security needs to be turned on when looking to interact with the Resource",
+              "default": false,
+              "type": "boolean"
+            },
+            "port": {
+              "description": "Secure port to be used for connection",
+              "type": "integer"
+            }
+          },
+          "required" : ["bm"]
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "A title for the link relation. Can be used by the UI to provide a context"
+        },
+        "anchor": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "This is used to override the context URI e.g. override the URI of the containing collection",
+          "format": "uri"
+        },
+        "ins": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "description": "An ordinal number that is not repeated - must be unique in the collection context"
+            },
+            {
+              "type": "string",
+              "maxLength": 256,
+              "format" : "uri",
+              "description": "Any unique string including a URI"
+            },
+            {
+              "$ref": "oic.types-schema.json#/definitions/uuid",
+              "description": "Unique identifier (UUID)"
+            }
+          ],
+          "description": "The instance identifier for this web link in an array of web links - used in collections"
+        },
+        "type": {
+          "type": "array",
+          "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting",
+          "items" : [
+            {
+            "type": "string",
+            "maxLength": 64
+            }
+          ],
+          "minItems": 1,
+          "default": "application/cbor"
+        }
+      },
+      "required": [ "href", "rt", "if" ]
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/definitions/oic.oic-link" }
+  ]
+}
